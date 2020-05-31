@@ -1,0 +1,26 @@
+{
+    "name": "jackmarchant/jackmarchant.com",
+    "description": "Jack Marchant's personal Blog",
+    "keywords": ["jackmarchant.com"],
+    "homepage": "http://github.com/jackmarchant/jackmarchant.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jack Marchant",
+            "email": "jack@jackmarchant.com",
+            "homepage": "https://jackmarchant.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.5.0",
+        "slim/slim": "^3.1",
+        "twig/twig": "^3.0",
+        "monolog/monolog": "^1.17",
+        "erusev/parsedown": "^1.7"
+    }
+}

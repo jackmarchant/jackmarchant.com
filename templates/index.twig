@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>{{ post.title }} {%if post %}|{% endif %} Jack Marchant</title>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+        <link href="/style.css" rel="stylesheet" type="text/css" />
+        <meta name="description" content="I'm a Software Engineer from Sydney. I like writing code and talking about." />
+        <meta property="og:title" content="Software Engineer" />
+        <meta property="og:description" content="I'm a Software Engineer from Sydney. I like writing code and talking about it." />
+    </head>
+    <body class="wrapper">
+        <header>
+            <h1 class="heading heading--title {% if post %}heading--home{% endif %}"><a href="/">Jack Marchant</a></h1>
+        </header>
+        <main>
+            {% for post in posts %}
+                <div class="post-listing">
+                    <h3 class="heading heading--post"><a href="{{post.url}}">{{post.title}}</a></h3>
+                    <p>{{ post.date }}</p>
+                    {{ post.blurb | raw }}
+                </div>
+            {% endfor %}
+
+        {% if post %}
+            <div class="post">
+                <h2 class="heading">{{ post.title }}</h2>
+                <p>{{ post.date }}</p>
+                {{ post.content|raw }}
+            </div>
+            <div class="post-footer">
+                <hr>
+                <p>Written by <strong>Jack Marchant</strong>, a Software Engineer who writes about writing code. <br>You should follow him on 
+                <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/jackmarchant10">Twitter</a> or check out his code on 
+                <a target="_blank" rel="noopener noreferrer" href="https://github.com/jackmarchant">GitHub</a></p>
+            </div>
+        {% endif %}
+        </main>
+    </body>
+</html>
