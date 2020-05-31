@@ -164,3 +164,16 @@ blockquote {
     font-style: italic;
     border-left: 0.32813rem solid hsla(0,0%,0%,0.9);
 }
+
+.blurb {
+    margin-bottom: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.blurb img, .blurb p {
+    display: inline-block;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    vertical-align: middle;
+}

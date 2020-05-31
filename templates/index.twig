@@ -11,10 +11,19 @@
         <meta name="description" content="I'm a Software Engineer from Sydney. I like writing code and talking about." />
         <meta property="og:title" content="Software Engineer" />
         <meta property="og:description" content="I'm a Software Engineer from Sydney. I like writing code and talking about it." />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     </head>
     <body class="wrapper">
         <header>
             <h1 class="heading heading--title {% if post %}heading--home{% endif %}"><a href="/">Jack Marchant</a></h1>
+            {% if not post %}
+            <div class="blurb">
+                <img src="/profile-pic.jpg" width="100" />
+                <p>Written by <strong>Jack Marchant</strong>, a Software Engineer who writes about writing code. <br>You should follow him on 
+                <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/jackmarchant10">Twitter</a> or check out his code on 
+                <a target="_blank" rel="noopener noreferrer" href="https://github.com/jackmarchant">GitHub</a></p>
+            </div>
+            {% endif %}
         </header>
         <main>
             {% for post in posts %}
@@ -33,9 +42,12 @@
             </div>
             <div class="post-footer">
                 <hr>
-                <p>Written by <strong>Jack Marchant</strong>, a Software Engineer who writes about writing code. <br>You should follow him on 
-                <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/jackmarchant10">Twitter</a> or check out his code on 
-                <a target="_blank" rel="noopener noreferrer" href="https://github.com/jackmarchant">GitHub</a></p>
+                <div class="blurb">
+                    <img src="/profile-pic.jpg" width="100" />
+                    <p>Written by <strong>Jack Marchant</strong>, a Software Engineer who writes about writing code. <br>You should follow him on 
+                    <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/jackmarchant10">Twitter</a> or check out his code on 
+                    <a target="_blank" rel="noopener noreferrer" href="https://github.com/jackmarchant">GitHub</a></p>
+                </div>
             </div>
         {% endif %}
         </main>
