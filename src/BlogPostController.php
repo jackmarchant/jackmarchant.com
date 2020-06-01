@@ -13,12 +13,14 @@ class BlogPostController
     private $logger;
     private $renderer;
     private $markdown;
+    private $settings;
 
     public function __construct(Container $container)
     {
         $this->logger = $container->get('logger');
         $this->renderer = $container->get('renderer');
         $this->markdown = $container->get('markdown');
+        $this->settings = $container->get('settings');
     }
 
     public function __invoke(Request $request, Response $response, $args): Response
@@ -40,7 +42,7 @@ class BlogPostController
         }
     
         $response->getBody()->write(
-            $this->renderer->render('index.twig', ['post' => $post])
+            $this->renderer->render('index.twig', ['post' => $post, 'settings' => $this->settings])
         );
         return $response;
     }

@@ -1,7 +1,8 @@
 <?php
 return [
     'settings' => [
-        'displayErrorDetails' => true, // set to false in production
+        'environment' => getenv('ENVIRONMENT'),
+        'displayErrorDetails' => getenv('DISPLAY_ERROR_DETAILS'),
 
         // Renderer settings
         'renderer' => [
