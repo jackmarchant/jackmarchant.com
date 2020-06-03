@@ -39,6 +39,7 @@ class BlogPostController
                 'date' => (new DateTime($metadata['date']))->format('F d, Y'),
                 'content' => $this->markdown->text($exploded[2]),
             ];
+            $this->logger->info($post['content']);
         }
     
         $response->getBody()->write(

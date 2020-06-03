@@ -29,13 +29,29 @@ When this code runs, the process in which it is running is blocked until it is f
 Asynchronous code can be particularly useful if you have large amounts of work that can be done concurrently. To do this in Elixir we can use the `spawn/1` function to create a new process in which to do the work. When application code executes inside of a process, it can run without blocking any code in other processes.
 Similar to the previous example, we can enumerate over a list but this time we'll execute the output asynchronously:
 
-<script src="https://gist.github.com/jackmarchant/e44d49c25a5c34c35c463b8a9d515e9b.js"></script>
+```elixir
+Enum.map(1..10, fn number -> 
+  spawn(fn -> 
+    IO.puts number
+  end)
+end)
+```
 
 You'll notice when you run this code the numbers aren't output in order like they were in the synchronous example. This is because each process is started and executes in an independent order to any others. 
 
 This is great when all of your code works perfectly, but in the real world, you will have to expect there to be some failures, so to replicate this real-world scenario, we can raise an exception to illustrate something not executing correctly.
 
-<script src="https://gist.github.com/jackmarchant/5c0ae78ba78a8e411cd6912d0a765988.js"></script>
+```elixir
+Enum.each(1..10, fn number ->
+  spawn(fn ->
+    if rem(number, 2) == 0 do
+      raise "the roof with number #{number}"
+    else
+      IO.puts(number)
+    end
+  end)
+end)
+```
 
 When this code runs it will raise an exception for all of the even numbers within the `1..10` range. We can see however, for all the odd numbers, the code executes correctly and outputs the number. In a larger context this would mean that failures are not affecting the main process where the application is running, and that any failures within any child processes are also not stopping anything in the main process, so any other code can continue to execute.
 

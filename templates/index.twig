@@ -7,6 +7,7 @@
         <title>{{ post.title }} {%if post %}|{% endif %} Jack Marchant</title>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+        <link href="/prism.css" rel="stylesheet" type="text/css" />
         <link href="/style.css" rel="stylesheet" type="text/css" />
         <meta name="description" content="I'm a Software Engineer from Sydney. I like writing code and talking about it." />
         <meta property="og:title" content="Software Engineer" />
@@ -19,7 +20,7 @@
             {% if not post %}
             <div class="blurb">
                 <img src="/profile-pic.jpg" width="100" />
-                <p>Written by <strong>Jack Marchant</strong>, a Software Engineer who writes about writing code. <br>You should follow him on 
+                <p>Written by <a href="/">Jack Marchant</a>, a Software Engineer who writes about writing code. You should follow him on 
                 <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/jackmarchant10">Twitter</a> or check out his code on 
                 <a target="_blank" rel="noopener noreferrer" href="https://github.com/jackmarchant">GitHub</a></p>
             </div>
@@ -44,13 +45,16 @@
                 <hr>
                 <div class="blurb">
                     <img src="/profile-pic.jpg" width="100" />
-                    <p>Written by <strong>Jack Marchant</strong>, a Software Engineer who writes about writing code. <br>You should follow him on 
+                    <p>Written by <a href="/">Jack Marchant</a>, a Software Engineer who writes about writing code. You should follow him on 
                     <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/jackmarchant10">Twitter</a> or check out his code on 
                     <a target="_blank" rel="noopener noreferrer" href="https://github.com/jackmarchant">GitHub</a></p>
                 </div>
+                <h4 class="heading heading--title {% if post %}heading--home{% endif %}"><a href="/">Jack Marchant</a></h4>
             </div>
         {% endif %}
         </main>
+
+        <script src="/prism.js"></script>
         
         {% if settings.environment == 'production' %}
             <script async src="https://www.googletagmanager.com/gtag/js?id=UA-53035029-1"></script>

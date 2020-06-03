@@ -29,7 +29,42 @@ The solution that (seems to work so far) I ended up going with wasn’t too far 
 As it is a GenServer that is spawning these tasks, it can handle generic messages sent to it quite easily with the [handle_info/2](https://hexdocs.pm/elixir/GenServer.html#c:handle_info/2) callback. This is where the GenServer handles success or failure states of each task, and processing each result synchronously is not a problem in this case. 
 
 Here's a snippet of the GenServer that spawns these Task processes.
-<script src="https://gist.github.com/jackmarchant/e28cb2ed3767c8b5041fa5d37fe1d1fa.js"></script>
+```elixir
+defmodule TaskRunner do
+  use GenServer
+  
+  @me __MODULE__
+  
+  def start_link(opts) do
+    GenServer.start_link(@me, opts, name: @me)
+  end
+  
+  def init(opts), do: {:ok, opts}
+
+  def run(fun) do
+    GenServer.cast(@me, {:run, fun})
+  end
+
+  def handle_cast({:run, fun}, state) do
+    Task.async(fun) # sends a message back to the TaskRunner when completed
+    {:noreply, state}
+  end
+  
+  # handle_info/2 receives generic messages from the Task processes
+  def handle_info({_task, {:ok, result}}, state) do
+    Logger.info("#{inspect(result)} Job Done.")
+    {:noreply, state}
+  end
+
+  def handle_info({_task, {:error, reason}}, state) do
+    Logger.error("Failed to completed job: #{reason}")
+    {:noreply, state}
+  end
+
+  def handle_info(_, state), do: {:noreply, state}
+end
+```
+
 
 What's interesting about this code is that it may actually be reimplementing something that already exists in Elixir, that I haven't quite got my head around yet - either way I haven't got a problem with doing it this way as long as it works! Wrapping the spawning of a Task in a GenServer simply provides the ability to "schedule" tasks (as each message is processed sequentially), while responding to the response from each task invidiually.
 

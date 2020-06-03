@@ -6,7 +6,34 @@ date: "2018-09-26T09:00:00.000Z"
 Protocols are a way to implement polymorphism in Elixir. We can use it to apply a function to multiple object types or structured data types, which are specific to the object itself. There are two steps; defining a protocol in the form of function(s), and one or many implementations for that protocol.
 
 You've probably seen this example before either in Elixir or as an Interface in other languages:
-<script src="https://gist.github.com/jackmarchant/c97b1cd6c4d22b089e6352279184d4e2.js"></script>
+```elixir
+defprotocol Area do
+  @doc "Calculate the area for a given object"
+  def area(object)
+end
+
+defimpl Area, for: Rectangle do
+  def area(rectangle) do
+    rectangle.width * rectangle.length
+  end
+end
+
+defimpl Area, for: Circle do
+  def area(circle) do
+    :math.pow(circle.radius * :math.pi, 2)
+  end
+end
+
+# These are arbritrary shape structs, but ignoring that fact, 
+# we have defined a protocol and a couple of implementations. 
+# Usage is then as easy as:
+
+iex> Area.area(%Rectangle{width: 5, length: 3})
+15
+
+iex> Area.area(%Circle{radius: 5})
+246.74011002723395
+```
 
 ## What is Polymorphism?
 __[Source: Wikipedia](https://en.wikipedia.org/wiki/Polymorphism_(computer_science))__
