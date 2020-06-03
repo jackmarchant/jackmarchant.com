@@ -1,19 +1,25 @@
 <?php
-// DIC configuration
+
+use App\Services\PostService;
+use App\Markdown;
+use Slim\Container;
 
 $container = $app->getContainer();
 
 // view renderer
 $container['renderer'] = function ($c) {
     $loader = new Twig\Loader\FilesystemLoader(__DIR__ . '/../templates');
-    $twig = new Twig\Environment($loader, [
-        // __DIR__ . '/../var/cache'
+    return new Twig\Environment($loader, [
+        __DIR__ . '/../var/cache'
     ]);
-    return $twig;
 };
 
 $container['markdown'] = function($c) {
-    return new Parsedown();
+    return new Markdown();
+};
+
+$container['PostService'] = function(Container $c) {
+    return new PostService($c->get('markdown'));
 };
 
 // monolog

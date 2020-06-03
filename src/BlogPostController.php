@@ -5,22 +5,28 @@ namespace App;
 use Slim\Container;
 use Slim\Http\Request;
 use Slim\Http\Response;
-use Parsedown;
-use DateTime;
+use App\PostService;
+use Psr\Log\LoggerInterface;
 
 class BlogPostController
 {
+    /** @var LoggerInterface */
     private $logger;
-    private $renderer;
-    private $markdown;
+
+    /** @var array */
     private $settings;
+    
+    /** @var PostService */
+    private $postService;
+    
+    private $renderer;
 
     public function __construct(Container $container)
     {
         $this->logger = $container->get('logger');
         $this->renderer = $container->get('renderer');
-        $this->markdown = $container->get('markdown');
         $this->settings = $container->get('settings');
+        $this->postService = $container->get('PostService');
     }
 
     public function __invoke(Request $request, Response $response, $args): Response
@@ -28,39 +34,18 @@ class BlogPostController
         $this->logger->info('blog post handler dispatched');
 
         $post = ['title' => 'Page not found'];
-    
-        if (isset($args['post'])) {
-            $filepath = __DIR__ . sprintf('/../content/%s/index.md', $args['post']);
-            if (file_exists($filepath)) {
-                $content = file_get_contents($filepath);            
-                $exploded = explode('---', $content);
-                $metadata = $this->parseMetadata($exploded[1]);
-                $post = [
-                    'title' => $metadata['title'],
-                    'date' => (new DateTime($metadata['date']))->format('F d, Y'),
-                    'content' => $this->markdown->text($exploded[2]),
-                ];
-            }
-        }
-    
-        $response->getBody()->write(
-            $this->renderer->render('index.twig', ['post' => $post, 'settings' => $this->settings])
-        );
-        return $response;
-    }
 
-    protected function parseMetadata($metadata) {
-        $lines = explode("\n", $metadata);
-        $data = [];
-        foreach ($lines as $line) {
-            $pos = strpos($line, ':');
-            $title = substr($line, 0, $pos);
-            $content = substr($line, $pos + 1);
-    
-            if ($title) {
-                $data[$title] = str_replace('"', '', $content);
-            }
+        if (isset($args['post'])) {
+            $post = $this->postService->findPostByPath($args['post']);
         }
-        return $data;
+
+        $body = $this->renderer->render('index.twig', [
+            'post' => $post,
+            'settings' => $this->settings,
+            'listings' => $this->postService->getAllPostListings(),
+        ]);
+        $response->getBody()->write($body);
+
+        return $response;
     }
 }
