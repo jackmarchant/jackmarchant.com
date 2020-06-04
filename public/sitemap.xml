@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://www.jackmarchant.com/</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/using-a-dependency-injection-container-to-decouple-code</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/3-tips-to-help-with-working-from-home</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/making-software-a-three-step-process</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/help-me-help-you-code-review</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/a-pratical-guide-to-test-driven-development</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/facade-pattern</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/the-problem-with-elixir-umbrella-apps</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/broken-windows</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/lonestar-elixir-2019</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/genserver-async-concurrent-tasks</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/best-practices-third-party-integrations</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/you-might-not-need-a-genserver</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/offset-cursor-pagination</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/protocols</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/exdocker</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/working-with-tasks</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/understanding-concurrency-in-elixir</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/understanding-concurrency</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/composing-ecto-queries</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/streaming-datasets</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/elixir-queues</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/composing-plugs</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/elixir-supervision-trees</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/surviving-tech-debt</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/pattern-matching-elixir</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/first-impressions-elixir</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://www.jackmarchant.com/write-unit-tests</loc>
+  <lastmod>2020-06-04T01:57:57+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+
+
+</urlset>

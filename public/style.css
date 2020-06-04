@@ -291,6 +291,10 @@ blockquote {
     align-items: center;
 }
 
+.blurb--title {
+    margin-bottom: 50px;
+}
+
 .blurb img, .blurb p {
     display: inline-block;
     margin-right: 20px;
