@@ -11,8 +11,6 @@ In all types of interviews **there is a lot you can learn from doing interviews*
 
 > Disclaimer: I am not pretending to be an expert on interviewing nor have the perfect process, but these practices are what I wish I knew before I started interviewing more regularly.
 
-**So, what have I learned?** 
-
 ## Having a clear, repeatable structure helps you and other interviewers ask the right questions
 When I started interviewing there was some process about what questions to ask, how the interview was structured and how it changed depending on seniority, but it was often not relevant and I always found it odd to roll off 20-questions one after the other, especially when the questions probably weren’t relevant for the candidate.
 I also found stating the structure of the interview at the start allows the candidate to understand what’s coming and what time we should finish so we know to progress if one section is taking too long.
@@ -62,7 +60,6 @@ Above almost everything else, you should want the candidate to do well. It’s y
 
 This will result in a better interview experience for everyone involved, and even if they don’t progress to the next round or eventually get the job, they could still come back again or leave with a good interview experience to learn from.
 
----
 Evaluating a candidate for an engineering role is a bit different to other roles and has its own intricacies due to the technical nature of what you’re trying to asses, but more often than not I have found technical skills can be learned but attitude and how you treat other people is much harder to change. So, even though we’re assessing technical ability, it’s not an excuse to ignore basic decency of giving respect to everyone on the call. Thankfully, there have not been too many occasions where this is has impacted an interview.
 
 Interviewing is a tricky subject and most of my interviews recently have been done over hangouts, which has its own challenges. Having a good experience in an interview should be a given, even if it doesn’t work out in the end. 
