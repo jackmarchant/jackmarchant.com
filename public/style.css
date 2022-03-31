@@ -316,10 +316,9 @@ blockquote {
 .subscription__input {
     appearance: none;
     background-color: rgb(255, 255, 255);
-    border: 0px;
+    border: 1px solid #7bb13d;
     border-radius: 0.1875rem;
     box-sizing: border-box;
-    box-shadow: rgb(221 54 42) 0px 0px 0px 1px, rgb(232 82 68) 0px 0px 4px 0px, rgb(232 82 68) 0px 0px 2px -2px;
     color: rgb(67, 77, 93);
     font-size: 0.875rem;
     line-height: 1.5;
@@ -329,6 +328,10 @@ blockquote {
     transition: box-shadow 0.2s ease 0s;
     width: 100%;
     margin-bottom: 15px;
+}
+
+.subscription__input:focus {
+    border: 1px solid rgb(96 157 25);
 }
 
 .subscription__button {
