@@ -35,35 +35,52 @@
                 </div>
             {% endfor %}
 
-        {% if post %}
-            <div class="post">
-                <h2 class="heading">{{ post.title }}</h2>
-                <p>{{ post.date }}</p>
-                {{ post.content|raw }}
-            </div>
-            <div class="post-footer">
-                <hr>
-                <div class="blurb">
-                    <img src="/profile-pic.jpg" width="100" />
-                    <p>Written by <a href="/">Jack Marchant</a>, a Software Engineer who writes about writing code. You should follow him on 
-                    <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/jackmarchant10">Twitter</a> or check out his code on 
-                    <a target="_blank" rel="noopener noreferrer" href="https://github.com/jackmarchant">GitHub</a></p>
+            {% if post %}
+                <div class="post">
+                    <h2 class="heading">{{ post.title }}</h2>
+                    <p>{{ post.date }}</p>
+                    {{ post.content|raw }}
                 </div>
-                <hr>
-            </div>
-        {% endif %}
+                <div class="post-footer">
+                    <hr>
+                    <div class="blurb">
+                        <img src="/profile-pic.jpg" width="100" />
+                        <p>Written by <a href="/">Jack Marchant</a>, a Software Engineer who writes about writing code. You should follow him on 
+                        <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/jackmarchant10">Twitter</a> or check out his code on 
+                        <a target="_blank" rel="noopener noreferrer" href="https://github.com/jackmarchant">GitHub</a></p>
+                    </div>
+                </div>
+            {% endif %}
 
-        {% for post in listings %}
-            <div class="post-listing">
-                <h3 class="heading heading--post"><a href="{{post.url}}">{{post.title}}</a></h3>
-                <p>{{ post.date }}</p>
-                {{ post.blurb | raw }}
+            <div class="subscription">
+                <h2 class="subscription__header">Get notified when a new post is available</h2>
+                <form class="subscription__form js-cm-form" id="subForm" action="https://www.createsend.com/t/subscribeerror?description=" method="post" data-id="2BE4EF332AA2E32596E38B640E90561964E82AF3A0C5E963D77E262726BF6CBF87184D8700F1D62D5482BE15EC7F719A45365336872D9A7C05FE709A837840EA">
+                    <div class="subscription__container">
+                        <label class="subscription__label">Email</label>
+                        <input placeholder="you@example.com" autocomplete="Email" aria-label="Email" class="subscription__input js-cm-email-input qa-input-email" id="fieldEmail" maxlength="200" name="cm-zulkkh-zulkkh" required="" type="email">
+                    </div>
+                    <button class="subscription__button" type="submit">Subscribe</button>
+                </form>
+                </div>
+                <script type="text/javascript" src="https://js.createsend1.com/javascript/copypastesubscribeformlogic.js"></script>
             </div>
-        {% endfor %}
+
+
+            {% if listings %}
+                <hr class="separator">
+                <h2>But wait, there's more...</h2>
+            {% endif %}
+            {% for post in listings %}
+                <div class="post-listing">
+                    <h3 class="heading heading--post"><a href="{{post.url}}">{{post.title}}</a></h3>
+                    <p>{{ post.date }}</p>
+                    {{ post.blurb | raw }}
+                </div>
+            {% endfor %}
         </main>
 
         <script src="/prism.js"></script>
-        
+
         {% if settings.environment == 'production' %}
             <script async src="https://www.googletagmanager.com/gtag/js?id=UA-53035029-1"></script>
             <script>
