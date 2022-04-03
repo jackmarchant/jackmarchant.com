@@ -1,6 +1,6 @@
 install: 
 	composer install
 
-upd:
+up:
 	php -S localhost:8000 -t public
 	

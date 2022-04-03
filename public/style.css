@@ -302,60 +302,6 @@ blockquote {
     vertical-align: middle;
 }
 
-/**
- subscription form
-*/
-.subscription {
-    margin-bottom: 25px;
-}
-
-.subscription__label {
-    display: none;
-}
-
-.subscription__input {
-    appearance: none;
-    background-color: rgb(255, 255, 255);
-    border: 1px solid #7bb13d;
-    border-radius: 0.1875rem;
-    box-sizing: border-box;
-    color: rgb(67, 77, 93);
-    font-size: 0.875rem;
-    line-height: 1.5;
-    min-height: 2.8125rem;
-    outline: 0px;
-    padding: 0.75rem 1rem;
-    transition: box-shadow 0.2s ease 0s;
-    width: 100%;
-    margin-bottom: 15px;
-}
-
-.subscription__input:focus {
-    border: 1px solid rgb(96 157 25);
-}
-
-.subscription__button {
-    background-color: rgb(123, 177, 61);
-    border: none;
-    border-radius: 3px;
-    color: rgb(255, 255, 255);
-    display: inline-block;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 1rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 1;
-    outline: 0px;
-    padding: 0.75rem 1.5rem;
-    text-decoration: none;
-    transition: background-color 0.1s ease-in 0s, box-shadow 0.1s ease-in 0s;
-    cursor: pointer;
-}
-
-.subscription__button:focus {
-    outline: 2px solid rgb(96 157 25);
-}
-
 .separator {
     margin-bottom: 20px;
     margin-left: 0;
