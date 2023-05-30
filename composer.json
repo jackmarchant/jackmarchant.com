@@ -16,11 +16,20 @@
             "App\\": "src/"
         }
     },
+    "scripts": {
+        "start": [
+            "Composer\\Config::disableProcessTimeout",
+            "@php -S localhost:8000 -t public"
+        ]
+    },
     "require": {
         "php": ">=5.5.0",
-        "slim/slim": "^3.1",
+        "slim/slim": "^4.11",
         "twig/twig": "^3.0",
         "monolog/monolog": "^1.17",
-        "erusev/parsedown": "^1.7"
+        "erusev/parsedown": "^1.7",
+        "php-di/php-di": "^7.0",
+        "slim/psr7": "^1.6",
+        "middlewares/trailing-slash": "^2.0"
     }
 }

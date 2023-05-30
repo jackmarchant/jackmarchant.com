@@ -14,9 +14,16 @@ require __DIR__ . '/../vendor/autoload.php';
 
 session_start();
 
-// Instantiate the app
-$settings = require __DIR__ . '/../src/settings.php';
-$app = new \Slim\App($settings);
+/**
+ * Slim 4.x does not ship with a container library. It supports all PSR-11 implementations such as PHP-DI
+ * To install PHP-DI `composer require php-di/php-di`
+ */
+
+use Slim\Factory\AppFactory;
+
+$container = new \DI\Container();
+AppFactory::setContainer($container);
+$app = AppFactory::create();
 
 // Set up dependencies
 require __DIR__ . '/../src/dependencies.php';

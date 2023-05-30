@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Slim\Container;
-use Slim\Http\Request;
-use Slim\Http\Response;
+use DI\Container;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Logging\LoggerInterface;
 use App\Services\PostService;
 
