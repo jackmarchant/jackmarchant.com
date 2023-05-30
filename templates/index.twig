@@ -16,21 +16,23 @@
     </head>
     <body class="wrapper">
         <header>
-            <h1 class="heading heading--title {% if post %}heading--home{% endif %}"><a href="/">Jack Marchant</a></h1>
-            {% if not post %}
-            <div class="blurb blurb--title">
-                <img src="/profile-pic.jpg" width="100" />
-                <p>Written by <a href="/">Jack Marchant</a>, a Software Engineer who writes about writing code. You should follow him on 
-                <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/jackmarchant10">Twitter</a> or check out his code on 
-                <a target="_blank" rel="noopener noreferrer" href="https://github.com/jackmarchant">GitHub</a></p>
+            <div class="blurb">
+                <div class="blurb__image">
+                    <img src="/profile-pic.jpg" width="100" />
+                </div>
+                <div class="blurb__text">
+                    <h3><a href="/">Jack Marchant</a></h3>
+                    <p>Principal Software Engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">Deputy</a></p>
+                    <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/jackmarchant10">Twitter</a> | 
+                    <a target="_blank" rel="noopener noreferrer" href="https://github.com/jackmarchant">GitHub</a>
+                </div>
             </div>
-            {% endif %}
         </header>
         <main>
             {% for post in posts %}
                 <div class="post-listing">
                     <h3 class="heading heading--post"><a href="{{post.url}}">{{post.title}}</a></h3>
-                    <p>{{ post.date }}</p>
+                    <h4 class="post-date">{{ post.date }}</h4>
                     {{ post.blurb | raw }}
                 </div>
             {% endfor %}
@@ -38,25 +40,18 @@
         {% if post %}
             <div class="post">
                 <h2 class="heading">{{ post.title }}</h2>
-                <p>{{ post.date }}</p>
+                <h4 class="post-date">{{ post.date }}</h4>
                 {{ post.content|raw }}
             </div>
             <div class="post-footer">
-                <hr>
-                <div class="blurb">
-                    <img src="/profile-pic.jpg" width="100" />
-                    <p>Written by <a href="/">Jack Marchant</a>, a Software Engineer who writes about writing code. You should follow him on 
-                    <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/jackmarchant10">Twitter</a> or check out his code on 
-                    <a target="_blank" rel="noopener noreferrer" href="https://github.com/jackmarchant">GitHub</a></p>
-                </div>
-                <hr>
+                . . .
             </div>
         {% endif %}
 
         {% for post in listings %}
             <div class="post-listing">
                 <h3 class="heading heading--post"><a href="{{post.url}}">{{post.title}}</a></h3>
-                <p>{{ post.date }}</p>
+                <h4 class="post-date">{{ post.date }}</h4>
                 {{ post.blurb | raw }}
             </div>
         {% endfor %}

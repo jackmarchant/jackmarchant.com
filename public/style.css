@@ -6,6 +6,22 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+clike+j
  * @author Rose Pritchard
  */
 
+@font-face {
+    font-family: "Source Sans Pro Regular";
+    src: url("SourceSansPro-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Source Sans Pro Bold";
+    src: url("SourceSansPro-Bold.ttf");
+}
+
+:root {
+    --bg-color: #111827;
+    --body-copy-color: #9ca3af;
+    --heading-color: #ffffff;
+}
+
  code[class*="language-"],
  pre[class*="language-"] {
      color: #ccc;
@@ -127,15 +143,17 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+clike+j
  
 
 body {
-    font-family:  Georgia, 'Times New Roman', Times, serif;
+    font-family:  'Source Sans Pro Regular', sans-serif;
+    background-color: var(--bg-color);
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+    font-family: 'Source Sans Pro Bold', 'Montserrat', Arial, Helvetica, sans-serif;
+    color: var(--heading-color);
 }
 
-a {
-    color: #6f42c1;
+a, p, li::marker, li {
+    color: var(--body-copy-color);
 }
 
 h3 {
@@ -147,23 +165,36 @@ h3 {
     padding-right: 0;
     padding-top: 0;
     margin-bottom: 10px;
-    color: inherit;
-    font-family: Georgia,serif;
     font-weight: 900;
     text-rendering: optimizeLegibility;
-    font-size: 1.4427rem;
+    font-size: 1.5rem;
     line-height: 1.1;
+}
+
+.post h3 {
+    line-height: 1.5;
 }
 
 .wrapper {
     margin-left: auto;
     margin-right: auto;
-    max-width: 42rem;
-    padding: 2.625rem 1.3125rem;
+    max-width: 700px;
+    padding: 0;
+}
+
+header, main {
+    padding: 15px;
 }
 
 .post-listing {
     margin-bottom: 40px;
+}
+
+.post-date {
+    margin-top: 0;
+    color: var(--body-copy-color);
+    margin-bottom: 10px;
+    font-weight: 600;
 }
 
 .heading--title {
@@ -172,20 +203,16 @@ h3 {
     margin-top: 0px;
 }
 
-.heading--title a {
-    color: #202020;
-}
-
 .heading--home {
     font-size: 26px;
 }
 
 .heading--home a {
-    color: #6f42c1;
+    color: var(--heading-color);
 }
 
 .heading--post a {
-    color: #5e5cbf;
+    color: var(--heading-color);
     text-transform: capitalize;
 }
 
@@ -194,11 +221,16 @@ h3 {
 }
 
 .heading a:hover {
-    color: #202020;
+    text-decoration: underline;
 }
 
 .post .heading {
     font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.post a:hover {
+    text-decoration: none;
 }
 
 p code {
@@ -224,7 +256,7 @@ p code {
     hyphens: none;
 }
 
-p {
+p, li {
     margin-left: 0;
     margin-right: 0;
     margin-top: 0;
@@ -234,20 +266,14 @@ p {
     padding-top: 0;
     margin-bottom: 1.75rem;
     line-height: 1.5;
+    font-size: 1.2rem;
 }
 
-.post-footer hr {
-    margin-left: 0;
-    margin-right: 0;
-    margin-top: 0;
-    padding-bottom: 0;
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-    margin-bottom: calc(1.75rem - 1px);
-    background: hsla(0,0%,0%,0.2);
-    border: none;
-    height: 1px;;
+.post-footer {
+    line-height: 2;
+    font-size: 80px;
+    text-align: center;
+    color: var(--heading-color);
 }
 
 ul {
@@ -267,6 +293,10 @@ ul {
 li {
     padding-left: 0;
     margin-bottom: 20px;
+}
+
+li p {
+    margin-bottom: 0;
 }
 
 blockquote {
@@ -291,13 +321,20 @@ blockquote {
     align-items: center;
 }
 
-.blurb--title {
-    margin-bottom: 50px;
+.blurb, .blurb__text p, .blurb__text a {
+    color: var(--heading-color);
+}
+
+.blurb__text a {
+    text-decoration: none;
+}
+
+.blurb__text a:hover {
+    text-decoration: underline;
 }
 
 .blurb img, .blurb p {
-    display: inline-block;
+    display: block;
     margin-right: 20px;
-    margin-bottom: 20px;
-    vertical-align: middle;
+    margin-bottom: 10px;
 }
