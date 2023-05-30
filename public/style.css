@@ -6,16 +6,6 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+clike+j
  * @author Rose Pritchard
  */
 
-@font-face {
-    font-family: "Source Sans Pro Regular";
-    src: url("SourceSansPro-Regular.ttf");
-}
-
-@font-face {
-    font-family: "Source Sans Pro Bold";
-    src: url("SourceSansPro-Bold.ttf");
-}
-
 :root {
     --bg-color: #111827;
     --body-copy-color: #9ca3af;
@@ -143,17 +133,19 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+clike+j
  
 
 body {
-    font-family:  'Source Sans Pro Regular', sans-serif;
-    background-color: var(--bg-color);
+    font-family:  'Source Sans Pro', sans-serif;
+    background-color: #111827;
+    font-weight: 400;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Source Sans Pro Bold', 'Montserrat', Arial, Helvetica, sans-serif;
-    color: var(--heading-color);
+    font-family: 'Source Sans Pro', 'Montserrat', Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    color: #ffffff;
 }
 
 a, p, li::marker, li {
-    color: var(--body-copy-color);
+    color: #9ca3af;
 }
 
 h3 {
@@ -192,7 +184,7 @@ header, main {
 
 .post-date {
     margin-top: 0;
-    color: var(--body-copy-color);
+    color: #9ca3af;
     margin-bottom: 10px;
     font-weight: 600;
 }
@@ -208,11 +200,11 @@ header, main {
 }
 
 .heading--home a {
-    color: var(--heading-color);
+    color: #ffffff;
 }
 
 .heading--post a {
-    color: var(--heading-color);
+    color: #ffffff;
     text-transform: capitalize;
 }
 
@@ -273,7 +265,7 @@ p, li {
     line-height: 2;
     font-size: 80px;
     text-align: center;
-    color: var(--heading-color);
+    color: #ffffff;
 }
 
 ul {
@@ -310,9 +302,9 @@ blockquote {
     margin-bottom: 1.75rem;
     font-size: 1.20112rem;
     line-height: 1.75rem;
-    color: hsla(0,0%,0%,0.59);
+    color: #9ca3af;
     font-style: italic;
-    border-left: 0.32813rem solid hsla(0,0%,0%,0.9);
+    border-left: 0.32813rem solid #9ca3af;
 }
 
 .blurb {
@@ -322,7 +314,7 @@ blockquote {
 }
 
 .blurb, .blurb__text p, .blurb__text a {
-    color: var(--heading-color);
+    color: #ffffff;
 }
 
 .blurb__text a {
