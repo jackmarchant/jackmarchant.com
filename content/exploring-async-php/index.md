@@ -420,4 +420,6 @@ The main reason I wanted to dive a bit deeper into all the different possibiliti
 
 There are many solutions available without requiring PHP 8.1 that have been battle tested, but it's interesting to see the direction the PHP language is going in to compete with the likes of [Golang](https://go.dev/) and [Elixir](https://elixir-lang.org/), both of which support async programming and have done for years.
 
-Ultimately, I would probably still reach for a Queue/Worker approach given the scalability and cross-platform/cross-language support - however I think over time we might see libraries such as `AMPHP` become more feature rich and make this problem easier to solve without introducing new infrastructure. 
+Ultimately, I would probably still reach for a Queue/Worker approach given the scalability and cross-platform/cross-language support - however I think over time we might see libraries such as `AMPHP` become more feature rich and make this problem easier to solve without introducing new infrastructure.
+
+To see the code samples used in this blog post, you can find them on [GitHub](https://github.com/jackmarchant/async-php/tree/main/src).
