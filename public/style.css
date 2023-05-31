@@ -226,8 +226,8 @@ header, main {
 }
 
 p code {
-    color: #222;
-    background: #fde2e2;
+    color: #212121;
+    background: #aaa3a3;
     border-radius: 4px;
     padding: 2px 4px;
     font-family: Consolas,Menlo,Monaco,source-code-pro,Courier New,monospace;
