@@ -36,7 +36,10 @@ class BlogListController
         $posts = $this->postService->getAllPostListings();
 
         $response->getBody()->write(
-            $this->renderer->render('index.twig', ['posts' => $posts, 'settings' => $this->settings])
+            $this->renderer->render('index.twig', [
+                'posts' => $posts, 
+                'settings' => $this->settings,
+            ])
         );
         return $response;
     }
