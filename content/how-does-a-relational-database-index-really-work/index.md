@@ -1,6 +1,6 @@
 ---
 title: How does a relational database index really work?
-date: "2024-02-24T06:22:00.000Z"
+date: "2024-02-29T06:22:00.000Z"
 ---
 
 A common question in software engineering interviews is _how can you speed up a slow query?_ In this post I want to explain one answer to this question, which is: to add an index to the table the query is performed on.
