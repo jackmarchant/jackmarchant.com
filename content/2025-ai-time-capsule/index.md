@@ -1,5 +1,5 @@
 ---
-title: 2025 AI Time Capsule
+title: Using coding agents in my workflow in 2025
 date: "2025-12-05T09:00:00.000Z"
 ---
 
