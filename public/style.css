@@ -159,7 +159,7 @@ h3 {
     margin-bottom: 10px;
     font-weight: 900;
     text-rendering: optimizeLegibility;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     line-height: 1.1;
 }
 
@@ -190,8 +190,8 @@ header, main {
 }
 
 .heading--title {
-    font-size: 56px;
-    margin-bottom: 70px;
+    font-size: 42px;
+    margin-bottom: 50px;
     margin-top: 0px;
 }
 
@@ -217,7 +217,7 @@ header, main {
 }
 
 .post .heading {
-    font-size: 36px;
+    font-size: 28px;
     margin-bottom: 10px;
 }
 
@@ -258,7 +258,7 @@ p, li {
     padding-top: 0;
     margin-bottom: 1.75rem;
     line-height: 1.5;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 .post-footer {
@@ -308,9 +308,10 @@ blockquote {
 }
 
 .blurb {
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     display: flex;
     align-items: center;
+    gap: 16px;
 }
 
 .blurb, .blurb__text p, .blurb__text a {
@@ -327,10 +328,24 @@ blockquote {
 
 .blurb img, .blurb p {
     display: block;
-    margin-right: 20px;
-    margin-bottom: 10px;
+    margin-right: 0;
+    margin-bottom: 6px;
 }
-/* Responsive images */
+
+.blurb__text h3 {
+    margin-bottom: 4px;
+    font-size: 1.1rem;
+}
+
+.blurb__text p {
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+}
+
+.blurb__text a {
+    font-size: 0.9rem;
+}
+/* Images */
 img {
     max-width: 100%;
     height: auto;
@@ -342,9 +357,35 @@ pre[class*="language-"] {
     -webkit-overflow-scrolling: touch;
 }
 
-/* Responsive tweet embeds */
-.twitter-tweet {
-    max-width: 100%;
+/* Tweet card component */
+.tweet-card {
+    background: #1f2937;
+    border: 1px solid #374151;
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 1.75rem;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.tweet-card__icon {
+    width: 22px;
+    height: 22px;
+    fill: #ffffff;
+    flex-shrink: 0;
+}
+
+.tweet-card__link {
+    color: #9ca3af;
+    text-decoration: none;
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+.tweet-card__link:hover {
+    color: #ffffff;
+    text-decoration: underline;
 }
 
 /* Mobile responsive styles */
@@ -354,38 +395,34 @@ pre[class*="language-"] {
     }
 
     header, main {
-        padding: 12px;
+        padding: 10px;
     }
 
     .heading--title {
-        font-size: 36px;
-        margin-bottom: 40px;
+        font-size: 28px;
+        margin-bottom: 30px;
     }
 
     .post .heading {
-        font-size: 26px;
+        font-size: 22px;
     }
 
     h3 {
-        font-size: 1.3rem;
+        font-size: 1.15rem;
     }
 
     p, li {
-        font-size: 1.05rem;
+        font-size: 1rem;
     }
 
     .blurb {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
     }
 
     .blurb img {
-        margin-bottom: 12px;
-        margin-right: 0;
-    }
-
-    .blurb__text p {
-        margin-bottom: 4px;
+        margin-bottom: 0;
     }
 
     blockquote {
@@ -394,6 +431,11 @@ pre[class*="language-"] {
     }
 
     .post-footer {
-        font-size: 50px;
+        font-size: 40px;
+    }
+
+    .tweet-card {
+        padding: 12px 14px;
+        gap: 10px;
     }
 }
