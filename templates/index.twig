@@ -86,6 +86,9 @@
 
             {% if listings %}
                 <section class="post-list">
+                {% if listingsCategory %}
+                    <h3 class="post-list__heading">more posts in {{ listingsCategory }}</h3>
+                {% endif %}
                     {% for listing in listings %}
                         <article class="post-card" data-post-card data-title="{{ listing.title|lower|e('html_attr') }}" data-tags="{{ listing.tags|join(' ')|lower|e('html_attr') }}">
                             <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">

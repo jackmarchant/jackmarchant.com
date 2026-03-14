@@ -30,10 +30,15 @@ class PostService
         if ($this->postExists($filepath)) {
             $postRaw = $this->readPost($filepath);
             $metadata = $this->parseMetadata($postRaw['meta']);
+            $tags = $this->parseTags(isset($metadata['tags']) ? $metadata['tags'] : '');
+            if (empty($tags)) {
+                $tags = $this->inferTags(sprintf('%s %s', $path, isset($metadata['title']) ? trim($metadata['title']) : ''));
+            }
             $post = [
                 'title' => $metadata['title'],
                 'date' => (new DateTime($metadata['date']))->format('F d, Y'),
                 'content' => $this->parser->parse($postRaw['body']),
+                'tags' => $tags,
             ];
         }
         

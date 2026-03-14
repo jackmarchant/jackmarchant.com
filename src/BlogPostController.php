@@ -39,10 +39,25 @@ class BlogPostController
             $post = $this->postService->findPostByPath($args['post']);
         }
 
+        $currentUrl = isset($args['post']) ? sprintf('/%s', $args['post']) : null;
+        $primaryTag = !empty($post['tags']) ? $post['tags'][0] : null;
+        $allListings = $this->postService->getAllPostListings();
+
+        $listings = array_values(array_filter($allListings, function ($listing) use ($currentUrl, $primaryTag) {
+            if ($currentUrl !== null && $listing['url'] === $currentUrl) {
+                return false;
+            }
+            if ($primaryTag !== null && !in_array($primaryTag, $listing['tags'], true)) {
+                return false;
+            }
+            return true;
+        }));
+
         $body = $this->renderer->render('index.twig', [
             'post' => $post,
             'settings' => $this->settings,
-            'listings' => $this->postService->getAllPostListings(),
+            'listings' => $listings,
+            'listingsCategory' => $primaryTag,
         ]);
         $response->getBody()->write($body);
 
