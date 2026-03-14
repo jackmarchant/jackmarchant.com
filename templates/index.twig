@@ -12,16 +12,38 @@
         <meta property="og:title" content="Software Engineer" />
         <meta property="og:description" content="I'm a Software Engineer from Sydney. I like writing code and talking about it." />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-        <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/5a51a355f4187fddb0d0f4816/a740cde517cbaf44c3accd43e.js");</script>
     </head>
     <body>
         <header class="site-header">
             <div class="container">
-                <p class="site-prompt">jackmarchant@blog:~$</p>
+                <div class="site-header__row">
+                    <p class="site-prompt">jackmarchant@blog:~$</p>
+                    <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                </div>
                 <h1 class="site-title"><a href="/">jack marchant</a></h1>
                 <p class="site-tagline">principal engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">deputy</a> · writing about software</p>
             </div>
         </header>
+
+        <div class="subscribe-modal" data-subscribe-modal aria-hidden="true">
+            <div class="subscribe-modal__backdrop" data-subscribe-backdrop></div>
+            <div class="subscribe-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+                <div class="subscribe-modal__header">
+                    <h2 class="subscribe-modal__title" id="subscribe-modal-title">subscribe</h2>
+                    <button class="subscribe-modal__close" type="button" data-subscribe-close aria-label="close">×</button>
+                </div>
+                <p class="subscribe-modal__desc">get new posts delivered to your inbox</p>
+                <form class="subscribe-form" action="https://jackmarchant.us1.list-manage.com/subscribe/post" method="post" target="_blank" rel="noopener noreferrer" novalidate>
+                    <input type="hidden" name="u" value="5a51a355f4187fddb0d0f4816" />
+                    <input type="hidden" name="id" value="a740cde517c" />
+                    <div style="position:absolute;left:-5000px;" aria-hidden="true">
+                        <input type="text" name="b_5a51a355f4187fddb0d0f4816_a740cde517c" tabindex="-1" value="" />
+                    </div>
+                    <input type="email" name="EMAIL" class="subscribe-form__input" placeholder="your@email.com" required />
+                    <button type="submit" class="subscribe-form__submit">subscribe →</button>
+                </form>
+            </div>
+        </div>
         <main class="container">
             {% if posts %}
                 <section class="post-directory" data-post-directory>
