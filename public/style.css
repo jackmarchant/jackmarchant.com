@@ -665,3 +665,7 @@ main {
 .subscribe-form__submit:hover {
     background: rgba(99, 210, 151, 0.1);
 }
+
+.post-directory {
+    margin-top: 20px;
+}
