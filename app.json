@@ -1,0 +1,27 @@
+{
+  "name": "jackmarchant.com",
+  "description": "Jack Marchant's personal blog built with Slim Framework and Twig.",
+  "keywords": ["php", "slim", "twig", "blog"],
+  "website": "https://jackmarchant.com",
+  "repository": "https://github.com/jackmarchant/jackmarchant.com",
+  "logo": "https://jackmarchant.com/assets/logo.png",
+  "buildpacks": [
+    {
+      "url": "heroku/php"
+    }
+  ],
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "eco"
+    }
+  },
+  "environments": {
+    "review": {
+      "addons": [],
+      "scripts": {
+        "postdeploy": "echo 'Review app deployed'"
+      }
+    }
+  }
+}
