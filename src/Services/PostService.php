@@ -147,8 +147,10 @@ class PostService
             'elixir' => '/\b(elixir|erlang|genserver|ecto|phoenix)\b/',
             'ai' => '/\b(ai|llm|copilot|autocomplete)\b/',
             'database' => '/\b(database|sql|query|postgres|index|pagination)\b/',
-            'testing' => '/\b(test|tdd|unit test|spec|assert)\b/',
+            'testing' => '/\b(tests?|testing|tdd|spec|assert)\b/',
             'php' => '/\bphp\b/',
+            'career' => '/\b(interview|interviewing|interviewee|candidate|hiring|remote)\b/',
+            'practices' => '/code\s+review|pull\s+request|\brefactor(ing)?\b|tech\s+debt|technical\s+debt|design\s+pattern|dependency\s+injection|feature\s+flags?|\bmaintainab(le|ility)?\b/',
         ];
         $tags = [];
 

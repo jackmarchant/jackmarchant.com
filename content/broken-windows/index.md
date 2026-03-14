@@ -1,6 +1,7 @@
 ---
 title: Building Software with Broken Windows 
 date: "2019-04-14T09:00:00.000Z"
+tags: practices
 ---
 
 Ever get the feeling that adding this "one little hack", a couple of lines of code, won't have much of an impact on the rest of the codebase? You think nothing of it and add it, convincing your team members it was the correct decision to get this new feature over the line. In theory, and generally speaking, I would kind of agree with doing it, but every hack is different so it's hard to paint them all with the same brush. If you've been doing software development for long enough you can see this kind of code coming from a mile away. It's the kind of code that can haunt your dreams if you're not careful.

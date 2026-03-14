@@ -21,6 +21,8 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+clike+j
     --tag-engineering-color: #f0a060;
     --tag-testing-color: #ff8080;
     --tag-php-color: #8898d4;
+    --tag-career-color: #f7c948;
+    --tag-practices-color: #4ecdc4;
 }
 
  code[class*="language-"],
@@ -299,6 +301,16 @@ main {
     color: var(--tag-php-color);
 }
 
+.tag-filter-btn--career.is-active {
+    border-color: var(--tag-career-color);
+    color: var(--tag-career-color);
+}
+
+.tag-filter-btn--practices.is-active {
+    border-color: var(--tag-practices-color);
+    color: var(--tag-practices-color);
+}
+
 .post-count {
     margin: 10px 0 16px;
     color: var(--text-muted-color);
@@ -414,6 +426,16 @@ main {
 .tag-chip--php {
     color: var(--tag-php-color);
     border-color: var(--tag-php-color);
+}
+
+.tag-chip--career {
+    color: var(--tag-career-color);
+    border-color: var(--tag-career-color);
+}
+
+.tag-chip--practices {
+    color: var(--tag-practices-color);
+    border-color: var(--tag-practices-color);
 }
 
 .post-card__excerpt {

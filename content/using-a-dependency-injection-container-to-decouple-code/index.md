@@ -1,6 +1,7 @@
 ---
 title: Using a Dependency Injection (DI) Container to decouple your code
 date: "2020-06-03"
+tags: practices, php
 ---
 
 Dependency Injection is the method of passing objects to another (usually during instantiation) to invert the dependency created when you use an object. A Container is often used as a collection of the objects used in your system, to achieve separation between usage and instantiation.

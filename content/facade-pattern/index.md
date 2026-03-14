@@ -1,6 +1,7 @@
 ---
 title: The Facade Pattern
 date: "2019-07-05T09:00:00.000Z"
+tags: practices, php
 ---
 
 Design Patterns allow you to create abstractions that decouple sections of a codebase with the purpose of making a change to the code later a much easier process. 

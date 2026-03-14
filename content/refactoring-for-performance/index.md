@@ -1,6 +1,7 @@
 ---
 title: Refactoring for Performance
 date: "2024-02-12T09:00:00.000Z"
+tags: practices
 ---
 
 I spend most of my time thinking about performance improvements. Refactoring is tricky work, even more so when you’re unfamiliar with the feature or part of the codebase.

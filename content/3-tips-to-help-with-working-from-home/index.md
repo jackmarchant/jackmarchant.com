@@ -1,6 +1,7 @@
 ---
 title: 3 simple tips to get better at working from home
 date: "2020-04-17T18:00:00.000Z"
+tags: career
 ---
 
 Working from home has been thrust upon those lucky enough to still have a job. Many aren’t sure how to cope, some are trying to find ways to help them through the day. Make no mistake, this is not a normal remote working environment we find ourselves in, but nonetheless we should find ways to embrace it. 

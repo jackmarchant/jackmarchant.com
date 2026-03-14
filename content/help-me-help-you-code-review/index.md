@@ -1,6 +1,7 @@
 ---
 title: Help me, help you - Code Review
 date: "2019-10-24T12:18:00.000Z"
+tags: practices
 ---
 
 Code Reviews are one of the easiest ways to help your team-mates. There are a number of benefits for both the reviewer and pull request author:

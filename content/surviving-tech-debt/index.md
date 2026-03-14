@@ -1,6 +1,7 @@
 ---
 title: Surviving technical debt in the real world
 date: "2017-12-21T12:18:00.000Z"
+tags: practices
 ---
 
 Technical debt is a potentially crippling disease that can take over your codebase without much warning. One day, you’re building features, the next, you struggle to untangle the mess you (or maybe your team) has created.
