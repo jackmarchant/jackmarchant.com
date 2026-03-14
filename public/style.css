@@ -207,6 +207,7 @@ main {
     align-items: center;
     gap: 8px;
     width: 100%;
+    box-sizing: border-box;
     background: var(--surface-color);
     border: 1px solid var(--border-color);
     border-radius: 8px;
@@ -252,6 +253,7 @@ main {
     background: var(--surface-color);
     border-radius: 8px;
     padding: 12px;
+    overflow: hidden;
     transition: transform 120ms ease, border-color 120ms ease, border-left-color 120ms ease;
 }
 
@@ -284,6 +286,8 @@ main {
     font-family: 'Space Mono', monospace;
     font-size: 16px;
     font-weight: 700;
+    flex: 1;
+    min-width: 0;
     text-transform: lowercase;
 }
 
@@ -291,6 +295,8 @@ main {
     color: var(--text-muted-color);
     font-family: 'Space Mono', monospace;
     font-size: 11px;
+    flex-shrink: 0;
+    margin-left: auto;
     white-space: nowrap;
 }
 
@@ -340,6 +346,7 @@ main {
     color: var(--text-muted-color);
     font-size: 14px;
     line-height: 1.6;
+    overflow-wrap: anywhere;
 }
 
 .post-card__excerpt-content p {
@@ -432,4 +439,14 @@ main {
 
 .tweet-card__link:hover {
     color: var(--accent-blue-color);
+}
+
+@media (max-width: 480px) {
+    .post-card__toggle {
+        flex-wrap: wrap;
+    }
+
+    .post-card__date {
+        margin-left: 0;
+    }
 }
