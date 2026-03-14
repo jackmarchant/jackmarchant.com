@@ -45,10 +45,12 @@
         <main class="container">
             {% if posts %}
                 <section class="post-directory" data-post-directory>
-                    <label class="search-field" for="post-filter">
-                        <span class="search-field__prompt">_</span>
-                        <input id="post-filter" type="text" class="search-field__input" placeholder="filter by title or tag" autocomplete="off" data-filter-input />
-                    </label>
+                    <div class="tag-filter-bar" data-tag-filter-bar>
+                        <button class="tag-filter-btn is-active" data-tag-filter="all">all</button>
+                        {% for tag in tags %}
+                            <button class="tag-filter-btn tag-filter-btn--{{ tag|lower|replace({' ': '-'}) }}" data-tag-filter="{{ tag|lower }}">{{ tag }}</button>
+                        {% endfor %}
+                    </div>
                     <p class="post-count">— <span data-results-count>{{ posts|length }}</span> posts —</p>
                     <div class="post-list" data-post-list>
                         {% for listing in posts %}

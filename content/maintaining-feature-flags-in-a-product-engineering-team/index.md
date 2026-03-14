@@ -1,6 +1,7 @@
 ---
 title: Maintaining feature flags in a product engineering team
 date: "2022-04-01T18:00:00.000Z"
+tags: practices
 ---
 
 I have mixed feelings about feature flags. They are part of the product development workflow and you would be hard pressed to find a product engineering team that doesn’t use them. Gone are the days of either shipping and hoping the code will work first time or testing the life out of a feature so much that it delays the project.

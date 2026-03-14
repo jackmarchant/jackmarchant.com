@@ -1,6 +1,7 @@
 ---
 title: What I've learned doing technical interviews
 date: "2022-03-18T18:00:00.000Z"
+tags: career
 ---
 
 When I first started interviewing candidates for engineering roles, I was very nervous. The process can be quite daunting as both an interviewer and interviewee. The goal for the interviewer is to assess the candidate for their technical capabilities and make a judgement on whether you think they should move to the next round (there’s always a next round). Making a judgement on someone after an hour, sometimes a bit longer, is hard and error prone.

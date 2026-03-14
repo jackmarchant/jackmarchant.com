@@ -1,6 +1,7 @@
 ---
 title: Making Software - a three step process
 date: "2020-04-14T08:22:00.000Z"
+tags: practices
 ---
 One of the most useful tips that has guided much of my decision over the years has been this simple principle: three steps, executed in sequential order;
 

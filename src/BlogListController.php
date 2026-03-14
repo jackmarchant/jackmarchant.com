@@ -37,7 +37,8 @@ class BlogListController
 
         $response->getBody()->write(
             $this->renderer->render('index.twig', [
-                'posts' => $posts, 
+                'posts' => $posts,
+                'tags' => $this->postService->getAllTags($posts),
                 'settings' => $this->settings,
             ])
         );
