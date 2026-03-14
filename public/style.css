@@ -330,3 +330,70 @@ blockquote {
     margin-right: 20px;
     margin-bottom: 10px;
 }
+/* Responsive images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Responsive code blocks */
+pre[class*="language-"] {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Responsive tweet embeds */
+.twitter-tweet {
+    max-width: 100%;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 700px) {
+    .wrapper {
+        padding: 0;
+    }
+
+    header, main {
+        padding: 12px;
+    }
+
+    .heading--title {
+        font-size: 36px;
+        margin-bottom: 40px;
+    }
+
+    .post .heading {
+        font-size: 26px;
+    }
+
+    h3 {
+        font-size: 1.3rem;
+    }
+
+    p, li {
+        font-size: 1.05rem;
+    }
+
+    .blurb {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .blurb img {
+        margin-bottom: 12px;
+        margin-right: 0;
+    }
+
+    .blurb__text p {
+        margin-bottom: 4px;
+    }
+
+    blockquote {
+        margin-left: 0;
+        padding-left: 1rem;
+    }
+
+    .post-footer {
+        font-size: 50px;
+    }
+}
