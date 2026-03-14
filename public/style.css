@@ -312,7 +312,7 @@ main {
 }
 
 .post-count {
-    margin: 10px 0 16px;
+    margin: 20px 0 16px;
     color: var(--text-muted-color);
     text-align: center;
     font-family: 'Space Mono', monospace;
