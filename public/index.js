@@ -108,8 +108,55 @@
         expandable.style.maxHeight = expandable.scrollHeight + 'px';
     }
 
+    function setupSubscribeModal() {
+        var btn = document.querySelector('[data-subscribe-btn]');
+        var modal = document.querySelector('[data-subscribe-modal]');
+        var backdrop = document.querySelector('[data-subscribe-backdrop]');
+        var close = document.querySelector('[data-subscribe-close]');
+
+        if (!btn || !modal) {
+            return;
+        }
+
+        function openModal() {
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+            var input = modal.querySelector('.subscribe-form__input');
+            if (input) {
+                input.focus();
+            }
+        }
+
+        function closeModal() {
+            modal.classList.remove('is-open');
+            modal.setAttribute('aria-hidden', 'true');
+            btn.focus();
+        }
+
+        btn.addEventListener('click', openModal);
+
+        if (close) {
+            close.addEventListener('click', closeModal);
+        }
+
+        if (backdrop) {
+            backdrop.addEventListener('click', closeModal);
+        }
+
+        return closeModal;
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         setupExpanding();
+        var closeModal = setupSubscribeModal();
+
+        if (closeModal) {
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            });
+        }
 
         var directories = document.querySelectorAll('[data-post-directory]');
         directories.forEach(function (directory) {
