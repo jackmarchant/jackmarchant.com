@@ -1,0 +1,455 @@
+/* ============================================
+   OPTION B: Retro Amber CRT Terminal Theme
+   ============================================
+   Inspired by amber phosphor CRT monitors (1980s)
+   Warm amber text with CRT scan line effects
+   Phosphor glow, subtle screen curvature feel
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap');
+
+:root {
+    --crt-bg: #0c0800;
+    --crt-amber: #ffb000;
+    --crt-amber-dim: #cc8800;
+    --crt-amber-bright: #ffc832;
+    --crt-amber-faded: rgba(255, 176, 0, 0.5);
+    --crt-amber-glow: rgba(255, 176, 0, 0.15);
+    --crt-scanline: rgba(0, 0, 0, 0.15);
+    --crt-font: 'Share Tech Mono', 'VT323', 'Courier New', monospace;
+    --crt-font-display: 'VT323', 'Share Tech Mono', monospace;
+}
+
+/* Reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--crt-font);
+    background-color: #050300;
+    color: var(--crt-amber);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* CRT Screen Container */
+.crt-screen {
+    max-width: 900px;
+    margin: 30px auto;
+    background: var(--crt-bg);
+    border-radius: 12px;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+        0 0 40px rgba(255, 176, 0, 0.1),
+        0 0 80px rgba(255, 176, 0, 0.05),
+        inset 0 0 60px rgba(0, 0, 0, 0.4);
+}
+
+/* Scanline Overlay */
+.crt-screen::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        var(--crt-scanline) 2px,
+        var(--crt-scanline) 4px
+    );
+    pointer-events: none;
+    z-index: 10;
+}
+
+/* Subtle vignette */
+.crt-screen::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+        ellipse at center,
+        transparent 60%,
+        rgba(0, 0, 0, 0.4) 100%
+    );
+    pointer-events: none;
+    z-index: 11;
+}
+
+.crt-bezel {
+    border: 3px solid #1a1200;
+    border-radius: 8px;
+    margin: 8px;
+    padding: 30px 36px;
+    position: relative;
+    min-height: 80vh;
+}
+
+/* Phosphor flicker animation */
+@keyframes flicker {
+    0% { opacity: 0.97; }
+    5% { opacity: 1; }
+    10% { opacity: 0.98; }
+    15% { opacity: 1; }
+    20% { opacity: 0.96; }
+    50% { opacity: 1; }
+    80% { opacity: 0.98; }
+    100% { opacity: 1; }
+}
+
+.crt-bezel {
+    animation: flicker 8s infinite;
+}
+
+/* System Banner */
+.system-banner {
+    border-bottom: 1px solid var(--crt-amber-dim);
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: var(--crt-amber-dim);
+    line-height: 1.4;
+    white-space: pre-line;
+}
+
+/* Header */
+header {
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.blurb {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.blurb__image {
+    margin-right: 16px;
+}
+
+.blurb__image img {
+    border-radius: 4px;
+    border: 1px solid var(--crt-amber-dim);
+    filter: sepia(100%) saturate(300%) brightness(70%) hue-rotate(5deg);
+}
+
+.blurb__text h3 {
+    font-family: var(--crt-font-display);
+    font-size: 1.8rem;
+    margin: 0 0 4px 0;
+    color: var(--crt-amber-bright);
+    text-shadow: 0 0 10px var(--crt-amber-glow);
+    letter-spacing: 2px;
+}
+
+.blurb__text h3 a {
+    color: var(--crt-amber-bright);
+    text-decoration: none;
+}
+
+.blurb__text p {
+    font-size: 0.95rem;
+    color: var(--crt-amber-dim);
+    margin: 0 0 4px 0;
+}
+
+.blurb__text a {
+    color: var(--crt-amber);
+    text-decoration: none;
+}
+
+.blurb__text a:hover {
+    color: var(--crt-amber-bright);
+    text-shadow: 0 0 8px var(--crt-amber-glow);
+}
+
+.blurb img, .blurb p {
+    display: block;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--crt-font-display);
+    color: var(--crt-amber-bright);
+    font-weight: 400;
+    text-shadow: 0 0 8px var(--crt-amber-glow);
+    letter-spacing: 1px;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+h3 {
+    font-size: 1.4rem;
+    margin: 0 0 10px 0;
+    line-height: 1.3;
+}
+
+a {
+    color: var(--crt-amber);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--crt-amber-bright);
+    text-shadow: 0 0 8px var(--crt-amber-glow);
+}
+
+p, li {
+    color: var(--crt-amber);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 0 0 1.2rem 0;
+}
+
+/* Post Listings */
+.post-listing {
+    margin-bottom: 24px;
+    padding: 16px;
+    border: 1px solid rgba(255, 176, 0, 0.15);
+    background: rgba(255, 176, 0, 0.02);
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.post-listing:hover {
+    background: rgba(255, 176, 0, 0.06);
+    border-color: rgba(255, 176, 0, 0.4);
+}
+
+.post-listing h3.heading--post a {
+    color: var(--crt-amber-bright);
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+.post-listing h3.heading--post a:hover {
+    text-shadow: 0 0 12px var(--crt-amber-glow);
+}
+
+.heading a {
+    text-decoration: none;
+}
+
+.heading a:hover {
+    text-decoration: none;
+}
+
+.post-date {
+    color: var(--crt-amber-faded);
+    font-size: 0.9rem;
+    margin: 2px 0 8px 0;
+    font-weight: 400;
+}
+
+.post-date::before {
+    content: '[ ';
+}
+
+.post-date::after {
+    content: ' ]';
+}
+
+/* Single Post */
+.post {
+    padding: 0;
+}
+
+.post .heading {
+    font-family: var(--crt-font-display);
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    color: var(--crt-amber-bright);
+    letter-spacing: 2px;
+}
+
+.post h3 {
+    line-height: 1.5;
+}
+
+.post a {
+    color: var(--crt-amber);
+    border-bottom: 1px dashed var(--crt-amber-dim);
+}
+
+.post a:hover {
+    text-decoration: none;
+    color: var(--crt-amber-bright);
+    border-bottom-color: var(--crt-amber-bright);
+}
+
+.post-footer {
+    text-align: center;
+    font-size: 16px;
+    color: var(--crt-amber-dim);
+    padding: 24px 0;
+    line-height: 2;
+    letter-spacing: 4px;
+}
+
+/* Inline Code */
+p code {
+    color: var(--crt-amber-bright);
+    background: rgba(255, 176, 0, 0.1);
+    border: 1px solid rgba(255, 176, 0, 0.25);
+    border-radius: 2px;
+    padding: 2px 6px;
+    font-family: var(--crt-font);
+    font-size: 0.9em;
+}
+
+/* Code Blocks */
+pre[class*="language-"] {
+    background: #0a0600;
+    border: 1px solid var(--crt-amber-dim);
+    border-radius: 2px;
+    padding: 16px;
+    margin: 16px 0;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+    font-family: var(--crt-font);
+    font-size: 0.95em;
+    color: var(--crt-amber);
+}
+
+/* Override Prism token colors for amber theme */
+.token.comment, .token.block-comment, .token.prolog,
+.token.doctype, .token.cdata {
+    color: var(--crt-amber-faded);
+}
+
+.token.punctuation { color: var(--crt-amber-dim); }
+.token.tag, .token.attr-name, .token.namespace, .token.deleted { color: #ff8844; }
+.token.function-name { color: var(--crt-amber-bright); }
+.token.boolean, .token.number, .token.function { color: #ffcc66; }
+.token.property, .token.class-name, .token.constant, .token.symbol { color: #ffdd88; }
+.token.selector, .token.important, .token.atrule, .token.keyword, .token.builtin { color: #ffaa44; }
+.token.string, .token.char, .token.attr-value, .token.regex, .token.variable { color: #eebb55; }
+.token.operator, .token.entity, .token.url { color: var(--crt-amber); }
+
+/* Blockquotes */
+blockquote {
+    border-left: 3px solid var(--crt-amber-dim);
+    margin: 0 0 1.5rem 0;
+    padding: 8px 0 8px 16px;
+    color: var(--crt-amber-faded);
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* Lists */
+ul {
+    margin: 0 0 1.5rem 1.5rem;
+    padding: 0;
+    list-style: square;
+}
+
+ul li::marker {
+    color: var(--crt-amber-dim);
+}
+
+li {
+    margin-bottom: 8px;
+    padding-left: 0;
+    color: var(--crt-amber);
+}
+
+li p {
+    margin-bottom: 0;
+}
+
+/* Wrapper */
+.wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+header, main {
+    padding: 0;
+}
+
+/* Status Bar */
+.status-bar {
+    margin-top: 24px;
+    padding-top: 12px;
+    border-top: 1px solid var(--crt-amber-dim);
+    font-size: 12px;
+    color: var(--crt-amber-faded);
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Tweet card */
+.tweet-card {
+    background: rgba(255, 176, 0, 0.05);
+    border: 1px solid rgba(255, 176, 0, 0.25);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.tweet-card__icon {
+    width: 22px;
+    height: 22px;
+    fill: var(--crt-amber);
+    flex-shrink: 0;
+}
+
+.tweet-card__link {
+    color: var(--crt-amber-dim);
+    text-decoration: none;
+    font-size: 1rem;
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+.tweet-card__link:hover {
+    color: var(--crt-amber-bright);
+    text-shadow: 0 0 8px var(--crt-amber-glow);
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .crt-screen {
+        margin: 0;
+        border-radius: 0;
+    }
+
+    .crt-bezel {
+        padding: 20px 16px;
+        margin: 4px;
+    }
+
+    .tweet-card {
+        padding: 12px 14px;
+        gap: 10px;
+    }
+}

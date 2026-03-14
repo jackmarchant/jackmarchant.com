@@ -1,0 +1,413 @@
+/* ============================================
+   OPTION A: Classic Green Terminal Theme
+   ============================================
+   Inspired by classic CRT terminals (VT100, IBM 3270)
+   Green phosphor text on black background
+   Monospace font throughout, command-prompt aesthetics
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+    --term-bg: #0a0a0a;
+    --term-green: #00ff41;
+    --term-green-dim: #00cc33;
+    --term-green-bright: #33ff66;
+    --term-green-faded: rgba(0, 255, 65, 0.6);
+    --term-green-glow: rgba(0, 255, 65, 0.15);
+    --term-border: #00ff41;
+    --term-link: #00ff41;
+    --term-link-hover: #66ff88;
+    --term-font: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+    --term-prompt: '$ ';
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--term-font);
+    background-color: var(--term-bg);
+    color: var(--term-green);
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    text-shadow: 0 0 5px var(--term-green-glow);
+}
+
+/* Terminal Window Chrome */
+.terminal-window {
+    max-width: 900px;
+    margin: 20px auto;
+    border: 1px solid var(--term-green-dim);
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 0 20px var(--term-green-glow), inset 0 0 20px rgba(0, 255, 65, 0.03);
+}
+
+.terminal-titlebar {
+    background: #1a1a1a;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #333;
+    font-size: 13px;
+    color: var(--term-green-dim);
+}
+
+.terminal-titlebar::before {
+    content: '● ● ●';
+    color: var(--term-green-dim);
+    letter-spacing: 4px;
+    margin-right: 12px;
+    font-size: 10px;
+}
+
+.terminal-body {
+    padding: 20px 24px;
+    min-height: 80vh;
+}
+
+/* ASCII Art Header */
+.ascii-header {
+    color: var(--term-green);
+    font-size: 11px;
+    line-height: 1.2;
+    margin-bottom: 8px;
+    white-space: pre;
+    overflow-x: auto;
+}
+
+/* Prompt Line */
+.prompt-line {
+    color: var(--term-green-dim);
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
+.prompt-line::before {
+    content: 'visitor@jackmarchant.com:~$ ';
+    color: var(--term-green);
+}
+
+/* Blinking Cursor */
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.cursor {
+    display: inline-block;
+    width: 8px;
+    height: 16px;
+    background-color: var(--term-green);
+    animation: blink 1s step-end infinite;
+    vertical-align: text-bottom;
+    margin-left: 2px;
+}
+
+/* Header / Profile */
+header {
+    padding: 0;
+    margin-bottom: 24px;
+    border-bottom: 1px dashed var(--term-green-dim);
+    padding-bottom: 16px;
+}
+
+.blurb {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.blurb__image {
+    display: none;
+}
+
+.blurb__text h3 {
+    font-size: 1.1rem;
+    margin: 0 0 4px 0;
+    color: var(--term-green-bright);
+}
+
+.blurb__text h3 a {
+    color: var(--term-green-bright);
+    text-decoration: none;
+}
+
+.blurb__text h3::before {
+    content: '> ';
+    color: var(--term-green-dim);
+}
+
+.blurb__text p {
+    margin: 0 0 4px 0;
+    font-size: 0.9rem;
+    color: var(--term-green-dim);
+}
+
+.blurb__text a {
+    color: var(--term-green);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--term-green-dim);
+}
+
+.blurb__text a:hover {
+    color: var(--term-green-bright);
+    text-decoration: none;
+    border-bottom-color: var(--term-green-bright);
+}
+
+.blurb img, .blurb p {
+    display: block;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--term-font);
+    color: var(--term-green-bright);
+    font-weight: 700;
+    text-shadow: 0 0 8px var(--term-green-glow);
+}
+
+h2 {
+    font-size: 1.4rem;
+    border-bottom: 1px solid var(--term-green-dim);
+    padding-bottom: 8px;
+}
+
+h3 {
+    font-size: 1.2rem;
+    margin: 0 0 10px 0;
+    line-height: 1.3;
+}
+
+a {
+    color: var(--term-green);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--term-green-bright);
+    text-decoration: underline;
+}
+
+p, li {
+    color: var(--term-green-dim);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin: 0 0 1.2rem 0;
+}
+
+/* Post Listings */
+.post-listing {
+    margin-bottom: 24px;
+    padding: 12px 0;
+    border-bottom: 1px dotted rgba(0, 255, 65, 0.2);
+}
+
+.post-listing h3.heading--post::before {
+    content: '├── ';
+    color: var(--term-green-dim);
+    font-weight: 400;
+}
+
+.post-listing:last-child h3.heading--post::before {
+    content: '└── ';
+}
+
+.post-listing h3.heading--post a {
+    color: var(--term-green-bright);
+    text-decoration: none;
+    text-transform: capitalize;
+}
+
+.post-listing h3.heading--post a:hover {
+    text-decoration: underline;
+}
+
+.post-date {
+    color: var(--term-green-faded);
+    font-size: 0.85rem;
+    margin: 2px 0 8px 0;
+    font-weight: 400;
+}
+
+.post-date::before {
+    content: '# ';
+}
+
+/* Single Post */
+.post {
+    padding: 0;
+}
+
+.post .heading {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: var(--term-green-bright);
+}
+
+.post h3 {
+    line-height: 1.5;
+}
+
+.post a {
+    color: var(--term-green);
+    border-bottom: 1px dashed var(--term-green-dim);
+}
+
+.post a:hover {
+    text-decoration: none;
+    color: var(--term-green-bright);
+    border-bottom-color: var(--term-green-bright);
+}
+
+.post-footer {
+    text-align: center;
+    font-size: 14px;
+    color: var(--term-green-dim);
+    padding: 20px 0;
+    line-height: 2;
+}
+
+.post-footer::before {
+    content: '--- EOF ---';
+}
+
+/* Inline Code */
+p code {
+    color: var(--term-green-bright);
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid rgba(0, 255, 65, 0.2);
+    border-radius: 3px;
+    padding: 2px 6px;
+    font-family: var(--term-font);
+    font-size: 0.9em;
+}
+
+/* Code Blocks */
+pre[class*="language-"] {
+    background: #0d0d0d;
+    border: 1px solid var(--term-green-dim);
+    border-radius: 4px;
+    padding: 16px;
+    margin: 16px 0;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+    font-family: var(--term-font);
+    font-size: 0.9em;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 3px solid var(--term-green-dim);
+    margin: 0 0 1.5rem 0;
+    padding: 8px 0 8px 16px;
+    color: var(--term-green-faded);
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Lists */
+ul {
+    margin: 0 0 1.5rem 1.5rem;
+    padding: 0;
+    list-style: none;
+}
+
+ul li::before {
+    content: '> ';
+    color: var(--term-green);
+}
+
+li {
+    margin-bottom: 8px;
+    padding-left: 0;
+}
+
+li p {
+    margin-bottom: 0;
+    display: inline;
+}
+
+/* Wrapper */
+.wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+header, main {
+    padding: 0;
+}
+
+/* Tweet card */
+.tweet-card {
+    background: #111;
+    border: 1px solid var(--term-green-dim);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.tweet-card__icon {
+    width: 22px;
+    height: 22px;
+    fill: var(--term-green);
+    flex-shrink: 0;
+}
+
+.tweet-card__link {
+    color: var(--term-green-dim);
+    text-decoration: none;
+    font-size: 0.95rem;
+    margin-bottom: 0;
+    border-bottom: none;
+}
+
+.tweet-card__link:hover {
+    color: var(--term-green-bright);
+}
+
+/* Images */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .terminal-window {
+        margin: 0;
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+    }
+
+    .terminal-body {
+        padding: 16px;
+    }
+
+    .ascii-header {
+        font-size: 8px;
+    }
+
+    .tweet-card {
+        padding: 12px 14px;
+        gap: 10px;
+    }
+}

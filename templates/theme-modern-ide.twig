@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>{%if post %}{{ post.title }} | {% endif %}Jack Marchant</title>
+        <link href="/theme-modern-ide.css" rel="stylesheet" type="text/css" />
+        <link href="/prism.css" rel="stylesheet" type="text/css" />
+        <meta name="description" content="I'm a Software Engineer from Sydney. I like writing code and talking about it." />
+        <meta property="og:title" content="Software Engineer" />
+        <meta property="og:description" content="I'm a Software Engineer from Sydney. I like writing code and talking about it." />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/5a51a355f4187fddb0d0f4816/a740cde517cbaf44c3accd43e.js");</script>
+    </head>
+    <body>
+        <div class="ide-window">
+            <!-- Title Bar -->
+            <div class="ide-titlebar">
+                <div class="ide-titlebar-buttons">
+                    <span class="close"></span>
+                    <span class="minimize"></span>
+                    <span class="maximize"></span>
+                </div>
+                <div class="ide-titlebar-title">jackmarchant.com — Blog</div>
+                <div></div>
+            </div>
+
+            <!-- Tab Bar -->
+            <div class="ide-tabs">
+                <a href="/" class="ide-tab {% if not post %}active{% endif %}">
+                    <span class="ide-tab-icon">📄</span> index.md
+                </a>
+                {% if post %}
+                <a href="#" class="ide-tab active">
+                    <span class="ide-tab-icon">📝</span> {{ post.title }}
+                </a>
+                {% endif %}
+            </div>
+
+            <!-- Content Area with Sidebar -->
+            <div class="ide-content">
+                <!-- Sidebar / Explorer -->
+                <div class="ide-sidebar">
+                    <div class="ide-sidebar-header">Explorer — Posts</div>
+                    <ul class="ide-file-tree">
+                        {% for listing_post in posts %}
+                            <li>
+                                <a href="{{ listing_post.url }}">
+                                    <span class="ide-file-icon">📄</span>
+                                    {{ listing_post.title }}
+                                    <span class="ide-file-date">{{ listing_post.date }}</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                        {% for listing_post in listings %}
+                            <li>
+                                <a href="{{ listing_post.url }}" {% if post and listing_post.title == post.title %}class="active"{% endif %}>
+                                    <span class="ide-file-icon">📄</span>
+                                    {{ listing_post.title }}
+                                    <span class="ide-file-date">{{ listing_post.date }}</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <!-- Editor -->
+                <div class="ide-editor">
+                    {% if not post %}
+                    <header>
+                        <div class="blurb">
+                            <div class="blurb__image">
+                                <img src="/profile-pic.jpg" width="72" />
+                            </div>
+                            <div class="blurb__text">
+                                <h3><a href="/">Jack Marchant</a></h3>
+                                <p>Principal Software Engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">Deputy</a></p>
+                                <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/jackmarchant10">Twitter</a> |
+                                <a target="_blank" rel="noopener noreferrer" href="https://github.com/jackmarchant">GitHub</a>
+                            </div>
+                        </div>
+                    </header>
+                    {% endif %}
+
+                    <main class="wrapper">
+                        {% for post in posts %}
+                            <div class="post-listing">
+                                <h3 class="heading heading--post"><a href="{{post.url}}">{{post.title}}</a></h3>
+                                <h4 class="post-date">{{ post.date }}</h4>
+                                {{ post.blurb | raw }}
+                            </div>
+                        {% endfor %}
+
+                    {% if post %}
+                        <div class="ide-breadcrumb">
+                            <a href="/">home</a>
+                            <span class="separator">›</span>
+                            <a href="/">posts</a>
+                            <span class="separator">›</span>
+                            <span>{{ post.title }}</span>
+                        </div>
+                        <div class="post">
+                            <h2 class="heading">{{ post.title }}</h2>
+                            <h4 class="post-date">{{ post.date }}</h4>
+                            {{ post.content|raw }}
+                        </div>
+                        <div class="post-footer">. . .</div>
+                    {% endif %}
+                    </main>
+                </div>
+            </div>
+
+            <!-- Status Bar -->
+            <div class="ide-statusbar">
+                <div class="ide-statusbar-left">
+                    <span class="accent">main</span>
+                    <span>UTF-8</span>
+                    <span>Markdown</span>
+                </div>
+                <div class="ide-statusbar-right">
+                    <span>{% if post %}{{ post.title }}{% else %}All Posts{% endif %}</span>
+                    <span>Ln 1, Col 1</span>
+                </div>
+            </div>
+        </div>
+
+        <script src="/prism.js"></script>
+
+        {% if settings.environment == 'production' %}
+            <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+        {% endif %}
+    </body>
+</html>

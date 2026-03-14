@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>{%if post %}{{ post.title }} | {% endif %}Jack Marchant</title>
+        <link href="/theme-green-terminal.css" rel="stylesheet" type="text/css" />
+        <link href="/prism.css" rel="stylesheet" type="text/css" />
+        <meta name="description" content="I'm a Software Engineer from Sydney. I like writing code and talking about it." />
+        <meta property="og:title" content="Software Engineer" />
+        <meta property="og:description" content="I'm a Software Engineer from Sydney. I like writing code and talking about it." />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/5a51a355f4187fddb0d0f4816/a740cde517cbaf44c3accd43e.js");</script>
+    </head>
+    <body>
+        <div class="terminal-window">
+            <div class="terminal-titlebar">
+                jackmarchant.com — bash — 80×24
+            </div>
+            <div class="terminal-body">
+                <div class="ascii-header">
+     _            _      __  __                _                 _
+    | | __ _  ___| | __ |  \/  | __ _ _ __ ___| |__   __ _ _ __ | |_
+ _  | |/ _` |/ __| |/ / | |\/| |/ _` | '__/ __| '_ \ / _` | '_ \| __|
+| |_| | (_| | (__|   &lt;  | |  | | (_| | | | (__| | | | (_| | | | | |_
+ \___/ \__,_|\___|_|\_\ |_|  |_|\__,_|_|  \___|_| |_|\__,_|_| |_|\__|
+                </div>
+                <div class="prompt-line">cat /etc/motd</div>
+
+                <header>
+                    <div class="blurb">
+                        <div class="blurb__text">
+                            <h3><a href="/">Jack Marchant</a></h3>
+                            <p>Principal Software Engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">Deputy</a></p>
+                            <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/jackmarchant10">Twitter</a> |
+                            <a target="_blank" rel="noopener noreferrer" href="https://github.com/jackmarchant">GitHub</a>
+                        </div>
+                    </div>
+                </header>
+
+                {% if posts | length > 0 %}
+                <div class="prompt-line">ls -la ~/posts/</div>
+                {% endif %}
+
+                <main class="wrapper">
+                    {% for post in posts %}
+                        <div class="post-listing">
+                            <h3 class="heading heading--post"><a href="{{post.url}}">{{post.title}}</a></h3>
+                            <h4 class="post-date">{{ post.date }}</h4>
+                            {{ post.blurb | raw }}
+                        </div>
+                    {% endfor %}
+
+                {% if post %}
+                    <div class="prompt-line">cat ~/posts/{{ post.title | lower | replace({' ': '-'}) }}.md</div>
+                    <div class="post">
+                        <h2 class="heading">{{ post.title }}</h2>
+                        <h4 class="post-date">{{ post.date }}</h4>
+                        {{ post.content|raw }}
+                    </div>
+                    <div class="post-footer"></div>
+                {% endif %}
+
+                {% if listings | length > 0 %}
+                    <div class="prompt-line">ls ~/posts/ | head -5</div>
+                {% endif %}
+
+                {% for post in listings %}
+                    <div class="post-listing">
+                        <h3 class="heading heading--post"><a href="{{post.url}}">{{post.title}}</a></h3>
+                        <h4 class="post-date">{{ post.date }}</h4>
+                        {{ post.blurb | raw }}
+                    </div>
+                {% endfor %}
+
+                <div class="prompt-line"><span class="cursor"></span></div>
+                </main>
+            </div>
+        </div>
+
+        <script src="/prism.js"></script>
+
+        {% if settings.environment == 'production' %}
+            <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+        {% endif %}
+    </body>
+</html>

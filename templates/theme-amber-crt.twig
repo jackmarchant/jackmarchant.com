@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>{%if post %}{{ post.title }} | {% endif %}Jack Marchant</title>
+        <link href="/theme-amber-crt.css" rel="stylesheet" type="text/css" />
+        <link href="/prism.css" rel="stylesheet" type="text/css" />
+        <meta name="description" content="I'm a Software Engineer from Sydney. I like writing code and talking about it." />
+        <meta property="og:title" content="Software Engineer" />
+        <meta property="og:description" content="I'm a Software Engineer from Sydney. I like writing code and talking about it." />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/5a51a355f4187fddb0d0f4816/a740cde517cbaf44c3accd43e.js");</script>
+    </head>
+    <body>
+        <div class="crt-screen">
+            <div class="crt-bezel">
+                <div class="system-banner">MARCHANT SYSTEMS INC. — PERSONAL TERMINAL v3.2
+CONNECTED: jackmarchant.com — SESSION #{{ "now" | date("U") }}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+
+                <header>
+                    <div class="blurb">
+                        <div class="blurb__image">
+                            <img src="/profile-pic.jpg" width="72" />
+                        </div>
+                        <div class="blurb__text">
+                            <h3><a href="/">Jack Marchant</a></h3>
+                            <p>Principal Software Engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">Deputy</a></p>
+                            <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/jackmarchant10">Twitter</a> |
+                            <a target="_blank" rel="noopener noreferrer" href="https://github.com/jackmarchant">GitHub</a>
+                        </div>
+                    </div>
+                </header>
+
+                <main class="wrapper">
+                    {% for post in posts %}
+                        <div class="post-listing">
+                            <h3 class="heading heading--post"><a href="{{post.url}}">{{post.title}}</a></h3>
+                            <h4 class="post-date">{{ post.date }}</h4>
+                            {{ post.blurb | raw }}
+                        </div>
+                    {% endfor %}
+
+                {% if post %}
+                    <div class="post">
+                        <h2 class="heading">{{ post.title }}</h2>
+                        <h4 class="post-date">{{ post.date }}</h4>
+                        {{ post.content|raw }}
+                    </div>
+                    <div class="post-footer">. . .</div>
+                {% endif %}
+
+                {% for post in listings %}
+                    <div class="post-listing">
+                        <h3 class="heading heading--post"><a href="{{post.url}}">{{post.title}}</a></h3>
+                        <h4 class="post-date">{{ post.date }}</h4>
+                        {{ post.blurb | raw }}
+                    </div>
+                {% endfor %}
+                </main>
+
+                <div class="status-bar">
+                    <span>SYSTEM READY</span>
+                    <span>MEM: 640K OK</span>
+                </div>
+            </div>
+        </div>
+
+        <script src="/prism.js"></script>
+
+        {% if settings.environment == 'production' %}
+            <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+        {% endif %}
+    </body>
+</html>
