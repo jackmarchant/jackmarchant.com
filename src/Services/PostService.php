@@ -55,10 +55,11 @@ class PostService
             $path = end($paths);
             $metadata = $this->getMetadata($path);
             $posts[strtotime($metadata['date'])] = [
-                'title' => str_replace('-', ' ', $path),
+                'title' => $metadata['title'],
                 'url' => sprintf('/%s', $path),
-                'date' => (new DateTime($metadata['date']))->format('F d, Y'),
+                'date' => (new DateTime($metadata['date']))->format('Y-m'),
                 'blurb' => $metadata['blurb'],
+                'tags' => $metadata['tags'],
             ];
         }
 
@@ -76,10 +77,17 @@ class PostService
             return !empty($content);
         });
         $blurb = $this->parser->parse(array_shift($md));
+        $title = isset($metadata['title']) ? trim($metadata['title']) : str_replace('-', ' ', $path);
+        $tags = $this->parseTags(isset($metadata['tags']) ? $metadata['tags'] : '');
+        if (empty($tags)) {
+            $tags = $this->inferTags(sprintf('%s %s %s', $path, $title, strip_tags($blurb)));
+        }
 
         return [
+            'title' => $title,
             'date' => $metadata['date'],
             'blurb' => $blurb,
+            'tags' => $tags,
         ];
     }
 
@@ -97,6 +105,43 @@ class PostService
             }
         }
         return $data;
+    }
+
+    protected function parseTags(string $rawTags): array
+    {
+        if (empty(trim($rawTags))) {
+            return [];
+        }
+
+        $parts = preg_split('/[,|]/', $rawTags);
+        $tags = array_values(array_unique(array_filter(array_map(function ($tag) {
+            return strtolower(trim($tag));
+        }, $parts))));
+
+        return $tags;
+    }
+
+    protected function inferTags(string $content): array
+    {
+        $normalizedContent = strtolower($content);
+        $tagPatterns = [
+            'elixir' => '/\b(elixir|erlang|genserver|ecto|phoenix)\b/',
+            'ai' => '/\b(ai|llm|copilot|autocomplete)\b/',
+            'database' => '/\b(database|sql|query|postgres|index|pagination)\b/',
+        ];
+        $tags = [];
+
+        foreach ($tagPatterns as $tag => $pattern) {
+            if (preg_match($pattern, $normalizedContent)) {
+                $tags[] = $tag;
+            }
+        }
+
+        if (empty($tags)) {
+            $tags[] = 'engineering';
+        }
+
+        return $tags;
     }
 
     protected function postExists(string $path): bool

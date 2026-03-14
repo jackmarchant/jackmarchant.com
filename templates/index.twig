@@ -5,7 +5,7 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
         <title>{{ post.title }} {%if post %}|{% endif %} Jack Marchant</title>
-        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
         <link href="/prism.css" rel="stylesheet" type="text/css" />
         <link href="/style.css" rel="stylesheet" type="text/css" />
         <meta name="description" content="I'm a Software Engineer from Sydney. I like writing code and talking about it." />
@@ -14,50 +14,81 @@
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/5a51a355f4187fddb0d0f4816/a740cde517cbaf44c3accd43e.js");</script>
     </head>
-    <body class="wrapper">
-        <header>
-            <div class="blurb">
-                <div class="blurb__image">
-                    <img src="/profile-pic.jpg" width="72" />
-                </div>
-                <div class="blurb__text">
-                    <h3><a href="/">Jack Marchant</a></h3>
-                    <p>Principal Software Engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">Deputy</a></p>
-                    <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/jackmarchant10">Twitter</a> | 
-                    <a target="_blank" rel="noopener noreferrer" href="https://github.com/jackmarchant">GitHub</a>
-                </div>
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <p class="site-prompt">jackmarchant@blog:~$</p>
+                <h1 class="site-title"><a href="/">Jack Marchant</a></h1>
+                <p class="site-tagline">Principal Engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">Deputy</a> · writing about software</p>
             </div>
         </header>
-        <main>
-            {% for post in posts %}
-                <div class="post-listing">
-                    <h3 class="heading heading--post"><a href="{{post.url}}">{{post.title}}</a></h3>
-                    <h4 class="post-date">{{ post.date }}</h4>
-                    {{ post.blurb | raw }}
-                </div>
-            {% endfor %}
+        <main class="container">
+            {% if posts %}
+                <section class="post-directory" data-post-directory>
+                    <label class="search-field" for="post-filter">
+                        <span class="search-field__prompt">_</span>
+                        <input id="post-filter" type="text" class="search-field__input" placeholder="filter by title or tag" autocomplete="off" data-filter-input />
+                    </label>
+                    <p class="post-count">— <span data-results-count>{{ posts|length }}</span> posts —</p>
+                    <div class="post-list" data-post-list>
+                        {% for listing in posts %}
+                            <article class="post-card" data-post-card data-title="{{ listing.title|lower }}" data-tags="{{ listing.tags|join(' ')|lower }}">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">{{ listing.title }}</span>
+                                    <span class="post-card__date">{{ listing.date }}</span>
+                                </button>
+                                <div class="post-card__tags">
+                                    {% for tag in listing.tags %}
+                                        <span class="tag-chip tag-chip--{{ tag|lower|replace({' ': '-'}) }}">{{ tag }}</span>
+                                    {% endfor %}
+                                </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        {{ listing.blurb | raw }}
+                                        <a href="{{ listing.url }}" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                        {% endfor %}
+                    </div>
+                </section>
+            {% endif %}
 
-        {% if post %}
-            <div class="post">
-                <h2 class="heading">{{ post.title }}</h2>
-                <h4 class="post-date">{{ post.date }}</h4>
-                {{ post.content|raw }}
-            </div>
-            <div class="post-footer">
-                . . .
-            </div>
-        {% endif %}
+            {% if post %}
+                <article class="post">
+                    <h2 class="post__title">{{ post.title }}</h2>
+                    <p class="post__date">{{ post.date }}</p>
+                    {{ post.content|raw }}
+                </article>
+            {% endif %}
 
-        {% for post in listings %}
-            <div class="post-listing">
-                <h3 class="heading heading--post"><a href="{{post.url}}">{{post.title}}</a></h3>
-                <h4 class="post-date">{{ post.date }}</h4>
-                {{ post.blurb | raw }}
-            </div>
-        {% endfor %}
+            {% if listings %}
+                <section class="post-list">
+                    {% for listing in listings %}
+                        <article class="post-card" data-post-card data-title="{{ listing.title|lower }}" data-tags="{{ listing.tags|join(' ')|lower }}">
+                            <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                <span class="post-card__title">{{ listing.title }}</span>
+                                <span class="post-card__date">{{ listing.date }}</span>
+                            </button>
+                            <div class="post-card__tags">
+                                {% for tag in listing.tags %}
+                                    <span class="tag-chip tag-chip--{{ tag|lower|replace({' ': '-'}) }}">{{ tag }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="post-card__excerpt" data-expandable>
+                                <div class="post-card__excerpt-content">
+                                    {{ listing.blurb | raw }}
+                                    <a href="{{ listing.url }}" class="post-card__read-more">read full post →</a>
+                                </div>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </section>
+            {% endif %}
         </main>
 
         <script src="/prism.js"></script>
+        <script src="/index.js"></script>
 
         {% if settings.environment == 'production' %}
             <!-- Google tag (gtag.js) -->
@@ -68,7 +99,6 @@
             gtag('js', new Date());
 
             gtag('config', 'G-8T5L82C44Y');
-            </script>
             </script>
         {% endif %}
     </body>
