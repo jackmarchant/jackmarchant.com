@@ -18,7 +18,7 @@
         <header>
             <div class="blurb">
                 <div class="blurb__image">
-                    <img src="/profile-pic.jpg" width="100" />
+                    <img src="/profile-pic.jpg" width="72" />
                 </div>
                 <div class="blurb__text">
                     <h3><a href="/">Jack Marchant</a></h3>
@@ -58,15 +58,6 @@
         </main>
 
         <script src="/prism.js"></script>
-        <script>
-            if (document.querySelector('blockquote.twitter-tweet')) {
-                var s = document.createElement('script');
-                s.async = true;
-                s.src = 'https://platform.twitter.com/widgets.js';
-                s.charset = 'utf-8';
-                document.body.appendChild(s);
-            }
-        </script>
 
         {% if settings.environment == 'production' %}
             <!-- Google tag (gtag.js) -->
