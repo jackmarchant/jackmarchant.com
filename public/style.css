@@ -49,6 +49,8 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+clike+j
      padding: 1em;
      margin: .5em 0;
      overflow: auto;
+     max-width: 100%;
+     box-sizing: border-box;
  }
  
  :not(pre) > code[class*="language-"],
@@ -226,7 +228,7 @@ main {
     border: 0;
     color: var(--text-primary-color);
     font-family: 'Space Mono', monospace;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .search-field__input:focus {
@@ -346,7 +348,7 @@ main {
     color: var(--text-muted-color);
     font-size: 14px;
     line-height: 1.6;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
 }
 
 .post-card__excerpt-content p {
@@ -411,6 +413,11 @@ main {
     border-radius: 4px;
     padding: 2px 4px;
     color: var(--text-primary-color);
+}
+
+.post img {
+    max-width: 100%;
+    height: auto;
 }
 
 .tweet-card {
