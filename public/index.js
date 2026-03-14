@@ -65,7 +65,7 @@
     function setupFiltering(directory) {
         var input = directory.querySelector('[data-filter-input]');
         var count = directory.querySelector('[data-results-count]');
-        var cards = Array.prototype.slice.call(directory.querySelectorAll('[data-post-card]'));
+        var cards = Array.from(directory.querySelectorAll('[data-post-card]'));
 
         if (!input || !count || cards.length === 0) {
             return;

@@ -32,7 +32,7 @@
                     <p class="post-count">— <span data-results-count>{{ posts|length }}</span> posts —</p>
                     <div class="post-list" data-post-list>
                         {% for listing in posts %}
-                            <article class="post-card" data-post-card data-title="{{ listing.title|lower }}" data-tags="{{ listing.tags|join(' ')|lower }}">
+                            <article class="post-card" data-post-card data-title="{{ listing.title|lower|e('html_attr') }}" data-tags="{{ listing.tags|join(' ')|lower|e('html_attr') }}">
                                 <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
                                     <span class="post-card__title">{{ listing.title }}</span>
                                     <span class="post-card__date">{{ listing.date }}</span>
@@ -65,7 +65,7 @@
             {% if listings %}
                 <section class="post-list">
                     {% for listing in listings %}
-                        <article class="post-card" data-post-card data-title="{{ listing.title|lower }}" data-tags="{{ listing.tags|join(' ')|lower }}">
+                        <article class="post-card" data-post-card data-title="{{ listing.title|lower|e('html_attr') }}" data-tags="{{ listing.tags|join(' ')|lower|e('html_attr') }}">
                             <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
                                 <span class="post-card__title">{{ listing.title }}</span>
                                 <span class="post-card__date">{{ listing.date }}</span>
