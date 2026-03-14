@@ -7,9 +7,17 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+clike+j
  */
 
 :root {
-    --bg-color: #111827;
-    --body-copy-color: #9ca3af;
-    --heading-color: #ffffff;
+    --bg-color: #131c2b;
+    --surface-color: #1b2638;
+    --border-color: #32415a;
+    --border-hover-color: #445779;
+    --text-primary-color: #f2f7ff;
+    --text-muted-color: #b4c1d8;
+    --accent-blue-color: #7ab8ff;
+    --accent-green-color: #63d297;
+    --tag-elixir-color: #bf9bff;
+    --tag-ai-color: #7ab8ff;
+    --tag-database-color: #63d297;
 }
 
  code[class*="language-"],
@@ -134,13 +142,13 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+clike+j
 
 body {
     margin: 0;
-    background-color: #0d1117;
-    color: #e6edf3;
+    background-color: var(--bg-color);
+    color: var(--text-primary-color);
     font-family: 'IBM Plex Mono', monospace;
 }
 
 a {
-    color: #58a6ff;
+    color: var(--accent-blue-color);
 }
 
 .container {
@@ -153,14 +161,14 @@ a {
     position: sticky;
     top: 0;
     z-index: 20;
-    background: #0d1117;
-    border-bottom: 1px solid #21262d;
+    background: var(--bg-color);
+    border-bottom: 1px solid var(--border-color);
     padding: 14px 0 12px;
 }
 
 .site-prompt {
     margin: 0;
-    color: #3fb950;
+    color: var(--accent-green-color);
     font-family: 'Space Mono', monospace;
     font-size: 12px;
 }
@@ -171,21 +179,22 @@ a {
     font-weight: 700;
     font-size: clamp(1.8rem, 7vw, 2.6rem);
     line-height: 1.1;
+    text-transform: lowercase;
 }
 
 .site-title a {
     text-decoration: none;
-    color: #e6edf3;
+    color: var(--text-primary-color);
 }
 
 .site-tagline {
     margin: 0;
-    color: #8b949e;
+    color: var(--text-muted-color);
     font-size: 13px;
 }
 
 .site-tagline a {
-    color: #58a6ff;
+    color: var(--accent-blue-color);
     text-decoration: none;
 }
 
@@ -198,14 +207,14 @@ main {
     align-items: center;
     gap: 8px;
     width: 100%;
-    background: #161b22;
-    border: 1px solid #21262d;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 10px 12px;
 }
 
 .search-field__prompt {
-    color: #3fb950;
+    color: var(--accent-green-color);
     font-family: 'Space Mono', monospace;
     font-weight: 700;
 }
@@ -214,7 +223,7 @@ main {
     width: 100%;
     background: transparent;
     border: 0;
-    color: #e6edf3;
+    color: var(--text-primary-color);
     font-family: 'Space Mono', monospace;
     font-size: 14px;
 }
@@ -225,7 +234,7 @@ main {
 
 .post-count {
     margin: 10px 0 16px;
-    color: #8b949e;
+    color: var(--text-muted-color);
     text-align: center;
     font-family: 'Space Mono', monospace;
     font-size: 12px;
@@ -238,22 +247,22 @@ main {
 }
 
 .post-card {
-    border: 1px solid #21262d;
+    border: 1px solid var(--border-color);
     border-left: 3px solid transparent;
-    background: #161b22;
+    background: var(--surface-color);
     border-radius: 8px;
     padding: 12px;
     transition: transform 120ms ease, border-color 120ms ease, border-left-color 120ms ease;
 }
 
 .post-card:hover {
-    border-color: #30363d;
-    border-left-color: #3fb950;
+    border-color: var(--border-hover-color);
+    border-left-color: var(--accent-green-color);
     transform: translateX(2px);
 }
 
 .post-card.is-expanded {
-    border-left-color: #58a6ff;
+    border-left-color: var(--accent-blue-color);
 }
 
 .post-card__toggle {
@@ -271,14 +280,15 @@ main {
 }
 
 .post-card__title {
-    color: #58a6ff;
+    color: var(--accent-blue-color);
     font-family: 'Space Mono', monospace;
     font-size: 16px;
     font-weight: 700;
+    text-transform: lowercase;
 }
 
 .post-card__date {
-    color: #8b949e;
+    color: var(--text-muted-color);
     font-family: 'Space Mono', monospace;
     font-size: 11px;
     white-space: nowrap;
@@ -295,28 +305,28 @@ main {
     display: inline-flex;
     align-items: center;
     padding: 2px 8px;
-    border: 1px solid #30363d;
+    border: 1px solid var(--border-hover-color);
     border-radius: 12px;
     font-size: 9px;
     line-height: 1.4;
-    color: #8b949e;
+    color: var(--text-muted-color);
     font-family: 'Space Mono', monospace;
     text-transform: lowercase;
 }
 
 .tag-chip--elixir {
-    color: #a371f7;
-    border-color: #a371f7;
+    color: var(--tag-elixir-color);
+    border-color: var(--tag-elixir-color);
 }
 
 .tag-chip--ai {
-    color: #58a6ff;
-    border-color: #58a6ff;
+    color: var(--tag-ai-color);
+    border-color: var(--tag-ai-color);
 }
 
 .tag-chip--database {
-    color: #3fb950;
-    border-color: #3fb950;
+    color: var(--tag-database-color);
+    border-color: var(--tag-database-color);
 }
 
 .post-card__excerpt {
@@ -327,7 +337,7 @@ main {
 
 .post-card__excerpt-content {
     padding-top: 10px;
-    color: #8b949e;
+    color: var(--text-muted-color);
     font-size: 14px;
     line-height: 1.6;
 }
@@ -349,28 +359,29 @@ main {
 
 .post {
     margin-bottom: 26px;
-    color: #e6edf3;
+    color: var(--text-primary-color);
 }
 
 .post__title, .post h1, .post h2, .post h3, .post h4, .post h5, .post h6 {
     font-family: 'Space Mono', monospace;
-    color: #e6edf3;
+    color: var(--text-primary-color);
 }
 
 .post__title {
     margin: 0 0 4px;
     font-size: 28px;
+    text-transform: lowercase;
 }
 
 .post__date {
     margin: 0 0 18px;
-    color: #8b949e;
+    color: var(--text-muted-color);
     font-family: 'Space Mono', monospace;
     font-size: 12px;
 }
 
 .post p, .post li {
-    color: #e6edf3;
+    color: var(--text-primary-color);
     font-size: 15px;
     line-height: 1.75;
 }
@@ -382,22 +393,22 @@ main {
 .post blockquote {
     margin: 0 0 18px;
     padding-left: 14px;
-    border-left: 2px solid #30363d;
-    color: #8b949e;
+    border-left: 2px solid var(--border-hover-color);
+    color: var(--text-muted-color);
     font-style: italic;
 }
 
 .post p code {
-    background: #161b22;
-    border: 1px solid #30363d;
+    background: var(--surface-color);
+    border: 1px solid var(--border-hover-color);
     border-radius: 4px;
     padding: 2px 4px;
-    color: #e6edf3;
+    color: var(--text-primary-color);
 }
 
 .tweet-card {
-    background: #161b22;
-    border: 1px solid #21262d;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 10px 12px;
     margin-bottom: 1rem;
@@ -409,16 +420,16 @@ main {
 .tweet-card__icon {
     width: 20px;
     height: 20px;
-    fill: #e6edf3;
+    fill: var(--text-primary-color);
     flex-shrink: 0;
 }
 
 .tweet-card__link {
-    color: #8b949e;
+    color: var(--text-muted-color);
     text-decoration: none;
     font-size: 14px;
 }
 
 .tweet-card__link:hover {
-    color: #58a6ff;
+    color: var(--accent-blue-color);
 }
