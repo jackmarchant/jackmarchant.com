@@ -18,6 +18,9 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+clike+j
     --tag-elixir-color: #bf9bff;
     --tag-ai-color: #7ab8ff;
     --tag-database-color: #63d297;
+    --tag-engineering-color: #f0a060;
+    --tag-testing-color: #ff8080;
+    --tag-php-color: #8898d4;
 }
 
  code[class*="language-"],
@@ -226,35 +229,74 @@ main {
     padding: 40px 0 32px;
 }
 
-.search-field {
+.tag-filter-bar {
     display: flex;
-    align-items: center;
     gap: 8px;
-    width: 100%;
-    box-sizing: border-box;
-    background: var(--surface-color);
+    overflow-x: auto;
+    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+.tag-filter-bar::-webkit-scrollbar {
+    display: none;
+}
+
+.tag-filter-btn {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    padding: 5px 12px;
     border: 1px solid var(--border-color);
-    border-radius: 8px;
-    padding: 10px 12px;
-}
-
-.search-field__prompt {
-    color: var(--accent-green-color);
-    font-family: 'Space Mono', monospace;
-    font-weight: 700;
-}
-
-.search-field__input {
-    width: 100%;
+    border-radius: 16px;
     background: transparent;
-    border: 0;
-    color: var(--text-primary-color);
+    color: var(--text-muted-color);
     font-family: 'Space Mono', monospace;
-    font-size: 16px;
+    font-size: 11px;
+    cursor: pointer;
+    text-transform: lowercase;
+    transition: border-color 120ms ease, color 120ms ease;
+    white-space: nowrap;
 }
 
-.search-field__input:focus {
-    outline: none;
+.tag-filter-btn:hover {
+    border-color: var(--border-hover-color);
+    color: var(--text-primary-color);
+}
+
+.tag-filter-btn.is-active {
+    border-color: var(--accent-green-color);
+    color: var(--accent-green-color);
+}
+
+.tag-filter-btn--elixir.is-active {
+    border-color: var(--tag-elixir-color);
+    color: var(--tag-elixir-color);
+}
+
+.tag-filter-btn--ai.is-active {
+    border-color: var(--tag-ai-color);
+    color: var(--tag-ai-color);
+}
+
+.tag-filter-btn--database.is-active {
+    border-color: var(--tag-database-color);
+    color: var(--tag-database-color);
+}
+
+.tag-filter-btn--engineering.is-active {
+    border-color: var(--tag-engineering-color);
+    color: var(--tag-engineering-color);
+}
+
+.tag-filter-btn--testing.is-active {
+    border-color: var(--tag-testing-color);
+    color: var(--tag-testing-color);
+}
+
+.tag-filter-btn--php.is-active {
+    border-color: var(--tag-php-color);
+    color: var(--tag-php-color);
 }
 
 .post-count {
@@ -357,6 +399,21 @@ main {
 .tag-chip--database {
     color: var(--tag-database-color);
     border-color: var(--tag-database-color);
+}
+
+.tag-chip--engineering {
+    color: var(--tag-engineering-color);
+    border-color: var(--tag-engineering-color);
+}
+
+.tag-chip--testing {
+    color: var(--tag-testing-color);
+    border-color: var(--tag-testing-color);
+}
+
+.tag-chip--php {
+    color: var(--tag-php-color);
+    border-color: var(--tag-php-color);
 }
 
 .post-card__excerpt {

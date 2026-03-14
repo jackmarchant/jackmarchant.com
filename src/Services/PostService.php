@@ -121,6 +121,25 @@ class PostService
         return $tags;
     }
 
+    /**
+     * Get all unique tags from a posts array, sorted alphabetically.
+     *
+     * @param array $posts
+     * @return array
+     */
+    public function getAllTags(array $posts): array
+    {
+        $seen = [];
+        foreach ($posts as $post) {
+            foreach ($post['tags'] as $tag) {
+                $seen[$tag] = true;
+            }
+        }
+        $tags = array_keys($seen);
+        sort($tags);
+        return $tags;
+    }
+
     protected function inferTags(string $content): array
     {
         $normalizedContent = strtolower($content);
@@ -128,6 +147,8 @@ class PostService
             'elixir' => '/\b(elixir|erlang|genserver|ecto|phoenix)\b/',
             'ai' => '/\b(ai|llm|copilot|autocomplete)\b/',
             'database' => '/\b(database|sql|query|postgres|index|pagination)\b/',
+            'testing' => '/\b(test|tdd|unit test|spec|assert)\b/',
+            'php' => '/\bphp\b/',
         ];
         $tags = [];
 

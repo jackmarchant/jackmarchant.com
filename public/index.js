@@ -62,23 +62,23 @@
         });
     }
 
-    function setupFiltering(directory) {
-        var input = directory.querySelector('[data-filter-input]');
+    function setupTagFilter(directory) {
+        var filterBar = directory.querySelector('[data-tag-filter-bar]');
         var count = directory.querySelector('[data-results-count]');
         var cards = Array.from(directory.querySelectorAll('[data-post-card]'));
 
-        if (!input || !count || cards.length === 0) {
+        if (!filterBar || !count || cards.length === 0) {
             return;
         }
 
+        var activeTag = 'all';
+
         function applyFilter() {
-            var query = input.value.toLowerCase().trim();
             var visibleCount = 0;
 
             cards.forEach(function (card) {
-                var title = card.getAttribute('data-title') || '';
-                var tags = card.getAttribute('data-tags') || '';
-                var matches = query === '' || title.indexOf(query) !== -1 || tags.indexOf(query) !== -1;
+                var tags = (card.getAttribute('data-tags') || '').split(' ').filter(Boolean);
+                var matches = activeTag === 'all' || tags.indexOf(activeTag) !== -1;
 
                 card.hidden = !matches;
                 if (matches) {
@@ -92,7 +92,20 @@
             count.textContent = visibleCount;
         }
 
-        input.addEventListener('input', applyFilter);
+        filterBar.addEventListener('click', function (e) {
+            var btn = e.target.closest('[data-tag-filter]');
+            if (!btn) {
+                return;
+            }
+
+            activeTag = btn.getAttribute('data-tag-filter');
+
+            filterBar.querySelectorAll('[data-tag-filter]').forEach(function (b) {
+                b.classList.toggle('is-active', b === btn);
+            });
+
+            applyFilter();
+        });
     }
 
     function refreshExpandedCardHeight() {
@@ -160,7 +173,7 @@
 
         var directories = document.querySelectorAll('[data-post-directory]');
         directories.forEach(function (directory) {
-            setupFiltering(directory);
+            setupTagFilter(directory);
         });
 
         window.addEventListener('resize', refreshExpandedCardHeight);
