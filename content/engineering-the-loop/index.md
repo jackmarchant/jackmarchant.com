@@ -38,7 +38,9 @@ The loop works best when it's handling execution, not making decisions. But the 
 
 A few places where I've noticed this creep in: choosing between competing implementation approaches, deciding what's in scope for a ticket, and judging whether a failing test is a real problem or a test that needs updating. These all look like execution tasks on the surface. They're not. They're judgment calls, and if you're not careful, you end up with an agent making them silently.
 
-The corrective is to stay deliberately in the decision path. That doesn't mean reviewing every line — it means being clear about which decisions you're retaining and which you're genuinely delegating. Where the agent needs to make a call, that should be explicit, not an accident of an underspecified ticket.
+The corrective I've landed on is building the approval step directly into the ticket flow rather than managing an agent session in real time. When I assign work to an agent, the first thing it does is post a plan as a comment on the Jira ticket. I can review that plan on my own time, in the same place the spec lives. If something's off, I leave a comment and the agent produces a revised plan. If it looks right, I approve it and implementation starts.
+
+That loop — plan, review, revise or approve — keeps me in the decision path without requiring me to babysit a session. I'm not watching the agent work. I'm reviewing its intent before it acts, which is the right place to catch problems.
 
 Keeping a human in the loop isn't a constraint on the process. It's what makes the output trustworthy.
 
