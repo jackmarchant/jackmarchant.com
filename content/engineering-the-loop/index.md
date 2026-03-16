@@ -30,6 +30,18 @@ Review and QA is the current bottleneck. The loop produces code faster than I ca
 
 The other rough edge is knowing what not to hand off. Some tasks look automatable on the surface but require judgment at each step, the kind of decision-making that's hard to encode in a spec. I'm still calibrating where that line is.
 
+## Keeping the human in the loop
+
+Automation can create the illusion that the human is optional. It isn't.
+
+The loop works best when it's handling execution, not making decisions. But the line between the two isn't always obvious, and it's easy to drift into a pattern where the agent is being asked to decide things that should still sit with you.
+
+A few places where I've noticed this creep in: choosing between competing implementation approaches, deciding what's in scope for a ticket, and judging whether a failing test is a real problem or a test that needs updating. These all look like execution tasks on the surface. They're not. They're judgment calls, and if you're not careful, you end up with an agent making them silently.
+
+The corrective is to stay deliberately in the decision path. That doesn't mean reviewing every line — it means being clear about which decisions you're retaining and which you're genuinely delegating. Where the agent needs to make a call, that should be explicit, not an accident of an underspecified ticket.
+
+Keeping a human in the loop isn't a constraint on the process. It's what makes the output trustworthy.
+
 ## What to take from this
 
 If you're building your own loop, a few things worth starting with:
