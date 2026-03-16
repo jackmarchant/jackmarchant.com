@@ -10,6 +10,8 @@ The loop is the automation pipeline that sits between me and a coding agent. Don
 
 ## What the loop looks like
 
+The loop is a long-running script that runs in the background. It isn't triggered manually each time — it's always on, watching for work to pick up and responding to state changes across my projects.
+
 My current setup is fairly simple. I write specs into Jira tickets or pull context together in Confluence pages. Claude Code picks those up as a starting point. The goal is that by the time I'm handing something off, the work is already decomposed enough that the agent isn't guessing at intent.
 
 The quality of input matters far more than I expected. A vague ticket produces vague code. A well-structured spec with clear acceptance criteria produces something reviewable on the first pass.
@@ -27,6 +29,8 @@ The second is throughput on the boring parts. Not glamorous, but real. The SDLC 
 ## Where it still breaks down
 
 Review and QA is the current bottleneck. The loop produces code faster than I can meaningfully review it, which creates its own kind of pressure. Speed without oversight isn't actually a win.
+
+I've started giving the loop context about branches that are currently in review. It can scan open PRs, read the comments, and make a first pass at deciding which ones represent unresolved feedback that needs action versus ones that are already addressed or are just discussion. That triage is useful — it means I'm not manually combing through threads — but it still surfaces a list I have to work through. The loop can flag; the judgment call on what to actually do sits with me.
 
 The other rough edge is knowing what not to hand off. Some tasks look automatable on the surface but require judgment at each step, the kind of decision-making that's hard to encode in a spec. I'm still calibrating where that line is.
 
