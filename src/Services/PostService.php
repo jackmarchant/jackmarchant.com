@@ -30,10 +30,16 @@ class PostService
         if ($this->postExists($filepath)) {
             $postRaw = $this->readPost($filepath);
             $metadata = $this->parseMetadata($postRaw['meta']);
+            $paragraphs = array_values(array_filter(explode("\n", $postRaw['body']), function ($content) {
+                return !empty($content);
+            }));
+            $blurb = strip_tags($this->parser->parse($paragraphs[0] ?? ''));
             $post = [
-                'title' => $metadata['title'],
+                'title' => trim($metadata['title']),
                 'date' => (new DateTime($metadata['date']))->format('F d, Y'),
                 'content' => $this->parser->parse($postRaw['body']),
+                'blurb' => $blurb,
+                'url' => '/' . $path,
             ];
         }
         
