@@ -77,35 +77,14 @@
             {% endif %}
 
             {% if post %}
-                <article class="post">
+                <div class="reading-progress" data-reading-progress aria-hidden="true">
+                    <div class="reading-progress__bar" data-reading-progress-bar></div>
+                </div>
+                <article class="post" data-post>
                     <h2 class="post__title">{{ post.title|lower }}</h2>
                     <p class="post__date">{{ post.date }}</p>
                     {{ post.content|raw }}
                 </article>
-            {% endif %}
-
-            {% if listings %}
-                <section class="post-list">
-                    {% for listing in listings %}
-                        <article class="post-card" data-post-card data-title="{{ listing.title|lower|e('html_attr') }}" data-tags="{{ listing.tags|join(' ')|lower|e('html_attr') }}">
-                            <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
-                                <span class="post-card__title">{{ listing.title|lower }}</span>
-                                <span class="post-card__date">{{ listing.date }}</span>
-                            </button>
-                            <div class="post-card__tags">
-                                {% for tag in listing.tags %}
-                                    <span class="tag-chip tag-chip--{{ tag|lower|replace({' ': '-'}) }}">{{ tag }}</span>
-                                {% endfor %}
-                            </div>
-                            <div class="post-card__excerpt" data-expandable>
-                                <div class="post-card__excerpt-content">
-                                    {{ listing.blurb | raw }}
-                                    <a href="{{ listing.url }}" class="post-card__read-more">read full post →</a>
-                                </div>
-                            </div>
-                        </article>
-                    {% endfor %}
-                </section>
             {% endif %}
         </main>
 

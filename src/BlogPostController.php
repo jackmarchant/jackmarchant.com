@@ -42,7 +42,6 @@ class BlogPostController
         $body = $this->renderer->render('index.twig', [
             'post' => $post,
             'settings' => $this->settings,
-            'listings' => $this->postService->getAllPostListings(),
         ]);
         $response->getBody()->write($body);
 

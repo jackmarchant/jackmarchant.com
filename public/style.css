@@ -472,6 +472,23 @@ main {
     color: var(--text-primary-color);
 }
 
+.reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    z-index: 100;
+    background: transparent;
+}
+
+.reading-progress__bar {
+    height: 100%;
+    width: 0%;
+    background: var(--accent-green-color);
+    transition: width 80ms linear;
+}
+
 .post__title, .post h1, .post h2, .post h3, .post h4, .post h5, .post h6 {
     font-family: 'Space Mono', monospace;
     color: var(--text-primary-color);
