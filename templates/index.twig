@@ -4,13 +4,29 @@
         <meta charset="utf-8"/>
         <meta http-equiv="x-ua-compatible" content="ie=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-        <title>{{ post.title|lower }} {%if post %}|{% endif %} jack marchant</title>
+        <title>{% if post %}{{ post.title|lower }} | {% endif %}jack marchant</title>
         <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
         <link href="/prism.css" rel="stylesheet" type="text/css" />
         <link href="/style.css" rel="stylesheet" type="text/css" />
+        {% if post %}
+        <meta name="description" content="{{ post.blurb|e }}" />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="{{ post.title|e }}" />
+        <meta property="og:description" content="{{ post.blurb|e }}" />
+        <meta property="og:url" content="https://www.jackmarchant.com{{ post.url }}" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="{{ post.title|e }}" />
+        <meta name="twitter:description" content="{{ post.blurb|e }}" />
+        {% else %}
         <meta name="description" content="I'm a Software Engineer from Sydney. I like writing code and talking about it." />
-        <meta property="og:title" content="Software Engineer" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Jack Marchant — Software Engineer" />
         <meta property="og:description" content="I'm a Software Engineer from Sydney. I like writing code and talking about it." />
+        <meta property="og:url" content="https://www.jackmarchant.com" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Jack Marchant — Software Engineer" />
+        <meta name="twitter:description" content="I'm a Software Engineer from Sydney. I like writing code and talking about it." />
+        {% endif %}
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     </head>
     <body>
