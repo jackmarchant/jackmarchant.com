@@ -182,8 +182,47 @@
         updateProgress();
     }
 
+    function setupThemeToggle() {
+        var btn = document.querySelector('[data-theme-toggle]');
+        if (!btn) {
+            return;
+        }
+
+        function getStoredTheme() {
+            try {
+                return localStorage.getItem('theme') || 'dark';
+            } catch (e) {
+                return 'dark';
+            }
+        }
+
+        function storeTheme(theme) {
+            try {
+                localStorage.setItem('theme', theme);
+            } catch (e) {}
+        }
+
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            if (theme === 'dark') {
+                btn.setAttribute('aria-label', 'switch to light mode');
+            } else {
+                btn.setAttribute('aria-label', 'switch to dark mode');
+            }
+        }
+
+        applyTheme(getStoredTheme());
+
+        btn.addEventListener('click', function () {
+            var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            storeTheme(next);
+            applyTheme(next);
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         setupExpanding();
+        setupThemeToggle();
         setupReadingProgress();
         var closeModal = setupSubscribeModal();
 
