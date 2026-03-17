@@ -369,7 +369,7 @@ main {
 
 .post-card {
     border: 1px solid var(--border-color);
-    border-left: 3px solid transparent;
+    border-left: 3px solid var(--border-color);
     background: var(--surface-color);
     border-radius: 0;
     padding: 12px;
