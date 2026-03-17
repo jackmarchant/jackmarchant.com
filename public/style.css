@@ -25,6 +25,25 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+clike+j
     --tag-practices-color: #4ecdc4;
 }
 
+[data-theme="light"] {
+    --bg-color: #f4f6f9;
+    --surface-color: #ffffff;
+    --border-color: #d0d8e8;
+    --border-hover-color: #9aadcc;
+    --text-primary-color: #111827;
+    --text-muted-color: #4b5e78;
+    --accent-blue-color: #1d6fa8;
+    --accent-green-color: #1a7a46;
+    --tag-elixir-color: #7b4db5;
+    --tag-ai-color: #1d6fa8;
+    --tag-database-color: #1a7a46;
+    --tag-engineering-color: #c4620a;
+    --tag-testing-color: #c9302c;
+    --tag-php-color: #4a5fa0;
+    --tag-career-color: #9c6f00;
+    --tag-practices-color: #0e7f79;
+}
+
  code[class*="language-"],
  pre[class*="language-"] {
      color: #ccc;
@@ -195,6 +214,29 @@ a {
     border-color: var(--accent-green-color);
 }
 
+.site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.theme-toggle {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-muted-color);
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    padding: 3px 10px;
+    cursor: pointer;
+    transition: border-color 120ms ease, color 120ms ease;
+}
+
+.theme-toggle:hover {
+    border-color: var(--border-hover-color);
+    color: var(--text-primary-color);
+}
+
 .site-prompt {
     margin: 0;
     color: var(--accent-green-color);
@@ -329,7 +371,7 @@ main {
     border: 1px solid var(--border-color);
     border-left: 3px solid transparent;
     background: var(--surface-color);
-    border-radius: 8px;
+    border-radius: 0;
     padding: 12px;
     overflow: hidden;
     transition: transform 120ms ease, border-color 120ms ease, border-left-color 120ms ease;

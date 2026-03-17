@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-theme="dark">
     <head>
         <meta charset="utf-8"/>
         <meta http-equiv="x-ua-compatible" content="ie=edge"/>
@@ -28,13 +28,17 @@
         <meta name="twitter:description" content="I'm a Software Engineer from Sydney. I like writing code and talking about it." />
         {% endif %}
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <script>(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}}());</script>
     </head>
     <body>
         <header class="site-header">
             <div class="container">
                 <div class="site-header__row">
                     <p class="site-prompt">jackmarchant@blog:~$</p>
-                    <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                    <div class="site-header__actions">
+                        <button class="theme-toggle" type="button" data-theme-toggle aria-label="switch to light mode">light</button>
+                        <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                    </div>
                 </div>
                 <h1 class="site-title"><a href="/">jack marchant</a></h1>
                 <p class="site-tagline">principal engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">deputy</a> · writing about software</p>
