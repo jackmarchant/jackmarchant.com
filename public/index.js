@@ -205,10 +205,8 @@
         function applyTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
             if (theme === 'dark') {
-                btn.textContent = 'light';
                 btn.setAttribute('aria-label', 'switch to light mode');
             } else {
-                btn.textContent = 'dark';
                 btn.setAttribute('aria-label', 'switch to dark mode');
             }
         }
