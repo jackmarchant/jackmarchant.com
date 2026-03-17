@@ -159,8 +159,32 @@
         return closeModal;
     }
 
+    function setupReadingProgress() {
+        var bar = document.querySelector('[data-reading-progress-bar]');
+        var post = document.querySelector('[data-post]');
+
+        if (!bar || !post) {
+            return;
+        }
+
+        function updateProgress() {
+            var scrollTop = window.scrollY || document.documentElement.scrollTop;
+            var postTop = post.offsetTop;
+            var postBottom = postTop + post.offsetHeight;
+            var viewportHeight = window.innerHeight;
+            var start = postTop;
+            var end = postBottom - viewportHeight;
+            var progress = end > start ? Math.min(100, Math.max(0, ((scrollTop - start) / (end - start)) * 100)) : 0;
+            bar.style.width = progress + '%';
+        }
+
+        window.addEventListener('scroll', updateProgress, { passive: true });
+        updateProgress();
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         setupExpanding();
+        setupReadingProgress();
         var closeModal = setupSubscribeModal();
 
         if (closeModal) {
