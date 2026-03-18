@@ -15,6 +15,7 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+clike+j
     --text-muted-color: #b4c1d8;
     --accent-blue-color: #7ab8ff;
     --accent-green-color: #63d297;
+    --accent-green-muted-color: rgba(99, 210, 151, 0.1);
     --tag-elixir-color: #bf9bff;
     --tag-ai-color: #7ab8ff;
     --tag-database-color: #63d297;
@@ -34,6 +35,7 @@ https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+clike+j
     --text-muted-color: #4b5e78;
     --accent-blue-color: #1d6fa8;
     --accent-green-color: #1a7a46;
+    --accent-green-muted-color: rgba(26, 122, 70, 0.1);
     --tag-elixir-color: #7b4db5;
     --tag-ai-color: #1d6fa8;
     --tag-database-color: #1a7a46;
@@ -558,29 +560,32 @@ main {
 }
 
 .post__tldr {
-    margin: 0 0 28px;
-    padding: 16px 18px;
+    margin: 32px 0 40px;
+    padding: 20px 24px;
     background: var(--surface-color);
     border: 1px solid var(--border-color);
-    border-left: 3px solid var(--accent-green-color);
-    border-radius: 4px;
+    border-left: 4px solid var(--accent-green-color);
+    border-radius: 6px;
 }
 
 .post__tldr-label {
-    display: block;
+    display: inline-block;
     font-family: 'Space Mono', monospace;
     font-size: 11px;
     font-weight: 700;
     color: var(--accent-green-color);
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    background: var(--accent-green-muted-color);
+    padding: 2px 8px;
+    border-radius: 3px;
 }
 
 .post__tldr-text {
     margin: 0;
-    font-size: 14px;
-    line-height: 1.65;
+    font-size: 15px;
+    line-height: 1.7;
     color: var(--text-primary-color);
 }
 
