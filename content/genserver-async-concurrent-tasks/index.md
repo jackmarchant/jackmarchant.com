@@ -1,6 +1,7 @@
 ---
 title: Using a GenServer to handle asynchronous and concurrent tasks 
 date: "2019-02-01T18:00:00.000Z"
+tldr: A GenServer is a good fit for handling concurrent, asynchronous jobs like asset migrations where a GraphQL mutation must trigger background work without blocking the HTTP response.
 ---
 
 In most cases I have found inter-process communication to be an unnecessary overhead for the work I have been doing. Although Elixir is known for this (along with Erlang), it really depends on what you’re trying to achieve and processes shouldn’t be spawned just for the fun of it. I have recently come across a scenario where I thought having a separate process be responsible for performing concurrent and asynchronous jobs would be the best way to approach the problem. In this article I will explain the problem and the solution. 

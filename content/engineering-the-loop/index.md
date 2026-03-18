@@ -1,6 +1,7 @@
 ---
 title: engineering the loop
 date: "2026-03-16T09:00:00.000Z"
+tldr: Building an always-on automation pipeline around AI coding agents shifts your focus from writing code to writing clear specs, because the quality of the agent input directly determines the quality of the output.
 tags: ai, practices
 ---
 

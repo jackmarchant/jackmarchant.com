@@ -1,6 +1,7 @@
 ---
 title: Offset and Cursor Pagination explained
 date: "2018-10-30T08:22:00.000Z"
+tldr: Offset pagination is simple but becomes slow and inaccurate at scale, while cursor pagination is more performant and stable for large or frequently changing datasets.
 ---
 
 Typically in an application with a database, you might have more records than you can fit on a page or in a single result set from a query. When you or your users want to retrieve the next page of results, two common options for paginating data include:

@@ -1,6 +1,7 @@
 ---
 title: Help me, help you - Code Review
 date: "2019-10-24T12:18:00.000Z"
+tldr: Effective code reviews require authors to separate ego from their code and reviewers to communicate feedback with good intent, so both parties can collaborate toward a better solution.
 tags: practices
 ---
 

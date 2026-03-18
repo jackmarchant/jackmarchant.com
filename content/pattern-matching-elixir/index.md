@@ -1,6 +1,7 @@
 ---
 title: Elixir Pattern Matching in a nutshell
 date: "2017-08-15T20:00:00.000Z"
+tldr: Pattern matching in Elixir replaces complex if-statement chains with declarative destructuring and multi-clause functions, making code control flow clearer and more expressive.
 ---
 
 Before being introduced to [Elixir](http://elixir-lang.org), a functional programming language built on top of [Erlang](https://www.erlang.org/), I had no idea what pattern matching was. Hopefully, by the end of this article you will have at least a rudimentary understanding of how awesome it is.

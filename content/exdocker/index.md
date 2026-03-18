@@ -1,6 +1,7 @@
 ---
 title: Add Docker to Elixir/Phoenix projects in one command
 date: "2018-08-23T09:00:00.000Z"
+tldr: exdocker is an Elixir CLI escript tool that automates the generation of Docker configuration files for Elixir projects, eliminating repetitive copy-paste setup when starting new applications.
 ---
 
 Recently, I've been writing a tonne of Elixir code, some Phoenix websites and a few other small Elixir applications. One thing that was bugging me every time I would create a new project is that I would want to add Docker to it either straight away because I knew there would be a dependency on Redis or Postgres etc, or halfway through a project and it would really slow down the speed at which I could hack something together.

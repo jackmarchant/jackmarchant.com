@@ -39,6 +39,7 @@ class PostService
                 'date' => (new DateTime($metadata['date']))->format('F d, Y'),
                 'content' => $this->parser->parse($postRaw['body']),
                 'blurb' => $blurb,
+                'tldr' => isset($metadata['tldr']) ? trim($metadata['tldr']) : '',
                 'url' => '/' . $path,
             ];
         }

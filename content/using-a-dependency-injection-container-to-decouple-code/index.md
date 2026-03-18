@@ -1,6 +1,7 @@
 ---
 title: Using a Dependency Injection (DI) Container to decouple your code
 date: "2020-06-03"
+tldr: Dependency Injection Containers separate object instantiation from usage by passing dependencies through constructors, producing loosely coupled, easily testable, and more flexible code.
 tags: practices, php
 ---
 

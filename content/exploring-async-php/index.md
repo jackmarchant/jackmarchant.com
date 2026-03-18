@@ -1,6 +1,7 @@
 ---
 title: Exploring Async PHP
 date: "2023-05-31T18:00:00.000Z"
+tldr: PHP offers several approaches to asynchronous processing - from promise-based libraries to child processes and job queues - to offload blocking work like bulk email sending away from the main web request.
 ---
 
 Asynchronous programming is a foundational building block for scaling web applications due to the increasing need to do more in each web request. A typical example of this is sending an email as part of a request. 

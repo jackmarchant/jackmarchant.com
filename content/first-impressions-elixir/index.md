@@ -1,6 +1,7 @@
 ---
 title: First Impressions of Elixir
 date: "2017-01-06T09:00:00.000Z"
+tldr: A JavaScript developer attracted to functional programming shares their first impressions of Elixir, finding its pattern matching, immutability, and pipe operator a natural and enjoyable step up from FP in JS.
 ---
 
 Elixir is a functional programming language based on Erlang. I’m told it’s very similar to Ruby, with a few tweaks and improvements to the developer experience and language syntax.

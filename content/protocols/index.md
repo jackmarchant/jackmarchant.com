@@ -1,6 +1,7 @@
 ---
 title: Using Protocols to decouple implementation details
 date: "2018-09-26T09:00:00.000Z"
+tldr: Elixir protocols implement polymorphism by defining a single interface that multiple data types can implement independently, decoupling calling code from type-specific implementation details.
 ---
 
 Protocols are a way to implement polymorphism in Elixir. We can use it to apply a function to multiple object types or structured data types, which are specific to the object itself. There are two steps; defining a protocol in the form of function(s), and one or many implementations for that protocol.

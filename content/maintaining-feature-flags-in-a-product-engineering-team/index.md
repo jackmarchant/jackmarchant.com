@@ -1,6 +1,7 @@
 ---
 title: Maintaining feature flags in a product engineering team
 date: "2022-04-01T18:00:00.000Z"
+tldr: Feature flags enable safe, incremental rollouts but require disciplined lifecycle management to prevent stale flags from accumulating as technical debt and causing production incidents.
 tags: practices
 ---
 

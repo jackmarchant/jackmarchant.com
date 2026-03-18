@@ -1,6 +1,7 @@
 ---
 title: Surviving technical debt in the real world
 date: "2017-12-21T12:18:00.000Z"
+tldr: Technical debt is unavoidable but manageable - always write tests even for imperfect code, take shortcuts only under real pressure, and continuously refactor before the debt becomes unworkable.
 tags: practices
 ---
 

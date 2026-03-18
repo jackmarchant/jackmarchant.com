@@ -1,6 +1,7 @@
 ---
 title: What I've learned doing technical interviews
 date: "2022-03-18T18:00:00.000Z"
+tldr: Technical interviews are imprecise by nature, so focus on creating a comfortable environment, use open-ended questions, and evaluate problem-solving approach and communication rather than just correct answers.
 tags: career
 ---
 

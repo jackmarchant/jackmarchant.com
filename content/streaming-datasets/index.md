@@ -1,6 +1,7 @@
 ---
 title: Streaming large datasets in Elixir
 date: "2018-06-27T21:34:00.000Z"
+tldr: Elixir Streams provide lazy, composable evaluation of data transformations over collections, avoiding loading entire datasets into memory by deferring computation until enumeration.
 ---
 
 We often think about Streaming as being the way we watch multimedia content such as video/audio. We press play and the content is bufferred and starts sending data over the wire. The client receiving the data will handle those packets and show the content, while at the same time requesting more data. Streaming has allowed us to consume large media content types such as tv shows or movies over the internet.
