@@ -203,7 +203,7 @@ a {
     border: 1px solid var(--border-color);
     border-radius: 6px;
     color: var(--accent-green-color);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Space Mono', monospace;
     font-size: 11px;
     padding: 3px 10px;
     cursor: pointer;
@@ -248,13 +248,13 @@ a {
 .site-prompt {
     margin: 0;
     color: var(--accent-green-color);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Space Mono', monospace;
     font-size: 12px;
 }
 
 .site-title {
     margin: 6px 0 4px;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Space Mono', monospace;
     font-weight: 700;
     font-size: clamp(1.8rem, 7vw, 2.6rem);
     line-height: 1.1;
@@ -303,7 +303,7 @@ main {
     border-radius: 16px;
     background: transparent;
     color: var(--text-muted-color);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Space Mono', monospace;
     font-size: 11px;
     cursor: pointer;
     text-transform: lowercase;
@@ -365,7 +365,7 @@ main {
     margin: 20px 0 16px;
     color: var(--text-muted-color);
     text-align: center;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Space Mono', monospace;
     font-size: 12px;
 }
 
@@ -411,7 +411,7 @@ main {
 
 .post-card__title {
     color: var(--accent-blue-color);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Space Mono', monospace;
     font-size: 16px;
     font-weight: 700;
     flex: 1;
@@ -421,7 +421,7 @@ main {
 
 .post-card__date {
     color: var(--text-muted-color);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Space Mono', monospace;
     font-size: 11px;
     flex-shrink: 0;
     margin-left: auto;
@@ -444,7 +444,7 @@ main {
     font-size: 9px;
     line-height: 1.4;
     color: var(--text-muted-color);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Space Mono', monospace;
     text-transform: lowercase;
 }
 
@@ -540,7 +540,7 @@ main {
 }
 
 .post__title, .post h1, .post h2, .post h3, .post h4, .post h5, .post h6 {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Space Mono', monospace;
     color: var(--text-primary-color);
 }
 
@@ -553,7 +553,7 @@ main {
 .post__date {
     margin: 0 0 18px;
     color: var(--text-muted-color);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Space Mono', monospace;
     font-size: 12px;
 }
 
@@ -568,7 +568,7 @@ main {
 
 .post__tldr-label {
     display: block;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Space Mono', monospace;
     font-size: 11px;
     font-weight: 700;
     color: var(--accent-green-color);
@@ -694,7 +694,7 @@ main {
 
 .subscribe-modal__title {
     margin: 0;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Space Mono', monospace;
     font-size: 18px;
     color: var(--text-primary-color);
     text-transform: lowercase;
@@ -733,7 +733,7 @@ main {
     border: 1px solid var(--border-color);
     border-radius: 6px;
     color: var(--text-primary-color);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Space Mono', monospace;
     font-size: 13px;
     padding: 9px 12px;
 }
@@ -748,7 +748,7 @@ main {
     border: 1px solid var(--accent-green-color);
     border-radius: 6px;
     color: var(--accent-green-color);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Space Mono', monospace;
     font-size: 13px;
     padding: 9px 16px;
     cursor: pointer;
