@@ -1,6 +1,7 @@
 ---
 title: No excuses, write unit tests
 date: "2016-11-29T12:22:00.000Z"
+tldr: Unit tests verify that isolated functions return expected outputs for given inputs, and teams should start small with imperfect coverage rather than avoiding tests altogether due to disagreement or time pressure.
 tags: testing
 ---
 

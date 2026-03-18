@@ -1,6 +1,7 @@
 ---
 title: The Facade Pattern
 date: "2019-07-05T09:00:00.000Z"
+tldr: The Facade design pattern creates a simplified interface over complex subsystems, hiding implementation details and reducing repetition without over-complicating the codebase.
 tags: practices, php
 ---
 

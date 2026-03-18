@@ -1,6 +1,7 @@
 ---
 title: Understanding concurrency in Elixir
 date: "2018-07-14T09:00:00.000Z"
+tldr: Elixir leverages the Erlang VM to spawn thousands of lightweight processes concurrently, isolating failures and preventing a single bug from blocking or crashing the entire application.
 ---
 
 Concurrency in Elixir is a big selling point for the language, but what does it really mean for the code that we write in Elixir? It all comes down to [Processes](https://hexdocs.pm/elixir/Process.html). Thanks to the Erlang Virtual Machine, upon which Elixir is built, we can create process threads that aren't actual processes on your machine, but in the Erlang VM. This means that in an Elixir application we can create thousands of Erlang processes without the application skipping a beat.

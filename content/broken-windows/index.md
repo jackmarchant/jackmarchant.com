@@ -1,6 +1,7 @@
 ---
 title: Building Software with Broken Windows 
 date: "2019-04-14T09:00:00.000Z"
+tldr: Each small hack or shortcut added to a codebase silently lowers the bar for the next one, and without discipline this attitude snowballs into crippling technical debt.
 tags: practices
 ---
 

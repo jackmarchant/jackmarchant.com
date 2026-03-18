@@ -1,6 +1,7 @@
 ---
 title: The problem with Elixir Umbrella Apps
 date: "2019-05-03T18:00:00.000Z"
+tldr: Elixir umbrella apps add complexity without delivering true service isolation, and are better replaced by well-structured contexts within a single application in most real-world scenarios.
 ---
 
 [Umbrella apps](https://elixir-lang.org/getting-started/mix-otp/dependencies-and-umbrella-projects.html) are big projects that contain multiple mix projects. Using umbrella apps feels more like getting poked in the eye from an actual umbrella. 

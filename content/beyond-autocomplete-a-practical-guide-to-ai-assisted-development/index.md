@@ -1,6 +1,7 @@
 ---
 title: Beyond Autocomplete: A practical guide to AI-Assisted Development
 date: "2025-09-19T09:00:00.000Z"
+tldr: AI assistants are most valuable when used as an interactive pair programmer for dialogue, test generation, and code review rather than just autocomplete suggestions.
 ---
 
 To truly leverage the power of AI in software engineering, we need to move beyond simple code completion. In this post, I want to explore some practical techniques for using AI as a development partner, from pair programming to bug hunting, and even look at what the future might hold for AI other parts of software development.

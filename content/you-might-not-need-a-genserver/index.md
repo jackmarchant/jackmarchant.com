@@ -1,6 +1,7 @@
 ---
 title: You might not need a GenServer
 date: "2018-11-20T18:00:00.000Z"
+tldr: Tasks are often a simpler and better fit than GenServers for one-off async work in Elixir, and understanding the difference helps avoid over-engineering with unnecessary process abstractions.
 ---
 
 When you're browsing your way through Elixir documentation or reading blog posts (like this one), there's no doubt you'll come across a GenServer. It is perhaps one of the most overused modules in the Elixir standard library, simply because it's a good teaching tool for abstractions around processes. It can be confusing though, to know when to reach for your friendly, neighbourhood GenServer.

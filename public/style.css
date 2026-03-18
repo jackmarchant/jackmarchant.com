@@ -557,6 +557,33 @@ main {
     font-size: 12px;
 }
 
+.post__tldr {
+    margin: 0 0 28px;
+    padding: 16px 18px;
+    background: var(--surface-color);
+    border: 1px solid var(--border-color);
+    border-left: 3px solid var(--accent-green-color);
+    border-radius: 4px;
+}
+
+.post__tldr-label {
+    display: block;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--accent-green-color);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+}
+
+.post__tldr-text {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--text-primary-color);
+}
+
 .post p, .post li {
     color: var(--text-primary-color);
     font-size: 15px;

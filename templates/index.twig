@@ -106,6 +106,12 @@
                 <article class="post" data-post>
                     <h2 class="post__title">{{ post.title|lower }}</h2>
                     <p class="post__date">{{ post.date }}</p>
+                    {% if post.tldr %}
+                    <div class="post__tldr">
+                        <span class="post__tldr-label">tl;dr</span>
+                        <p class="post__tldr-text">{{ post.tldr }}</p>
+                    </div>
+                    {% endif %}
                     {{ post.content|raw }}
                 </article>
             {% endif %}

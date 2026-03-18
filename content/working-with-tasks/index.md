@@ -1,6 +1,7 @@
 ---
 title: Working with Tasks
 date: "2018-07-26T09:00:00.000Z"
+tldr: Elixir Tasks abstract over processes to provide a clean API for fire-and-forget or awaitable async work, and re-implementing the module from scratch is a great way to understand how they work.
 ---
 
 While writing [Understanding Concurrency in Elixir](/understanding-concurrency-in-elixir) I started to grasp processes more than I have before. Working with them more closely has strengthened the concepts in my own mind. 

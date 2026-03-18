@@ -1,6 +1,7 @@
 ---
 title: Lonestar ElixirConf 2019 Highlights 
 date: "2019-03-04T08:22:00.000Z"
+tldr: A recap of LoneStar ElixirConf 2019 in Austin covering highlights like the Nerves embedded systems keynote, LiveView, testing strategies, and the welcoming Elixir community.
 ---
 Last week was Lonestar ElixirConf 2019 held in Austin, Texas. The conference ran over 2 days and was the first Elixir conference I had been to.
 

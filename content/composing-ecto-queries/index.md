@@ -1,6 +1,7 @@
 ---
 title: Composing Ecto Queries
 date: "2018-07-06T09:00:00.000Z"
+tldr: Ecto lets you build Elixir database queries as composable, chainable expressions using the pipe operator, keeping queries modular, reusable, and easy to extend.
 ---
 
 [Ecto](https://github.com/elixir-ecto/ecto) is an Elixir library, which allows you to define schemas that map to database tables. It's a super light weight [ORM](https://en.wikipedia.org/wiki/Object-relational_mapping), (Object-Relational Mapper) that allows you to define structs to represent data. 

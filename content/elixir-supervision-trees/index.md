@@ -1,6 +1,7 @@
 ---
 title: A Comparison of Elixir Supervision Trees and React Component Trees 
 date: "2018-02-06T09:00:00.000Z"
+tldr: Elixir supervision trees isolate process failures so individual processes can crash and restart independently, similar to how React component error boundaries catch errors in a component tree.
 ---
 A Supervision Tree in [Elixir](https://elixir-lang.org/) has quite a number of parallels to how developers using React think about a component tree. In this article I will attempt to describe parallel concepts between the two - and if you've used React and are interested in functional programming, it might prompt you to take a look at Elixir.
 

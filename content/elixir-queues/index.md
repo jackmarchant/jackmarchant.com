@@ -1,6 +1,7 @@
 ---
 title: A Queue is just a Q with 4 silent letters
 date: "2018-06-06T09:20:00.000Z"
+tldr: Implementing a FIFO queue in Elixir using singly-linked lists requires enqueue, dequeue, peek, and count operations, and leverages the prepend-then-reverse pattern for efficient list access.
 ---
 
 A Queue is a collection data structure, which uses the FIFO (First In, First Out) method. This means that when you add items to a queue, often called enqueuing, the item takes its place at the end of the queue. When you dequeue an item, we remove the item from the front of the queue. 

@@ -1,6 +1,7 @@
 ---
 title: Using coding agents in my workflow in 2025
 date: "2025-12-05T09:00:00.000Z"
+tldr: A practical snapshot of integrating AI coding agents and Cursor into a daily engineering workflow in 2025, moving beyond autocomplete to agents handling research, planning, and full development tasks.
 ---
 
 There's a lot going on in the world of AI right now, so in an effort to cut through the noise, I thought it would be interesting to write down my current practices with AI — both as a time capsule to refer back to next year, and as a challenge to rethink anything I assumed wasn't previously possible without AI. The assumption being that a lot will change a year from now.

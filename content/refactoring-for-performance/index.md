@@ -1,6 +1,7 @@
 ---
 title: Refactoring for Performance
 date: "2024-02-12T09:00:00.000Z"
+tldr: Before investing in a performance refactor, isolate the slow code and measure the maximum possible improvement to ensure the effort is worthwhile and you are targeting the right bottleneck.
 tags: practices
 ---
 

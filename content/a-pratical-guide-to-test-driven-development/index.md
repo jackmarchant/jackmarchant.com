@@ -1,6 +1,7 @@
 ---
 title: A practical guide to Test Driven Development
 date: "2019-09-12T12:18:00.000Z"
+tldr: TDD is less about writing tests first and more about incorporating unit, integration, and user acceptance tests throughout development to catch bugs early and build confidence in your code.
 ---
 
 It’s been a while since I last wrote about why testing is important, but in this post I thought I would expand on that and talk about why not only unit testing is important, but how a full spectrum of automated tests can improve productivity, increase confidence pushing code and help keep users happy. 

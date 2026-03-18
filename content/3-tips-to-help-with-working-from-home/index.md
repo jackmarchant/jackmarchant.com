@@ -1,6 +1,7 @@
 ---
 title: 3 simple tips to get better at working from home
 date: "2020-04-17T18:00:00.000Z"
+tldr: Set fixed start and end times, take proper breaks, and dedicate a single room as your workspace to maintain productivity and a healthy work-life balance when working from home.
 tags: career
 ---
 
