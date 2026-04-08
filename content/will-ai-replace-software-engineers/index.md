@@ -12,6 +12,8 @@ It’s the topic on everyone’s mind, especially software engineers. AI is comi
 
 I recently listened to Jensen Huang on the Lex Fridman Podcast where he describes the change radiology went through with the introduction of AI, where rather than replacing radiologists, there was actually a greater demand for radiologists after they could now process the work much faster. The work of reading the scans can now be done by AI but the work of radiologists changes to fill the gaps where a human is required.
 
+https://x.com/lexfridman/status/2035833853357830640
+
 This particular story has stuck with me and I can draw a few parallels to the work software engineers do today, which goes well beyond the work of writing code.
 
 ## What software engineering actually is
