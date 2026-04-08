@@ -80,10 +80,15 @@ class PostService
         $content = file_get_contents(__DIR__ . sprintf('%s/%s/index.md', self::CONTENT_PATH, $path));
         $exploded = explode('---', $content);
         $metadata = $this->parseMetadata($exploded[1]);
-        $md = array_filter(explode("\n", $exploded[2]), function ($content) {
-            return !empty($content);
-        });
-        $blurb = $this->parser->parse(array_shift($md));
+        $summary = isset($metadata['tldr']) ? trim($metadata['tldr']) : '';
+        if (!empty($summary)) {
+            $blurb = $this->parser->parse($summary);
+        } else {
+            $md = array_filter(explode("\n", $exploded[2]), function ($content) {
+                return !empty($content);
+            });
+            $blurb = $this->parser->parse(array_shift($md));
+        }
         $title = isset($metadata['title']) ? trim($metadata['title']) : str_replace('-', ' ', $path);
         $tags = $this->parseTags(isset($metadata['tags']) ? $metadata['tags'] : '');
         if (empty($tags)) {
