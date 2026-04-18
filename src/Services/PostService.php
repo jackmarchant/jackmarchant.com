@@ -38,6 +38,7 @@ class PostService
                 'title' => trim($metadata['title']),
                 'date' => (new DateTime($metadata['date']))->format('F d, Y'),
                 'content' => $this->parser->parse($postRaw['body']),
+                'markdown' => trim($postRaw['body']),
                 'blurb' => $blurb,
                 'tldr' => isset($metadata['tldr']) ? trim($metadata['tldr']) : '',
                 'url' => '/' . $path,
@@ -66,6 +67,7 @@ class PostService
                 'url' => sprintf('/%s', $path),
                 'date' => (new DateTime($metadata['date']))->format('Y-m'),
                 'blurb' => $metadata['blurb'],
+                'tldr' => isset($metadata['tldr']) ? trim($metadata['tldr']) : '',
                 'tags' => $metadata['tags'],
             ];
         }

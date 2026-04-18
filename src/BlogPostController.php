@@ -36,7 +36,18 @@ class BlogPostController
         $post = ['title' => 'Page not found'];
 
         if (isset($args['post'])) {
-            $post = $this->postService->findPostByPath($args['post']);
+            $foundPost = $this->postService->findPostByPath($args['post']);
+            if (!empty($foundPost)) {
+                $post = $foundPost;
+            }
+        }
+
+        if ($this->wantsMarkdown($request)) {
+            $markdown = $this->renderMarkdown($post);
+            $response->getBody()->write($markdown);
+            return $response
+                ->withHeader('Content-Type', 'text/markdown; charset=UTF-8')
+                ->withHeader('X-Markdown-Tokens', (string) str_word_count(strip_tags($markdown)));
         }
 
         $body = $this->renderer->render('index.twig', [
@@ -46,5 +57,37 @@ class BlogPostController
         $response->getBody()->write($body);
 
         return $response;
+    }
+
+    private function wantsMarkdown(Request $request): bool
+    {
+        $accept = strtolower($request->getHeaderLine('Accept'));
+        return strpos($accept, 'text/markdown') !== false;
+    }
+
+    private function renderMarkdown(array $post): string
+    {
+        if (empty($post['url'])) {
+            return "# page not found\n";
+        }
+
+        $lines = [
+            '# ' . $post['title'],
+            '',
+            '_Published ' . $post['date'] . '_',
+            '',
+        ];
+
+        if (!empty($post['tldr'])) {
+            $lines[] = '> TL;DR: ' . trim($post['tldr']);
+            $lines[] = '';
+        }
+
+        $bodyMarkdown = trim(isset($post['markdown']) ? $post['markdown'] : '');
+        if (!empty($bodyMarkdown)) {
+            $lines[] = $bodyMarkdown;
+        }
+
+        return implode("\n", $lines) . "\n";
     }
 }
