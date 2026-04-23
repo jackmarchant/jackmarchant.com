@@ -151,7 +151,7 @@ $sitemapLines = [
 
 foreach ($posts as $post) {
     $sitemapLines[] = '<url>';
-    $sitemapLines[] = '  <loc>' . $siteUrl . $post['url'] . '</loc>';
+    $sitemapLines[] = '  <loc>' . htmlspecialchars($siteUrl . $post['url'], ENT_XML1, 'UTF-8') . '</loc>';
     $sitemapLines[] = '  <priority>0.80</priority>';
     $sitemapLines[] = '</url>';
 }
