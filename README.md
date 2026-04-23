@@ -1,6 +1,6 @@
 # jackmarchant.com
 
-Website for jackmarchant.com built with [Slim Framework](https://www.slimframework.com) and [Twig](https://twig.symfony.com/doc/3.x/) to render markdown posts into html. Deployed as a static site on [Netlify](https://www.netlify.com).
+Website for jackmarchant.com built with [Slim Framework](https://www.slimframework.com) and [Twig](https://twig.symfony.com/doc/3.x/) to render markdown posts into html.
 
 ### Development
 1. Run `make install`
@@ -10,4 +10,5 @@ Website for jackmarchant.com built with [Slim Framework](https://www.slimframewo
 Run `make build` to generate the static site in the `dist/` directory.
 
 ### Deployment
-The site is deployed automatically by Netlify on push. See `netlify.toml` for build configuration.
+- **Heroku** — serves the PHP app dynamically via `Procfile`.
+- **Netlify** — builds a static version via `build.php`. See `netlify.toml` for build configuration.
