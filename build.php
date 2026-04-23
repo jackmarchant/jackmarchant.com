@@ -44,9 +44,13 @@ function copyDir(string $src, string $dst): void
 
 // ── bootstrap services ─────────────────────────────────────────────
 
+$siteUrl = 'https://www.jackmarchant.com';
+
 $markdown    = new Markdown();
 $postService = new PostService($markdown);
 
+// index.twig is a multi-purpose template that conditionally renders
+// the blog list (when 'posts' is set) or a single post (when 'post' is set).
 $loader   = new Twig\Loader\FilesystemLoader(__DIR__ . '/templates');
 $twig     = new Twig\Environment($loader);
 $settings = [
@@ -140,14 +144,14 @@ $sitemapLines = [
     '<?xml version="1.0" encoding="UTF-8"?>',
     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
     '<url>',
-    '  <loc>https://www.jackmarchant.com/</loc>',
+    '  <loc>' . $siteUrl . '/</loc>',
     '  <priority>1.00</priority>',
     '</url>',
 ];
 
 foreach ($posts as $post) {
     $sitemapLines[] = '<url>';
-    $sitemapLines[] = '  <loc>https://www.jackmarchant.com' . $post['url'] . '</loc>';
+    $sitemapLines[] = '  <loc>' . $siteUrl . $post['url'] . '</loc>';
     $sitemapLines[] = '  <priority>0.80</priority>';
     $sitemapLines[] = '</url>';
 }
