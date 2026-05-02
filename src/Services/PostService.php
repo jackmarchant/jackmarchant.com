@@ -12,6 +12,9 @@ class PostService
     /** @var MarkdownParserInterface */
     private $parser;
 
+    /** @var array|null Memoized listings — filesystem scan + metadata parse is expensive */
+    private $listingsCache;
+
     public function __construct(MarkdownParserInterface $parser)
     {
         $this->parser = $parser;
@@ -55,9 +58,13 @@ class PostService
      */
     public function getAllPostListings(): array
     {
+        if ($this->listingsCache !== null) {
+            return $this->listingsCache;
+        }
+
         $folders = array_filter(glob(__DIR__ . self::CONTENT_PATH . '/*'), 'is_dir');
         $posts = [];
-        
+
         foreach ($folders as $folder) {
             $paths = explode('/', $folder);
             $path = end($paths);
@@ -74,6 +81,7 @@ class PostService
 
         krsort($posts);
 
+        $this->listingsCache = $posts;
         return $posts;
     }
 
