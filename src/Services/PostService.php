@@ -12,6 +12,9 @@ class PostService
     /** @var MarkdownParserInterface */
     private $parser;
 
+    /** @var array|null Memoized listings — filesystem scan + metadata parse is expensive */
+    private $listingsCache;
+
     public function __construct(MarkdownParserInterface $parser)
     {
         $this->parser = $parser;
@@ -55,9 +58,13 @@ class PostService
      */
     public function getAllPostListings(): array
     {
+        if ($this->listingsCache !== null) {
+            return $this->listingsCache;
+        }
+
         $folders = array_filter(glob(__DIR__ . self::CONTENT_PATH . '/*'), 'is_dir');
         $posts = [];
-        
+
         foreach ($folders as $folder) {
             $paths = explode('/', $folder);
             $path = end($paths);
@@ -74,6 +81,7 @@ class PostService
 
         krsort($posts);
 
+        $this->listingsCache = $posts;
         return $posts;
     }
 
@@ -133,6 +141,35 @@ class PostService
         }, $parts))));
 
         return $tags;
+    }
+
+    /**
+     * Find the chronologically adjacent posts for a given slug.
+     * Listings are sorted newest-first, so the index BEFORE the current
+     * post is the "newer" neighbour, and the index AFTER is the "older".
+     *
+     * @param string $slug
+     * @return array{newer: ?array, older: ?array}
+     */
+    public function findAdjacentPosts(string $slug): array
+    {
+        $posts = array_values($this->getAllPostListings());
+        $idx = null;
+        foreach ($posts as $i => $post) {
+            if ($post['url'] === '/' . $slug) {
+                $idx = $i;
+                break;
+            }
+        }
+
+        if ($idx === null) {
+            return ['newer' => null, 'older' => null];
+        }
+
+        return [
+            'newer' => $idx > 0 ? $posts[$idx - 1] : null,
+            'older' => $idx < count($posts) - 1 ? $posts[$idx + 1] : null,
+        ];
     }
 
     /**

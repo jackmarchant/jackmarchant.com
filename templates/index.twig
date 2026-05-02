@@ -28,6 +28,7 @@
         <meta name="twitter:description" content="I'm a Software Engineer from Sydney. I like writing code and talking about it." />
         {% endif %}
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="alternate" type="application/rss+xml" title="jack marchant" href="/rss.xml" />
         <script>(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}}());</script>
     </head>
     <body>
@@ -114,8 +115,47 @@
                     {% endif %}
                     {{ post.content|raw }}
                 </article>
+                {% if newer or older %}
+                <nav class="post-nav" aria-label="post navigation">
+                    {% if older %}
+                        <a class="post-nav__link post-nav__link--prev" href="{{ older.url }}">
+                            <span class="post-nav__label">← older</span>
+                            <span class="post-nav__title">{{ older.title|lower }}</span>
+                        </a>
+                    {% else %}
+                        <span class="post-nav__placeholder" aria-hidden="true"></span>
+                    {% endif %}
+                    <a class="post-nav__home" href="/">all posts</a>
+                    {% if newer %}
+                        <a class="post-nav__link post-nav__link--next" href="{{ newer.url }}">
+                            <span class="post-nav__label">newer →</span>
+                            <span class="post-nav__title">{{ newer.title|lower }}</span>
+                        </a>
+                    {% else %}
+                        <span class="post-nav__placeholder" aria-hidden="true"></span>
+                    {% endif %}
+                </nav>
+                {% endif %}
             {% endif %}
         </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p class="site-footer__prompt">jackmarchant@blog:~$ exit</p>
+                <nav class="site-footer__links" aria-label="external links">
+                    <a href="/rss.xml">rss</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://github.com/jackmarchant" target="_blank" rel="noopener noreferrer">github</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://x.com/jackmarchant10" target="_blank" rel="noopener noreferrer" aria-label="x profile">x</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://www.linkedin.com/in/jack-marchant" target="_blank" rel="noopener noreferrer">linkedin</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:jack@jackmarchant.com">email</a>
+                </nav>
+                <p class="site-footer__meta">© <span data-current-year>2026</span> jack marchant</p>
+            </div>
+        </footer>
 
         <script src="/prism.js"></script>
         <script src="/index.js"></script>

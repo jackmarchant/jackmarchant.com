@@ -220,10 +220,79 @@
         });
     }
 
+    function setupCurrentYear() {
+        var el = document.querySelector('[data-current-year]');
+        if (el) {
+            el.textContent = String(new Date().getFullYear());
+        }
+    }
+
+    function setupCodeBlocks() {
+        var pres = document.querySelectorAll('.post pre[class*="language-"]');
+        pres.forEach(function (pre) {
+            if (pre.parentElement && pre.parentElement.classList.contains('code-block')) {
+                return;
+            }
+
+            var match = pre.className.match(/language-([\w-]+)/);
+            var lang = match ? match[1] : 'code';
+
+            var wrapper = document.createElement('div');
+            wrapper.className = 'code-block';
+
+            var header = document.createElement('div');
+            header.className = 'code-block__header';
+
+            var langEl = document.createElement('span');
+            langEl.className = 'code-block__lang';
+            langEl.textContent = lang;
+
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'code-block__copy';
+            btn.setAttribute('aria-label', 'copy code');
+            btn.textContent = 'copy';
+
+            header.appendChild(langEl);
+            header.appendChild(btn);
+
+            pre.parentNode.insertBefore(wrapper, pre);
+            wrapper.appendChild(header);
+            wrapper.appendChild(pre);
+
+            btn.addEventListener('click', function () {
+                var text = pre.textContent || '';
+                var done = function () {
+                    btn.textContent = 'copied';
+                    setTimeout(function () { btn.textContent = 'copy'; }, 1500);
+                };
+
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(text).then(done, function () {
+                        btn.textContent = 'failed';
+                        setTimeout(function () { btn.textContent = 'copy'; }, 1500);
+                    });
+                } else {
+                    var ta = document.createElement('textarea');
+                    ta.value = text;
+                    ta.setAttribute('readonly', '');
+                    ta.style.position = 'absolute';
+                    ta.style.left = '-9999px';
+                    document.body.appendChild(ta);
+                    ta.select();
+                    try { document.execCommand('copy'); done(); } catch (e) {}
+                    document.body.removeChild(ta);
+                }
+            });
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         setupExpanding();
         setupThemeToggle();
         setupReadingProgress();
+        setupCurrentYear();
+        setupCodeBlocks();
         var closeModal = setupSubscribeModal();
 
         if (closeModal) {
