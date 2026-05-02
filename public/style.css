@@ -812,12 +812,7 @@ main {
         display: none;
     }
 
-    .reading-progress {
-        top: auto;
-        bottom: 0;
-    }
-
-    .post p, .post li {
+.post p, .post li {
         font-size: 15px;
     }
 
