@@ -34,11 +34,13 @@ class BlogPostController
         $this->logger->info('blog post handler dispatched');
 
         $post = ['title' => 'Page not found'];
+        $adjacent = ['newer' => null, 'older' => null];
 
         if (isset($args['post'])) {
             $foundPost = $this->postService->findPostByPath($args['post']);
             if (!empty($foundPost)) {
                 $post = $foundPost;
+                $adjacent = $this->postService->findAdjacentPosts($args['post']);
             }
         }
 
@@ -52,6 +54,8 @@ class BlogPostController
 
         $body = $this->renderer->render('index.twig', [
             'post' => $post,
+            'newer' => $adjacent['newer'],
+            'older' => $adjacent['older'],
             'settings' => $this->settings,
         ]);
         $response->getBody()->write($body);

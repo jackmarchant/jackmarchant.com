@@ -136,6 +136,35 @@ class PostService
     }
 
     /**
+     * Find the chronologically adjacent posts for a given slug.
+     * Listings are sorted newest-first, so the index BEFORE the current
+     * post is the "newer" neighbour, and the index AFTER is the "older".
+     *
+     * @param string $slug
+     * @return array{newer: ?array, older: ?array}
+     */
+    public function findAdjacentPosts(string $slug): array
+    {
+        $posts = array_values($this->getAllPostListings());
+        $idx = null;
+        foreach ($posts as $i => $post) {
+            if ($post['url'] === '/' . $slug) {
+                $idx = $i;
+                break;
+            }
+        }
+
+        if ($idx === null) {
+            return ['newer' => null, 'older' => null];
+        }
+
+        return [
+            'newer' => $idx > 0 ? $posts[$idx - 1] : null,
+            'older' => $idx < count($posts) - 1 ? $posts[$idx + 1] : null,
+        ];
+    }
+
+    /**
      * Get all unique tags from a posts array, sorted alphabetically.
      *
      * @param array $posts

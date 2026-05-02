@@ -118,8 +118,12 @@ foreach ($folders as $folder) {
         continue;
     }
 
+    $adjacent = $postService->findAdjacentPosts($slug);
+
     $html = $twig->render('index.twig', [
         'post'     => $post,
+        'newer'    => $adjacent['newer'],
+        'older'    => $adjacent['older'],
         'settings' => $settings,
     ]);
 
@@ -159,5 +163,40 @@ foreach ($posts as $post) {
 $sitemapLines[] = '</urlset>';
 file_put_contents($dist . '/sitemap.xml', implode("\n", $sitemapLines) . "\n");
 echo "  ✓ /sitemap.xml (generated)\n";
+
+// ── generate rss.xml ───────────────────────────────────────────────
+
+$rssLines = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">',
+    '<channel>',
+    '  <title>jack marchant</title>',
+    '  <link>' . $siteUrl . '/</link>',
+    '  <description>writing about software</description>',
+    '  <language>en</language>',
+    '  <atom:link href="' . $siteUrl . '/rss.xml" rel="self" type="application/rss+xml" />',
+];
+
+foreach ($posts as $timestamp => $listing) {
+    $slug = ltrim($listing['url'], '/');
+    $full = $postService->findPostByPath($slug);
+    if (empty($full)) {
+        continue;
+    }
+    $itemUrl = $siteUrl . $listing['url'];
+    $rssLines[] = '<item>';
+    $rssLines[] = '  <title>' . htmlspecialchars($listing['title'], ENT_XML1, 'UTF-8') . '</title>';
+    $rssLines[] = '  <link>' . htmlspecialchars($itemUrl, ENT_XML1, 'UTF-8') . '</link>';
+    $rssLines[] = '  <guid isPermaLink="true">' . htmlspecialchars($itemUrl, ENT_XML1, 'UTF-8') . '</guid>';
+    $rssLines[] = '  <pubDate>' . date(DATE_RSS, $timestamp) . '</pubDate>';
+    $rssLines[] = '  <description>' . htmlspecialchars(trim(strip_tags($full['blurb'])), ENT_XML1, 'UTF-8') . '</description>';
+    $rssLines[] = '  <content:encoded><![CDATA[' . $full['content'] . ']]></content:encoded>';
+    $rssLines[] = '</item>';
+}
+
+$rssLines[] = '</channel>';
+$rssLines[] = '</rss>';
+file_put_contents($dist . '/rss.xml', implode("\n", $rssLines) . "\n");
+echo "  ✓ /rss.xml (generated)\n";
 
 echo "\nBuild complete → {$dist}\n";
