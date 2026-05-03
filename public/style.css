@@ -804,7 +804,6 @@ main {
 
 @media (max-width: 600px) {
     .site-header {
-        position: static;
         padding: 10px 0 8px;
     }
 
