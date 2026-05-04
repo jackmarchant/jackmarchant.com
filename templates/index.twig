@@ -68,7 +68,33 @@
         </div>
         <main class="container">
             {% if posts %}
+                {% set featured = posts|first %}
                 <section class="post-directory" data-post-directory>
+                    {% if featured %}
+                        <a class="featured-card" data-featured-card href="{{ featured.url }}">
+                            <span class="featured-card__label">// latest</span>
+                            <h2 class="featured-card__title">{{ featured.title|lower }}</h2>
+                            <div class="featured-card__meta">
+                                <span class="featured-card__date">{{ featured.date }}</span>
+                                {% if featured.reading_time %}
+                                    <span class="featured-card__sep" aria-hidden="true">·</span>
+                                    <span class="featured-card__reading">{{ featured.reading_time }} min read</span>
+                                {% endif %}
+                            </div>
+                            <div class="featured-card__blurb">{{ featured.blurb|raw }}</div>
+                            <span class="featured-card__cta">read post →</span>
+                        </a>
+                    {% endif %}
+                    <div class="post-controls">
+                        <label class="post-search" aria-label="search posts">
+                            <span class="post-search__prompt" aria-hidden="true">grep&gt;</span>
+                            <input class="post-search__input" type="search" placeholder="search posts…" data-post-search autocomplete="off" spellcheck="false" />
+                        </label>
+                        <div class="sort-toggle" data-sort-toggle role="group" aria-label="sort posts">
+                            <button class="sort-toggle__btn is-active" type="button" data-sort="newest">newest</button>
+                            <button class="sort-toggle__btn" type="button" data-sort="oldest">oldest</button>
+                        </div>
+                    </div>
                     <div class="tag-filter-bar" data-tag-filter-bar>
                         <button class="tag-filter-btn is-active" data-tag-filter="all">all</button>
                         {% for tag in tags %}
@@ -76,12 +102,19 @@
                         {% endfor %}
                     </div>
                     <p class="post-count">— <span data-results-count>{{ posts|length }}</span> posts —</p>
+                    <p class="post-empty" data-post-empty hidden>no posts match. try clearing filters.</p>
                     <div class="post-list" data-post-list>
                         {% for listing in posts %}
-                            <article class="post-card" data-post-card data-title="{{ listing.title|lower|e('html_attr') }}" data-tags="{{ listing.tags|join(' ')|lower|e('html_attr') }}">
+                            <article class="post-card" data-post-card data-title="{{ listing.title|lower|e('html_attr') }}" data-blurb="{{ listing.blurb|striptags|lower|e('html_attr') }}" data-tags="{{ listing.tags|join(' ')|lower|e('html_attr') }}" data-date="{{ listing.date|e('html_attr') }}">
                                 <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
                                     <span class="post-card__title">{{ listing.title|lower }}</span>
-                                    <span class="post-card__date">{{ listing.date }}</span>
+                                    <span class="post-card__meta">
+                                        {% if listing.reading_time %}
+                                            <span class="post-card__reading">{{ listing.reading_time }} min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                        {% endif %}
+                                        <span class="post-card__date">{{ listing.date }}</span>
+                                    </span>
                                 </button>
                                 <div class="post-card__tags">
                                     {% for tag in listing.tags %}
