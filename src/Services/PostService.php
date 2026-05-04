@@ -76,6 +76,7 @@ class PostService
                 'blurb' => $metadata['blurb'],
                 'tldr' => isset($metadata['tldr']) ? trim($metadata['tldr']) : '',
                 'tags' => $metadata['tags'],
+                'reading_time' => $metadata['reading_time'],
             ];
         }
 
@@ -104,12 +105,14 @@ class PostService
         if (empty($tags)) {
             $tags = $this->inferTags(sprintf('%s %s %s', $path, $title, strip_tags($blurb)));
         }
+        $readingTime = $this->estimateReadingTime($exploded[2]);
 
         return [
             'title' => $title,
             'date' => $metadata['date'],
             'blurb' => $blurb,
             'tags' => $tags,
+            'reading_time' => $readingTime,
         ];
     }
 
@@ -189,6 +192,13 @@ class PostService
         $tags = array_keys($seen);
         sort($tags);
         return $tags;
+    }
+
+    protected function estimateReadingTime(string $body): int
+    {
+        $words = str_word_count(strip_tags($body));
+        $minutes = (int) ceil($words / 220);
+        return max(1, $minutes);
     }
 
     protected function inferTags(string $content): array

@@ -62,23 +62,37 @@
         });
     }
 
-    function setupTagFilter(directory) {
+    function setupPostDirectory(directory) {
         var filterBar = directory.querySelector('[data-tag-filter-bar]');
         var count = directory.querySelector('[data-results-count]');
+        var empty = directory.querySelector('[data-post-empty]');
+        var search = directory.querySelector('[data-post-search]');
+        var sortToggle = directory.querySelector('[data-sort-toggle]');
+        var list = directory.querySelector('[data-post-list]');
+        var featured = directory.querySelector('[data-featured-card]');
         var cards = Array.from(directory.querySelectorAll('[data-post-card]'));
 
-        if (!filterBar || !count || cards.length === 0) {
+        if (cards.length === 0) {
             return;
         }
 
         var activeTag = 'all';
+        var query = '';
+        var sortMode = 'newest';
+        var originalOrder = cards.slice();
+        var oldestFirstOrder = cards.slice().reverse();
 
         function applyFilter() {
             var visibleCount = 0;
 
             cards.forEach(function (card) {
                 var tags = (card.getAttribute('data-tags') || '').split(' ').filter(Boolean);
-                var matches = activeTag === 'all' || tags.indexOf(activeTag) !== -1;
+                var title = card.getAttribute('data-title') || '';
+                var blurb = card.getAttribute('data-blurb') || '';
+
+                var tagMatch = activeTag === 'all' || tags.indexOf(activeTag) !== -1;
+                var queryMatch = !query || title.indexOf(query) !== -1 || blurb.indexOf(query) !== -1;
+                var matches = tagMatch && queryMatch;
 
                 card.hidden = !matches;
                 if (matches) {
@@ -89,23 +103,69 @@
                 }
             });
 
-            count.textContent = visibleCount;
+            if (count) {
+                count.textContent = visibleCount;
+            }
+            if (empty) {
+                empty.hidden = visibleCount !== 0;
+            }
+            if (featured) {
+                var hideFeatured = activeTag !== 'all' || query !== '' || sortMode !== 'newest';
+                featured.classList.toggle('is-hidden', hideFeatured);
+            }
         }
 
-        filterBar.addEventListener('click', function (e) {
-            var btn = e.target.closest('[data-tag-filter]');
-            if (!btn) {
+        function applySort() {
+            if (!list) {
                 return;
             }
-
-            activeTag = btn.getAttribute('data-tag-filter');
-
-            filterBar.querySelectorAll('[data-tag-filter]').forEach(function (b) {
-                b.classList.toggle('is-active', b === btn);
+            var order = sortMode === 'oldest' ? oldestFirstOrder : originalOrder;
+            order.forEach(function (card) {
+                list.appendChild(card);
             });
+        }
 
-            applyFilter();
-        });
+        if (filterBar) {
+            filterBar.addEventListener('click', function (e) {
+                var btn = e.target.closest('[data-tag-filter]');
+                if (!btn) {
+                    return;
+                }
+
+                activeTag = btn.getAttribute('data-tag-filter');
+
+                filterBar.querySelectorAll('[data-tag-filter]').forEach(function (b) {
+                    b.classList.toggle('is-active', b === btn);
+                });
+
+                applyFilter();
+            });
+        }
+
+        if (search) {
+            search.addEventListener('input', function () {
+                query = (search.value || '').trim().toLowerCase();
+                applyFilter();
+            });
+        }
+
+        if (sortToggle) {
+            sortToggle.addEventListener('click', function (e) {
+                var btn = e.target.closest('[data-sort]');
+                if (!btn) {
+                    return;
+                }
+
+                sortMode = btn.getAttribute('data-sort');
+
+                sortToggle.querySelectorAll('[data-sort]').forEach(function (b) {
+                    b.classList.toggle('is-active', b === btn);
+                });
+
+                applySort();
+                applyFilter();
+            });
+        }
     }
 
     function refreshExpandedCardHeight() {
@@ -305,7 +365,7 @@
 
         var directories = document.querySelectorAll('[data-post-directory]');
         directories.forEach(function (directory) {
-            setupTagFilter(directory);
+            setupPostDirectory(directory);
         });
 
         window.addEventListener('resize', refreshExpandedCardHeight);
