@@ -1,0 +1,15 @@
+# Cache-busting + long-lived caching for hashed assets.
+#
+# Templates reference assets via /name.<hash8>.ext (e.g. /style.7bc36a27.css).
+# This block matches that pattern, serves the canonical file from disk, and
+# tells the browser to cache it forever — safe because the URL changes
+# whenever the file content changes.
+#
+# Drop this inside the `server { }` block that serves jackmarchant.com,
+# above any catch-all `location /` rule.
+
+location ~ "^/(.+)\.[a-f0-9]{8}\.(css|js)$" {
+    try_files /$1.$2 =404;
+    expires 1y;
+    add_header Cache-Control "public, immutable";
+}
