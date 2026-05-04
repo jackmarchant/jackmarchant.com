@@ -1,5 +1,7 @@
 <?php
 
+use App\Assets;
+use App\AssetsExtension;
 use App\Services\PostService;
 use App\Markdown;
 use \Psr\Container\ContainerInterface;
@@ -10,12 +12,18 @@ $container->set('settings', function (ContainerInterface $c) {
     return require __DIR__ . '/settings.php';
 });
 
+$container->set('assets', function (ContainerInterface $c) {
+    return new Assets(__DIR__ . '/../public');
+});
+
 // view renderer
 $container->set('renderer', function (ContainerInterface $c) {
     $loader = new Twig\Loader\FilesystemLoader(__DIR__ . '/../templates');
-    return new Twig\Environment($loader, [
+    $env = new Twig\Environment($loader, [
         __DIR__ . '/../var/cache'
     ]);
+    $env->addExtension(new AssetsExtension($c->get('assets')));
+    return $env;
 });
 
 $container->set('markdown', function(ContainerInterface $c) {

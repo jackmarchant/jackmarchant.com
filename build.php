@@ -11,6 +11,8 @@
 error_reporting(E_ALL ^ E_DEPRECATED);
 require __DIR__ . '/vendor/autoload.php';
 
+use App\Assets;
+use App\AssetsExtension;
 use App\Markdown;
 use App\Services\PostService;
 
@@ -53,6 +55,8 @@ $postService = new PostService($markdown);
 // the blog list (when 'posts' is set) or a single post (when 'post' is set).
 $loader   = new Twig\Loader\FilesystemLoader(__DIR__ . '/templates');
 $twig     = new Twig\Environment($loader);
+$assets   = new Assets(__DIR__ . '/public');
+$twig->addExtension(new AssetsExtension($assets));
 $settings = [
     'environment' => 'production',
 ];
@@ -88,6 +92,15 @@ foreach (scandir($publicDir) as $item) {
         copyDir($srcPath, $dstPath);
     } else {
         copy($srcPath, $dstPath);
+    }
+}
+
+// Write hashed copies of bundled assets so the static site can serve them
+// at the same URLs the template references via {{ asset(...) }}.
+foreach (['/style.css', '/prism.css', '/index.js', '/prism.js'] as $assetPath) {
+    $hashedPath = $assets->path($assetPath);
+    if ($hashedPath !== $assetPath) {
+        copy($publicDir . $assetPath, $dist . $hashedPath);
     }
 }
 
