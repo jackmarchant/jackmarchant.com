@@ -2,4 +2,3 @@
 /dist/
 /logs/*
 !/logs/README.md
-/.screenshots/
