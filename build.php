@@ -3,7 +3,7 @@
  * Static site generator for jackmarchant.com
  *
  * Reads markdown content, renders HTML via Twig, and writes static files
- * to the dist/ directory for deployment on Netlify (or any static host).
+ * to the dist/ directory for deployment on any static host.
  *
  * Usage: php build.php
  */

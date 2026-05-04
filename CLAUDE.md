@@ -16,8 +16,8 @@ There is no test suite. After any app change, run `make up` and verify the affec
 
 This is a PHP blog built with Slim Framework 4 and Twig. It has two deployment modes from the same codebase:
 
-- **Dynamic (Heroku):** `public/index.php` bootstraps Slim, PHP-DI, and serves requests. The `Procfile` points Apache at `public/`.
-- **Static (Netlify):** `build.php` runs the same services outside of Slim and writes pre-rendered HTML to `dist/`. `netlify.toml` invokes this as the build command.
+- **Dynamic:** `public/index.php` bootstraps Slim, PHP-DI, and serves requests.
+- **Static:** `build.php` runs the same services outside of Slim and writes pre-rendered HTML to `dist/`.
 
 ### Request flow (dynamic mode)
 

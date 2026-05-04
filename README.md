@@ -8,7 +8,3 @@ Website for jackmarchant.com built with [Slim Framework](https://www.slimframewo
 
 ### Static Build
 Run `make build` to generate the static site in the `dist/` directory.
-
-### Deployment
-- **Heroku** — serves the PHP app dynamically via `Procfile`.
-- **Netlify** — builds a static version via `build.php`. See `netlify.toml` for build configuration.
