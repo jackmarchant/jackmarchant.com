@@ -1,0 +1,85 @@
+name: new-blog-post
+
+on:
+  workflow_dispatch:
+    inputs:
+      title:
+        description: 'Post title'
+        required: true
+        type: string
+      tldr:
+        description: 'One-line summary (1-2 sentences, no colons or double-quotes)'
+        required: false
+        default: 'TODO write a one-line summary of this post.'
+        type: string
+      tags:
+        description: 'Comma-separated tags (optional, e.g. elixir, php)'
+        required: false
+        default: ''
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  create-post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create post file
+        env:
+          TITLE: ${{ inputs.title }}
+          TLDR: ${{ inputs.tldr }}
+          TAGS: ${{ inputs.tags }}
+        run: |
+          # Build a URL-safe slug from the title:
+          # lowercase, drop anything that isn't a letter/number/space/hyphen,
+          # collapse whitespace to single hyphens, trim stray hyphens.
+          slug=$(printf '%s' "$TITLE" \
+            | tr '[:upper:]' '[:lower:]' \
+            | sed -E 's/[^a-z0-9 -]//g; s/[[:space:]]+/-/g; s/-+/-/g; s/^-//; s/-$//')
+
+          if [ -z "$slug" ]; then
+            echo "::error::Could not derive a slug from the title."
+            exit 1
+          fi
+
+          dir="content/$slug"
+          if [ -e "$dir/index.md" ]; then
+            echo "::error::content/$slug/index.md already exists."
+            exit 1
+          fi
+
+          mkdir -p "$dir"
+
+          # Strip characters the frontmatter parser can't handle:
+          # it splits on the first ':' per line and strips double-quotes.
+          title=$(printf '%s' "$TITLE" | tr -d '":')
+          tldr=$(printf '%s' "$TLDR" | tr -d '":' | tr '\n' ' ')
+
+          {
+            echo '---'
+            echo "title: $title"
+            echo "date: \"$(date -u +%Y-%m-%dT%H:%M:%S.000Z)\""
+            echo "tldr: $tldr"
+            if [ -n "$TAGS" ]; then
+              echo "tags: $(printf '%s' "$TAGS" | tr -d '":')"
+            fi
+            echo '---'
+            echo ''
+            echo 'Start writing your post here.'
+          } > "$dir/index.md"
+
+          echo "Created $dir/index.md"
+          cat "$dir/index.md"
+
+      - name: Commit new post
+        env:
+          TITLE: ${{ inputs.title }}
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add content/
+          git commit -m "post: draft \"$TITLE\""
+          git push
