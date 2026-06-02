@@ -20,6 +20,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   create-post:
@@ -73,13 +74,23 @@ jobs:
 
           echo "Created $dir/index.md"
           cat "$dir/index.md"
+          echo "slug=$slug" >> "$GITHUB_OUTPUT"
+        id: post
 
-      - name: Commit new post
+      - name: Open pull request
         env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TITLE: ${{ inputs.title }}
+          SLUG: ${{ steps.post.outputs.slug }}
         run: |
+          branch="post/$SLUG"
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$branch"
           git add content/
           git commit -m "post: draft \"$TITLE\""
-          git push
+          git push -u origin "$branch"
+          gh pr create \
+            --title "post: $TITLE" \
+            --body "Drafted via the new-blog-post workflow. Edit \`content/$SLUG/index.md\` to write the post, then merge." \
+            --head "$branch"
