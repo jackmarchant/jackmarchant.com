@@ -6,7 +6,7 @@ tags: leadership
 ---
 
 I listened to a podcast recently with [James Cowling on The Peterman Pod](https://open.spotify.com/episode/1Xt2SfdlM8huFQERnsknqP?si=NaAKQpXaS2eclbg5RRc1TA) and one of the topics James talks about is the concept of leading by example, specifically why you shouldn’t.
-I’ve been a Tech Lead in one form or another for a while now, and I always valued “Leading by Example” as a principle, all of the leaders I aspired to did this. At least what I thought it meant.
+I’ve been a Tech Lead in one form or another for a while now, and I always valued “Leading by Example” as a principle, all of the leaders I aspired to be did this. At least what I thought it meant.
 It turns out to be a bit more nuanced than that, there’s more to knowing when to step in and help out the team, and when to step back and let the team escalate if they need to.
 
 In this post I’m going to talk about a few traps I’ve fallen into while trying to lead by example and what I aspire to now with a bit more experience and perspective.
@@ -20,7 +20,7 @@ Everyone else is busy with their own work, it actually takes a lot of effort to 
 **Always being available to help**
 
 Perhaps most detrimental to your own work in the long term, if you keep focussing on being the problem solver, no one else gets to sharpen their skills and share the load.
-I used to think to be the best I’d have to make sure I’m answering all of the questions for the team, shielding them to do their best work, but actually I was preventing them from rising up and being more visible.
+I used to think to be the best I’d have to make sure I’m answering all of the questions for the team, shielding them to do their best work, but actually I was preventing them from rising up and learning themselves.
 
 **Fire fighting reduces your overall capacity**
 
