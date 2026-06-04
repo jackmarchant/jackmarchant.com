@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>engineering the loop | jack marchant</title>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="/prism.30affb74.css" rel="stylesheet" type="text/css" />
+        <link href="/style.63f6c93a.css" rel="stylesheet" type="text/css" />
+                <meta name="description" content="I&#039;ve been spending more time thinking about how I work with agents than the actual code they produce. That shift in focus, from output to process, is what engineering the loop is about." />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="engineering the loop" />
+        <meta property="og:description" content="I&#039;ve been spending more time thinking about how I work with agents than the actual code they produce. That shift in focus, from output to process, is what engineering the loop is about." />
+        <meta property="og:url" content="https://www.jackmarchant.com/engineering-the-loop" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="engineering the loop" />
+        <meta name="twitter:description" content="I&#039;ve been spending more time thinking about how I work with agents than the actual code they produce. That shift in focus, from output to process, is what engineering the loop is about." />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="alternate" type="application/rss+xml" title="jack marchant" href="/rss.xml" />
+        <script>(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}}());</script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header__row">
+                    <p class="site-prompt">jackmarchant@blog:~$</p>
+                    <div class="site-header__actions">
+                        <button class="theme-toggle" type="button" data-theme-toggle aria-label="switch to light mode">
+                            <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        </button>
+                        <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                    </div>
+                </div>
+                <h1 class="site-title"><a href="/">jack marchant</a></h1>
+                <p class="site-tagline">principal engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">deputy</a> · writing about software</p>
+            </div>
+        </header>
+
+        <div class="subscribe-modal" data-subscribe-modal aria-hidden="true">
+            <div class="subscribe-modal__backdrop" data-subscribe-backdrop></div>
+            <div class="subscribe-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+                <div class="subscribe-modal__header">
+                    <h2 class="subscribe-modal__title" id="subscribe-modal-title">subscribe</h2>
+                    <button class="subscribe-modal__close" type="button" data-subscribe-close aria-label="close">×</button>
+                </div>
+                <p class="subscribe-modal__desc">get new posts delivered to your inbox</p>
+                <form class="subscribe-form" action="https://jackmarchant.us14.list-manage.com/subscribe?u=5a51a355f4187fddb0d0f4816&amp;id=b5ae7106ea" method="POST" target="_blank" rel="noopener noreferrer" novalidate>
+                    <div style="position:absolute;left:-5000px;" aria-hidden="true">
+                        <input type="text" name="b_5a51a355f4187fddb0d0f4816_b5ae7106ea" tabindex="-1" value="" />
+                    </div>
+                    <input type="email" name="EMAIL" id="mce-EMAIL" class="subscribe-form__input" placeholder="your@email.com" required />
+                    <button type="submit" class="subscribe-form__submit">subscribe →</button>
+                </form>
+            </div>
+        </div>
+        <main class="container">
+            
+                            <div class="reading-progress" data-reading-progress aria-hidden="true">
+                    <div class="reading-progress__bar" data-reading-progress-bar></div>
+                </div>
+                <article class="post" data-post>
+                    <h2 class="post__title">engineering the loop</h2>
+                    <p class="post__date">March 16, 2026</p>
+                                        <div class="post__tldr">
+                        <span class="post__tldr-label">tl;dr</span>
+                        <p class="post__tldr-text">Building an always-on automation pipeline around AI coding agents shifts your focus from writing code to writing clear specs, because the quality of the agent input directly determines the quality of the output.</p>
+                    </div>
+                                        <p>I've been spending more time thinking about how I work with agents than the actual code they produce. That shift in focus, from output to process, is what engineering the loop is about.</p>
+<p>The loop is the automation pipeline that sits between me and a coding agent. Done well, it lets me hand off well-defined pieces of work to Claude Code and stay focused on the bigger picture: system design, architecture decisions, the things that actually require judgment.</p>
+<h2>What the loop looks like</h2>
+<p>The loop is a long-running script that runs in the background. It isn't triggered manually each time — it's always on, watching for work to pick up and responding to state changes across my projects.</p>
+<p>My current setup is fairly simple. I write specs into Jira tickets or pull context together in Confluence pages. Claude Code picks those up as a starting point. The goal is that by the time I'm handing something off, the work is already decomposed enough that the agent isn't guessing at intent.</p>
+<p>The quality of input matters far more than I expected. A vague ticket produces vague code. A well-structured spec with clear acceptance criteria produces something reviewable on the first pass.</p>
+<p>Writing a good spec is also a forcing function. If I can't describe the work clearly enough for an agent to act on, I probably haven't thought it through clearly enough to build it myself either.</p>
+<h2>What's changed</h2>
+<p>Two things have shifted since I started taking this seriously.</p>
+<p>The first is focus. When smaller, mechanical tasks have a clear home, a defined input, a defined outcome, an agent to run them, they stop taking up mental space. I'm spending more time on architecture and less time holding implementation details I'd rather not be thinking about.</p>
+<p>The second is throughput on the boring parts. Not glamorous, but real. The SDLC has a long tail of tasks that are well-understood but time-consuming: boilerplate, tests, doc updates. These are good candidates for the loop. The human decision has already been made, execution is what remains.</p>
+<h2>Where it still breaks down</h2>
+<p>Review and QA is the current bottleneck. The loop produces code faster than I can meaningfully review it, which creates its own kind of pressure. Speed without oversight isn't actually a win.</p>
+<p>I've started giving the loop context about branches that are currently in review. It can scan open PRs, read the comments, and make a first pass at deciding which ones represent unresolved feedback that needs action versus ones that are already addressed or are just discussion. That triage is useful — it means I'm not manually combing through threads — but it still surfaces a list I have to work through. The loop can flag; the judgment call on what to actually do sits with me.</p>
+<p>The other rough edge is knowing what not to hand off. Some tasks look automatable on the surface but require judgment at each step, the kind of decision-making that's hard to encode in a spec. I'm still calibrating where that line is.</p>
+<h2>Keeping the human in the loop</h2>
+<p>Automation can create the illusion that the human is optional. It isn't.</p>
+<p>The loop works best when it's handling execution, not making decisions. But the line between the two isn't always obvious, and it's easy to drift into a pattern where the agent is being asked to decide things that should still sit with you.</p>
+<p>A few places where I've noticed this creep in: choosing between competing implementation approaches, deciding what's in scope for a ticket, and judging whether a failing test is a real problem or a test that needs updating. These all look like execution tasks on the surface. They're not. They're judgment calls, and if you're not careful, you end up with an agent making them silently.</p>
+<p>The corrective I've landed on is building the approval step directly into the ticket flow rather than managing an agent session in real time. When I assign work to an agent, the first thing it does is post a plan as a comment on the Jira ticket. I can review that plan on my own time, in the same place the spec lives. If something's off, I leave a comment and the agent produces a revised plan. If it looks right, I approve it and implementation starts.</p>
+<p>That loop — plan, review, revise or approve — keeps me in the decision path without requiring me to babysit a session. I'm not watching the agent work. I'm reviewing its intent before it acts, which is the right place to catch problems.</p>
+<p>Keeping a human in the loop isn't a constraint on the process. It's what makes the output trustworthy.</p>
+<h2>What to take from this</h2>
+<p>If you're building your own loop, a few things worth starting with:</p>
+<p>Invest in the spec, not the prompt. A well-written ticket with context, constraints, and a clear definition of done is more valuable than a clever one-liner. The agent will only be as good as the brief.</p>
+<p>Identify your handoff criteria. Before running anything through the loop, ask: is the decision already made, or is the agent being asked to make it? Execution is a good handoff. Decision-making usually isn't.</p>
+<p>Treat review as part of the loop, not outside it. Build in the time. An unreviewed PR is just deferred work.</p>
+<p>The loop isn't finished. It's a system under construction. But even in its current rough state, it's changed how I spend my day, and that's enough to keep iterating on it.</p>
+                </article>
+                                <nav class="post-nav" aria-label="post navigation">
+                                            <a class="post-nav__link post-nav__link--prev" href="/using-coding-agents-in-my-workflow-in-2025">
+                            <span class="post-nav__label">← older</span>
+                            <span class="post-nav__title">using coding agents in my workflow in 2025</span>
+                        </a>
+                                        <a class="post-nav__home" href="/">all posts</a>
+                                            <a class="post-nav__link post-nav__link--next" href="/will-ai-replace-software-engineers">
+                            <span class="post-nav__label">newer →</span>
+                            <span class="post-nav__title">will ai replace software engineers?</span>
+                        </a>
+                                    </nav>
+                                    </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p class="site-footer__prompt">jackmarchant@blog:~$ exit</p>
+                <nav class="site-footer__links" aria-label="external links">
+                    <a href="/rss.xml">rss</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://github.com/jackmarchant" target="_blank" rel="noopener noreferrer">github</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://x.com/jackmarchant10" target="_blank" rel="noopener noreferrer" aria-label="x profile">x</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://www.linkedin.com/in/jack-marchant" target="_blank" rel="noopener noreferrer">linkedin</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:jack@jackmarchant.com">email</a>
+                </nav>
+                <p class="site-footer__meta">© <span data-current-year>2026</span> jack marchant</p>
+            </div>
+        </footer>
+
+        <script src="/prism.e59d2e5e.js"></script>
+        <script src="/index.2b15b332.js"></script>
+
+                    <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+            </body>
+</html>

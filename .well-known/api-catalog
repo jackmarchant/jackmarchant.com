@@ -1,0 +1,25 @@
+{
+  "version": "1.0",
+  "resources": [
+    {
+      "href": "/",
+      "rel": "home",
+      "type": "text/html"
+    },
+    {
+      "href": "/",
+      "rel": "alternate",
+      "type": "text/markdown"
+    },
+    {
+      "href": "/sitemap.xml",
+      "rel": "sitemap",
+      "type": "application/xml"
+    },
+    {
+      "href": "/robots.txt",
+      "rel": "describedby",
+      "type": "text/plain"
+    }
+  ]
+}

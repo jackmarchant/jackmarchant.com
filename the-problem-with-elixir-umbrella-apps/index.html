@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>the problem with elixir umbrella apps | jack marchant</title>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="/prism.30affb74.css" rel="stylesheet" type="text/css" />
+        <link href="/style.63f6c93a.css" rel="stylesheet" type="text/css" />
+                <meta name="description" content="Umbrella apps are big projects that contain multiple mix projects. Using umbrella apps feels more like getting poked in the eye from an actual umbrella. " />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="The problem with Elixir Umbrella Apps" />
+        <meta property="og:description" content="Umbrella apps are big projects that contain multiple mix projects. Using umbrella apps feels more like getting poked in the eye from an actual umbrella. " />
+        <meta property="og:url" content="https://www.jackmarchant.com/the-problem-with-elixir-umbrella-apps" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="The problem with Elixir Umbrella Apps" />
+        <meta name="twitter:description" content="Umbrella apps are big projects that contain multiple mix projects. Using umbrella apps feels more like getting poked in the eye from an actual umbrella. " />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="alternate" type="application/rss+xml" title="jack marchant" href="/rss.xml" />
+        <script>(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}}());</script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header__row">
+                    <p class="site-prompt">jackmarchant@blog:~$</p>
+                    <div class="site-header__actions">
+                        <button class="theme-toggle" type="button" data-theme-toggle aria-label="switch to light mode">
+                            <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        </button>
+                        <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                    </div>
+                </div>
+                <h1 class="site-title"><a href="/">jack marchant</a></h1>
+                <p class="site-tagline">principal engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">deputy</a> · writing about software</p>
+            </div>
+        </header>
+
+        <div class="subscribe-modal" data-subscribe-modal aria-hidden="true">
+            <div class="subscribe-modal__backdrop" data-subscribe-backdrop></div>
+            <div class="subscribe-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+                <div class="subscribe-modal__header">
+                    <h2 class="subscribe-modal__title" id="subscribe-modal-title">subscribe</h2>
+                    <button class="subscribe-modal__close" type="button" data-subscribe-close aria-label="close">×</button>
+                </div>
+                <p class="subscribe-modal__desc">get new posts delivered to your inbox</p>
+                <form class="subscribe-form" action="https://jackmarchant.us14.list-manage.com/subscribe?u=5a51a355f4187fddb0d0f4816&amp;id=b5ae7106ea" method="POST" target="_blank" rel="noopener noreferrer" novalidate>
+                    <div style="position:absolute;left:-5000px;" aria-hidden="true">
+                        <input type="text" name="b_5a51a355f4187fddb0d0f4816_b5ae7106ea" tabindex="-1" value="" />
+                    </div>
+                    <input type="email" name="EMAIL" id="mce-EMAIL" class="subscribe-form__input" placeholder="your@email.com" required />
+                    <button type="submit" class="subscribe-form__submit">subscribe →</button>
+                </form>
+            </div>
+        </div>
+        <main class="container">
+            
+                            <div class="reading-progress" data-reading-progress aria-hidden="true">
+                    <div class="reading-progress__bar" data-reading-progress-bar></div>
+                </div>
+                <article class="post" data-post>
+                    <h2 class="post__title">the problem with elixir umbrella apps</h2>
+                    <p class="post__date">May 03, 2019</p>
+                                        <div class="post__tldr">
+                        <span class="post__tldr-label">tl;dr</span>
+                        <p class="post__tldr-text">Elixir umbrella apps add complexity without delivering true service isolation, and are better replaced by well-structured contexts within a single application in most real-world scenarios.</p>
+                    </div>
+                                        <p><a href="https://elixir-lang.org/getting-started/mix-otp/dependencies-and-umbrella-projects.html">Umbrella apps</a> are big projects that contain multiple mix projects. Using umbrella apps feels more like getting poked in the eye from an actual umbrella. </p>
+<p>There are a few misconceptions about umbrella apps surrounding their purpose, how to effectively manage a growing project and deploying the app somewhere in production. I’d like to present a case for not using an umbrella app, if you were considering doing so.</p>
+<h3>A typical umbrella app</h3>
+<p>Umbrella apps are meant to help developers split different concerns into different apps thinking that a parallel can be drawn to a Service Oriented Architecture (i.e micro-services). An umbrella app can be thought about in terms of a single application, and in most cases is deployed as such. </p>
+<p><strong>Let’s think through an example app:</strong>
+In an application that has a web component serving traffic, type and resolver definitions for a graphql API, data contexts for interacting with the database, we could potentially have three apps in our umbrella:</p>
+<ul>
+<li>web</li>
+<li>graphql</li>
+<li>data</li>
+</ul>
+<p>We can still deploy this as a single project given the wonders of an umbrella app, and get some minor conveniences with config and testing. When a request comes in, the web app handles it, calling a resolver function in the graphql app, which in turn retrieved some data from the data app. The dependencies are in a single order: web -&gt; graphql -&gt; data, so when you compile it starts with the inner most dependency and works it’s way back, as you’d expect - however if everything is deployed together you can still technically access modules that are technically circular dependencies, which kind of breaks the separation concept. </p>
+<h3>What’s the problem with this application?</h3>
+<p>The main issue with this architecture is that the apps aren’t really split for the right reason. In a growing (in terms of code added over time) application it will most likely slow you down the more code you add as the boundaries become more brittle and blurred.
+The reason for this effect is that umbrella child apps are intended to be created as a way to <strong>deploy</strong> each of them separately, hence the individual configuration and mix project. So unless you’re deploying the apps separately, there is no benefit from using an umbrella app.</p>
+<p>There may come a time when you need to, but I can guarantee moving into an umbrella app configuration, retrofitting on an existing app is the easier option than consolidating child apps.</p>
+<blockquote>
+<p>Umbrella child apps are intended to be created as a way to <strong>deploy</strong> each of them separately</p>
+</blockquote>
+<h3>A better alternative</h3>
+<p>I’m not advocating to never use umbrella apps, but I think in most cases it’s better not to use one until you have the requirement to deploy a child app separately. </p>
+<p>The alternative is to create a good old elixir application using ‘mix new’ and placing all of your apps into their own folders. You can still accomplish the same architecture without using an umbrella app and as a side bonus you’ll be able to quickly iterate and change your mind on decisions as you learn more about your business domain and perhaps elixir too!
+This is a much easier way to get started with Elixir, in fact <a href="https://hexdocs.pm/phoenix/contexts.html">Phoenix recommends to structure your apps in this way</a> through contexts.</p>
+<p>My experience with umbrella apps has mostly been one of trying to reduce its complexity and favour modules over apps.</p>
+<p>In fact, in <a href="https://elixir-lang.org/getting-started/mix-otp/dependencies-and-umbrella-projects.html#dont-drink-the-kool-aid">Elixir's official documentation</a> where it explains some of the benefits of using Umbrella apps, it does state a disclaimer:</p>
+<blockquote>
+<p>While it provides a degree of separation between applications, those applications are not fully decoupled, as they are assumed to share the same configuration and the same dependencies.</p>
+</blockquote>
+<p>Maybe your experience has been different? If anyone has found success with umbrella apps I’d love to discuss it! </p>
+                </article>
+                                <nav class="post-nav" aria-label="post navigation">
+                                            <a class="post-nav__link post-nav__link--prev" href="/broken-windows">
+                            <span class="post-nav__label">← older</span>
+                            <span class="post-nav__title">building software with broken windows</span>
+                        </a>
+                                        <a class="post-nav__home" href="/">all posts</a>
+                                            <a class="post-nav__link post-nav__link--next" href="/facade-pattern">
+                            <span class="post-nav__label">newer →</span>
+                            <span class="post-nav__title">the facade pattern</span>
+                        </a>
+                                    </nav>
+                                    </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p class="site-footer__prompt">jackmarchant@blog:~$ exit</p>
+                <nav class="site-footer__links" aria-label="external links">
+                    <a href="/rss.xml">rss</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://github.com/jackmarchant" target="_blank" rel="noopener noreferrer">github</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://x.com/jackmarchant10" target="_blank" rel="noopener noreferrer" aria-label="x profile">x</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://www.linkedin.com/in/jack-marchant" target="_blank" rel="noopener noreferrer">linkedin</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:jack@jackmarchant.com">email</a>
+                </nav>
+                <p class="site-footer__meta">© <span data-current-year>2026</span> jack marchant</p>
+            </div>
+        </footer>
+
+        <script src="/prism.e59d2e5e.js"></script>
+        <script src="/index.2b15b332.js"></script>
+
+                    <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+            </body>
+</html>

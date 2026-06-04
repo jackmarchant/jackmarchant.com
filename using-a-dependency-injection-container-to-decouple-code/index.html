@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>using a dependency injection (di) container to decouple your code | jack marchant</title>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="/prism.30affb74.css" rel="stylesheet" type="text/css" />
+        <link href="/style.63f6c93a.css" rel="stylesheet" type="text/css" />
+                <meta name="description" content="Dependency Injection is the method of passing objects to another (usually during instantiation) to invert the dependency created when you use an object. A Container is often used as a collection of the objects used in your system, to achieve separation between usage and instantiation." />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Using a Dependency Injection (DI) Container to decouple your code" />
+        <meta property="og:description" content="Dependency Injection is the method of passing objects to another (usually during instantiation) to invert the dependency created when you use an object. A Container is often used as a collection of the objects used in your system, to achieve separation between usage and instantiation." />
+        <meta property="og:url" content="https://www.jackmarchant.com/using-a-dependency-injection-container-to-decouple-code" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Using a Dependency Injection (DI) Container to decouple your code" />
+        <meta name="twitter:description" content="Dependency Injection is the method of passing objects to another (usually during instantiation) to invert the dependency created when you use an object. A Container is often used as a collection of the objects used in your system, to achieve separation between usage and instantiation." />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="alternate" type="application/rss+xml" title="jack marchant" href="/rss.xml" />
+        <script>(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}}());</script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header__row">
+                    <p class="site-prompt">jackmarchant@blog:~$</p>
+                    <div class="site-header__actions">
+                        <button class="theme-toggle" type="button" data-theme-toggle aria-label="switch to light mode">
+                            <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        </button>
+                        <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                    </div>
+                </div>
+                <h1 class="site-title"><a href="/">jack marchant</a></h1>
+                <p class="site-tagline">principal engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">deputy</a> · writing about software</p>
+            </div>
+        </header>
+
+        <div class="subscribe-modal" data-subscribe-modal aria-hidden="true">
+            <div class="subscribe-modal__backdrop" data-subscribe-backdrop></div>
+            <div class="subscribe-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+                <div class="subscribe-modal__header">
+                    <h2 class="subscribe-modal__title" id="subscribe-modal-title">subscribe</h2>
+                    <button class="subscribe-modal__close" type="button" data-subscribe-close aria-label="close">×</button>
+                </div>
+                <p class="subscribe-modal__desc">get new posts delivered to your inbox</p>
+                <form class="subscribe-form" action="https://jackmarchant.us14.list-manage.com/subscribe?u=5a51a355f4187fddb0d0f4816&amp;id=b5ae7106ea" method="POST" target="_blank" rel="noopener noreferrer" novalidate>
+                    <div style="position:absolute;left:-5000px;" aria-hidden="true">
+                        <input type="text" name="b_5a51a355f4187fddb0d0f4816_b5ae7106ea" tabindex="-1" value="" />
+                    </div>
+                    <input type="email" name="EMAIL" id="mce-EMAIL" class="subscribe-form__input" placeholder="your@email.com" required />
+                    <button type="submit" class="subscribe-form__submit">subscribe →</button>
+                </form>
+            </div>
+        </div>
+        <main class="container">
+            
+                            <div class="reading-progress" data-reading-progress aria-hidden="true">
+                    <div class="reading-progress__bar" data-reading-progress-bar></div>
+                </div>
+                <article class="post" data-post>
+                    <h2 class="post__title">using a dependency injection (di) container to decouple your code</h2>
+                    <p class="post__date">June 03, 2020</p>
+                                        <div class="post__tldr">
+                        <span class="post__tldr-label">tl;dr</span>
+                        <p class="post__tldr-text">Dependency Injection Containers separate object instantiation from usage by passing dependencies through constructors, producing loosely coupled, easily testable, and more flexible code.</p>
+                    </div>
+                                        <p>Dependency Injection is the method of passing objects to another (usually during instantiation) to invert the dependency created when you use an object. A Container is often used as a collection of the objects used in your system, to achieve separation between usage and instantiation.</p>
+<h2>What is Dependency Injection</h2>
+<p>Take for example, the repository pattern whereby you use a separate class to handle database access so that you can separate that functionality from your application's business logic. For example, you might instantiate a new Repository in a Service:</p>
+<pre><code class="language-php">class BookService
+{
+    public function getSomeBooks()
+    {
+        $repository = new BookRepository();
+        return $repository-&gt;getAll();
+    }
+}</code></pre>
+<p>It doesn't really matter at this point what the <code>getAll</code> function does in <code>BookRepository</code>, but the main point is that by instantiating dependencies in the same place as where they are used creates an implicit dependency on the <code>BookRepository</code> leading to tightly coupled and hard to change code. In the example above, we're no longer able to test it without having a database connected, nor can we switch it out at runtime or setup, meaning less overall flexibility.</p>
+<p>Instead, we could declare a private member variable on the <code>BookService</code> class, and assign it during instantiation of the <code>BookService</code> class itself, and ensure whatever is passed in, implements a specific interface, so that functions you call on the repository are guarunteed to have been implemented.</p>
+<pre><code class="language-php">class BookService
+{
+    private $repository;
+
+    public function __construct(RepositoryInterface $repository)
+    {
+        $this-&gt;repository = $repository;
+    }
+
+    public function getSomeBooks()
+    {
+        return $this-&gt;repository-&gt;getAll();
+    }
+}</code></pre>
+<p>Now, BookService has no idea what specific repository will be passed in, and it doesn't need to care because it knows it implements the <code>RepositoryInterface</code>. This is an example of <a href="https://en.wikipedia.org/wiki/Dependency_inversion_principle">Dependency Inversion Principle</a> and is critical to understanding why Dependency Injection (DI) in PHP (and most other languages) is an important concept and to understand why a DI container exists.</p>
+<h2>How a DI Container makes this a lot easier</h2>
+<p>We've seen how dependency injection can make testing easier, along with decoupling your code so that it can easily change over time, you might also consider what your codebase might look like if you had more complex objects than the <code>BookService</code> and you had to use it all over your codebase.
+Everywhere you need to get some books, you need to instantiate both the <code>BookService</code> and it's dependency <code>BookRepository</code>, so that it can be passed into the constructor.</p>
+<pre><code class="language-php">$bookRepository = new BookRepository();
+$bookService = new BookService($bookRepository);</code></pre>
+<p>This is a great first step forward, but there's more that can be done to control how a <code>BookService</code> is instantiated and with what repository, since now it can be switched out with relative ease.
+This is where a container comes in. If you've ever used <a href="http://www.slimframework.com/docs/v3/concepts/di.html">Slim Framework</a>, you might have noticed you can set up a DI container for your app.</p>
+<pre><code class="language-php">$container = new \Slim\Container;
+$app = new \Slim\App($container);
+
+// Add a service to Slim container:
+$container = $app-&gt;getContainer();
+$container['BookService'] = function ($container) {
+    $bookRepository = new BookRepository();
+    return new BookService($bookRepository);
+};</code></pre>
+<p>Wherever in your code you need a new <code>BookService</code>, you can simply use the container to build a new object for you with the repository.</p>
+<pre><code class="language-php">// Use your service
+$bookService = $container-&gt;get('BookService');
+$bookService-&gt;getSomeBooks();</code></pre>
+<p>This makes any code that uses the <code>BookService</code> independent of the service as well, so by using the container, we're inverting the dependency on the <code>BookService</code>.</p>
+<p>As you might have realised, the function we defined as the value for the <code>BookService</code> key in the container, will be passed the container as an argument, meaning you can pull off any other dependencies that exist in the container already, such as the repository itself:</p>
+<pre><code class="language-php">$container['BookService'] = function ($container) {
+    return new BookService($container-&gt;get('BookRepository'));
+};</code></pre>
+<p>There are endless possibilities for how you can use a Dependency Injection (DI) Container to your advantage, to decouple related objects and remove implicit dependencies so that your software can grow over time with boundaries in place. </p>
+                </article>
+                                <nav class="post-nav" aria-label="post navigation">
+                                            <a class="post-nav__link post-nav__link--prev" href="/3-tips-to-help-with-working-from-home">
+                            <span class="post-nav__label">← older</span>
+                            <span class="post-nav__title">3 simple tips to get better at working from home</span>
+                        </a>
+                                        <a class="post-nav__home" href="/">all posts</a>
+                                            <a class="post-nav__link post-nav__link--next" href="/technical-interviewing">
+                            <span class="post-nav__label">newer →</span>
+                            <span class="post-nav__title">what i&#039;ve learned doing technical interviews</span>
+                        </a>
+                                    </nav>
+                                    </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p class="site-footer__prompt">jackmarchant@blog:~$ exit</p>
+                <nav class="site-footer__links" aria-label="external links">
+                    <a href="/rss.xml">rss</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://github.com/jackmarchant" target="_blank" rel="noopener noreferrer">github</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://x.com/jackmarchant10" target="_blank" rel="noopener noreferrer" aria-label="x profile">x</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://www.linkedin.com/in/jack-marchant" target="_blank" rel="noopener noreferrer">linkedin</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:jack@jackmarchant.com">email</a>
+                </nav>
+                <p class="site-footer__meta">© <span data-current-year>2026</span> jack marchant</p>
+            </div>
+        </footer>
+
+        <script src="/prism.e59d2e5e.js"></script>
+        <script src="/index.2b15b332.js"></script>
+
+                    <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+            </body>
+</html>

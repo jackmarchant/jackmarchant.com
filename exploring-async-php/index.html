@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>exploring async php | jack marchant</title>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="/prism.30affb74.css" rel="stylesheet" type="text/css" />
+        <link href="/style.63f6c93a.css" rel="stylesheet" type="text/css" />
+                <meta name="description" content="Asynchronous programming is a foundational building block for scaling web applications due to the increasing need to do more in each web request. A typical example of this is sending an email as part of a request. " />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Exploring Async PHP" />
+        <meta property="og:description" content="Asynchronous programming is a foundational building block for scaling web applications due to the increasing need to do more in each web request. A typical example of this is sending an email as part of a request. " />
+        <meta property="og:url" content="https://www.jackmarchant.com/exploring-async-php" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Exploring Async PHP" />
+        <meta name="twitter:description" content="Asynchronous programming is a foundational building block for scaling web applications due to the increasing need to do more in each web request. A typical example of this is sending an email as part of a request. " />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="alternate" type="application/rss+xml" title="jack marchant" href="/rss.xml" />
+        <script>(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}}());</script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header__row">
+                    <p class="site-prompt">jackmarchant@blog:~$</p>
+                    <div class="site-header__actions">
+                        <button class="theme-toggle" type="button" data-theme-toggle aria-label="switch to light mode">
+                            <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        </button>
+                        <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                    </div>
+                </div>
+                <h1 class="site-title"><a href="/">jack marchant</a></h1>
+                <p class="site-tagline">principal engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">deputy</a> · writing about software</p>
+            </div>
+        </header>
+
+        <div class="subscribe-modal" data-subscribe-modal aria-hidden="true">
+            <div class="subscribe-modal__backdrop" data-subscribe-backdrop></div>
+            <div class="subscribe-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+                <div class="subscribe-modal__header">
+                    <h2 class="subscribe-modal__title" id="subscribe-modal-title">subscribe</h2>
+                    <button class="subscribe-modal__close" type="button" data-subscribe-close aria-label="close">×</button>
+                </div>
+                <p class="subscribe-modal__desc">get new posts delivered to your inbox</p>
+                <form class="subscribe-form" action="https://jackmarchant.us14.list-manage.com/subscribe?u=5a51a355f4187fddb0d0f4816&amp;id=b5ae7106ea" method="POST" target="_blank" rel="noopener noreferrer" novalidate>
+                    <div style="position:absolute;left:-5000px;" aria-hidden="true">
+                        <input type="text" name="b_5a51a355f4187fddb0d0f4816_b5ae7106ea" tabindex="-1" value="" />
+                    </div>
+                    <input type="email" name="EMAIL" id="mce-EMAIL" class="subscribe-form__input" placeholder="your@email.com" required />
+                    <button type="submit" class="subscribe-form__submit">subscribe →</button>
+                </form>
+            </div>
+        </div>
+        <main class="container">
+            
+                            <div class="reading-progress" data-reading-progress aria-hidden="true">
+                    <div class="reading-progress__bar" data-reading-progress-bar></div>
+                </div>
+                <article class="post" data-post>
+                    <h2 class="post__title">exploring async php</h2>
+                    <p class="post__date">May 31, 2023</p>
+                                        <div class="post__tldr">
+                        <span class="post__tldr-label">tl;dr</span>
+                        <p class="post__tldr-text">PHP offers several approaches to asynchronous processing - from promise-based libraries to child processes and job queues - to offload blocking work like bulk email sending away from the main web request.</p>
+                    </div>
+                                        <p>Asynchronous programming is a foundational building block for scaling web applications due to the increasing need to do more in each web request. A typical example of this is sending an email as part of a request. </p>
+<p>In many web applications, when something is processed on the server we want to notify people via email and it's common for this to be a separate HTTP request to a third-party service such as SendGrid, Mailchimp etc.</p>
+<p>This becomes a more than trivial example when you need to send a lot of emails at once. In PHP, if you want to send an email and the HTTP process takes 100ms to complete, you'd quickly increase the total time for the request by sending tens or hundreds of emails. </p>
+<p>Of course, any good third-party email service would provide a bulk endpoint to negate this, but for the sake of the example - let's say you want to send 100 emails and each has to be processed individually.</p>
+<p>So, we need to make a decision: <strong>how can we move the processing of the emails into a separate process so that it doesn't block the original web request?</strong>
+That is what we'll explore in this post, particularly all the different ways this can be solved in PHP with or without new infrastructure.</p>
+<h2>Using exec()</h2>
+<p><a href="https://www.php.net/manual/en/function.exec.php">exec()</a> is a native function in PHP that can be used to execute an external program and returns the result. In our case, it could be a script that sends emails. This function uses the operating system to spawn a completely new (blank, nothing copied or shared) process and you can pass any state you need to it.</p>
+<p>Let's take a look at an example.</p>
+<pre><code class="language-php">&lt;?php
+// handle a web request
+
+// record the start time of the web request
+$start = microtime(true);
+$path = __DIR__ . '/send_email.php';
+
+// output to /dev/null &amp; so we don't block to wait for the result
+$command = 'php ' . $path . ' --email=%s &gt; /dev/null &amp;';
+$emails = ['joe@blogs.com', 'jack@test.com'];
+
+// for each of the emails, call exec to start a new script
+foreach ($emails as $email) {
+    // Execute the command
+    exec(sprintf($command, $email));
+}
+
+// record the finish time of the web request
+$finish = microtime(true);
+$duration = round($finish - $start, 4);
+
+// output duration of web request
+echo "finished web request in $duration\n";</code></pre>
+<p><strong>send_email.php</strong></p>
+<pre><code class="language-php">&lt;?php
+
+$email = explode('--email=', $argv[1])[1];
+// this blocking sleep won't affect the web request duration
+// (illustrative purposes only)
+sleep(5);
+
+// here we can send the email
+echo "sending email to $email\n";</code></pre>
+<p><strong>Output</strong></p>
+<p><code>$ php src/exec.php</code></p>
+<pre><code class="language-bash">finished web request in 0.0184</code></pre>
+<p>The above scripts show the web request still finishes in milliseconds, even though there is a blocking <code>sleep</code> function call in the send_email.php script.</p>
+<p>The reason it doesn't block is because we've told <code>exec</code> with the inclusion of <code>&gt; /dev/null &amp;</code> in the command that we don't want to wait for <code>exec</code> command to finish so we can get the result, meaning it can happen in the background and the web request can continue.</p>
+<p>In this way, the web request script is simply responsible for running the script, not for monitoring its execution and/or failure. </p>
+<p>This is an inherent downside of this solution, as the monitoring of the process falls to the process itself and it cannot be restarted. However, this is an easy way to get asynchronous behaviour into a PHP application without much effort.</p>
+<p><code>exec</code> runs a command on a server so you have to be careful about how the script is executed, particularly if it involves user input. It can be hard to manage using <code>exec</code> particularly as you manage scaling the application, as the script is likely running on the exact same box that is processing external web requests, so you could end up exhausing CPU and memory if many hundreds or thousands of new processes are spawned via <code>exec</code>.</p>
+<h3>pcntl_fork</h3>
+<p><a href="https://www.php.net/manual/en/function.pcntl-fork.php">pcntl_fork</a> is a low-level function which requires PCNTL extension to be enabled and is a powerful, yet potentially error prone method for writing asynchronous code in PHP.</p>
+<p><code>pcntl_fork</code> will fork or clone the current process and split it into a parent and a number of child processes (depending on how many times it is called). By detecting the Process ID or PID we can run different code when in the context of a parent process or a child process.</p>
+<p>The parent process will be responsibile for spawning child processes and waiting until the spawned processes have completed before it can complete.</p>
+<p>In this case, we can have more control over how the processes exit and can easily write some logic to handle retries in case of failure in the child process.</p>
+<p>Now, on to the example code for our use case to send emails in a non-blocking way.</p>
+<pre><code class="language-php">&lt;?php
+
+function sendEmail($to, $subject, $message)
+{
+    // Code to send email (replace with your email sending logic)
+    // This is just a mock implementation for demonstration purposes
+    sleep(3); // Simulating sending email by sleeping for 3 seconds
+    echo "Email sent to: $to\n";
+}
+
+$emails = [
+    [
+        'to' =&gt; 'john@example.com',
+        'subject' =&gt; 'Hello John',
+        'message' =&gt; 'This is a test email for John.',
+    ],
+    [
+        'to' =&gt; 'jane@example.com',
+        'subject' =&gt; 'Hello Jane',
+        'message' =&gt; 'This is a test email for Jane.',
+    ],
+    // Add more email entries as needed
+];
+
+$children = [];
+
+foreach ($emails as $email) {
+    $pid = pcntl_fork();
+
+    if ($pid == -1) {
+        // Fork failed
+        die('Error: Unable to fork process.');
+    } elseif ($pid == 0) {
+        // Child process
+        sendEmail($email['to'], $email['subject'], $email['message']);
+        exit(); // Exit the child process
+    } else {
+        // Parent process
+        $children[] = $pid;
+    }
+}
+
+echo "running some other things in parent process\n";
+sleep(3);
+
+// Parent process waits for each child process to finish
+foreach ($children as $pid) {
+    pcntl_waitpid($pid, $status);
+    $status = pcntl_wexitstatus($status);
+    echo "Child process $pid exited with status: $status\n";
+}
+
+echo 'All emails sent.';</code></pre>
+<p>In the above example using <code>pcntl_fork</code> we can fork the current process, which copies the parent process into new child processes and wait for the execution to complete. Additionally, after forking the child processses to send emails, the parent process can continue doing other things, before ultimately ensuring the child processes have finished.</p>
+<p>This is a step above using <code>exec</code> where we were pretty limited in what is possible because the scripts are completely separate contexts so monitoring is not possible from an overall perspective.</p>
+<p>We also gain process isolation as each child process runs in a separate memory space and does not affect other processes.
+By tracking the process IDs we can effectively monitor and manage execution flow.</p>
+<p>A downside in forking requests in this way, directly from the web request (parent process) is that by waiting for the child processes to finish, there's no benefit to the response time of the original request in doing it this way.</p>
+<p>Fortunately, there is a solution to this and it's to combine both <code>exec</code> and <code>pcntl_fork</code> to get the best of both worlds, which looks like this:</p>
+<ol>
+<li>Web request uses exec() to spawn a new PHP process</li>
+<li>The spawned process is passed a list of emails as a batch</li>
+<li>The spawned process becomes the parent as it forks to send each email individually</li>
+</ol>
+<p>This can all happen in the background, rather than blocking the original request.</p>
+<p>Let's take a look at making this work:</p>
+<pre><code class="language-php">&lt;?php
+
+$start = microtime(true);
+$path = __DIR__ . '/pcntl_fork_send_email.php';
+$emails = implode(',', ['joe@blogs.com', 'jack@test.com']);
+$command = 'php ' . $path . ' --emails=%s &gt; /dev/null &amp;';
+
+// Execute the command
+echo "running exec\n";
+exec(sprintf($command, $emails));
+$finish = microtime(true);
+
+$duration = round($finish - $start, 4);
+echo "finished web request in $duration\n";</code></pre>
+<p><strong>pctnl_fork_send_email.php</strong></p>
+<pre><code class="language-php">&lt;?php
+
+$param = explode('--emails=', $argv[1])[1];
+$emails = explode(',', $param);
+
+function sendEmail($to)
+{
+    sleep(3); // Simulating sending email by sleeping for 3 seconds
+    echo "Email sent to: $to\n";
+}
+
+$children = [];
+
+foreach ($emails as $email) {
+    $pid = pcntl_fork();
+
+    if ($pid == -1) {
+        // Fork failed
+        die('Error: Unable to fork process.');
+    } elseif ($pid == 0) {
+        // Child process
+        sendEmail($email);
+        exit(); // Exit the child process
+    } else {
+        // Parent process
+        $children[] = $pid;
+    }
+}
+
+echo "running some other things in parent process\n";
+sleep(3);
+
+// Parent process waits for each child process to finish
+foreach ($children as $pid) {
+    pcntl_waitpid($pid, $status);
+    $status = pcntl_wexitstatus($status);
+    echo "Child process $pid exited with status: $status\n";
+}
+
+echo "All emails sent.\n";</code></pre>
+<p>The beauty of this solution, albeit more complicated, is that you can set up a separate process all together whose responsibility it is to run and monitor forked processes for the purpose of doing work asynchronously.</p>
+<h2>AMPHP</h2>
+<p><a href="https://amphp.org/">amphp</a> (Asynchronous Multi-tasking PHP) is a collection of libraries that allow you to build fast, concurrent applications with PHP.</p>
+<p>The release of PHP 8.1 in November 2021 shipped support for <a href="https://www.php.net/releases/8.1/en.php#fibers">Fibers</a> which implement a lightweight cooperative concurrency model. </p>
+<p>Now we know a little bit about how <code>amphp</code> works and why it's exciting for the future of PHP programs, let's take look at an example:</p>
+<pre><code class="language-php">&lt;?php
+
+require __DIR__ . '/../vendor/autoload.php'; // Include the autoload file for the amphp/amp library
+
+use function Amp\delay;
+use function Amp\async;
+
+function sendEmail($to, $subject, $message)
+{
+    delay(3000)-&gt;onResolve(function () use ($to) {
+        echo "Email sent to: $to\n";
+    });
+}
+
+$emails = [
+    [
+        'to' =&gt; 'john@example.com',
+        'subject' =&gt; 'Hello John',
+        'message' =&gt; 'This is a test email for John.',
+    ],
+    [
+        'to' =&gt; 'jane@example.com',
+        'subject' =&gt; 'Hello Jane',
+        'message' =&gt; 'This is a test email for Jane.',
+    ],
+    // Add more email entries as needed
+];
+
+foreach ($emails as $email) {
+    $future = async(static function () use ($email) {
+        $to = $email['to'];
+        $subject = $email['subject'];
+        $message = $email['message'];
+        sendEmail($to, $subject, $message);
+    });
+
+    // block current process by running $future-&gt;await();
+}
+
+echo "All emails sent.\n";</code></pre>
+<p>The above script is a very simple version of running things asynchronously. It will create a new fiber asynchronously using the given closure, returning a Future (object).</p>
+<p>This is a much simpler version than rolling your own and does the heavy lifting for you, which is key for building an application as you don't need to worry about how the work is queued internally - you just know it happens asynchronously.</p>
+<h2>Queues and Workers</h2>
+<p>A solution to this problem also exists outside of PHP and prior to PHP 8.1 it could be considered the gold standard because it's language independent and highly scalable.</p>
+<p>The use of queues such as <a href="https://aws.amazon.com/sqs/">Amazon SQS</a>, <a href="https://www.rabbitmq.com/">RabbitMQ</a> or <a href="https://kafka.apache.org/">Apache Kafka</a> has been a widely accepted solution for some time.</p>
+<p>Queues are pieces of infrastructure to run workers indepdenent to your application for the processing of any work asynchronously. This is not without risk or downside either, but tried and tested over time.</p>
+<p>Let's get into an example:</p>
+<p>Sender, in this example, is typically your existsing web application.</p>
+<p><strong>sender.php</strong></p>
+<pre><code class="language-php">&lt;?php
+
+require 'vendor/autoload.php';
+
+use Aws\Sqs\SqsClient;
+
+// Initialize the SQS client
+$client = new SqsClient([
+    'region' =&gt; 'us-east-1',
+    'version' =&gt; 'latest',
+    'credentials' =&gt; [
+        'key' =&gt; 'YOUR_AWS_ACCESS_KEY',
+        'secret' =&gt; 'YOUR_AWS_SECRET_ACCESS_KEY',
+    ],
+]);
+
+// Define the message details
+$message = [
+    'to' =&gt; 'john@example.com',
+    'subject' =&gt; 'Hello John',
+    'message' =&gt; 'This is a test email for John.',
+];
+
+// Send the message to SQS
+$result = $client-&gt;sendMessage([
+    'QueueUrl' =&gt; 'YOUR_SQS_QUEUE_URL',
+    'MessageBody' =&gt; json_encode($message),
+]);
+
+echo "Message sent to SQS with MessageId: " . $result['MessageId'] . "\n";</code></pre>
+<p>Workers are an additional deployment of running code to process jobs.</p>
+<p><strong>worker.php</strong></p>
+<pre><code class="language-php">&lt;?php
+
+require 'vendor/autoload.php';
+
+use Aws\Sqs\SqsClient;
+
+// Initialize the SQS client
+$client = new SqsClient([
+    'region' =&gt; 'us-east-1',
+    'version' =&gt; 'latest',
+    'credentials' =&gt; [
+        'key' =&gt; 'YOUR_AWS_ACCESS_KEY',
+        'secret' =&gt; 'YOUR_AWS_SECRET_ACCESS_KEY',
+    ],
+]);
+
+// Receive and process messages from SQS
+while (true) {
+    $result = $client-&gt;receiveMessage([
+        'QueueUrl' =&gt; 'YOUR_SQS_QUEUE_URL',
+        'MaxNumberOfMessages' =&gt; 1,
+        'WaitTimeSeconds' =&gt; 20,
+    ]);
+
+    if (!empty($result['Messages'])) {
+        foreach ($result['Messages'] as $message) {
+            $body = json_decode($message['Body'], true);
+
+            // Process the message (send email in this case)
+            sendEmail($body['to'], $body['subject'], $body['message']);
+
+            // Delete the message from SQS
+            $client-&gt;deleteMessage([
+                'QueueUrl' =&gt; 'YOUR_SQS_QUEUE_URL',
+                'ReceiptHandle' =&gt; $message['ReceiptHandle'],
+            ]);
+        }
+    }
+}
+
+function sendEmail($to, $subject, $message)
+{
+    sleep(3); // Simulating sending email by sleeping for 3 seconds
+    echo "Email sent to: $to\n";
+}</code></pre>
+<p>This solution is comprised of two parts:</p>
+<ul>
+<li>Sender (pushes a message to an SQS queue)</li>
+<li>Worker (receives a message from a queue and sends an email)</li>
+</ul>
+<p>It can be scaled through increasing the number of workers relative to the number of messages that get sent by any number of senders.</p>
+<p>By using a queue, the worker is completely independent from the sender and can be written in any language as the communication between sender and worker is through JSON messages.</p>
+<h2>Which solution is best?</h2>
+<p>It's almost impossible to say out of all of the solutions we've explored above, which would be the best for your application because although they all aim at solving the problem of running asynchronous code with PHP the implementations are quite different and have different benefits and drawbacks.</p>
+<p>To summarise each option in a few points:</p>
+<h4>exec()</h4>
+<ul>
+<li>Perhaps the simplest and most effective way to run PHP scripts async</li>
+<li>Fraught with potential security implications particularly around user input</li>
+<li>Nothing is shared can be both a blessing and a curse</li>
+<li>May cause increase in existing server resources (CPU/Memory)</li>
+</ul>
+<h4>pcntl_fork()</h4>
+<ul>
+<li>Allows management of parent/child processes to customise behaviour</li>
+<li>Can be abstracted away in a simpler API for your application</li>
+<li>Cloning the current process may cause other downstream issues</li>
+</ul>
+<h4>AMPHP</h4>
+<ul>
+<li>Requires PHP 8.1 for the user of Fibers</li>
+<li>Library has abstracted away the &quot;hard parts&quot; of running async code</li>
+<li>Steep learning curve over other more traditional methods (understanding event loop and multi-tasking in PHP)</li>
+</ul>
+<h4>Queues and Workers</h4>
+<ul>
+<li>Language independent, flexible for any use case</li>
+<li>Introduces a distributed system (can be a good or bad thing in the long run)</li>
+<li>Many solutions around and different queue providers to make it easy</li>
+</ul>
+<h2>Conclusion</h2>
+<p>The main reason I wanted to dive a bit deeper into all the different possibilities of async code in PHP is to understand how (if at all) the introduction of Fibers in PHP 8.1 changes how we can write async programs in the future.</p>
+<p>There are many solutions available without requiring PHP 8.1 that have been battle tested, but it's interesting to see the direction the PHP language is going in to compete with the likes of <a href="https://go.dev/">Golang</a> and <a href="https://elixir-lang.org/">Elixir</a>, both of which support async programming and have done for years.</p>
+<p>Ultimately, I would probably still reach for a Queue/Worker approach given the scalability and cross-platform/cross-language support - however I think over time we might see libraries such as <code>AMPHP</code> become more feature rich and make this problem easier to solve without introducing new infrastructure.</p>
+<p>To see the code samples used in this blog post, you can find them on <a href="https://github.com/jackmarchant/async-php/tree/main/src">GitHub</a>.</p>
+                </article>
+                                <nav class="post-nav" aria-label="post navigation">
+                                            <a class="post-nav__link post-nav__link--prev" href="/maintaining-feature-flags-in-a-product-engineering-team">
+                            <span class="post-nav__label">← older</span>
+                            <span class="post-nav__title">maintaining feature flags in a product engineering team</span>
+                        </a>
+                                        <a class="post-nav__home" href="/">all posts</a>
+                                            <a class="post-nav__link post-nav__link--next" href="/refactoring-for-performance">
+                            <span class="post-nav__label">newer →</span>
+                            <span class="post-nav__title">refactoring for performance</span>
+                        </a>
+                                    </nav>
+                                    </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p class="site-footer__prompt">jackmarchant@blog:~$ exit</p>
+                <nav class="site-footer__links" aria-label="external links">
+                    <a href="/rss.xml">rss</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://github.com/jackmarchant" target="_blank" rel="noopener noreferrer">github</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://x.com/jackmarchant10" target="_blank" rel="noopener noreferrer" aria-label="x profile">x</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://www.linkedin.com/in/jack-marchant" target="_blank" rel="noopener noreferrer">linkedin</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:jack@jackmarchant.com">email</a>
+                </nav>
+                <p class="site-footer__meta">© <span data-current-year>2026</span> jack marchant</p>
+            </div>
+        </footer>
+
+        <script src="/prism.e59d2e5e.js"></script>
+        <script src="/index.2b15b332.js"></script>
+
+                    <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+            </body>
+</html>

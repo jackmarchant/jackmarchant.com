@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>maintaining feature flags in a product engineering team | jack marchant</title>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="/prism.30affb74.css" rel="stylesheet" type="text/css" />
+        <link href="/style.63f6c93a.css" rel="stylesheet" type="text/css" />
+                <meta name="description" content="I have mixed feelings about feature flags. They are part of the product development workflow and you would be hard pressed to find a product engineering team that doesn’t use them. Gone are the days of either shipping and hoping the code will work first time or testing the life out of a feature so much that it delays the project." />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Maintaining feature flags in a product engineering team" />
+        <meta property="og:description" content="I have mixed feelings about feature flags. They are part of the product development workflow and you would be hard pressed to find a product engineering team that doesn’t use them. Gone are the days of either shipping and hoping the code will work first time or testing the life out of a feature so much that it delays the project." />
+        <meta property="og:url" content="https://www.jackmarchant.com/maintaining-feature-flags-in-a-product-engineering-team" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Maintaining feature flags in a product engineering team" />
+        <meta name="twitter:description" content="I have mixed feelings about feature flags. They are part of the product development workflow and you would be hard pressed to find a product engineering team that doesn’t use them. Gone are the days of either shipping and hoping the code will work first time or testing the life out of a feature so much that it delays the project." />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="alternate" type="application/rss+xml" title="jack marchant" href="/rss.xml" />
+        <script>(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}}());</script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header__row">
+                    <p class="site-prompt">jackmarchant@blog:~$</p>
+                    <div class="site-header__actions">
+                        <button class="theme-toggle" type="button" data-theme-toggle aria-label="switch to light mode">
+                            <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        </button>
+                        <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                    </div>
+                </div>
+                <h1 class="site-title"><a href="/">jack marchant</a></h1>
+                <p class="site-tagline">principal engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">deputy</a> · writing about software</p>
+            </div>
+        </header>
+
+        <div class="subscribe-modal" data-subscribe-modal aria-hidden="true">
+            <div class="subscribe-modal__backdrop" data-subscribe-backdrop></div>
+            <div class="subscribe-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+                <div class="subscribe-modal__header">
+                    <h2 class="subscribe-modal__title" id="subscribe-modal-title">subscribe</h2>
+                    <button class="subscribe-modal__close" type="button" data-subscribe-close aria-label="close">×</button>
+                </div>
+                <p class="subscribe-modal__desc">get new posts delivered to your inbox</p>
+                <form class="subscribe-form" action="https://jackmarchant.us14.list-manage.com/subscribe?u=5a51a355f4187fddb0d0f4816&amp;id=b5ae7106ea" method="POST" target="_blank" rel="noopener noreferrer" novalidate>
+                    <div style="position:absolute;left:-5000px;" aria-hidden="true">
+                        <input type="text" name="b_5a51a355f4187fddb0d0f4816_b5ae7106ea" tabindex="-1" value="" />
+                    </div>
+                    <input type="email" name="EMAIL" id="mce-EMAIL" class="subscribe-form__input" placeholder="your@email.com" required />
+                    <button type="submit" class="subscribe-form__submit">subscribe →</button>
+                </form>
+            </div>
+        </div>
+        <main class="container">
+            
+                            <div class="reading-progress" data-reading-progress aria-hidden="true">
+                    <div class="reading-progress__bar" data-reading-progress-bar></div>
+                </div>
+                <article class="post" data-post>
+                    <h2 class="post__title">maintaining feature flags in a product engineering team</h2>
+                    <p class="post__date">April 01, 2022</p>
+                                        <div class="post__tldr">
+                        <span class="post__tldr-label">tl;dr</span>
+                        <p class="post__tldr-text">Feature flags enable safe, incremental rollouts but require disciplined lifecycle management to prevent stale flags from accumulating as technical debt and causing production incidents.</p>
+                    </div>
+                                        <p>I have mixed feelings about feature flags. They are part of the product development workflow and you would be hard pressed to find a product engineering team that doesn’t use them. Gone are the days of either shipping and hoping the code will work first time or testing the life out of a feature so much that it delays the project.</p>
+<p>The benefits of using feature flags certainly outweigh the bad, but it doesn’t stop teams from cursing them every time a major bug is reported or an incident occurs as a result of enabled (or disabled) feature flags.</p>
+<p>In this post I will discuss the benefits and some drawbacks of using feature flags, to help you learn from some of the lessons I’ve personally learned, in the hopes that you can avoid the mistakes.</p>
+<p>First, let’s understand what a feature flag does, and why it’s there:</p>
+<p>A feature flag is (at its simplest - there are more advanced controls you can use) an on/off switch to release some new functionality to your product through the code base. </p>
+<p>Teams can safely ship code knowing the feature can be enabled for small groups of users at a time, and released to more customers as confidence in a feature or behaviour grows. </p>
+<p>Before feature flags, you only had one shot to ship code to production and make sure it works, which meant a longer build up to releasing code for the first time, or complicated infrastructure to support canary releases. </p>
+<p>The main problem with feature flags is what happens when you have too many and they start conflicting with each other or you have so many different flows to test that the team spends much longer on a feature than they should. </p>
+<p>This leads me to the first lesson:</p>
+<h2>Lesson #1</h2>
+<h3>The number of feature flags you maintain will spiral out of control</h3>
+<p>Every time you create a feature flag, you’re introducing a different behaviour for your code that may only be initially released to parts of your user base, meaning you now support two different behaviours (feature flag on and feature flag off). </p>
+<p>This is empowering for a growing product and engineering team. As the number of feature flags in use in production grows, so too does the frustration of testing all of those different cases and receiving bug reports where your first instinct is to check which feature flags are enabled or disabled. </p>
+<p>Keeping track of feature flags means making them attributed to your team so there’s ownership of the feature flags and tracking the rollout status, including ensuring rollout continues to happen, or the flag is retired. </p>
+<p>When feature flags have already spiralled and are out of control, the best thing to do is pause development of new features and clean up any flags that are rolled out or no longer required. </p>
+<p>Getting feature flags back under control should be a priority, given the impact on development and testing time for related features. </p>
+<p>This is a hard lesson to learn because there’s only one way out. Clean up the flags!</p>
+<h2>Lesson #2</h2>
+<h3>Clean up feature flags regularly, make it part of the development cycle</h3>
+<p>After some time in production, feature flags can become stale and turn into technical debt, which must be paid back at some point, or risk cumulating over time and being at the point of no return. In some ways you will always have to live with feature flags, and they become part of the work you do. </p>
+<p>The difference between a feature flag that is new and part of the feature actively being worked on, versus a flag that has lost purpose is enormous. </p>
+<p>To avoid this dysfunctional reality, we must clean up feature flags after the feature has been rolled out or no longer needed. Sometimes this will be a minor piece of work that involves only one person making the code change and testing it and other times it can require re-testing an entire feature. </p>
+<p>In my experience, how well you have built up your automated testing around the feature will impact whether it’s a minor change or a major one. </p>
+<p>Recently in my team, we had built up a lot of feature flags for a variety of reasons, whether it was changing teams, forgotten features or slow rollouts and so we had to take a week or two to clean up around 10-12 feature flags in a short period of time. </p>
+<p>We ended up doing the work for these in a short time frame, then merging and releasing the changes incrementally and over a longer period just in case anything went wrong. </p>
+<p>This proved to be successful in the end and the team swarmed on the work to get it done. </p>
+<p>We’re working on keeping track of feature flags more closely now to make it part of our development cycle to clean up feature flags rather than waiting for the eventual build up. </p>
+<p>When we release a new feature, with a corresponding flag, we document it and ensure it keeps rolling out and create a ticket for the future to clean it up.</p>
+<p>Progressing with the rollout usually means opening up the feature to more customers and this brings me to the final lesson.</p>
+<h2>Lesson #3</h2>
+<h4>Always be rolling out</h4>
+<p>Feature flags should be temporary and are meant to increase the velocity of your team by allowing you to ship quickly and get real feedback from smaller groups of users in a safe way. </p>
+<p>Flags, therefore, should be intended to be rolled out completely to your whole user base at some point. It’s normal to start with a small group and then build up incrementally to larger groups, but this should always be on a timeline. </p>
+<p>Once you forget about it or move on to the next thing and leave the flag there, it will become stale and your team falls into the trap of having to maintain it and test both states of the flag should a change to that area of the code base be required. </p>
+<p>There’s no one right time frame for a feature flag to exist, it will always depend on the feature and the group of customers using it to give you feedback directly or indirectly, through usage. </p>
+<p>That’s why keeping track of the current state of feature flags in your control is important including managing the continual rollout to more users. </p>
+<p>As you find bugs you can pause the rollout until the bugs are fixed, but if you haven’t hit any road blocks it’s critical to keep forging ahead so removing the feature flag becomes possible once it has been made available for all of your users. </p>
+<p>Feature flags are both a blessing and a curse, it’s probably no secret to most engineering teams. What’s missing in my opinion is a framework to manage feature flags over time and throughout engineering organisations. </p>
+<p>They help keep the product working and make it easy to rollback changes without code deployment, and give on-call engineers peace of mind when they can safely turn off a flag that has caused an incident. </p>
+<p>If left unchecked, feature flags can slow engineering teams down to a crawl so create each feature flag with caution and a plan for its eventual removal. </p>
+<p>Feature flags have given product teams the confidence to move fast, with a plan to rollback at the click of a button, but with great power and flexibility, comes a cost which should not be underestimated.</p>
+                </article>
+                                <nav class="post-nav" aria-label="post navigation">
+                                            <a class="post-nav__link post-nav__link--prev" href="/technical-interviewing">
+                            <span class="post-nav__label">← older</span>
+                            <span class="post-nav__title">what i&#039;ve learned doing technical interviews</span>
+                        </a>
+                                        <a class="post-nav__home" href="/">all posts</a>
+                                            <a class="post-nav__link post-nav__link--next" href="/exploring-async-php">
+                            <span class="post-nav__label">newer →</span>
+                            <span class="post-nav__title">exploring async php</span>
+                        </a>
+                                    </nav>
+                                    </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p class="site-footer__prompt">jackmarchant@blog:~$ exit</p>
+                <nav class="site-footer__links" aria-label="external links">
+                    <a href="/rss.xml">rss</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://github.com/jackmarchant" target="_blank" rel="noopener noreferrer">github</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://x.com/jackmarchant10" target="_blank" rel="noopener noreferrer" aria-label="x profile">x</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://www.linkedin.com/in/jack-marchant" target="_blank" rel="noopener noreferrer">linkedin</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:jack@jackmarchant.com">email</a>
+                </nav>
+                <p class="site-footer__meta">© <span data-current-year>2026</span> jack marchant</p>
+            </div>
+        </footer>
+
+        <script src="/prism.e59d2e5e.js"></script>
+        <script src="/index.2b15b332.js"></script>
+
+                    <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+            </body>
+</html>

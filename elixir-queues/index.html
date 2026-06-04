@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>a queue is just a q with 4 silent letters | jack marchant</title>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="/prism.30affb74.css" rel="stylesheet" type="text/css" />
+        <link href="/style.63f6c93a.css" rel="stylesheet" type="text/css" />
+                <meta name="description" content="A Queue is a collection data structure, which uses the FIFO (First In, First Out) method. This means that when you add items to a queue, often called enqueuing, the item takes its place at the end of the queue. When you dequeue an item, we remove the item from the front of the queue. " />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="A Queue is just a Q with 4 silent letters" />
+        <meta property="og:description" content="A Queue is a collection data structure, which uses the FIFO (First In, First Out) method. This means that when you add items to a queue, often called enqueuing, the item takes its place at the end of the queue. When you dequeue an item, we remove the item from the front of the queue. " />
+        <meta property="og:url" content="https://www.jackmarchant.com/elixir-queues" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="A Queue is just a Q with 4 silent letters" />
+        <meta name="twitter:description" content="A Queue is a collection data structure, which uses the FIFO (First In, First Out) method. This means that when you add items to a queue, often called enqueuing, the item takes its place at the end of the queue. When you dequeue an item, we remove the item from the front of the queue. " />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="alternate" type="application/rss+xml" title="jack marchant" href="/rss.xml" />
+        <script>(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}}());</script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header__row">
+                    <p class="site-prompt">jackmarchant@blog:~$</p>
+                    <div class="site-header__actions">
+                        <button class="theme-toggle" type="button" data-theme-toggle aria-label="switch to light mode">
+                            <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        </button>
+                        <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                    </div>
+                </div>
+                <h1 class="site-title"><a href="/">jack marchant</a></h1>
+                <p class="site-tagline">principal engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">deputy</a> · writing about software</p>
+            </div>
+        </header>
+
+        <div class="subscribe-modal" data-subscribe-modal aria-hidden="true">
+            <div class="subscribe-modal__backdrop" data-subscribe-backdrop></div>
+            <div class="subscribe-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+                <div class="subscribe-modal__header">
+                    <h2 class="subscribe-modal__title" id="subscribe-modal-title">subscribe</h2>
+                    <button class="subscribe-modal__close" type="button" data-subscribe-close aria-label="close">×</button>
+                </div>
+                <p class="subscribe-modal__desc">get new posts delivered to your inbox</p>
+                <form class="subscribe-form" action="https://jackmarchant.us14.list-manage.com/subscribe?u=5a51a355f4187fddb0d0f4816&amp;id=b5ae7106ea" method="POST" target="_blank" rel="noopener noreferrer" novalidate>
+                    <div style="position:absolute;left:-5000px;" aria-hidden="true">
+                        <input type="text" name="b_5a51a355f4187fddb0d0f4816_b5ae7106ea" tabindex="-1" value="" />
+                    </div>
+                    <input type="email" name="EMAIL" id="mce-EMAIL" class="subscribe-form__input" placeholder="your@email.com" required />
+                    <button type="submit" class="subscribe-form__submit">subscribe →</button>
+                </form>
+            </div>
+        </div>
+        <main class="container">
+            
+                            <div class="reading-progress" data-reading-progress aria-hidden="true">
+                    <div class="reading-progress__bar" data-reading-progress-bar></div>
+                </div>
+                <article class="post" data-post>
+                    <h2 class="post__title">a queue is just a q with 4 silent letters</h2>
+                    <p class="post__date">June 06, 2018</p>
+                                        <div class="post__tldr">
+                        <span class="post__tldr-label">tl;dr</span>
+                        <p class="post__tldr-text">Implementing a FIFO queue in Elixir using singly-linked lists requires enqueue, dequeue, peek, and count operations, and leverages the prepend-then-reverse pattern for efficient list access.</p>
+                    </div>
+                                        <p>A Queue is a collection data structure, which uses the FIFO (First In, First Out) method. This means that when you add items to a queue, often called enqueuing, the item takes its place at the end of the queue. When you dequeue an item, we remove the item from the front of the queue. </p>
+<p>Both of these methods will change the length of the queue. A peek method can be implemented to look at what the first item is in the queue, without removing the item, leaving the queue unchanged.</p>
+<p>Queues are often implemented with list data structures, such as a Linked List. In Elixir, lists are singly-linked lists under the hood. We’re able to access the head and tail of a list, which refer to the first item in the list and the rest of the list, respectively.</p>
+<pre><code class="language-elixir">[head | tail] = [1, 2, 3]
+&gt; head
+1
+&gt; tail
+[2, 3]</code></pre>
+<p>If you think about implementing a queue in Elixir, we would need to implement the following methods:</p>
+<ul>
+<li>Enqueue</li>
+<li>Dequeue</li>
+<li>Peek</li>
+<li>Count</li>
+</ul>
+<p>Let’s look at each of these individually.</p>
+<h2>Enqueue</h2>
+<p>When adding an item to a list in Elixir, it’s common to prepend to the list, then reverse it when accessing it to preserve order. As lists are singly-linked in Elixir, it is much faster to add to the front of the list, rather than adding to the end and having to re-create all of the links in the list.</p>
+<p>For this reason, you could implement an enqueue function in this way:</p>
+<pre><code class="language-elixir">@spec enqueue(list(), any()) :: list()
+def enqueue(queue, item) do
+  [item | queue]
+end</code></pre>
+<h2>Dequeue</h2>
+<p>Now that we have items in a list, we need a way to remove one when we call dequeue. I started having a look at how Elixir deletes items from a list and found <a href="https://github.com/elixir-lang/elixir/blob/v1.6.5/lib/elixir/lib/list.ex#L123">List.delete/2</a> — we can see a few function heads there, but here are the two lines you need to appreciate:</p>
+<pre><code class="language-elixir">def delete([item | list], item), do: list  
+def delete([other | list], item), do: [other | delete(list, item)]</code></pre>
+<p>The first argument is the list, and the second argument is the item to be removed. Elixir binds the second argument name as the same value as the head of the list, and if this function is called, it returns the tail (thus removing the item from the list). Otherwise, if the two item variables are not a match, the head is prepended and <code>delete/2</code> is recursively called on the tail.</p>
+<p>That might be a bit to take in, but I recommend trying it out in an interactive Elixir shell <code>iex</code>.</p>
+<p>Although we don't need <code>List.delete/2</code> in this case, we can implement a dequeue function like so:</p>
+<pre><code class="language-elixir">@spec dequeue(list()) :: {any(), list()}
+def dequeue([]), do: nil
+def dequeue(queue) when length(queue) &lt;= 2 do
+ [item | tail] = Enum.reverse(queue)
+ {item, tail}
+end
+def dequeue(queue) do 
+ {Enum.at(queue, -1), Enum.drop(queue, -1)}
+end</code></pre>
+<p>We return a tuple in this function, because we want to know both the item that was dequeued, and the remaining items in the queue (so we can enqueue more items later). It’s worth noting as well that this is not the most efficient solution, as it is using an <code>O(n)</code> algorithm because the <code>Enum</code> methods we’re using are always going to enumerate of the list to get the last item.</p>
+<h2>Peek</h2>
+<p>A peek function is simply a utility to allow looking at the front of the queue, without changing the queue itself. Although, you might want to add some extra function heads to cater for empty lists.</p>
+<pre><code class="language-elixir">@spec peek(list()) :: any() | nil
+def peek([]), do: nil
+def peek(queue) do
+  [h | _ ] = queue
+  h
+end</code></pre>
+<h2>Count</h2>
+<p>Similarly, count is the number of items still in the queue, and can be implemented as such:</p>
+<pre><code class="language-elixir">@spec count(list()) :: integer()
+def count([]), do: 0
+def count(queue), do: length(queue)</code></pre>
+<p>These functions are all fine in theory, but when we start to think about implementing a queue in Elixir, we can’t wrap this up in a class that knows about it’s own state. Instead, we could implement these functions as part of a GenServer, which will hold it’s own state and can be updated over time.</p>
+<h2>Priority Queue</h2>
+<p>When simple FIFO doesn’t cut it and you need to be able to process items in a queue before others we can implement a Priority Queue. This means that when an item is enqueued, it doesn’t necessarily go to the back of the queue (or front of the list in Elixir), each new item needs to be compared with other items until we find a suitable place for it based on its priority.</p>
+<p>Priority could mean integer values, for example the number 10 would have a higher priority than 5, because it is the higher value. Imagine the following queue:</p>
+<p><code>head -&gt; 7 - 3 - 1 &lt;- tail</code></p>
+<p>If we base priority on the higher integer values, and we add 10 to this queue, we would expect it to take priority over all other values because it is highest. So we’re left with the following queue:</p>
+<p><code>head -&gt; 10 - 7 - 3 - 1 &lt;- tail</code></p>
+<p>If the priority of the new item was not higher than any of the existing items, it would simply be added to the end of the queue.</p>
+<p>Queue’s have a variety of real-world applications, such as scheduling asynchronous work or handling large amounts of requests. High priority requests can be processed first, and lower priority processed later.</p>
+<p>I decided to implement a simple <a href="https://hex.pm/packages/pex_queue">Queue library</a> using a <code>GenServer</code>, and optional priority, you can take a look at the <a href="https://hex.pm/packages/pex_queue">documentation</a> or go straight to <a href="https://github.com/jackmarchant/pex_queue/blob/master/lib/pexqueue.ex">the code</a></p>
+                </article>
+                                <nav class="post-nav" aria-label="post navigation">
+                                            <a class="post-nav__link post-nav__link--prev" href="/composing-plugs">
+                            <span class="post-nav__label">← older</span>
+                            <span class="post-nav__title">composing elixir plugs in a phoenix application</span>
+                        </a>
+                                        <a class="post-nav__home" href="/">all posts</a>
+                                            <a class="post-nav__link post-nav__link--next" href="/streaming-datasets">
+                            <span class="post-nav__label">newer →</span>
+                            <span class="post-nav__title">streaming large datasets in elixir</span>
+                        </a>
+                                    </nav>
+                                    </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p class="site-footer__prompt">jackmarchant@blog:~$ exit</p>
+                <nav class="site-footer__links" aria-label="external links">
+                    <a href="/rss.xml">rss</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://github.com/jackmarchant" target="_blank" rel="noopener noreferrer">github</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://x.com/jackmarchant10" target="_blank" rel="noopener noreferrer" aria-label="x profile">x</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://www.linkedin.com/in/jack-marchant" target="_blank" rel="noopener noreferrer">linkedin</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:jack@jackmarchant.com">email</a>
+                </nav>
+                <p class="site-footer__meta">© <span data-current-year>2026</span> jack marchant</p>
+            </div>
+        </footer>
+
+        <script src="/prism.e59d2e5e.js"></script>
+        <script src="/index.2b15b332.js"></script>
+
+                    <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+            </body>
+</html>

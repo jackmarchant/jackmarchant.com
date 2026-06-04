@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>composing elixir plugs in a phoenix application | jack marchant</title>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="/prism.30affb74.css" rel="stylesheet" type="text/css" />
+        <link href="/style.63f6c93a.css" rel="stylesheet" type="text/css" />
+                <meta name="description" content="Elixir is a functional language, so it’s no surprise that one of the main building blocks of the request-response cycle is the humble Plug. A Plug will take connection struct (see Plug.Conn) and return a new struct of the same type. It is this concept that allows you to join multiple plugs together, each with their own transformation on a Conn struct." />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Composing Elixir Plugs in a Phoenix application" />
+        <meta property="og:description" content="Elixir is a functional language, so it’s no surprise that one of the main building blocks of the request-response cycle is the humble Plug. A Plug will take connection struct (see Plug.Conn) and return a new struct of the same type. It is this concept that allows you to join multiple plugs together, each with their own transformation on a Conn struct." />
+        <meta property="og:url" content="https://www.jackmarchant.com/composing-plugs" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Composing Elixir Plugs in a Phoenix application" />
+        <meta name="twitter:description" content="Elixir is a functional language, so it’s no surprise that one of the main building blocks of the request-response cycle is the humble Plug. A Plug will take connection struct (see Plug.Conn) and return a new struct of the same type. It is this concept that allows you to join multiple plugs together, each with their own transformation on a Conn struct." />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="alternate" type="application/rss+xml" title="jack marchant" href="/rss.xml" />
+        <script>(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}}());</script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header__row">
+                    <p class="site-prompt">jackmarchant@blog:~$</p>
+                    <div class="site-header__actions">
+                        <button class="theme-toggle" type="button" data-theme-toggle aria-label="switch to light mode">
+                            <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        </button>
+                        <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                    </div>
+                </div>
+                <h1 class="site-title"><a href="/">jack marchant</a></h1>
+                <p class="site-tagline">principal engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">deputy</a> · writing about software</p>
+            </div>
+        </header>
+
+        <div class="subscribe-modal" data-subscribe-modal aria-hidden="true">
+            <div class="subscribe-modal__backdrop" data-subscribe-backdrop></div>
+            <div class="subscribe-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+                <div class="subscribe-modal__header">
+                    <h2 class="subscribe-modal__title" id="subscribe-modal-title">subscribe</h2>
+                    <button class="subscribe-modal__close" type="button" data-subscribe-close aria-label="close">×</button>
+                </div>
+                <p class="subscribe-modal__desc">get new posts delivered to your inbox</p>
+                <form class="subscribe-form" action="https://jackmarchant.us14.list-manage.com/subscribe?u=5a51a355f4187fddb0d0f4816&amp;id=b5ae7106ea" method="POST" target="_blank" rel="noopener noreferrer" novalidate>
+                    <div style="position:absolute;left:-5000px;" aria-hidden="true">
+                        <input type="text" name="b_5a51a355f4187fddb0d0f4816_b5ae7106ea" tabindex="-1" value="" />
+                    </div>
+                    <input type="email" name="EMAIL" id="mce-EMAIL" class="subscribe-form__input" placeholder="your@email.com" required />
+                    <button type="submit" class="subscribe-form__submit">subscribe →</button>
+                </form>
+            </div>
+        </div>
+        <main class="container">
+            
+                            <div class="reading-progress" data-reading-progress aria-hidden="true">
+                    <div class="reading-progress__bar" data-reading-progress-bar></div>
+                </div>
+                <article class="post" data-post>
+                    <h2 class="post__title">composing elixir plugs in a phoenix application</h2>
+                    <p class="post__date">March 23, 2018</p>
+                                        <div class="post__tldr">
+                        <span class="post__tldr-label">tl;dr</span>
+                        <p class="post__tldr-text">Elixir Plugs are simple function or module transformations on a Conn struct that can be chained together in a pipeline, making web request handling modular and easy to reason about.</p>
+                    </div>
+                                        <p>Elixir is a functional language, so it’s no surprise that one of the main building blocks of the request-response cycle is the humble Plug. A Plug will take connection struct (see <a href="https://hexdocs.pm/plug/Plug.Conn.html">Plug.Conn</a>) and return a new struct of the same type. It is this concept that allows you to join multiple plugs together, each with their own transformation on a Conn struct.
+A plug can be either a function or a module that implements the Plug behaviour.</p>
+<h2>What is a Plug?</h2>
+<p>Before we get to know Plug, add it as a dependency to your project’s mix.exs file: <code>{:plug, "~&gt; 1.5"}</code> and run <code>mix deps.get</code> to install it.
+A Plug has the following structure:</p>
+<pre><code class="language-elixir">defmodule MyApp.Plug.AuthenticateUserSession do
+  import Plug.Conn
+
+  def init(options), do: options
+
+  def call(conn, _opts) do
+    put_session(conn, :user, %{name: "Jack"})
+  end
+end</code></pre>
+<p>In this example, we’re adding a :user map to the current session data. The two main functions are <code>init/1</code> and <code>call/2</code> both of which are part of the Plug behaviour, defined in <code>plug.ex</code>.
+<code>init/1</code> is used to initialise the plug with options that can be used in the <code>call/2</code> function. <code>call/2</code> is the meat of the plug, where you take a <code>%Plug.Conn{}</code> struct and return a new one.</p>
+<h2>How to use a Plug</h2>
+<p>You can use a Plug in a your application’s router. It might look something like this:</p>
+<pre><code class="language-elixir">defmodule MyApp.Router do
+  use Plug.Router
+
+  alias MyApp.Plug.AuthenticateUserSession
+
+  plug AuthenticateUserSession
+
+  get("/", do: send_resp(conn, 200, "Welcome\n"))
+end</code></pre>
+<p>Now, when you visit <code>/</code> in your application, it will run <code>AuthenticateUserSession.call/2</code> and as we defined earlier, it will add a user map into the session data.</p>
+<h2>How to combine multiple Plugs</h2>
+<p>When building an application, you might need to do more than just adding a user to a session. Rather than extending upon the AuthenticateUserSession plug, you can create a new plug that will do the specific job you need it to. This allows us to compose plugs that are discrete and makes sure we’re following the <a href="https://en.wikipedia.org/wiki/Single_responsibility_principle">Single Responsibility Principle</a>.</p>
+<p>With Elixir plugs, we can combine multiple plugs in a <code>:pipeline</code> that can group functionality together.</p>
+<pre><code class="language-elixir">defmodule MyApp.Router do
+  use WebRoot.Web, :router
+  pipeline :auth do
+    plug AuthenticateUserSession
+    plug AuthoriseUserSession
+  end
+  scope "/", do
+    pipe_through :app
+    get "/page", MyApp.PageController, :index
+  end
+end</code></pre>
+<p>Order is important when using a pipeline, as plugs will be called in the order that they are defined. Now, in MyApp when <code>/page</code> is requested, <code>AuthenticateUserSession.call/2</code> will be called, which can either return a <code>%Plug.Conn{}</code> and let the request continue to the next plug, or it can halt the request and return a different response. When the former happens, the <code>AuthoriseUserSession.call/2</code> function will run. Finally, if this plug returns successfully, <code>MyApp.PageController</code> will be called and the user can receive a response.</p>
+<p>The Plug concept has many applications beyond just the request-reponse cycle. It stands as a metaphor to explain how Elixir applications can be built up with many parts, all performing their job and handing off to the next module.
+You can read more about plugs on the <a href="https://hexdocs.pm/plug">docs of the Plug package</a>.</p>
+                </article>
+                                <nav class="post-nav" aria-label="post navigation">
+                                            <a class="post-nav__link post-nav__link--prev" href="/elixir-supervision-trees">
+                            <span class="post-nav__label">← older</span>
+                            <span class="post-nav__title">a comparison of elixir supervision trees and react component trees</span>
+                        </a>
+                                        <a class="post-nav__home" href="/">all posts</a>
+                                            <a class="post-nav__link post-nav__link--next" href="/elixir-queues">
+                            <span class="post-nav__label">newer →</span>
+                            <span class="post-nav__title">a queue is just a q with 4 silent letters</span>
+                        </a>
+                                    </nav>
+                                    </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p class="site-footer__prompt">jackmarchant@blog:~$ exit</p>
+                <nav class="site-footer__links" aria-label="external links">
+                    <a href="/rss.xml">rss</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://github.com/jackmarchant" target="_blank" rel="noopener noreferrer">github</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://x.com/jackmarchant10" target="_blank" rel="noopener noreferrer" aria-label="x profile">x</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://www.linkedin.com/in/jack-marchant" target="_blank" rel="noopener noreferrer">linkedin</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:jack@jackmarchant.com">email</a>
+                </nav>
+                <p class="site-footer__meta">© <span data-current-year>2026</span> jack marchant</p>
+            </div>
+        </footer>
+
+        <script src="/prism.e59d2e5e.js"></script>
+        <script src="/index.2b15b332.js"></script>
+
+                    <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+            </body>
+</html>

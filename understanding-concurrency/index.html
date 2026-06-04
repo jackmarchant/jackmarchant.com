@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>understanding concurrency in elixir | jack marchant</title>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="/prism.30affb74.css" rel="stylesheet" type="text/css" />
+        <link href="/style.63f6c93a.css" rel="stylesheet" type="text/css" />
+                <meta name="description" content="Concurrency in Elixir is a big selling point for the language, but what does it really mean for the code that we write in Elixir? It all comes down to Processes. Thanks to the Erlang Virtual Machine, upon which Elixir is built, we can create process threads that aren&#039;t actual processes on your machine, but in the Erlang VM. This means that in an Elixir application we can create thousands of Erlang processes without the application skipping a beat." />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Understanding concurrency in Elixir" />
+        <meta property="og:description" content="Concurrency in Elixir is a big selling point for the language, but what does it really mean for the code that we write in Elixir? It all comes down to Processes. Thanks to the Erlang Virtual Machine, upon which Elixir is built, we can create process threads that aren&#039;t actual processes on your machine, but in the Erlang VM. This means that in an Elixir application we can create thousands of Erlang processes without the application skipping a beat." />
+        <meta property="og:url" content="https://www.jackmarchant.com/understanding-concurrency" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Understanding concurrency in Elixir" />
+        <meta name="twitter:description" content="Concurrency in Elixir is a big selling point for the language, but what does it really mean for the code that we write in Elixir? It all comes down to Processes. Thanks to the Erlang Virtual Machine, upon which Elixir is built, we can create process threads that aren&#039;t actual processes on your machine, but in the Erlang VM. This means that in an Elixir application we can create thousands of Erlang processes without the application skipping a beat." />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="alternate" type="application/rss+xml" title="jack marchant" href="/rss.xml" />
+        <script>(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}}());</script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header__row">
+                    <p class="site-prompt">jackmarchant@blog:~$</p>
+                    <div class="site-header__actions">
+                        <button class="theme-toggle" type="button" data-theme-toggle aria-label="switch to light mode">
+                            <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        </button>
+                        <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                    </div>
+                </div>
+                <h1 class="site-title"><a href="/">jack marchant</a></h1>
+                <p class="site-tagline">principal engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">deputy</a> · writing about software</p>
+            </div>
+        </header>
+
+        <div class="subscribe-modal" data-subscribe-modal aria-hidden="true">
+            <div class="subscribe-modal__backdrop" data-subscribe-backdrop></div>
+            <div class="subscribe-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+                <div class="subscribe-modal__header">
+                    <h2 class="subscribe-modal__title" id="subscribe-modal-title">subscribe</h2>
+                    <button class="subscribe-modal__close" type="button" data-subscribe-close aria-label="close">×</button>
+                </div>
+                <p class="subscribe-modal__desc">get new posts delivered to your inbox</p>
+                <form class="subscribe-form" action="https://jackmarchant.us14.list-manage.com/subscribe?u=5a51a355f4187fddb0d0f4816&amp;id=b5ae7106ea" method="POST" target="_blank" rel="noopener noreferrer" novalidate>
+                    <div style="position:absolute;left:-5000px;" aria-hidden="true">
+                        <input type="text" name="b_5a51a355f4187fddb0d0f4816_b5ae7106ea" tabindex="-1" value="" />
+                    </div>
+                    <input type="email" name="EMAIL" id="mce-EMAIL" class="subscribe-form__input" placeholder="your@email.com" required />
+                    <button type="submit" class="subscribe-form__submit">subscribe →</button>
+                </form>
+            </div>
+        </div>
+        <main class="container">
+            
+                            <div class="reading-progress" data-reading-progress aria-hidden="true">
+                    <div class="reading-progress__bar" data-reading-progress-bar></div>
+                </div>
+                <article class="post" data-post>
+                    <h2 class="post__title">understanding concurrency in elixir</h2>
+                    <p class="post__date">July 14, 2018</p>
+                                        <div class="post__tldr">
+                        <span class="post__tldr-label">tl;dr</span>
+                        <p class="post__tldr-text">Elixir leverages the Erlang VM to spawn thousands of lightweight processes concurrently, isolating failures and preventing a single bug from blocking or crashing the entire application.</p>
+                    </div>
+                                        <p>Concurrency in Elixir is a big selling point for the language, but what does it really mean for the code that we write in Elixir? It all comes down to <a href="https://hexdocs.pm/elixir/Process.html">Processes</a>. Thanks to the Erlang Virtual Machine, upon which Elixir is built, we can create process threads that aren't actual processes on your machine, but in the Erlang VM. This means that in an Elixir application we can create thousands of Erlang processes without the application skipping a beat.</p>
+<p>One function that enables Elixir developers to create processes is <code>spawn/1</code>. <a href="https://hexdocs.pm/elixir/Kernel.html#spawn/1">Spawn</a> takes a single argument, which can either be an anonymous or named function and will create an isolated context inside a new process for the function to be run. Typically, when we invoke a function it is run in the main process thread with all of the rest of your code. There are two things to be aware of when doing this:</p>
+<ol>
+<li>When running application code within a single (main) process, if your code fails due to a bug or otherwise, it will stop the rest of the application from responding, and will be in a crashed state.</li>
+<li>The process thread which is currently running your code, will be blocked until the execution of the function completes. This means that it's blocking other code from running, and is synchronous.</li>
+</ol>
+<p>Let's break down each of these points to understand their meaning.</p>
+<h2>Let it crash</h2>
+<p>In Elixir, a common turn of phrase is to &quot;let it crash&quot; - it being the current process - and if you're just coming to Elixir from another language, as most people are, it can be confusing to understand exactly what this means. When we follow the &quot;Let it crash&quot; principle, <code>it</code> should always be a separate process so that other parts of the application are unaffected. When we use the <a href="http://phoenixframework.org">Phoenix Framework</a>, each HTTP request is handled in a separate process, created for a single purpose. If your application needed to serve thousands of requests simultaneously, then Phoenix (and by extension <a href="https://github.com/ninenines/cowboy">Cowboy</a> - an Erlang-based HTTP server) would create thousands of requests, each in complete isolation.
+Doing this means you can crash the current process, i.e. a single HTTP request and it would not affect the rest of the application. </p>
+<p>Similarly, if we have an application that is not in a web context, we can create a <a href="https://elixir-lang.org/getting-started/mix-otp/supervisor-and-application.html">supervision tree</a> to handle any failures. The added benefit of using a supervision tree is that you can also determine a strategy for restarting any child processes based on the purpose of said processes. Structuring an application in this way, means that you can isolate failures, which is the purpose of letting things crash - because if they're not affecting the main process thread, then it can be handled appropriately.</p>
+<h2>Asynchronous Elixir</h2>
+<p>To demonstrate asynchronous elixir, it's important to understand what typically happens with your code when it is executed synchronously. Think about enumerating over a list:</p>
+<pre><code class="language-elixir">Enum.each(1..10, fn n -&gt; IO.puts n end)</code></pre>
+<p>When this code runs, the process in which it is running is blocked until it is finished enumerating over the list. You can see this more clearly by changing the range <code>1..10</code> to <code>1..10_000_000</code> and running it inside an <code>iex</code> shell. You'll notice that you can't do anything else in that process until it's done enumerating. This is code executing synchronously.</p>
+<p>Asynchronous code can be particularly useful if you have large amounts of work that can be done concurrently. To do this in Elixir we can use the <code>spawn/1</code> function to create a new process in which to do the work. When application code executes inside of a process, it can run without blocking any code in other processes.
+Similar to the previous example, we can enumerate over a list but this time we'll execute the output asynchronously:</p>
+<pre><code class="language-elixir">Enum.map(1..10, fn number -&gt; 
+  spawn(fn -&gt; 
+    IO.puts number
+  end)
+end)</code></pre>
+<p>You'll notice when you run this code the numbers aren't output in order like they were in the synchronous example. This is because each process is started and executes in an independent order to any others. </p>
+<p>This is great when all of your code works perfectly, but in the real world, you will have to expect there to be some failures, so to replicate this real-world scenario, we can raise an exception to illustrate something not executing correctly.</p>
+<pre><code class="language-elixir">Enum.each(1..10, fn number -&gt;
+  spawn(fn -&gt;
+    if rem(number, 2) == 0 do
+      raise "the roof with number #{number}"
+    else
+      IO.puts(number)
+    end
+  end)
+end)</code></pre>
+<p>When this code runs it will raise an exception for all of the even numbers within the <code>1..10</code> range. We can see however, for all the odd numbers, the code executes correctly and outputs the number. In a larger context this would mean that failures are not affecting the main process where the application is running, and that any failures within any child processes are also not stopping anything in the main process, so any other code can continue to execute.</p>
+<p>In a real world application, you might want to handle any cases where a process does crash, and thankfully there are a few constructs built in to Elixir that abstract away some of the necessary code to send and receive messages that you would need to handle success and failures in processes with <code>spawn/1</code>. One such construct is the <a href="https://hexdocs.pm/elixir/Task.html">Task</a> module, which is perfect for once-off asynchronous tasks, as we were doing earlier. In particular, the <code>async/1</code> and <code>await/2</code> link the calling process with the new one created in <code>Task.async/1</code>.
+There are many other possibilities using Tasks, and I think they're great for getting started working with processes in Elixir.</p>
+                </article>
+                                <nav class="post-nav" aria-label="post navigation">
+                                            <a class="post-nav__link post-nav__link--prev" href="/composing-ecto-queries">
+                            <span class="post-nav__label">← older</span>
+                            <span class="post-nav__title">composing ecto queries</span>
+                        </a>
+                                        <a class="post-nav__home" href="/">all posts</a>
+                                            <a class="post-nav__link post-nav__link--next" href="/working-with-tasks">
+                            <span class="post-nav__label">newer →</span>
+                            <span class="post-nav__title">working with tasks</span>
+                        </a>
+                                    </nav>
+                                    </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p class="site-footer__prompt">jackmarchant@blog:~$ exit</p>
+                <nav class="site-footer__links" aria-label="external links">
+                    <a href="/rss.xml">rss</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://github.com/jackmarchant" target="_blank" rel="noopener noreferrer">github</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://x.com/jackmarchant10" target="_blank" rel="noopener noreferrer" aria-label="x profile">x</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://www.linkedin.com/in/jack-marchant" target="_blank" rel="noopener noreferrer">linkedin</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:jack@jackmarchant.com">email</a>
+                </nav>
+                <p class="site-footer__meta">© <span data-current-year>2026</span> jack marchant</p>
+            </div>
+        </footer>
+
+        <script src="/prism.e59d2e5e.js"></script>
+        <script src="/index.2b15b332.js"></script>
+
+                    <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+            </body>
+</html>

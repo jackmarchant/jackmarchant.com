@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>building software with broken windows | jack marchant</title>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="/prism.30affb74.css" rel="stylesheet" type="text/css" />
+        <link href="/style.63f6c93a.css" rel="stylesheet" type="text/css" />
+                <meta name="description" content="Ever get the feeling that adding this &amp;quot;one little hack&amp;quot;, a couple of lines of code, won&#039;t have much of an impact on the rest of the codebase? You think nothing of it and add it, convincing your team members it was the correct decision to get this new feature over the line. In theory, and generally speaking, I would kind of agree with doing it, but every hack is different so it&#039;s hard to paint them all with the same brush. If you&#039;ve been doing software development for long enough you can see this kind of code coming from a mile away. It&#039;s the kind of code that can haunt your dreams if you&#039;re not careful." />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Building Software with Broken Windows" />
+        <meta property="og:description" content="Ever get the feeling that adding this &amp;quot;one little hack&amp;quot;, a couple of lines of code, won&#039;t have much of an impact on the rest of the codebase? You think nothing of it and add it, convincing your team members it was the correct decision to get this new feature over the line. In theory, and generally speaking, I would kind of agree with doing it, but every hack is different so it&#039;s hard to paint them all with the same brush. If you&#039;ve been doing software development for long enough you can see this kind of code coming from a mile away. It&#039;s the kind of code that can haunt your dreams if you&#039;re not careful." />
+        <meta property="og:url" content="https://www.jackmarchant.com/broken-windows" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Building Software with Broken Windows" />
+        <meta name="twitter:description" content="Ever get the feeling that adding this &amp;quot;one little hack&amp;quot;, a couple of lines of code, won&#039;t have much of an impact on the rest of the codebase? You think nothing of it and add it, convincing your team members it was the correct decision to get this new feature over the line. In theory, and generally speaking, I would kind of agree with doing it, but every hack is different so it&#039;s hard to paint them all with the same brush. If you&#039;ve been doing software development for long enough you can see this kind of code coming from a mile away. It&#039;s the kind of code that can haunt your dreams if you&#039;re not careful." />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="alternate" type="application/rss+xml" title="jack marchant" href="/rss.xml" />
+        <script>(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}}());</script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header__row">
+                    <p class="site-prompt">jackmarchant@blog:~$</p>
+                    <div class="site-header__actions">
+                        <button class="theme-toggle" type="button" data-theme-toggle aria-label="switch to light mode">
+                            <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        </button>
+                        <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                    </div>
+                </div>
+                <h1 class="site-title"><a href="/">jack marchant</a></h1>
+                <p class="site-tagline">principal engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">deputy</a> · writing about software</p>
+            </div>
+        </header>
+
+        <div class="subscribe-modal" data-subscribe-modal aria-hidden="true">
+            <div class="subscribe-modal__backdrop" data-subscribe-backdrop></div>
+            <div class="subscribe-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+                <div class="subscribe-modal__header">
+                    <h2 class="subscribe-modal__title" id="subscribe-modal-title">subscribe</h2>
+                    <button class="subscribe-modal__close" type="button" data-subscribe-close aria-label="close">×</button>
+                </div>
+                <p class="subscribe-modal__desc">get new posts delivered to your inbox</p>
+                <form class="subscribe-form" action="https://jackmarchant.us14.list-manage.com/subscribe?u=5a51a355f4187fddb0d0f4816&amp;id=b5ae7106ea" method="POST" target="_blank" rel="noopener noreferrer" novalidate>
+                    <div style="position:absolute;left:-5000px;" aria-hidden="true">
+                        <input type="text" name="b_5a51a355f4187fddb0d0f4816_b5ae7106ea" tabindex="-1" value="" />
+                    </div>
+                    <input type="email" name="EMAIL" id="mce-EMAIL" class="subscribe-form__input" placeholder="your@email.com" required />
+                    <button type="submit" class="subscribe-form__submit">subscribe →</button>
+                </form>
+            </div>
+        </div>
+        <main class="container">
+            
+                            <div class="reading-progress" data-reading-progress aria-hidden="true">
+                    <div class="reading-progress__bar" data-reading-progress-bar></div>
+                </div>
+                <article class="post" data-post>
+                    <h2 class="post__title">building software with broken windows</h2>
+                    <p class="post__date">April 14, 2019</p>
+                                        <div class="post__tldr">
+                        <span class="post__tldr-label">tl;dr</span>
+                        <p class="post__tldr-text">Each small hack or shortcut added to a codebase silently lowers the bar for the next one, and without discipline this attitude snowballs into crippling technical debt.</p>
+                    </div>
+                                        <p>Ever get the feeling that adding this &quot;one little hack&quot;, a couple of lines of code, won't have much of an impact on the rest of the codebase? You think nothing of it and add it, convincing your team members it was the correct decision to get this new feature over the line. In theory, and generally speaking, I would kind of agree with doing it, but every hack is different so it's hard to paint them all with the same brush. If you've been doing software development for long enough you can see this kind of code coming from a mile away. It's the kind of code that can haunt your dreams if you're not careful.</p>
+<p>Back to the point, the code you added that was a little sub-par has introduced the possibility for a second hack to be added without the same reservations or questioning from team-members that you might have had before. A similar decision was made last time so we can let this one slide. You may even go so far as to add a comment detailing the hack, and the reasoning, patting yourself on the back before merging it in.</p>
+<p>This kind of attitude can really add up quickly, and without you even realising. I would classify this as the go-to technical debt example - the debt being the block of code you anticipate will need re-writing for one reason or another. Over time, you introduce code like this that isn't performant as it should be or wasn't written in a way that is extensible. Tech debt should be used like a bandage, a temporary fix to stop the bleeding, but left for too long, and it starts to bleed-through.</p>
+<p>At some point you will have to repay this debt, and figure out a way to remove the code you or your team has added to get a &quot;quick win&quot;. Some are easier and more straight-forward than others. When you're adding code, a good rule-of-thumb could be: &quot;how easily can this be removed?&quot;. It is the removal of code that is taken forgranted. We assume code we write will live on for a long time, but in reality things change often, so we need to be able to move code around, delete it, or completely re-write it. Easy deletion of code should be the mark that something was created well, and isn't tangled in between many other files or functions.</p>
+<p>To the detriment of the codebase, should hacks add up over time and you find yourself piled on with tech debt, it can make the attitude towards the codebase change. This effect is known in software development as Broken Windows, where seeing something that's already broken or poorly formed devalues your own opinion of it, so you either leave it broken or make matters worse by breaking more windows.</p>
+<p>In this metaphor your codebase is a house, and you and your team live in this house. When you add a hack, it's like breaking a window. The first one you might patch up to stop the cold air getting in. Not patching it, however, will open the floodgates for more broken windows. Soon, you'll have three or four in your house. When a door handle inevitably breaks under the pressure of heavy usage, after seeing all of the broken windows, you'll probably just leave the door open and not close it anymore, rather than fixing it or buying a new handle. </p>
+<h3>How did we get here?</h3>
+<p>When your codebase is an unmaintainable mess, it's bad for business, it's bad for you (you have to keep fixing it) and it can make others in your team quit if it doesn't get better.</p>
+<p>It might seem a bit dramatic, to go from a simple hack to all those bad side effects, but it wasn't the hack itself, it was the attitude that ensued as a result.
+Unchecked, these decisions can pile up over time without realising.</p>
+<h3>How do we fix it?</h3>
+<p>The first step is knowing you have a problem, just like any other. Identifying problem areas in your codebase, places where nobody dares go until they are forced to add a new feature. Sounds familiar, right?
+Instead of taking time out to refactor parts of the codebase for the sake of it, which I might add is much harder to convince anyone it's worth doing now, versus later, I would recommend waiting until you have a feature that needs to be implemented in that area, or could benefit from its refactoring. This ammunition can help you prioritise the refactoring ahead of the feature work itself, if building the feature will be easier. Think of it like an investment.</p>
+<p>Planning the redesign of the software with the feature itself, means when it comes time to add the feature, it should be a piece of cake - assuming the planning and execution has gone well.</p>
+<p>Whether it's a random hack or a poorly architected part of the software, you can treat the problems in the same way.
+If you're thinking it's too late to refactor and you need to completely rewire, I would urge you to think again, since in my experience it's almost always harder to compeletely re-write, unless there are other factors in play than simply it's bad code.
+It can be tempting to want to start again and commit to a new set of guidelines for how you build your software, but in the long run you will eventually need to be disciplined enough in your team to see a problem and fix it rather than needing to start again because it got so bad.</p>
+<p>In Elixir, I would argue refactoring is at its easiest when you think about modules and functions, as opposed to hierarchical structures that you might find in Object-Oriented Programming languages. Of course, you can still get yourself into a mess in Elixir with the over-use of OTP features and apparent indirection that can come from Meta-programming with Macros.
+In general I have found it easier than most other languages that I have used.</p>
+<p>A simple mindset change might be all you need to progress from an unmaintainable codebase to one that is easy to add new features. A popular one in programming is the Boy Scout's rule: &quot;Always leave the camp ground cleaner than you found it&quot;, which in relation to programming means you fix something that's broken when you see it - while you're touching that code.</p>
+<p>It can also be helpful to take the codebase in the state that it's in now and discuss improvements with your team (or yourself if you're riding solo), and plan for the state you'd like it to be in. When you can agree on how the codebase should look, it's easier to make steps towards that goal each time you write code. Over time, this will pay off with the correct attitude.</p>
+<p>Tech debt is a mystical beast that can break companies, teams and software alike. Through understanding of how problems like this arise in software development, it's possible to limit the effect it has.</p>
+<p><em>Note for the reader: Planned tech debt is not an excuse for writing bad code, nor should it happen consecutively across features - you may be in more trouble than you think!</em></p>
+                </article>
+                                <nav class="post-nav" aria-label="post navigation">
+                                            <a class="post-nav__link post-nav__link--prev" href="/lonestar-elixir-2019">
+                            <span class="post-nav__label">← older</span>
+                            <span class="post-nav__title">lonestar elixirconf 2019 highlights</span>
+                        </a>
+                                        <a class="post-nav__home" href="/">all posts</a>
+                                            <a class="post-nav__link post-nav__link--next" href="/the-problem-with-elixir-umbrella-apps">
+                            <span class="post-nav__label">newer →</span>
+                            <span class="post-nav__title">the problem with elixir umbrella apps</span>
+                        </a>
+                                    </nav>
+                                    </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p class="site-footer__prompt">jackmarchant@blog:~$ exit</p>
+                <nav class="site-footer__links" aria-label="external links">
+                    <a href="/rss.xml">rss</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://github.com/jackmarchant" target="_blank" rel="noopener noreferrer">github</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://x.com/jackmarchant10" target="_blank" rel="noopener noreferrer" aria-label="x profile">x</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://www.linkedin.com/in/jack-marchant" target="_blank" rel="noopener noreferrer">linkedin</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:jack@jackmarchant.com">email</a>
+                </nav>
+                <p class="site-footer__meta">© <span data-current-year>2026</span> jack marchant</p>
+            </div>
+        </footer>
+
+        <script src="/prism.e59d2e5e.js"></script>
+        <script src="/index.2b15b332.js"></script>
+
+                    <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+            </body>
+</html>

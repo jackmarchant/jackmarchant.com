@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>beyond autocomplete: a practical guide to ai-assisted development | jack marchant</title>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="/prism.30affb74.css" rel="stylesheet" type="text/css" />
+        <link href="/style.63f6c93a.css" rel="stylesheet" type="text/css" />
+                <meta name="description" content="To truly leverage the power of AI in software engineering, we need to move beyond simple code completion. In this post, I want to explore some practical techniques for using AI as a development partner, from pair programming to bug hunting, and even look at what the future might hold for AI other parts of software development." />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Beyond Autocomplete: A practical guide to AI-Assisted Development" />
+        <meta property="og:description" content="To truly leverage the power of AI in software engineering, we need to move beyond simple code completion. In this post, I want to explore some practical techniques for using AI as a development partner, from pair programming to bug hunting, and even look at what the future might hold for AI other parts of software development." />
+        <meta property="og:url" content="https://www.jackmarchant.com/beyond-autocomplete-a-practical-guide-to-ai-assisted-development" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Beyond Autocomplete: A practical guide to AI-Assisted Development" />
+        <meta name="twitter:description" content="To truly leverage the power of AI in software engineering, we need to move beyond simple code completion. In this post, I want to explore some practical techniques for using AI as a development partner, from pair programming to bug hunting, and even look at what the future might hold for AI other parts of software development." />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="alternate" type="application/rss+xml" title="jack marchant" href="/rss.xml" />
+        <script>(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}}());</script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header__row">
+                    <p class="site-prompt">jackmarchant@blog:~$</p>
+                    <div class="site-header__actions">
+                        <button class="theme-toggle" type="button" data-theme-toggle aria-label="switch to light mode">
+                            <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        </button>
+                        <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                    </div>
+                </div>
+                <h1 class="site-title"><a href="/">jack marchant</a></h1>
+                <p class="site-tagline">principal engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">deputy</a> · writing about software</p>
+            </div>
+        </header>
+
+        <div class="subscribe-modal" data-subscribe-modal aria-hidden="true">
+            <div class="subscribe-modal__backdrop" data-subscribe-backdrop></div>
+            <div class="subscribe-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+                <div class="subscribe-modal__header">
+                    <h2 class="subscribe-modal__title" id="subscribe-modal-title">subscribe</h2>
+                    <button class="subscribe-modal__close" type="button" data-subscribe-close aria-label="close">×</button>
+                </div>
+                <p class="subscribe-modal__desc">get new posts delivered to your inbox</p>
+                <form class="subscribe-form" action="https://jackmarchant.us14.list-manage.com/subscribe?u=5a51a355f4187fddb0d0f4816&amp;id=b5ae7106ea" method="POST" target="_blank" rel="noopener noreferrer" novalidate>
+                    <div style="position:absolute;left:-5000px;" aria-hidden="true">
+                        <input type="text" name="b_5a51a355f4187fddb0d0f4816_b5ae7106ea" tabindex="-1" value="" />
+                    </div>
+                    <input type="email" name="EMAIL" id="mce-EMAIL" class="subscribe-form__input" placeholder="your@email.com" required />
+                    <button type="submit" class="subscribe-form__submit">subscribe →</button>
+                </form>
+            </div>
+        </div>
+        <main class="container">
+            
+                            <div class="reading-progress" data-reading-progress aria-hidden="true">
+                    <div class="reading-progress__bar" data-reading-progress-bar></div>
+                </div>
+                <article class="post" data-post>
+                    <h2 class="post__title">beyond autocomplete: a practical guide to ai-assisted development</h2>
+                    <p class="post__date">September 19, 2025</p>
+                                        <div class="post__tldr">
+                        <span class="post__tldr-label">tl;dr</span>
+                        <p class="post__tldr-text">AI assistants are most valuable when used as an interactive pair programmer for dialogue, test generation, and code review rather than just autocomplete suggestions.</p>
+                    </div>
+                                        <p>To truly leverage the power of AI in software engineering, we need to move beyond simple code completion. In this post, I want to explore some practical techniques for using AI as a development partner, from pair programming to bug hunting, and even look at what the future might hold for AI other parts of software development.</p>
+<h2>The New Pair Programmer: Your AI Sounding Board</h2>
+<p>We've all been there: stuck on a problem, talking it through with a rubber duck on our desk. The act of articulating the problem often illuminates the solution. AI assistants have become the ultimate interactive rubber duck. Instead of just stating the problem, you can have a dialogue.</p>
+<p>By asking the AI questions like, &quot;Can you explain this block of code to me in simple terms?&quot; or &quot;What are the potential edge cases for this function?&quot;, you are forced to structure your own thoughts. The AI's response, whether it's perfectly correct or slightly off, provides a new perspective that can break you out of a mental block. This interactive process is a powerful evolution of the classic debugging technique, turning a monologue into a productive conversation.</p>
+<h2>AI-Driven Test Generation: A Second Opinion on Functionality</h2>
+<p>Writing comprehensive tests is crucial, but it can be tedious. This is an area where AI can shine. Instead of just writing tests yourself, you can present a function to an AI model and ask it to generate a suite of test cases.</p>
+<p>This approach offers two key benefits. First, it accelerates the process of writing boilerplate test code. Second, and more importantly, the AI might interpret the function's purpose differently than you intended. The tests it generates can reveal ambiguities in your code or highlight edge cases you hadn't considered. It acts as an impartial reviewer, testing what the code actually seems to do, not just what you intended it to do.</p>
+<p>This is typically where most engineers start experimenting with AI, beyond simple code completion and moving towards code generation.</p>
+<h2>Accelerating Feature Development with Contextual Prompts</h2>
+<p>One of the most effective ways to use AI is for brownfield projects where established patterns already exist. Instead of a generic prompt like &quot;write a function to fetch user data,&quot; you can provide the AI with specific context.</p>
+<p>For example, you could provide an existing API endpoint function and prompt it with: &quot;Following this example, create a new endpoint to handle product data, including validation for the 'price' and 'stock' fields.&quot; By giving the AI a clear template, you guide it to produce code that aligns with your project's existing structure, conventions, and style. This makes adding new features faster and helps maintain a consistent codebase.</p>
+<h2>Increasing Confidence by Detecting Bugs (or Proving the AI Wrong)</h2>
+<p>AI can be an excellent &quot;second pair of eyes&quot; for catching subtle bugs. You can paste a piece of code and ask the model to review it for potential issues, race conditions, or security vulnerabilities. It's surprisingly effective at spotting common mistakes.</p>
+<p>Interestingly, even when the AI is wrong, it provides value. <strong>If the model flags a piece of code as buggy and you investigate and prove it's correct, you've just engaged in a deep-dive review of your own logic.</strong> This process of validating your code against the AI's critique significantly increases your confidence in its correctness.</p>
+<h2>What's Next? AI in System Design</h2>
+<p>What's next for AI? Can models gain enough context and direction to assist with architecture and system design? This is the next frontier, but it comes with significant challenges. A good system design is all about making trade-offs on constraints such as: </p>
+<ul>
+<li>cost vs. performance</li>
+<li>consistency vs. availability</li>
+<li>scalability vs. complexity</li>
+</ul>
+<p>For an AI to make meaningful contributions here, it needs a vast amount of context. It would need to understand business goals, budget constraints, team skill sets, and existing infrastructure. Simply asking it to &quot;design a scalable microservices architecture&quot; will likely result in a textbook answer boiling the ocean with &quot;best practices&quot; that aren't practical for your specific situation.</p>
+<p>The future of AI in system design will likely involve a highly interactive process, where architects use AI to explore different design patterns, model performance trade-offs, and generate diagrams, but the final strategic decisions will still rest on human experience and deep contextual understanding.</p>
+<h2>My Take on the Current State of AI for software engineering</h2>
+<p>In my view, the real power of AI in its current form is not as an autonomous coder, but as a thought partner. Using an LLM as a sounding board or a way to fact-check your own assumptions gives a necessary structure to the development process. It forces you to articulate your problem clearly and highlights potential issues much faster, allowing you to focus your attention on double-checking the most critical parts.</p>
+<p>This is why I use these tools both inside and outside of the code editor. Limiting myself to simple autocompletion is like using a smartphone only for making calls. The true value comes from a more holistic integration: brainstorming solutions, drafting documentation, and debugging complex logic in a conversational interface. The AI isn't replacing the engineer; it's augmenting the development workflow and becoming an indispensable part of an engineer's toolkit.</p>
+                </article>
+                                <nav class="post-nav" aria-label="post navigation">
+                                            <a class="post-nav__link post-nav__link--prev" href="/how-does-a-relational-database-index-really-work">
+                            <span class="post-nav__label">← older</span>
+                            <span class="post-nav__title">how does a relational database index really work?</span>
+                        </a>
+                                        <a class="post-nav__home" href="/">all posts</a>
+                                            <a class="post-nav__link post-nav__link--next" href="/using-coding-agents-in-my-workflow-in-2025">
+                            <span class="post-nav__label">newer →</span>
+                            <span class="post-nav__title">using coding agents in my workflow in 2025</span>
+                        </a>
+                                    </nav>
+                                    </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p class="site-footer__prompt">jackmarchant@blog:~$ exit</p>
+                <nav class="site-footer__links" aria-label="external links">
+                    <a href="/rss.xml">rss</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://github.com/jackmarchant" target="_blank" rel="noopener noreferrer">github</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://x.com/jackmarchant10" target="_blank" rel="noopener noreferrer" aria-label="x profile">x</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://www.linkedin.com/in/jack-marchant" target="_blank" rel="noopener noreferrer">linkedin</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:jack@jackmarchant.com">email</a>
+                </nav>
+                <p class="site-footer__meta">© <span data-current-year>2026</span> jack marchant</p>
+            </div>
+        </footer>
+
+        <script src="/prism.e59d2e5e.js"></script>
+        <script src="/index.2b15b332.js"></script>
+
+                    <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+            </body>
+</html>

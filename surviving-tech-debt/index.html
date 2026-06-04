@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>surviving technical debt in the real world | jack marchant</title>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="/prism.30affb74.css" rel="stylesheet" type="text/css" />
+        <link href="/style.63f6c93a.css" rel="stylesheet" type="text/css" />
+                <meta name="description" content="Technical debt is a potentially crippling disease that can take over your codebase without much warning. One day, you’re building features, the next, you struggle to untangle the mess you (or maybe your team) has created." />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Surviving technical debt in the real world" />
+        <meta property="og:description" content="Technical debt is a potentially crippling disease that can take over your codebase without much warning. One day, you’re building features, the next, you struggle to untangle the mess you (or maybe your team) has created." />
+        <meta property="og:url" content="https://www.jackmarchant.com/surviving-tech-debt" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Surviving technical debt in the real world" />
+        <meta name="twitter:description" content="Technical debt is a potentially crippling disease that can take over your codebase without much warning. One day, you’re building features, the next, you struggle to untangle the mess you (or maybe your team) has created." />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="alternate" type="application/rss+xml" title="jack marchant" href="/rss.xml" />
+        <script>(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}}());</script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header__row">
+                    <p class="site-prompt">jackmarchant@blog:~$</p>
+                    <div class="site-header__actions">
+                        <button class="theme-toggle" type="button" data-theme-toggle aria-label="switch to light mode">
+                            <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        </button>
+                        <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                    </div>
+                </div>
+                <h1 class="site-title"><a href="/">jack marchant</a></h1>
+                <p class="site-tagline">principal engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">deputy</a> · writing about software</p>
+            </div>
+        </header>
+
+        <div class="subscribe-modal" data-subscribe-modal aria-hidden="true">
+            <div class="subscribe-modal__backdrop" data-subscribe-backdrop></div>
+            <div class="subscribe-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+                <div class="subscribe-modal__header">
+                    <h2 class="subscribe-modal__title" id="subscribe-modal-title">subscribe</h2>
+                    <button class="subscribe-modal__close" type="button" data-subscribe-close aria-label="close">×</button>
+                </div>
+                <p class="subscribe-modal__desc">get new posts delivered to your inbox</p>
+                <form class="subscribe-form" action="https://jackmarchant.us14.list-manage.com/subscribe?u=5a51a355f4187fddb0d0f4816&amp;id=b5ae7106ea" method="POST" target="_blank" rel="noopener noreferrer" novalidate>
+                    <div style="position:absolute;left:-5000px;" aria-hidden="true">
+                        <input type="text" name="b_5a51a355f4187fddb0d0f4816_b5ae7106ea" tabindex="-1" value="" />
+                    </div>
+                    <input type="email" name="EMAIL" id="mce-EMAIL" class="subscribe-form__input" placeholder="your@email.com" required />
+                    <button type="submit" class="subscribe-form__submit">subscribe →</button>
+                </form>
+            </div>
+        </div>
+        <main class="container">
+            
+                            <div class="reading-progress" data-reading-progress aria-hidden="true">
+                    <div class="reading-progress__bar" data-reading-progress-bar></div>
+                </div>
+                <article class="post" data-post>
+                    <h2 class="post__title">surviving technical debt in the real world</h2>
+                    <p class="post__date">December 21, 2017</p>
+                                        <div class="post__tldr">
+                        <span class="post__tldr-label">tl;dr</span>
+                        <p class="post__tldr-text">Technical debt is unavoidable but manageable - always write tests even for imperfect code, take shortcuts only under real pressure, and continuously refactor before the debt becomes unworkable.</p>
+                    </div>
+                                        <p>Technical debt is a potentially crippling disease that can take over your codebase without much warning. One day, you’re building features, the next, you struggle to untangle the mess you (or maybe your team) has created.</p>
+<p>The good news is you’re not alone. Engineers everywhere accrue technical debt, the trouble is when you never do anything to get yourself out of debt, you just keep smashing features out into the dark abyss of GitHub.</p>
+<p>You can train yourself not to take a shortcut all the time, and start to learn the benefits of technical debt when used properly. All it takes is a bit of willpower. Yes, the same thing you use if you want to shed a few kilos. When you take short cuts all the time, it’s hard to bust out of that groove and future proof things.</p>
+<h2>Does it even work?</h2>
+<p>Always be testing your code. Even when you write code that you can see is bad, write a test so that when you refactor it you can have a level of confidence it’s still going to work.</p>
+<h2>You’re not in control of all situations</h2>
+<p>There might come a time when you’re pressed to get things done now. When that happens, get it done and take a cheat day. There’s nothing wrong with this, after all you are not your code and businesses want things done yesterday.</p>
+<p>Just try to record you took the shortcut perhaps with a Fixme comment and plan to refactor.</p>
+<h2>Bugs are bad, mmkay</h2>
+<p>Be okay with pushing bugs to production. Bugs are not created equally, so of course don’t be okay with breaking the application, but small bugs are going to happen. It is not a measure of your expertise as a developer that you missed it. Rather, I would measure a person’s commitment to fixing said bug rather than producing it in the first place.</p>
+<h2>Catch it in code review</h2>
+<p>Code review is an effective exercise for both reviewer and author. If something is a short cut, make sure the author knows. On the flip side, as an author, make sure you let reviewers know the code could be improved but you will fix it later. Ownership of tech debt is important, because in a team it can often get lost as nobody’s problem until you all have to deal with it.</p>
+<h2>Don’t overuse technical debt as an excuse to write bad code</h2>
+<p>Use technical debt sparingly. If you are spending more time justifying why the code you’re writing is technical debt than writing code. I have bad news for you.</p>
+<p>It ain’t technical debt.</p>
+<p>It takes a lot of self control and willpower not to take the easy road, especially when you discover someone else’s technical debt, which they have not bothered to refactor.</p>
+<p>It’s a skill, which once mastered, means your coworkers will thank you.</p>
+<p>I am by no means an expert at not writing or fixing technical debt, but it has become a satisfying effort for me to fix what was once broken or difficult to understand.</p>
+<p>If you’ve read this far, you probably have enough willpower to fix tech debt already…</p>
+                </article>
+                                <nav class="post-nav" aria-label="post navigation">
+                                            <a class="post-nav__link post-nav__link--prev" href="/pattern-matching-elixir">
+                            <span class="post-nav__label">← older</span>
+                            <span class="post-nav__title">elixir pattern matching in a nutshell</span>
+                        </a>
+                                        <a class="post-nav__home" href="/">all posts</a>
+                                            <a class="post-nav__link post-nav__link--next" href="/elixir-supervision-trees">
+                            <span class="post-nav__label">newer →</span>
+                            <span class="post-nav__title">a comparison of elixir supervision trees and react component trees</span>
+                        </a>
+                                    </nav>
+                                    </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p class="site-footer__prompt">jackmarchant@blog:~$ exit</p>
+                <nav class="site-footer__links" aria-label="external links">
+                    <a href="/rss.xml">rss</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://github.com/jackmarchant" target="_blank" rel="noopener noreferrer">github</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://x.com/jackmarchant10" target="_blank" rel="noopener noreferrer" aria-label="x profile">x</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://www.linkedin.com/in/jack-marchant" target="_blank" rel="noopener noreferrer">linkedin</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:jack@jackmarchant.com">email</a>
+                </nav>
+                <p class="site-footer__meta">© <span data-current-year>2026</span> jack marchant</p>
+            </div>
+        </footer>
+
+        <script src="/prism.e59d2e5e.js"></script>
+        <script src="/index.2b15b332.js"></script>
+
+                    <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+            </body>
+</html>

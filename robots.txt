@@ -1,0 +1,46 @@
+User-agent: *
+Allow: /
+Disallow: /logs/
+Disallow: /src/
+Disallow: /templates/
+Disallow: /vendor/
+Disallow: /.git/
+Content-Signal: ai-train=no, search=yes, ai-input=no
+
+User-agent: GPTBot
+Allow: /
+Disallow: /logs/
+Disallow: /src/
+Disallow: /templates/
+Disallow: /vendor/
+Disallow: /.git/
+Content-Signal: ai-train=no, search=yes, ai-input=no
+
+User-agent: OAI-SearchBot
+Allow: /
+Disallow: /logs/
+Disallow: /src/
+Disallow: /templates/
+Disallow: /vendor/
+Disallow: /.git/
+Content-Signal: ai-train=no, search=yes, ai-input=no
+
+User-agent: Claude-Web
+Allow: /
+Disallow: /logs/
+Disallow: /src/
+Disallow: /templates/
+Disallow: /vendor/
+Disallow: /.git/
+Content-Signal: ai-train=no, search=yes, ai-input=no
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /logs/
+Disallow: /src/
+Disallow: /templates/
+Disallow: /vendor/
+Disallow: /.git/
+Content-Signal: ai-train=no, search=yes, ai-input=no
+
+Sitemap: https://www.jackmarchant.com/sitemap.xml

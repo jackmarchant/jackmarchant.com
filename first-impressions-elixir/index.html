@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>first impressions of elixir | jack marchant</title>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="/prism.30affb74.css" rel="stylesheet" type="text/css" />
+        <link href="/style.63f6c93a.css" rel="stylesheet" type="text/css" />
+                <meta name="description" content="Elixir is a functional programming language based on Erlang. I’m told it’s very similar to Ruby, with a few tweaks and improvements to the developer experience and language syntax." />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="First Impressions of Elixir" />
+        <meta property="og:description" content="Elixir is a functional programming language based on Erlang. I’m told it’s very similar to Ruby, with a few tweaks and improvements to the developer experience and language syntax." />
+        <meta property="og:url" content="https://www.jackmarchant.com/first-impressions-elixir" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="First Impressions of Elixir" />
+        <meta name="twitter:description" content="Elixir is a functional programming language based on Erlang. I’m told it’s very similar to Ruby, with a few tweaks and improvements to the developer experience and language syntax." />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="alternate" type="application/rss+xml" title="jack marchant" href="/rss.xml" />
+        <script>(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}}());</script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header__row">
+                    <p class="site-prompt">jackmarchant@blog:~$</p>
+                    <div class="site-header__actions">
+                        <button class="theme-toggle" type="button" data-theme-toggle aria-label="switch to light mode">
+                            <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        </button>
+                        <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                    </div>
+                </div>
+                <h1 class="site-title"><a href="/">jack marchant</a></h1>
+                <p class="site-tagline">principal engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">deputy</a> · writing about software</p>
+            </div>
+        </header>
+
+        <div class="subscribe-modal" data-subscribe-modal aria-hidden="true">
+            <div class="subscribe-modal__backdrop" data-subscribe-backdrop></div>
+            <div class="subscribe-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+                <div class="subscribe-modal__header">
+                    <h2 class="subscribe-modal__title" id="subscribe-modal-title">subscribe</h2>
+                    <button class="subscribe-modal__close" type="button" data-subscribe-close aria-label="close">×</button>
+                </div>
+                <p class="subscribe-modal__desc">get new posts delivered to your inbox</p>
+                <form class="subscribe-form" action="https://jackmarchant.us14.list-manage.com/subscribe?u=5a51a355f4187fddb0d0f4816&amp;id=b5ae7106ea" method="POST" target="_blank" rel="noopener noreferrer" novalidate>
+                    <div style="position:absolute;left:-5000px;" aria-hidden="true">
+                        <input type="text" name="b_5a51a355f4187fddb0d0f4816_b5ae7106ea" tabindex="-1" value="" />
+                    </div>
+                    <input type="email" name="EMAIL" id="mce-EMAIL" class="subscribe-form__input" placeholder="your@email.com" required />
+                    <button type="submit" class="subscribe-form__submit">subscribe →</button>
+                </form>
+            </div>
+        </div>
+        <main class="container">
+            
+                            <div class="reading-progress" data-reading-progress aria-hidden="true">
+                    <div class="reading-progress__bar" data-reading-progress-bar></div>
+                </div>
+                <article class="post" data-post>
+                    <h2 class="post__title">first impressions of elixir</h2>
+                    <p class="post__date">January 06, 2017</p>
+                                        <div class="post__tldr">
+                        <span class="post__tldr-label">tl;dr</span>
+                        <p class="post__tldr-text">A JavaScript developer attracted to functional programming shares their first impressions of Elixir, finding its pattern matching, immutability, and pipe operator a natural and enjoyable step up from FP in JS.</p>
+                    </div>
+                                        <p>Elixir is a functional programming language based on Erlang. I’m told it’s very similar to Ruby, with a few tweaks and improvements to the developer experience and language syntax.</p>
+<p>[Detour – buckle your seatbelts]</p>
+<p>I’m drawn to Elixir because of my interest in Functional Programming, generally and specially in JavaScript. I started by learning techniques to make pure functions so that I could more easily test my code. Then, I progressed into learning about composition, currying and partial application in JavaScript, particularly as it was useful to know when using Redux.</p>
+<p>[take a breather, that’s a lot of buzz]</p>
+<p>…</p>
+<p>[enough breathing]</p>
+<p>So, then (without mastering any of the above) I decided to try my luck with learning functional programming theory (which is basically just math). That was fun too.</p>
+<p>I have twisted and turned through it all, trying to figure out what FP means, and to be honest I’m enjoying it – so why not try to pick up a language that is purely (get it?) functional.</p>
+<p>[back to Elixir…/Detour]</p>
+<p>Now you know why I’m interested in learning a functional programming language such as Elixir, let’s go on a mythical journey together to see what I’ve learned.</p>
+<h2>Learning new things is hard</h2>
+<p>One of the best things I’ve noticed about Elixir – given at this point in time I’ve used it for about a week – is that it’s incredibly focussed on developer experience.</p>
+<p>I think the creator of Elixir (José Valim) must have looked at Erlang and thought we could do better than this. The best people take great ideas and make them easier for other people to learn.</p>
+<p>Here’s a few things Elixir does or helps you do as a developer (in list format because who doesn’t like a good list?)</p>
+<ul>
+<li>Built in unit testing (run <em>‘mix test’</em>)</li>
+<li>Encourages documentation through making it part of the module distribution</li>
+<li>Interactive Elixir – iex&gt; to allow running code in a terminal</li>
+<li>More approachable syntax than Erlang</li>
+<li>Pattern Matching (what’s that? – keep reading)</li>
+</ul>
+<p>That’s plenty of things. What more do you want?</p>
+<p>All of this makes it easier for a willing developer to pick up Elixir and give it a go. Nobody wants to be fiddling around with their development environment in a shameful attempt to start learning a new language.</p>
+<h2>FP is FP</h2>
+<p>Functional programming is fucking powerful. It shouldn’t be underestimated. I don’t want to spend any more than 3 seconds walking through my code (and dissecting my brain that day) because I wasn’t bothered to create a function with a clear interface and signature. I am starting to think a function with more than say, 10 lines, is too long and doing too much.</p>
+<p>It’s easy to say Elixir is better because it enforces strict rules about what and how you should write your code but I think it would still be possible to write shitty code in any language, just easier in others.</p>
+<p>Given that Elixir is an FP language it makes sense that all of the Elixir modules follow its general principles. Taking my early experiences with Elixir into account, I can say I appreciate the strict-ness of the language coming from JavaScript, but there’s also something to be said about the creativity and expressiveness you can have writing functional JavaScript – and there’s plenty of people talking about that now.</p>
+<p>It’s interesting that I haven’t seen more people checking out Functional languages after discovering the power of it in JavaScript. Maybe they just haven’t written a kickass article about it?</p>
+<h2>WTF? (What the feature?!)</h2>
+<p>In keeping with Elixir’s functional ties, there’s a feature called Pattern Matching, which I’m very excited to learn more about. I don’t think this is an Elixir-only feature but it’s certainly the first time I have come across it.</p>
+<p>The idea (from what I can gather) is that you can define a function as a copy of another function with values in place of parameters and when the value is equal to what is passed in, it will run that function, instead of another further down.</p>
+<p>As an example, I had a recursive function that takes a list, but I only want it to run when there are items in the list (otherwise it would get stuck in a recursive loop).</p>
+<p>My instinct would have been to use an if statement to check whether there are items and return early – but with Pattern Matching you can say when the first parameter is an empty list, just return early. You have to make sure the pattern matching function is defined before any function you want to override.</p>
+<p>This concept separates the two cases into two functions, rather than having one function that handles all cases. As a beginner that is a difficult thing to realise but I’m interested to see whether it improves code readability.</p>
+<h2>Where do we go ? (Where do we go now)</h2>
+<p>Functional programming has been around for ages, but as software engineering on the web matures, developers begin to question how we’ve done things and look for something better.</p>
+<p>Elixir sounds like a new challenge to me and has some good things going for it. Now seems like the perfect time for me to pick it up so my goal will be to become more comfortable with it and be able to start a project from scratch and build something myself without a tutorial helping me along.</p>
+<p><strong>TLDR</strong></p>
+<ul>
+<li>Elixir looks like a fun way to learn more functional programming concepts</li>
+<li>Elixir’s focus on documentation, tests and readable code is what motivates me to learn more about it – and from other reading it seems highly scalable.</li>
+<li>The developer experience seems to have been thought out – making it appealing and easy to get started.</li>
+<li>The package management system, including package distribution seems similar to NPM.</li>
+</ul>
+<h2>So far</h2>
+<p>If you’ve read this far, I congratulate you on your job well done. Take the rest of the day off.</p>
+<p>Here are some links to Elixir work I’ve done so far:</p>
+<ul>
+<li><a href="https://github.com/jackmarchant/misc">jackmarchant/misc</a></li>
+<li><a href="https://github.com/jackmarchant/todo-elixir">jackmarchant/todo-elixir</a></li>
+<li><a href="https://hex.pm/packages/misc">misc</a></li>
+</ul>
+                </article>
+                                <nav class="post-nav" aria-label="post navigation">
+                                            <a class="post-nav__link post-nav__link--prev" href="/write-unit-tests">
+                            <span class="post-nav__label">← older</span>
+                            <span class="post-nav__title">no excuses, write unit tests</span>
+                        </a>
+                                        <a class="post-nav__home" href="/">all posts</a>
+                                            <a class="post-nav__link post-nav__link--next" href="/pattern-matching-elixir">
+                            <span class="post-nav__label">newer →</span>
+                            <span class="post-nav__title">elixir pattern matching in a nutshell</span>
+                        </a>
+                                    </nav>
+                                    </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p class="site-footer__prompt">jackmarchant@blog:~$ exit</p>
+                <nav class="site-footer__links" aria-label="external links">
+                    <a href="/rss.xml">rss</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://github.com/jackmarchant" target="_blank" rel="noopener noreferrer">github</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://x.com/jackmarchant10" target="_blank" rel="noopener noreferrer" aria-label="x profile">x</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://www.linkedin.com/in/jack-marchant" target="_blank" rel="noopener noreferrer">linkedin</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:jack@jackmarchant.com">email</a>
+                </nav>
+                <p class="site-footer__meta">© <span data-current-year>2026</span> jack marchant</p>
+            </div>
+        </footer>
+
+        <script src="/prism.e59d2e5e.js"></script>
+        <script src="/index.2b15b332.js"></script>
+
+                    <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+            </body>
+</html>

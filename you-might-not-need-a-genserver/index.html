@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>you might not need a genserver | jack marchant</title>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="/prism.30affb74.css" rel="stylesheet" type="text/css" />
+        <link href="/style.63f6c93a.css" rel="stylesheet" type="text/css" />
+                <meta name="description" content="When you&#039;re browsing your way through Elixir documentation or reading blog posts (like this one), there&#039;s no doubt you&#039;ll come across a GenServer. It is perhaps one of the most overused modules in the Elixir standard library, simply because it&#039;s a good teaching tool for abstractions around processes. It can be confusing though, to know when to reach for your friendly, neighbourhood GenServer." />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="You might not need a GenServer" />
+        <meta property="og:description" content="When you&#039;re browsing your way through Elixir documentation or reading blog posts (like this one), there&#039;s no doubt you&#039;ll come across a GenServer. It is perhaps one of the most overused modules in the Elixir standard library, simply because it&#039;s a good teaching tool for abstractions around processes. It can be confusing though, to know when to reach for your friendly, neighbourhood GenServer." />
+        <meta property="og:url" content="https://www.jackmarchant.com/you-might-not-need-a-genserver" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="You might not need a GenServer" />
+        <meta name="twitter:description" content="When you&#039;re browsing your way through Elixir documentation or reading blog posts (like this one), there&#039;s no doubt you&#039;ll come across a GenServer. It is perhaps one of the most overused modules in the Elixir standard library, simply because it&#039;s a good teaching tool for abstractions around processes. It can be confusing though, to know when to reach for your friendly, neighbourhood GenServer." />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="alternate" type="application/rss+xml" title="jack marchant" href="/rss.xml" />
+        <script>(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}}());</script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header__row">
+                    <p class="site-prompt">jackmarchant@blog:~$</p>
+                    <div class="site-header__actions">
+                        <button class="theme-toggle" type="button" data-theme-toggle aria-label="switch to light mode">
+                            <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        </button>
+                        <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                    </div>
+                </div>
+                <h1 class="site-title"><a href="/">jack marchant</a></h1>
+                <p class="site-tagline">principal engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">deputy</a> · writing about software</p>
+            </div>
+        </header>
+
+        <div class="subscribe-modal" data-subscribe-modal aria-hidden="true">
+            <div class="subscribe-modal__backdrop" data-subscribe-backdrop></div>
+            <div class="subscribe-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+                <div class="subscribe-modal__header">
+                    <h2 class="subscribe-modal__title" id="subscribe-modal-title">subscribe</h2>
+                    <button class="subscribe-modal__close" type="button" data-subscribe-close aria-label="close">×</button>
+                </div>
+                <p class="subscribe-modal__desc">get new posts delivered to your inbox</p>
+                <form class="subscribe-form" action="https://jackmarchant.us14.list-manage.com/subscribe?u=5a51a355f4187fddb0d0f4816&amp;id=b5ae7106ea" method="POST" target="_blank" rel="noopener noreferrer" novalidate>
+                    <div style="position:absolute;left:-5000px;" aria-hidden="true">
+                        <input type="text" name="b_5a51a355f4187fddb0d0f4816_b5ae7106ea" tabindex="-1" value="" />
+                    </div>
+                    <input type="email" name="EMAIL" id="mce-EMAIL" class="subscribe-form__input" placeholder="your@email.com" required />
+                    <button type="submit" class="subscribe-form__submit">subscribe →</button>
+                </form>
+            </div>
+        </div>
+        <main class="container">
+            
+                            <div class="reading-progress" data-reading-progress aria-hidden="true">
+                    <div class="reading-progress__bar" data-reading-progress-bar></div>
+                </div>
+                <article class="post" data-post>
+                    <h2 class="post__title">you might not need a genserver</h2>
+                    <p class="post__date">November 20, 2018</p>
+                                        <div class="post__tldr">
+                        <span class="post__tldr-label">tl;dr</span>
+                        <p class="post__tldr-text">Tasks are often a simpler and better fit than GenServers for one-off async work in Elixir, and understanding the difference helps avoid over-engineering with unnecessary process abstractions.</p>
+                    </div>
+                                        <p>When you're browsing your way through Elixir documentation or reading blog posts (like this one), there's no doubt you'll come across a GenServer. It is perhaps one of the most overused modules in the Elixir standard library, simply because it's a good teaching tool for abstractions around processes. It can be confusing though, to know when to reach for your friendly, neighbourhood GenServer.</p>
+<p>A GenServer is a generic implementation of typical client &lt;-&gt; server interactions, where the client is a process and the server is your GenServer. This abstraction exists because without it we would have to write a lot more boilerplate code around receiving messages from other processes.</p>
+<p>I have grown fond of GenServer's, along with the Elixir community, however there are some circumstances in which you might not need a GenServer.</p>
+<p>Let's take a quick look at the differences between a <a href="https://hexdocs.pm/elixir/Task.html">Task</a> and a <a href="https://hexdocs.pm/elixir/GenServer.html">GenServer</a> and figure out which module fits best.</p>
+<h3>Task</h3>
+<p>Tasks are a simple, yet powerful tool to change the way your code is executed and introduce some light concurrency.</p>
+<p>You can run a function asynchronously, isolating any failures:</p>
+<pre><code class="language-elixir">Task.start(fn -&gt; raise "the roof" end)</code></pre>
+<p>This line has a couple of advantages:</p>
+<ul>
+<li>The Task will run in a new process, leaving you free to do all of those other things you wanted to get done.</li>
+<li>Any failure or error raised in the course of running the function, will be isolated to the task's process, so your main process will not stop executing any code after the task.</li>
+</ul>
+<p>In contrast to <code>Task.start/1</code>, we can wait for the result, at some point in the future with <code>Task.async/1</code>:</p>
+<pre><code class="language-elixir">task = Task.async(&amp;my_function/0)
+# .. some other code
+result = Task.await(task)</code></pre>
+<p>By using a Task in this way, we can defer the retrieval of the result and execute some other code in the mean time. Once you've extracted the result, the process will exit.</p>
+<p>A Task will only execute one function in it's lifetime and isn't meant to be a long-running process, or be involved in any inter-process communication. The benefit of this is that it's much easier to write for one-off tasks and simpler to test. In most scenarios where you only want to run a function asynchronously, a task will suffice.</p>
+<h3>Agent</h3>
+<p>An <a href="https://hexdocs.pm/elixir/Agent.html">Agent</a> is a process that abstracts state. If all you need is something to hold a value for a relatively short period of time (in memory), an agent is a perfect option. An Agent is actually a GenServer that has been abstracted into it's own module. So, while you get all the benefits of using a GenServer, you aren't required to set up the client-server interactions you're already familiar with.</p>
+<p>If we want to hold a value in an agent, you can store it using <code>Agent.get/3</code> and store values using <code>Agent.update/3</code>. These functions are already defined for you in the Agent API - functions you would have to define yourself, had you chosen to implement the same functionality with a GenServer.</p>
+<pre><code class="language-elixir">{:ok, pid} = Agent.start(fn -&gt; "hello" end)
+Agent.get(pid, fn state -&gt; state end)
+"hello"
+
+Agent.update(pid, fn state -&gt; state &lt;&gt; " world" end)
+Agent.get(pid, fn state -&gt; state end)
+"hello world"</code></pre>
+<p>A timeout is included as the third argument to each of these functions, because they are synchronous and so the caller must wait for the function passed as the second argument to finish executing. If we want to run a function using the state in an Agent, we need to use <code>Agent.cast/2</code>, which works in a similar way to <code>GenServer.cast/3</code>.</p>
+<pre><code class="language-elixir">{:ok, pid} = Agent.start(fn -&gt; "hello" end)
+Agent.cast(pid, fn _ -&gt; "world" end)
+:ok
+Agent.get(pid, fn state -&gt; state end)
+"world"</code></pre>
+<h3>Final thoughts</h3>
+<p>As you can see it has almost all of the typical functions you'd see in a GenServer, however you don't need to worry about the process to process communication. You can simply focus on building the functionality of your application.
+The rise in Elixir's popularity is partly due to the fact that you can use abstractions around common problems while building your application, and only when you need the fine grained control, the underlying module is there for you to use, and this is especially the case for a GenServer.</p>
+<p>There are of course much more complicated problems a GenServer is quite adept at solving than anything I've written here, but the point was not to illustrate how complicated you can make an application, but rather how quickly you can get started with some simpler alternatives, and only use a GenServer when you absolutely need it.</p>
+                </article>
+                                <nav class="post-nav" aria-label="post navigation">
+                                            <a class="post-nav__link post-nav__link--prev" href="/offset-cursor-pagination">
+                            <span class="post-nav__label">← older</span>
+                            <span class="post-nav__title">offset and cursor pagination explained</span>
+                        </a>
+                                        <a class="post-nav__home" href="/">all posts</a>
+                                            <a class="post-nav__link post-nav__link--next" href="/best-practices-third-party-integrations">
+                            <span class="post-nav__label">newer →</span>
+                            <span class="post-nav__title">best practices for integrating with third-party libraries in elixir</span>
+                        </a>
+                                    </nav>
+                                    </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p class="site-footer__prompt">jackmarchant@blog:~$ exit</p>
+                <nav class="site-footer__links" aria-label="external links">
+                    <a href="/rss.xml">rss</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://github.com/jackmarchant" target="_blank" rel="noopener noreferrer">github</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://x.com/jackmarchant10" target="_blank" rel="noopener noreferrer" aria-label="x profile">x</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://www.linkedin.com/in/jack-marchant" target="_blank" rel="noopener noreferrer">linkedin</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:jack@jackmarchant.com">email</a>
+                </nav>
+                <p class="site-footer__meta">© <span data-current-year>2026</span> jack marchant</p>
+            </div>
+        </footer>
+
+        <script src="/prism.e59d2e5e.js"></script>
+        <script src="/index.2b15b332.js"></script>
+
+                    <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+            </body>
+</html>

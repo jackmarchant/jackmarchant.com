@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>refactoring for performance | jack marchant</title>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="/prism.30affb74.css" rel="stylesheet" type="text/css" />
+        <link href="/style.63f6c93a.css" rel="stylesheet" type="text/css" />
+                <meta name="description" content="I spend most of my time thinking about performance improvements. Refactoring is tricky work, even more so when you’re unfamiliar with the feature or part of the codebase." />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Refactoring for Performance" />
+        <meta property="og:description" content="I spend most of my time thinking about performance improvements. Refactoring is tricky work, even more so when you’re unfamiliar with the feature or part of the codebase." />
+        <meta property="og:url" content="https://www.jackmarchant.com/refactoring-for-performance" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Refactoring for Performance" />
+        <meta name="twitter:description" content="I spend most of my time thinking about performance improvements. Refactoring is tricky work, even more so when you’re unfamiliar with the feature or part of the codebase." />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="alternate" type="application/rss+xml" title="jack marchant" href="/rss.xml" />
+        <script>(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}}());</script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header__row">
+                    <p class="site-prompt">jackmarchant@blog:~$</p>
+                    <div class="site-header__actions">
+                        <button class="theme-toggle" type="button" data-theme-toggle aria-label="switch to light mode">
+                            <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        </button>
+                        <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                    </div>
+                </div>
+                <h1 class="site-title"><a href="/">jack marchant</a></h1>
+                <p class="site-tagline">principal engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">deputy</a> · writing about software</p>
+            </div>
+        </header>
+
+        <div class="subscribe-modal" data-subscribe-modal aria-hidden="true">
+            <div class="subscribe-modal__backdrop" data-subscribe-backdrop></div>
+            <div class="subscribe-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+                <div class="subscribe-modal__header">
+                    <h2 class="subscribe-modal__title" id="subscribe-modal-title">subscribe</h2>
+                    <button class="subscribe-modal__close" type="button" data-subscribe-close aria-label="close">×</button>
+                </div>
+                <p class="subscribe-modal__desc">get new posts delivered to your inbox</p>
+                <form class="subscribe-form" action="https://jackmarchant.us14.list-manage.com/subscribe?u=5a51a355f4187fddb0d0f4816&amp;id=b5ae7106ea" method="POST" target="_blank" rel="noopener noreferrer" novalidate>
+                    <div style="position:absolute;left:-5000px;" aria-hidden="true">
+                        <input type="text" name="b_5a51a355f4187fddb0d0f4816_b5ae7106ea" tabindex="-1" value="" />
+                    </div>
+                    <input type="email" name="EMAIL" id="mce-EMAIL" class="subscribe-form__input" placeholder="your@email.com" required />
+                    <button type="submit" class="subscribe-form__submit">subscribe →</button>
+                </form>
+            </div>
+        </div>
+        <main class="container">
+            
+                            <div class="reading-progress" data-reading-progress aria-hidden="true">
+                    <div class="reading-progress__bar" data-reading-progress-bar></div>
+                </div>
+                <article class="post" data-post>
+                    <h2 class="post__title">refactoring for performance</h2>
+                    <p class="post__date">February 12, 2024</p>
+                                        <div class="post__tldr">
+                        <span class="post__tldr-label">tl;dr</span>
+                        <p class="post__tldr-text">Before investing in a performance refactor, isolate the slow code and measure the maximum possible improvement to ensure the effort is worthwhile and you are targeting the right bottleneck.</p>
+                    </div>
+                                        <p>I spend most of my time thinking about performance improvements. Refactoring is tricky work, even more so when you’re unfamiliar with the feature or part of the codebase.</p>
+<p>Some refactoring might be simple, but in this post I’ll attempt to dissect my approach to solving performance issues in the hopes it’ll provide value for others.</p>
+<h2>Where do we start?</h2>
+<p>Before we can design a solution to a performance issue we must understand the problem. For example, is a page not loading or is it very slow? Are there more queries than necessary to get data? Can we see a slow part in the process? How do we know it’s slow? Answering these questions first is a must.</p>
+<p>Once we can see the slow part over and over again, if code is the culprit, I start by taking that piece out and seeing how fast it could be without it even though it may break or be incomplete. This helps me to see what the maximum amount of improvement we’ll get through performance optimisation – as if code didn’t run at all. </p>
+<p>This is the incentive. If I know how much performance improvement is possible, it’s worth investing time into figuring out a solution. If I see marginal or little to no improvement, I’m either in the wrong place or it wasn’t as slow as I thought - time to move on.</p>
+<p>The solution to the performance problem could be as simple as adding an index and as complicated as a complete rebuild. Code optimisation will naturally take longer than query optimisation because the behaviour of the code will generally change. If the problem is not that the query is slow but that the query runs thousands of times in a single request - those are two different problems to solve.</p>
+<h2>Going from prototype to production</h2>
+<p>The easiest way I get from identifying something slow to being able to fix the problem is to prototype the way I think it should work to be fast. Creating a prototype gives me the confidence the solution works at a high level, without addressing all of the edge cases. At minimum, I try to identify blockers standing in the way.</p>
+<p>Once I’ve proven the solution works, I can invest more time to understand the product behaviour and the experience. How does the user actually use this feature? What are they trying to accomplish?</p>
+<p>To be clear: this is the hardest point and often where the solution can fall over. If I misunderstand requirements or forget to include some parts, however minor they may seem, it undermines the performance optimisation and deflates any confidence in it when it comes time to release it.</p>
+<p>Confidence is a fickle thing - it can be gone in an instant and hard to get back quickly. Customers are never going to applaud performance improvements - maybe it should have been fast to begin with - but many performance improvements add up to a better experience.</p>
+<h2>Testing builds confidence</h2>
+<p>Testing a performance improvement is like any other test of a change with the addition of a specific metric that you want to improve. For example if the goal of the refactor was to reduce page load time, compare the previous and current page load speed. If reducing the number of queries was the goal, show that the number of queries has gone down. I often start with manual tests to confirm impact on the user experience supported by some quantifiable metric. Screenshots, videos or links to observability metrics all support the fact that the refactor does what was intended.</p>
+<p>Once I’ve covered the performance gains, the next thing to verify is correctness. To do this, I start with a few manual scenarios and compare the result of using the feature with and without my change. The most comprehensive way to do this is through a test spreadsheet which marks pass or failure for some scenarios. A user clicks a few buttons and assert the result is the same. Using a spreadsheet helps maintain regression tests and add test cases over time. Some features won’t be big enough that you’d need it, but even if you never share the results with anyone and use it for your own testing - it beats remembering all cases every time you test.</p>
+<p>One day you could even turn those manual tests into automated tests, if that’s not readily possible now. At least creating automated tests for any new code is a task worth doing.</p>
+<p>How do performance improvements differ from features?
+Feature development creates new functionality where it didn’t exist before, so there’s often time to assess its effectiveness and test with customers who might be more forgiving if something is not working. To break an existing feature that may be slow is to take it away. We must have extra care when dealing with something that is working today for some, even if it’s slow.</p>
+<p>A performance improvement must be:</p>
+<ul>
+<li>Cheaper or faster</li>
+<li>At least equal, ideally better behaviour</li>
+</ul>
+<p>It’s an unforgiving task, but rewarding when you can quantify performance improvements with a better experience for customers. Monitoring the outcome after release is a good place to start, even in the short term to verify the improvement was a success.</p>
+<p><strong>The hardest question, which will remain unanswered, is how can we know when performance optimisations are done?</strong></p>
+                </article>
+                                <nav class="post-nav" aria-label="post navigation">
+                                            <a class="post-nav__link post-nav__link--prev" href="/exploring-async-php">
+                            <span class="post-nav__label">← older</span>
+                            <span class="post-nav__title">exploring async php</span>
+                        </a>
+                                        <a class="post-nav__home" href="/">all posts</a>
+                                            <a class="post-nav__link post-nav__link--next" href="/how-does-a-relational-database-index-really-work">
+                            <span class="post-nav__label">newer →</span>
+                            <span class="post-nav__title">how does a relational database index really work?</span>
+                        </a>
+                                    </nav>
+                                    </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p class="site-footer__prompt">jackmarchant@blog:~$ exit</p>
+                <nav class="site-footer__links" aria-label="external links">
+                    <a href="/rss.xml">rss</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://github.com/jackmarchant" target="_blank" rel="noopener noreferrer">github</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://x.com/jackmarchant10" target="_blank" rel="noopener noreferrer" aria-label="x profile">x</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://www.linkedin.com/in/jack-marchant" target="_blank" rel="noopener noreferrer">linkedin</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:jack@jackmarchant.com">email</a>
+                </nav>
+                <p class="site-footer__meta">© <span data-current-year>2026</span> jack marchant</p>
+            </div>
+        </footer>
+
+        <script src="/prism.e59d2e5e.js"></script>
+        <script src="/index.2b15b332.js"></script>
+
+                    <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+            </body>
+</html>

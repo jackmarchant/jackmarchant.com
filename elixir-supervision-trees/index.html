@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>a comparison of elixir supervision trees and react component trees | jack marchant</title>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="/prism.30affb74.css" rel="stylesheet" type="text/css" />
+        <link href="/style.63f6c93a.css" rel="stylesheet" type="text/css" />
+                <meta name="description" content="A Supervision Tree in Elixir has quite a number of parallels to how developers using React think about a component tree. In this article I will attempt to describe parallel concepts between the two - and if you&#039;ve used React and are interested in functional programming, it might prompt you to take a look at Elixir." />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="A Comparison of Elixir Supervision Trees and React Component Trees" />
+        <meta property="og:description" content="A Supervision Tree in Elixir has quite a number of parallels to how developers using React think about a component tree. In this article I will attempt to describe parallel concepts between the two - and if you&#039;ve used React and are interested in functional programming, it might prompt you to take a look at Elixir." />
+        <meta property="og:url" content="https://www.jackmarchant.com/elixir-supervision-trees" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="A Comparison of Elixir Supervision Trees and React Component Trees" />
+        <meta name="twitter:description" content="A Supervision Tree in Elixir has quite a number of parallels to how developers using React think about a component tree. In this article I will attempt to describe parallel concepts between the two - and if you&#039;ve used React and are interested in functional programming, it might prompt you to take a look at Elixir." />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="alternate" type="application/rss+xml" title="jack marchant" href="/rss.xml" />
+        <script>(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}}());</script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header__row">
+                    <p class="site-prompt">jackmarchant@blog:~$</p>
+                    <div class="site-header__actions">
+                        <button class="theme-toggle" type="button" data-theme-toggle aria-label="switch to light mode">
+                            <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        </button>
+                        <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                    </div>
+                </div>
+                <h1 class="site-title"><a href="/">jack marchant</a></h1>
+                <p class="site-tagline">principal engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">deputy</a> · writing about software</p>
+            </div>
+        </header>
+
+        <div class="subscribe-modal" data-subscribe-modal aria-hidden="true">
+            <div class="subscribe-modal__backdrop" data-subscribe-backdrop></div>
+            <div class="subscribe-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+                <div class="subscribe-modal__header">
+                    <h2 class="subscribe-modal__title" id="subscribe-modal-title">subscribe</h2>
+                    <button class="subscribe-modal__close" type="button" data-subscribe-close aria-label="close">×</button>
+                </div>
+                <p class="subscribe-modal__desc">get new posts delivered to your inbox</p>
+                <form class="subscribe-form" action="https://jackmarchant.us14.list-manage.com/subscribe?u=5a51a355f4187fddb0d0f4816&amp;id=b5ae7106ea" method="POST" target="_blank" rel="noopener noreferrer" novalidate>
+                    <div style="position:absolute;left:-5000px;" aria-hidden="true">
+                        <input type="text" name="b_5a51a355f4187fddb0d0f4816_b5ae7106ea" tabindex="-1" value="" />
+                    </div>
+                    <input type="email" name="EMAIL" id="mce-EMAIL" class="subscribe-form__input" placeholder="your@email.com" required />
+                    <button type="submit" class="subscribe-form__submit">subscribe →</button>
+                </form>
+            </div>
+        </div>
+        <main class="container">
+            
+                            <div class="reading-progress" data-reading-progress aria-hidden="true">
+                    <div class="reading-progress__bar" data-reading-progress-bar></div>
+                </div>
+                <article class="post" data-post>
+                    <h2 class="post__title">a comparison of elixir supervision trees and react component trees</h2>
+                    <p class="post__date">February 06, 2018</p>
+                                        <div class="post__tldr">
+                        <span class="post__tldr-label">tl;dr</span>
+                        <p class="post__tldr-text">Elixir supervision trees isolate process failures so individual processes can crash and restart independently, similar to how React component error boundaries catch errors in a component tree.</p>
+                    </div>
+                                        <p>A Supervision Tree in <a href="https://elixir-lang.org/">Elixir</a> has quite a number of parallels to how developers using React think about a component tree. In this article I will attempt to describe parallel concepts between the two - and if you've used React and are interested in functional programming, it might prompt you to take a look at Elixir.</p>
+<p>Before we get started you'll need to know that <a href="https://elixir-lang.org/getting-started/mix-otp/supervisor-and-application.html#our-first-supervisor">Supervision Trees</a> are not necessarily a concept that was born out of the development of the Elixir language, but form part of a concept known as <a href="https://learnyousomeerlang.com/what-is-otp">OTP</a> (Open Telecom Platform), coined by the creators of the <a href="https://www.erlang.org/">Erlang</a> language.</p>
+<p>Hopefully I haven't lost you yet...take a look at this <a href="https://americanheritagetrees.org/wp-content/uploads/2016/10/Forest.png">picture of an actual tree to refresh</a>, and then come back.</p>
+<h3>Isolating Failure</h3>
+<p>One of the main building blocks in OTP is isolating processes so that they act (and fail) independently. When a new process is spawned in Elixir, it is common to monitor it with a <a href="https://hexdocs.pm/elixir/Supervisor.html">Supervisor</a>, so that if an error happens, the reason can be logged or sent to an error reporting service. The parallel in React, which we can find in the conceptual model of the React component tree is where a (Parent) Component renders one of its children, it can catch the error with <code>componentDidCatch</code> and similarly log or send an error report.</p>
+<h3>Message/Data Flow</h3>
+<p>In React Component Trees, the flow of data is one-way, from parent to child(ren). The parent component can also pass functions as props, which would enable the child component to respond back to the parent. The parent can then handle this callback by setting a new state, and consequently, it may re-render its children.
+In an Elixir Supervision Tree, a child process can be linked to the parent process, allowing the parent to be sent a message when something happens, for example, when the process finishes what it was doing. A common scenario might be that a process could spawn a <a href="https://hexdocs.pm/elixir/Task.html">Task</a>, which on completion could (depending on how it is spawned) send a message back to the parent process for it to be handled appropriately.</p>
+<h3>Guaruntees with a Tree structure</h3>
+<p>A tree structure makes sense when we think about UI, so that we can predictably control the way in which data flows through an application, allowing us to make certain guaruntees about our components. You might have heard of this being described as React being &quot;easy to reason about&quot;.</p>
+<p>Elixir Supervision Trees also utilise the tree structure to make guaruntees around availability and isolation - key concepts as part of OTP. A supervision tree isolates each node and set of nodes so that it can both easily recover when things go wrong (restarting processes - isolation of failure) and to keep the rest of the nodes in the tree unaffected by the system failure. You can think about this like branches in an actual tree - when a branch on a tree dies, it can be cut off and the rest of the tree will attempt to regrow the branch.</p>
+<p>Similarly, in a React Component Tree, as I mentioned earlier, errors can be caught with <code>componentDidCatch</code> lifecycle method - and one day a <a href="https://reactjs.org/blog/2019/02/06/react-v16.8.0.html#whats-next">hook</a> - at various points in the tree to stop the whole page from crashing, making the entire page unusable. Instead, only one branch or set of components in the tree won't be able to render correctly, or shows an error state, but it keeps the rest of the application working as if nothing happened.</p>
+<p>If you still have no idea why you would use a Supervision Tree in Elixir or how it could possibly relate to a UI library - I'm sorry, that's all I've got.</p>
+                </article>
+                                <nav class="post-nav" aria-label="post navigation">
+                                            <a class="post-nav__link post-nav__link--prev" href="/surviving-tech-debt">
+                            <span class="post-nav__label">← older</span>
+                            <span class="post-nav__title">surviving technical debt in the real world</span>
+                        </a>
+                                        <a class="post-nav__home" href="/">all posts</a>
+                                            <a class="post-nav__link post-nav__link--next" href="/composing-plugs">
+                            <span class="post-nav__label">newer →</span>
+                            <span class="post-nav__title">composing elixir plugs in a phoenix application</span>
+                        </a>
+                                    </nav>
+                                    </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p class="site-footer__prompt">jackmarchant@blog:~$ exit</p>
+                <nav class="site-footer__links" aria-label="external links">
+                    <a href="/rss.xml">rss</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://github.com/jackmarchant" target="_blank" rel="noopener noreferrer">github</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://x.com/jackmarchant10" target="_blank" rel="noopener noreferrer" aria-label="x profile">x</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://www.linkedin.com/in/jack-marchant" target="_blank" rel="noopener noreferrer">linkedin</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:jack@jackmarchant.com">email</a>
+                </nav>
+                <p class="site-footer__meta">© <span data-current-year>2026</span> jack marchant</p>
+            </div>
+        </footer>
+
+        <script src="/prism.e59d2e5e.js"></script>
+        <script src="/index.2b15b332.js"></script>
+
+                    <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+            </body>
+</html>

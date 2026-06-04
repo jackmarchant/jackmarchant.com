@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>help me, help you - code review | jack marchant</title>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="/prism.30affb74.css" rel="stylesheet" type="text/css" />
+        <link href="/style.63f6c93a.css" rel="stylesheet" type="text/css" />
+                <meta name="description" content="Code Reviews are one of the easiest ways to help your team-mates. There are a number of benefits for both the reviewer and pull request author:" />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Help me, help you - Code Review" />
+        <meta property="og:description" content="Code Reviews are one of the easiest ways to help your team-mates. There are a number of benefits for both the reviewer and pull request author:" />
+        <meta property="og:url" content="https://www.jackmarchant.com/help-me-help-you-code-review" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Help me, help you - Code Review" />
+        <meta name="twitter:description" content="Code Reviews are one of the easiest ways to help your team-mates. There are a number of benefits for both the reviewer and pull request author:" />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="alternate" type="application/rss+xml" title="jack marchant" href="/rss.xml" />
+        <script>(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}}());</script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header__row">
+                    <p class="site-prompt">jackmarchant@blog:~$</p>
+                    <div class="site-header__actions">
+                        <button class="theme-toggle" type="button" data-theme-toggle aria-label="switch to light mode">
+                            <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        </button>
+                        <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                    </div>
+                </div>
+                <h1 class="site-title"><a href="/">jack marchant</a></h1>
+                <p class="site-tagline">principal engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">deputy</a> · writing about software</p>
+            </div>
+        </header>
+
+        <div class="subscribe-modal" data-subscribe-modal aria-hidden="true">
+            <div class="subscribe-modal__backdrop" data-subscribe-backdrop></div>
+            <div class="subscribe-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+                <div class="subscribe-modal__header">
+                    <h2 class="subscribe-modal__title" id="subscribe-modal-title">subscribe</h2>
+                    <button class="subscribe-modal__close" type="button" data-subscribe-close aria-label="close">×</button>
+                </div>
+                <p class="subscribe-modal__desc">get new posts delivered to your inbox</p>
+                <form class="subscribe-form" action="https://jackmarchant.us14.list-manage.com/subscribe?u=5a51a355f4187fddb0d0f4816&amp;id=b5ae7106ea" method="POST" target="_blank" rel="noopener noreferrer" novalidate>
+                    <div style="position:absolute;left:-5000px;" aria-hidden="true">
+                        <input type="text" name="b_5a51a355f4187fddb0d0f4816_b5ae7106ea" tabindex="-1" value="" />
+                    </div>
+                    <input type="email" name="EMAIL" id="mce-EMAIL" class="subscribe-form__input" placeholder="your@email.com" required />
+                    <button type="submit" class="subscribe-form__submit">subscribe →</button>
+                </form>
+            </div>
+        </div>
+        <main class="container">
+            
+                            <div class="reading-progress" data-reading-progress aria-hidden="true">
+                    <div class="reading-progress__bar" data-reading-progress-bar></div>
+                </div>
+                <article class="post" data-post>
+                    <h2 class="post__title">help me, help you - code review</h2>
+                    <p class="post__date">October 24, 2019</p>
+                                        <div class="post__tldr">
+                        <span class="post__tldr-label">tl;dr</span>
+                        <p class="post__tldr-text">Effective code reviews require authors to separate ego from their code and reviewers to communicate feedback with good intent, so both parties can collaborate toward a better solution.</p>
+                    </div>
+                                        <p>Code Reviews are one of the easiest ways to help your team-mates. There are a number of benefits for both the reviewer and pull request author:</p>
+<ul>
+<li>
+<p>Product knowledge sharing through anecdotes or code samples</p>
+</li>
+<li>
+<p>Sharing techniques for writing maintainable code</p>
+</li>
+<li>
+<p>Differing perspectives collaborating on a single solution</p>
+</li>
+</ul>
+<p>I find it helpful to consider the intent of each party participating in a code review. Let’s think about what’s important to both the reviewer and author and how each can contribute to the success of the other.</p>
+<h3>As an Author, I want to submit my code for peer review, so that I can gather feedback and iterate on my solution</h3>
+<p>When you submit a new pull request, depending on your previous experiences, you might feel nervous about the response from your peers. It’s normal to be attached to your own code if you’ve spent a long time writing it, however this attachment can be a detriment to your willingness to accept feedback. While it’s not easy not to take feedback personally, it’s better to assume that the person providing feedback has the same good intentions you had when writing the code.</p>
+<p>The time it takes from when you open a pull request, to when it is merged varies widely based on it’s content, risk and testability (among other things). When specific people or teams are the best people to review your code, it helps to reach out to those people and let them know you’d like them to review it. It is your responsibility to follow up with them and get your code reviewed.</p>
+<p>It can make a huge difference if the pull request has a clear (and sometimes, thorough) description, breaking down context for the change, what the effect of the change is, and how it will be tested. In an ideal world, we’d be submitting automated tests along with our code, but this is not always possible. We should strive as a team to prove that our code works as expected, and including tests (manual or automated). This will aid the reviewer in understanding the reason for your change, so that they can in turn help you, by giving feedback. </p>
+<p>Pull requests that are matched to tickets are often seen as a 1-1 relationship. I don’t subscribe to this idea, and instead I’d prefer to see one large code change broken down into multiple chunks (1 ticket, many pull requests) that can be easily pieced together (if necessary) and follow a progression to a releasable version of your code. Too often we try to build the whole solution and release it to users all at once, often forgetting the risk involved with doing so. In many cases, hiding new code paths with feature flags can make your code releasable, without necessarily running in production straight away. Breaking code down into manageable chunks, makes the review process easier for both you and the reviewer.</p>
+<p><strong>TLDR;</strong></p>
+<ul>
+<li>
+<p>Make the pull request clear and concise.</p>
+</li>
+<li>
+<p>Follow-up reviewers to look at your pull request</p>
+</li>
+<li>
+<p>Provide comprehensive reasoning, where possible for the change</p>
+</li>
+<li>
+<p>Break down large code changes into smaller chunks</p>
+</li>
+</ul>
+<h2>As a Reviewer, I want to review code to ensure quality and accuracy and provide relevant feedback to help the Author move forward</h2>
+<p>Reviewing code can be difficult at times - when there are a large number of lines or not enough context in the description, it can make reviewing painful. As the reviewer, you want to ensure the correctness of the code in terms of the objective, rather than aesthetic - however the quality of the code organisation and formatting can have an impact on the maintainability of the code in the long term. In a large team with many contributors, or an open source codebase, this is particularly important. Thankfully, there are a number of automated formatting and code linters available in many different languages to help code authors meet this standard more easily. </p>
+<p>When reviewing code, it’s easy to look at the code at face value and forget about the intent, requirements and restrictions under which the author wrote said code. Without knowing all of this, the reviewer should make an attempt not to assume the worst of the author and instead work with them to provide feedback in a polite and professional manner. </p>
+<p>As a reviewer, you can only provide feedback from the information you’ve been given, whether that’s code, a description of the problem or a diagram of the solution. However, sometimes that is not enough, and you need to also seek further information from the author in order to provide great feedback. Your approach may vary depending on the size of the pull request, as with anything else in software development - it’s not a one size fits all situation, however it’s up to you as a reviewer to provide feedback that helps move the process forward.</p>
+<p><strong>TLDR;</strong></p>
+<ul>
+<li>
+<p>Automate as much of the formatting concerns as possible</p>
+</li>
+<li>
+<p>Discover the intent behind the code, not just the code itself</p>
+</li>
+<li>
+<p>Seek further information, if something is not clear</p>
+</li>
+</ul>
+<h2>Before your next pull request</h2>
+<p>You can only get out of the pull request process as you put in, both as a reviewer and an author. On both sides of the equation, there are many things to consider before code gets shipped to production, many of which I haven’t discussed today. Before you review or open your next pull request, understand how you can make the process easier for you and your colleagues - help them, help you.</p>
+                </article>
+                                <nav class="post-nav" aria-label="post navigation">
+                                            <a class="post-nav__link post-nav__link--prev" href="/a-pratical-guide-to-test-driven-development">
+                            <span class="post-nav__label">← older</span>
+                            <span class="post-nav__title">a practical guide to test driven development</span>
+                        </a>
+                                        <a class="post-nav__home" href="/">all posts</a>
+                                            <a class="post-nav__link post-nav__link--next" href="/making-software-a-three-step-process">
+                            <span class="post-nav__label">newer →</span>
+                            <span class="post-nav__title">making software - a three step process</span>
+                        </a>
+                                    </nav>
+                                    </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p class="site-footer__prompt">jackmarchant@blog:~$ exit</p>
+                <nav class="site-footer__links" aria-label="external links">
+                    <a href="/rss.xml">rss</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://github.com/jackmarchant" target="_blank" rel="noopener noreferrer">github</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://x.com/jackmarchant10" target="_blank" rel="noopener noreferrer" aria-label="x profile">x</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://www.linkedin.com/in/jack-marchant" target="_blank" rel="noopener noreferrer">linkedin</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:jack@jackmarchant.com">email</a>
+                </nav>
+                <p class="site-footer__meta">© <span data-current-year>2026</span> jack marchant</p>
+            </div>
+        </footer>
+
+        <script src="/prism.e59d2e5e.js"></script>
+        <script src="/index.2b15b332.js"></script>
+
+                    <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+            </body>
+</html>

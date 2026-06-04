@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>using a genserver to handle asynchronous and concurrent tasks | jack marchant</title>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="/prism.30affb74.css" rel="stylesheet" type="text/css" />
+        <link href="/style.63f6c93a.css" rel="stylesheet" type="text/css" />
+                <meta name="description" content="In most cases I have found inter-process communication to be an unnecessary overhead for the work I have been doing. Although Elixir is known for this (along with Erlang), it really depends on what you’re trying to achieve and processes shouldn’t be spawned just for the fun of it. I have recently come across a scenario where I thought having a separate process be responsible for performing concurrent and asynchronous jobs would be the best way to approach the problem. In this article I will explain the problem and the solution. " />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Using a GenServer to handle asynchronous and concurrent tasks" />
+        <meta property="og:description" content="In most cases I have found inter-process communication to be an unnecessary overhead for the work I have been doing. Although Elixir is known for this (along with Erlang), it really depends on what you’re trying to achieve and processes shouldn’t be spawned just for the fun of it. I have recently come across a scenario where I thought having a separate process be responsible for performing concurrent and asynchronous jobs would be the best way to approach the problem. In this article I will explain the problem and the solution. " />
+        <meta property="og:url" content="https://www.jackmarchant.com/genserver-async-concurrent-tasks" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Using a GenServer to handle asynchronous and concurrent tasks" />
+        <meta name="twitter:description" content="In most cases I have found inter-process communication to be an unnecessary overhead for the work I have been doing. Although Elixir is known for this (along with Erlang), it really depends on what you’re trying to achieve and processes shouldn’t be spawned just for the fun of it. I have recently come across a scenario where I thought having a separate process be responsible for performing concurrent and asynchronous jobs would be the best way to approach the problem. In this article I will explain the problem and the solution. " />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="alternate" type="application/rss+xml" title="jack marchant" href="/rss.xml" />
+        <script>(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}}());</script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header__row">
+                    <p class="site-prompt">jackmarchant@blog:~$</p>
+                    <div class="site-header__actions">
+                        <button class="theme-toggle" type="button" data-theme-toggle aria-label="switch to light mode">
+                            <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        </button>
+                        <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                    </div>
+                </div>
+                <h1 class="site-title"><a href="/">jack marchant</a></h1>
+                <p class="site-tagline">principal engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">deputy</a> · writing about software</p>
+            </div>
+        </header>
+
+        <div class="subscribe-modal" data-subscribe-modal aria-hidden="true">
+            <div class="subscribe-modal__backdrop" data-subscribe-backdrop></div>
+            <div class="subscribe-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+                <div class="subscribe-modal__header">
+                    <h2 class="subscribe-modal__title" id="subscribe-modal-title">subscribe</h2>
+                    <button class="subscribe-modal__close" type="button" data-subscribe-close aria-label="close">×</button>
+                </div>
+                <p class="subscribe-modal__desc">get new posts delivered to your inbox</p>
+                <form class="subscribe-form" action="https://jackmarchant.us14.list-manage.com/subscribe?u=5a51a355f4187fddb0d0f4816&amp;id=b5ae7106ea" method="POST" target="_blank" rel="noopener noreferrer" novalidate>
+                    <div style="position:absolute;left:-5000px;" aria-hidden="true">
+                        <input type="text" name="b_5a51a355f4187fddb0d0f4816_b5ae7106ea" tabindex="-1" value="" />
+                    </div>
+                    <input type="email" name="EMAIL" id="mce-EMAIL" class="subscribe-form__input" placeholder="your@email.com" required />
+                    <button type="submit" class="subscribe-form__submit">subscribe →</button>
+                </form>
+            </div>
+        </div>
+        <main class="container">
+            
+                            <div class="reading-progress" data-reading-progress aria-hidden="true">
+                    <div class="reading-progress__bar" data-reading-progress-bar></div>
+                </div>
+                <article class="post" data-post>
+                    <h2 class="post__title">using a genserver to handle asynchronous and concurrent tasks</h2>
+                    <p class="post__date">February 01, 2019</p>
+                                        <div class="post__tldr">
+                        <span class="post__tldr-label">tl;dr</span>
+                        <p class="post__tldr-text">A GenServer is a good fit for handling concurrent, asynchronous jobs like asset migrations where a GraphQL mutation must trigger background work without blocking the HTTP response.</p>
+                    </div>
+                                        <p>In most cases I have found inter-process communication to be an unnecessary overhead for the work I have been doing. Although Elixir is known for this (along with Erlang), it really depends on what you’re trying to achieve and processes shouldn’t be spawned just for the fun of it. I have recently come across a scenario where I thought having a separate process be responsible for performing concurrent and asynchronous jobs would be the best way to approach the problem. In this article I will explain the problem and the solution. </p>
+<h3>Requirements</h3>
+<p>The goal of this work was to asynchronously handle requests to move static assets from one provider to another. This means downloading the original to a temporary file on the server, then uploading it to the new provider and saving results in a database. </p>
+<ul>
+<li>A GraphQL mutation needs to trigger this asynchronous job and not block the response. </li>
+<li>When the job completes, either successfully or with a failure, we should report it or handle it in some way. </li>
+<li>Multiple requests will come through concurrently, meaning the process shouldn’t be blocked from handling another request because one is still running. </li>
+<li>A request may trigger one or many jobs</li>
+</ul>
+<h3>The process of finding a solution</h3>
+<p>There are many different options for structuring your Elixir applications in terms of the supervision tree - when and where to spawn processes and which type of process suits your use case is often a guessing game until you’ve used them all before extensively. </p>
+<p>My first thought was to use a <a href="https://hexdocs.pm/elixir/DynamicSupervisor.html">DynamicSupervisor</a> (i.e <a href="https://hexdocs.pm/elixir/Task.Supervisor.html">Task.Supervisor</a>) and specifically create new supervised processes when the work needed to be done, and on demand.</p>
+<p>This didn’t really work how I thought it would because the main process would still block until all the tasks were finished before responding to the initial request. </p>
+<p>The next solution I tried was to send messages to a <a href="https://hexdocs.pm/elixir/GenServer.html">GenServer</a>, and have it do the work so that the main process could return a response almost immediately. While this got most of the way to solving the problem, a common problem found with using GenServers is that they can only handle one message at a time, so while this solution provides the asynchronous behaviour, it loses the benefit of concurrency. </p>
+<p>The solution that (seems to work so far) I ended up going with wasn’t too far away from the Genserver solution. The only difference being when we schedule a job to be done, it only spawns a <a href="https://hexdocs.pm/elixir/Task.html">Task</a> with <a href="https://hexdocs.pm/elixir/Task.html#async/1">Task.async/1</a>, the benefit of which is that it will always send a message back to the caller when it’s finished even if you don’t use <a href="https://hexdocs.pm/elixir/Task.html#await/2">Task.await/2</a>. </p>
+<p>As it is a GenServer that is spawning these tasks, it can handle generic messages sent to it quite easily with the <a href="https://hexdocs.pm/elixir/GenServer.html#c:handle_info/2">handle_info/2</a> callback. This is where the GenServer handles success or failure states of each task, and processing each result synchronously is not a problem in this case. </p>
+<p>Here's a snippet of the GenServer that spawns these Task processes.</p>
+<pre><code class="language-elixir">defmodule TaskRunner do
+  use GenServer
+
+  @me __MODULE__
+
+  def start_link(opts) do
+    GenServer.start_link(@me, opts, name: @me)
+  end
+
+  def init(opts), do: {:ok, opts}
+
+  def run(fun) do
+    GenServer.cast(@me, {:run, fun})
+  end
+
+  def handle_cast({:run, fun}, state) do
+    Task.async(fun) # sends a message back to the TaskRunner when completed
+    {:noreply, state}
+  end
+
+  # handle_info/2 receives generic messages from the Task processes
+  def handle_info({_task, {:ok, result}}, state) do
+    Logger.info("#{inspect(result)} Job Done.")
+    {:noreply, state}
+  end
+
+  def handle_info({_task, {:error, reason}}, state) do
+    Logger.error("Failed to completed job: #{reason}")
+    {:noreply, state}
+  end
+
+  def handle_info(_, state), do: {:noreply, state}
+end</code></pre>
+<p>What's interesting about this code is that it may actually be reimplementing something that already exists in Elixir, that I haven't quite got my head around yet - either way I haven't got a problem with doing it this way as long as it works! Wrapping the spawning of a Task in a GenServer simply provides the ability to &quot;schedule&quot; tasks (as each message is processed sequentially), while responding to the response from each task invidiually.</p>
+<p>In theory if we were to send a bunch of messages that get &quot;queued&quot; for processing in the GenServer's mailbox, a problem may arise where if the application terminates, the GenServer will lose all of it's messages and those tasks will be lost. At this point, however, I would prefer to see how much of a problem this turns out to be as there would be various factors to consider.</p>
+<p>I’m still not sure if this is going to be the best way to architect this asynchronous, concurrent behaviour, but in the few cases where I’ve thought an OTP approach makes sense I have often found many different ways to solve this kind of problem - which is both a good and bad part of Elixir.</p>
+                </article>
+                                <nav class="post-nav" aria-label="post navigation">
+                                            <a class="post-nav__link post-nav__link--prev" href="/best-practices-third-party-integrations">
+                            <span class="post-nav__label">← older</span>
+                            <span class="post-nav__title">best practices for integrating with third-party libraries in elixir</span>
+                        </a>
+                                        <a class="post-nav__home" href="/">all posts</a>
+                                            <a class="post-nav__link post-nav__link--next" href="/lonestar-elixir-2019">
+                            <span class="post-nav__label">newer →</span>
+                            <span class="post-nav__title">lonestar elixirconf 2019 highlights</span>
+                        </a>
+                                    </nav>
+                                    </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p class="site-footer__prompt">jackmarchant@blog:~$ exit</p>
+                <nav class="site-footer__links" aria-label="external links">
+                    <a href="/rss.xml">rss</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://github.com/jackmarchant" target="_blank" rel="noopener noreferrer">github</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://x.com/jackmarchant10" target="_blank" rel="noopener noreferrer" aria-label="x profile">x</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://www.linkedin.com/in/jack-marchant" target="_blank" rel="noopener noreferrer">linkedin</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:jack@jackmarchant.com">email</a>
+                </nav>
+                <p class="site-footer__meta">© <span data-current-year>2026</span> jack marchant</p>
+            </div>
+        </footer>
+
+        <script src="/prism.e59d2e5e.js"></script>
+        <script src="/index.2b15b332.js"></script>
+
+                    <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+            </body>
+</html>

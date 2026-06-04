@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>jack marchant</title>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="/prism.30affb74.css" rel="stylesheet" type="text/css" />
+        <link href="/style.63f6c93a.css" rel="stylesheet" type="text/css" />
+                <meta name="description" content="I'm a Software Engineer from Sydney. I like writing code and talking about it." />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Jack Marchant — Software Engineer" />
+        <meta property="og:description" content="I'm a Software Engineer from Sydney. I like writing code and talking about it." />
+        <meta property="og:url" content="https://www.jackmarchant.com" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Jack Marchant — Software Engineer" />
+        <meta name="twitter:description" content="I'm a Software Engineer from Sydney. I like writing code and talking about it." />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="alternate" type="application/rss+xml" title="jack marchant" href="/rss.xml" />
+        <script>(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}}());</script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header__row">
+                    <p class="site-prompt">jackmarchant@blog:~$</p>
+                    <div class="site-header__actions">
+                        <button class="theme-toggle" type="button" data-theme-toggle aria-label="switch to light mode">
+                            <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        </button>
+                        <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                    </div>
+                </div>
+                <h1 class="site-title"><a href="/">jack marchant</a></h1>
+                <p class="site-tagline">principal engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">deputy</a> · writing about software</p>
+            </div>
+        </header>
+
+        <div class="subscribe-modal" data-subscribe-modal aria-hidden="true">
+            <div class="subscribe-modal__backdrop" data-subscribe-backdrop></div>
+            <div class="subscribe-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+                <div class="subscribe-modal__header">
+                    <h2 class="subscribe-modal__title" id="subscribe-modal-title">subscribe</h2>
+                    <button class="subscribe-modal__close" type="button" data-subscribe-close aria-label="close">×</button>
+                </div>
+                <p class="subscribe-modal__desc">get new posts delivered to your inbox</p>
+                <form class="subscribe-form" action="https://jackmarchant.us14.list-manage.com/subscribe?u=5a51a355f4187fddb0d0f4816&amp;id=b5ae7106ea" method="POST" target="_blank" rel="noopener noreferrer" novalidate>
+                    <div style="position:absolute;left:-5000px;" aria-hidden="true">
+                        <input type="text" name="b_5a51a355f4187fddb0d0f4816_b5ae7106ea" tabindex="-1" value="" />
+                    </div>
+                    <input type="email" name="EMAIL" id="mce-EMAIL" class="subscribe-form__input" placeholder="your@email.com" required />
+                    <button type="submit" class="subscribe-form__submit">subscribe →</button>
+                </form>
+            </div>
+        </div>
+        <main class="container">
+                                            <section class="post-directory" data-post-directory>
+                                            <a class="featured-card" data-featured-card href="/leading-by-example">
+                            <span class="featured-card__label">// latest</span>
+                            <h2 class="featured-card__title">leading by example</h2>
+                            <div class="featured-card__meta">
+                                <span class="featured-card__date">2026-06</span>
+                                                                    <span class="featured-card__sep" aria-hidden="true">·</span>
+                                    <span class="featured-card__reading">4 min read</span>
+                                                            </div>
+                            <div class="featured-card__blurb"><p>Reflecting on my own values and experiences of leading by example. What I previously thought I was doing well, turned out to be limiting my own growth.</p></div>
+                            <span class="featured-card__cta">read post →</span>
+                        </a>
+                                        <div class="post-controls">
+                        <label class="post-search" aria-label="search posts">
+                            <span class="post-search__prompt" aria-hidden="true">grep&gt;</span>
+                            <input class="post-search__input" type="search" placeholder="search posts…" data-post-search autocomplete="off" spellcheck="false" />
+                        </label>
+                        <div class="sort-toggle" data-sort-toggle role="group" aria-label="sort posts">
+                            <button class="sort-toggle__btn is-active" type="button" data-sort="newest">newest</button>
+                            <button class="sort-toggle__btn" type="button" data-sort="oldest">oldest</button>
+                        </div>
+                    </div>
+                    <div class="tag-filter-bar" data-tag-filter-bar>
+                        <button class="tag-filter-btn is-active" data-tag-filter="all">all</button>
+                                                    <button class="tag-filter-btn tag-filter-btn--ai" data-tag-filter="ai">ai</button>
+                                                    <button class="tag-filter-btn tag-filter-btn--career" data-tag-filter="career">career</button>
+                                                    <button class="tag-filter-btn tag-filter-btn--database" data-tag-filter="database">database</button>
+                                                    <button class="tag-filter-btn tag-filter-btn--elixir" data-tag-filter="elixir">elixir</button>
+                                                    <button class="tag-filter-btn tag-filter-btn--engineering" data-tag-filter="engineering">engineering</button>
+                                                    <button class="tag-filter-btn tag-filter-btn--leadership" data-tag-filter="leadership">leadership</button>
+                                                    <button class="tag-filter-btn tag-filter-btn--php" data-tag-filter="php">php</button>
+                                                    <button class="tag-filter-btn tag-filter-btn--practices" data-tag-filter="practices">practices</button>
+                                                    <button class="tag-filter-btn tag-filter-btn--testing" data-tag-filter="testing">testing</button>
+                                            </div>
+                    <p class="post-count">— <span data-results-count>37</span> posts —</p>
+                    <p class="post-empty" data-post-empty hidden>no posts match. try clearing filters.</p>
+                    <div class="post-list" data-post-list>
+                                                    <article class="post-card" data-post-card data-title="leading&#x20;by&#x20;example" data-blurb="reflecting&#x20;on&#x20;my&#x20;own&#x20;values&#x20;and&#x20;experiences&#x20;of&#x20;leading&#x20;by&#x20;example.&#x20;what&#x20;i&#x20;previously&#x20;thought&#x20;i&#x20;was&#x20;doing&#x20;well,&#x20;turned&#x20;out&#x20;to&#x20;be&#x20;limiting&#x20;my&#x20;own&#x20;growth." data-tags="leadership" data-date="2026-06">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">leading by example</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">4 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2026-06</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--leadership">leadership</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Reflecting on my own values and experiences of leading by example. What I previously thought I was doing well, turned out to be limiting my own growth.</p>
+                                        <a href="/leading-by-example" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="agentic&#x20;coding&#x20;habits&#x20;to&#x20;accelerate&#x20;your&#x20;engineering&#x20;workflow" data-blurb="five&#x20;practical&#x20;habits&#x20;for&#x20;working&#x20;effectively&#x20;with&#x20;coding&#x20;agents,&#x20;shifting&#x20;from&#x20;writing&#x20;code&#x20;to&#x20;designing&#x20;the&#x20;systems&#x20;that&#x20;write&#x20;it,&#x20;and&#x20;accelerating&#x20;the&#x20;move&#x20;toward&#x20;systems&#x20;thinking." data-tags="engineering" data-date="2026-04">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">agentic coding habits to accelerate your engineering workflow</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">4 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2026-04</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--engineering">engineering</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Five practical habits for working effectively with coding agents, shifting from writing code to designing the systems that write it, and accelerating the move toward systems thinking.</p>
+                                        <a href="/agentic-coding-habits-to-accelerate-your-engineering-workflow" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="will&#x20;ai&#x20;replace&#x20;software&#x20;engineers&#x3F;" data-blurb="ai&#x20;is&#x20;unlikely&#x20;to&#x20;replace&#x20;software&#x20;engineers&#x20;outright&#x20;because&#x20;engineering&#x20;is&#x20;fundamentally&#x20;about&#x20;judgement,&#x20;tradeoffs,&#x20;and&#x20;direction,&#x20;even&#x20;as&#x20;ai&#x20;automates&#x20;more&#x20;manual&#x20;implementation&#x20;work." data-tags="ai" data-date="2026-04">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">will ai replace software engineers?</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">3 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2026-04</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--ai">ai</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>AI is unlikely to replace software engineers outright because engineering is fundamentally about judgement, tradeoffs, and direction, even as AI automates more manual implementation work.</p>
+                                        <a href="/will-ai-replace-software-engineers" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="engineering&#x20;the&#x20;loop" data-blurb="building&#x20;an&#x20;always-on&#x20;automation&#x20;pipeline&#x20;around&#x20;ai&#x20;coding&#x20;agents&#x20;shifts&#x20;your&#x20;focus&#x20;from&#x20;writing&#x20;code&#x20;to&#x20;writing&#x20;clear&#x20;specs,&#x20;because&#x20;the&#x20;quality&#x20;of&#x20;the&#x20;agent&#x20;input&#x20;directly&#x20;determines&#x20;the&#x20;quality&#x20;of&#x20;the&#x20;output." data-tags="ai&#x20;practices" data-date="2026-03">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">engineering the loop</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">5 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2026-03</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--ai">ai</span>
+                                                                            <span class="tag-chip tag-chip--practices">practices</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Building an always-on automation pipeline around AI coding agents shifts your focus from writing code to writing clear specs, because the quality of the agent input directly determines the quality of the output.</p>
+                                        <a href="/engineering-the-loop" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="using&#x20;coding&#x20;agents&#x20;in&#x20;my&#x20;workflow&#x20;in&#x20;2025" data-blurb="a&#x20;practical&#x20;snapshot&#x20;of&#x20;integrating&#x20;ai&#x20;coding&#x20;agents&#x20;and&#x20;cursor&#x20;into&#x20;a&#x20;daily&#x20;engineering&#x20;workflow&#x20;in&#x20;2025,&#x20;moving&#x20;beyond&#x20;autocomplete&#x20;to&#x20;agents&#x20;handling&#x20;research,&#x20;planning,&#x20;and&#x20;full&#x20;development&#x20;tasks." data-tags="ai" data-date="2025-12">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">using coding agents in my workflow in 2025</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">4 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2025-12</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--ai">ai</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>A practical snapshot of integrating AI coding agents and Cursor into a daily engineering workflow in 2025, moving beyond autocomplete to agents handling research, planning, and full development tasks.</p>
+                                        <a href="/using-coding-agents-in-my-workflow-in-2025" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="beyond&#x20;autocomplete&#x3A;&#x20;a&#x20;practical&#x20;guide&#x20;to&#x20;ai-assisted&#x20;development" data-blurb="ai&#x20;assistants&#x20;are&#x20;most&#x20;valuable&#x20;when&#x20;used&#x20;as&#x20;an&#x20;interactive&#x20;pair&#x20;programmer&#x20;for&#x20;dialogue,&#x20;test&#x20;generation,&#x20;and&#x20;code&#x20;review&#x20;rather&#x20;than&#x20;just&#x20;autocomplete&#x20;suggestions." data-tags="ai&#x20;testing&#x20;practices" data-date="2025-09">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">beyond autocomplete: a practical guide to ai-assisted development</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">4 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2025-09</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--ai">ai</span>
+                                                                            <span class="tag-chip tag-chip--testing">testing</span>
+                                                                            <span class="tag-chip tag-chip--practices">practices</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>AI assistants are most valuable when used as an interactive pair programmer for dialogue, test generation, and code review rather than just autocomplete suggestions.</p>
+                                        <a href="/beyond-autocomplete-a-practical-guide-to-ai-assisted-development" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="how&#x20;does&#x20;a&#x20;relational&#x20;database&#x20;index&#x20;really&#x20;work&#x3F;" data-blurb="a&#x20;database&#x20;index&#x20;is&#x20;a&#x20;key-value&#x20;reverse-lookup&#x20;structure&#x20;that&#x20;lets&#x20;the&#x20;query&#x20;engine&#x20;skip&#x20;full&#x20;table&#x20;scans,&#x20;dramatically&#x20;speeding&#x20;up&#x20;queries&#x20;at&#x20;the&#x20;cost&#x20;of&#x20;additional&#x20;storage&#x20;and&#x20;write&#x20;overhead." data-tags="database" data-date="2024-02">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">how does a relational database index really work?</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">4 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2024-02</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--database">database</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>A database index is a key-value reverse-lookup structure that lets the query engine skip full table scans, dramatically speeding up queries at the cost of additional storage and write overhead.</p>
+                                        <a href="/how-does-a-relational-database-index-really-work" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="refactoring&#x20;for&#x20;performance" data-blurb="before&#x20;investing&#x20;in&#x20;a&#x20;performance&#x20;refactor,&#x20;isolate&#x20;the&#x20;slow&#x20;code&#x20;and&#x20;measure&#x20;the&#x20;maximum&#x20;possible&#x20;improvement&#x20;to&#x20;ensure&#x20;the&#x20;effort&#x20;is&#x20;worthwhile&#x20;and&#x20;you&#x20;are&#x20;targeting&#x20;the&#x20;right&#x20;bottleneck." data-tags="practices" data-date="2024-02">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">refactoring for performance</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">5 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2024-02</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--practices">practices</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Before investing in a performance refactor, isolate the slow code and measure the maximum possible improvement to ensure the effort is worthwhile and you are targeting the right bottleneck.</p>
+                                        <a href="/refactoring-for-performance" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="exploring&#x20;async&#x20;php" data-blurb="php&#x20;offers&#x20;several&#x20;approaches&#x20;to&#x20;asynchronous&#x20;processing&#x20;-&#x20;from&#x20;promise-based&#x20;libraries&#x20;to&#x20;child&#x20;processes&#x20;and&#x20;job&#x20;queues&#x20;-&#x20;to&#x20;offload&#x20;blocking&#x20;work&#x20;like&#x20;bulk&#x20;email&#x20;sending&#x20;away&#x20;from&#x20;the&#x20;main&#x20;web&#x20;request." data-tags="php" data-date="2023-05">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">exploring async php</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">2 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2023-05</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--php">php</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>PHP offers several approaches to asynchronous processing - from promise-based libraries to child processes and job queues - to offload blocking work like bulk email sending away from the main web request.</p>
+                                        <a href="/exploring-async-php" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="maintaining&#x20;feature&#x20;flags&#x20;in&#x20;a&#x20;product&#x20;engineering&#x20;team" data-blurb="feature&#x20;flags&#x20;enable&#x20;safe,&#x20;incremental&#x20;rollouts&#x20;but&#x20;require&#x20;disciplined&#x20;lifecycle&#x20;management&#x20;to&#x20;prevent&#x20;stale&#x20;flags&#x20;from&#x20;accumulating&#x20;as&#x20;technical&#x20;debt&#x20;and&#x20;causing&#x20;production&#x20;incidents." data-tags="practices" data-date="2022-04">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">maintaining feature flags in a product engineering team</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">6 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2022-04</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--practices">practices</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Feature flags enable safe, incremental rollouts but require disciplined lifecycle management to prevent stale flags from accumulating as technical debt and causing production incidents.</p>
+                                        <a href="/maintaining-feature-flags-in-a-product-engineering-team" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="what&#x20;i&#x27;ve&#x20;learned&#x20;doing&#x20;technical&#x20;interviews" data-blurb="technical&#x20;interviews&#x20;are&#x20;imprecise&#x20;by&#x20;nature,&#x20;so&#x20;focus&#x20;on&#x20;creating&#x20;a&#x20;comfortable&#x20;environment,&#x20;use&#x20;open-ended&#x20;questions,&#x20;and&#x20;evaluate&#x20;problem-solving&#x20;approach&#x20;and&#x20;communication&#x20;rather&#x20;than&#x20;just&#x20;correct&#x20;answers." data-tags="career" data-date="2022-03">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">what i&#039;ve learned doing technical interviews</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">8 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2022-03</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--career">career</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Technical interviews are imprecise by nature, so focus on creating a comfortable environment, use open-ended questions, and evaluate problem-solving approach and communication rather than just correct answers.</p>
+                                        <a href="/technical-interviewing" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="using&#x20;a&#x20;dependency&#x20;injection&#x20;&#x28;di&#x29;&#x20;container&#x20;to&#x20;decouple&#x20;your&#x20;code" data-blurb="dependency&#x20;injection&#x20;containers&#x20;separate&#x20;object&#x20;instantiation&#x20;from&#x20;usage&#x20;by&#x20;passing&#x20;dependencies&#x20;through&#x20;constructors,&#x20;producing&#x20;loosely&#x20;coupled,&#x20;easily&#x20;testable,&#x20;and&#x20;more&#x20;flexible&#x20;code." data-tags="practices&#x20;php" data-date="2020-06">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">using a dependency injection (di) container to decouple your code</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">4 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2020-06</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--practices">practices</span>
+                                                                            <span class="tag-chip tag-chip--php">php</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Dependency Injection Containers separate object instantiation from usage by passing dependencies through constructors, producing loosely coupled, easily testable, and more flexible code.</p>
+                                        <a href="/using-a-dependency-injection-container-to-decouple-code" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="3&#x20;simple&#x20;tips&#x20;to&#x20;get&#x20;better&#x20;at&#x20;working&#x20;from&#x20;home" data-blurb="set&#x20;fixed&#x20;start&#x20;and&#x20;end&#x20;times,&#x20;take&#x20;proper&#x20;breaks,&#x20;and&#x20;dedicate&#x20;a&#x20;single&#x20;room&#x20;as&#x20;your&#x20;workspace&#x20;to&#x20;maintain&#x20;productivity&#x20;and&#x20;a&#x20;healthy&#x20;work-life&#x20;balance&#x20;when&#x20;working&#x20;from&#x20;home." data-tags="career" data-date="2020-04">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">3 simple tips to get better at working from home</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">4 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2020-04</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--career">career</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Set fixed start and end times, take proper breaks, and dedicate a single room as your workspace to maintain productivity and a healthy work-life balance when working from home.</p>
+                                        <a href="/3-tips-to-help-with-working-from-home" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="making&#x20;software&#x20;-&#x20;a&#x20;three&#x20;step&#x20;process" data-blurb="build&#x20;software&#x20;in&#x20;three&#x20;sequential&#x20;steps&#x20;-&#x20;make&#x20;it&#x20;work,&#x20;make&#x20;it&#x20;right,&#x20;then&#x20;make&#x20;it&#x20;fast&#x20;-&#x20;to&#x20;avoid&#x20;premature&#x20;optimisation&#x20;and&#x20;ship&#x20;at&#x20;the&#x20;appropriate&#x20;quality&#x20;level&#x20;for&#x20;each&#x20;stage." data-tags="practices" data-date="2020-04">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">making software - a three step process</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">5 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2020-04</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--practices">practices</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Build software in three sequential steps - make it work, make it right, then make it fast - to avoid premature optimisation and ship at the appropriate quality level for each stage.</p>
+                                        <a href="/making-software-a-three-step-process" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="help&#x20;me,&#x20;help&#x20;you&#x20;-&#x20;code&#x20;review" data-blurb="effective&#x20;code&#x20;reviews&#x20;require&#x20;authors&#x20;to&#x20;separate&#x20;ego&#x20;from&#x20;their&#x20;code&#x20;and&#x20;reviewers&#x20;to&#x20;communicate&#x20;feedback&#x20;with&#x20;good&#x20;intent,&#x20;so&#x20;both&#x20;parties&#x20;can&#x20;collaborate&#x20;toward&#x20;a&#x20;better&#x20;solution." data-tags="practices" data-date="2019-10">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">help me, help you - code review</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">5 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2019-10</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--practices">practices</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Effective code reviews require authors to separate ego from their code and reviewers to communicate feedback with good intent, so both parties can collaborate toward a better solution.</p>
+                                        <a href="/help-me-help-you-code-review" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="a&#x20;practical&#x20;guide&#x20;to&#x20;test&#x20;driven&#x20;development" data-blurb="tdd&#x20;is&#x20;less&#x20;about&#x20;writing&#x20;tests&#x20;first&#x20;and&#x20;more&#x20;about&#x20;incorporating&#x20;unit,&#x20;integration,&#x20;and&#x20;user&#x20;acceptance&#x20;tests&#x20;throughout&#x20;development&#x20;to&#x20;catch&#x20;bugs&#x20;early&#x20;and&#x20;build&#x20;confidence&#x20;in&#x20;your&#x20;code." data-tags="testing" data-date="2019-09">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">a practical guide to test driven development</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">6 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2019-09</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--testing">testing</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>TDD is less about writing tests first and more about incorporating unit, integration, and user acceptance tests throughout development to catch bugs early and build confidence in your code.</p>
+                                        <a href="/a-pratical-guide-to-test-driven-development" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="the&#x20;facade&#x20;pattern" data-blurb="the&#x20;facade&#x20;design&#x20;pattern&#x20;creates&#x20;a&#x20;simplified&#x20;interface&#x20;over&#x20;complex&#x20;subsystems,&#x20;hiding&#x20;implementation&#x20;details&#x20;and&#x20;reducing&#x20;repetition&#x20;without&#x20;over-complicating&#x20;the&#x20;codebase." data-tags="practices&#x20;php" data-date="2019-07">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">the facade pattern</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">3 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2019-07</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--practices">practices</span>
+                                                                            <span class="tag-chip tag-chip--php">php</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>The Facade design pattern creates a simplified interface over complex subsystems, hiding implementation details and reducing repetition without over-complicating the codebase.</p>
+                                        <a href="/facade-pattern" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="the&#x20;problem&#x20;with&#x20;elixir&#x20;umbrella&#x20;apps" data-blurb="elixir&#x20;umbrella&#x20;apps&#x20;add&#x20;complexity&#x20;without&#x20;delivering&#x20;true&#x20;service&#x20;isolation,&#x20;and&#x20;are&#x20;better&#x20;replaced&#x20;by&#x20;well-structured&#x20;contexts&#x20;within&#x20;a&#x20;single&#x20;application&#x20;in&#x20;most&#x20;real-world&#x20;scenarios." data-tags="elixir" data-date="2019-05">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">the problem with elixir umbrella apps</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">4 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2019-05</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--elixir">elixir</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Elixir umbrella apps add complexity without delivering true service isolation, and are better replaced by well-structured contexts within a single application in most real-world scenarios.</p>
+                                        <a href="/the-problem-with-elixir-umbrella-apps" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="building&#x20;software&#x20;with&#x20;broken&#x20;windows" data-blurb="each&#x20;small&#x20;hack&#x20;or&#x20;shortcut&#x20;added&#x20;to&#x20;a&#x20;codebase&#x20;silently&#x20;lowers&#x20;the&#x20;bar&#x20;for&#x20;the&#x20;next&#x20;one,&#x20;and&#x20;without&#x20;discipline&#x20;this&#x20;attitude&#x20;snowballs&#x20;into&#x20;crippling&#x20;technical&#x20;debt." data-tags="practices" data-date="2019-04">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">building software with broken windows</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">6 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2019-04</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--practices">practices</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Each small hack or shortcut added to a codebase silently lowers the bar for the next one, and without discipline this attitude snowballs into crippling technical debt.</p>
+                                        <a href="/broken-windows" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="lonestar&#x20;elixirconf&#x20;2019&#x20;highlights" data-blurb="a&#x20;recap&#x20;of&#x20;lonestar&#x20;elixirconf&#x20;2019&#x20;in&#x20;austin&#x20;covering&#x20;highlights&#x20;like&#x20;the&#x20;nerves&#x20;embedded&#x20;systems&#x20;keynote,&#x20;liveview,&#x20;testing&#x20;strategies,&#x20;and&#x20;the&#x20;welcoming&#x20;elixir&#x20;community." data-tags="elixir&#x20;testing" data-date="2019-03">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">lonestar elixirconf 2019 highlights</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">6 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2019-03</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--elixir">elixir</span>
+                                                                            <span class="tag-chip tag-chip--testing">testing</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>A recap of LoneStar ElixirConf 2019 in Austin covering highlights like the Nerves embedded systems keynote, LiveView, testing strategies, and the welcoming Elixir community.</p>
+                                        <a href="/lonestar-elixir-2019" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="using&#x20;a&#x20;genserver&#x20;to&#x20;handle&#x20;asynchronous&#x20;and&#x20;concurrent&#x20;tasks" data-blurb="a&#x20;genserver&#x20;is&#x20;a&#x20;good&#x20;fit&#x20;for&#x20;handling&#x20;concurrent,&#x20;asynchronous&#x20;jobs&#x20;like&#x20;asset&#x20;migrations&#x20;where&#x20;a&#x20;graphql&#x20;mutation&#x20;must&#x20;trigger&#x20;background&#x20;work&#x20;without&#x20;blocking&#x20;the&#x20;http&#x20;response." data-tags="elixir" data-date="2019-02">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">using a genserver to handle asynchronous and concurrent tasks</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">4 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2019-02</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--elixir">elixir</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>A GenServer is a good fit for handling concurrent, asynchronous jobs like asset migrations where a GraphQL mutation must trigger background work without blocking the HTTP response.</p>
+                                        <a href="/genserver-async-concurrent-tasks" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="best&#x20;practices&#x20;for&#x20;integrating&#x20;with&#x20;third-party&#x20;libraries&#x20;in&#x20;elixir" data-blurb="use&#x20;a&#x20;hexagonal&#x20;architecture&#x20;to&#x20;wrap&#x20;third-party&#x20;libraries&#x20;in&#x20;a&#x20;single&#x20;internal&#x20;module,&#x20;keeping&#x20;business&#x20;logic&#x20;decoupled&#x20;from&#x20;external&#x20;dependencies&#x20;and&#x20;making&#x20;future&#x20;library&#x20;swaps&#x20;manageable." data-tags="elixir" data-date="2018-12">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">best practices for integrating with third-party libraries in elixir</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">4 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2018-12</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--elixir">elixir</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Use a hexagonal architecture to wrap third-party libraries in a single internal module, keeping business logic decoupled from external dependencies and making future library swaps manageable.</p>
+                                        <a href="/best-practices-third-party-integrations" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="you&#x20;might&#x20;not&#x20;need&#x20;a&#x20;genserver" data-blurb="tasks&#x20;are&#x20;often&#x20;a&#x20;simpler&#x20;and&#x20;better&#x20;fit&#x20;than&#x20;genservers&#x20;for&#x20;one-off&#x20;async&#x20;work&#x20;in&#x20;elixir,&#x20;and&#x20;understanding&#x20;the&#x20;difference&#x20;helps&#x20;avoid&#x20;over-engineering&#x20;with&#x20;unnecessary&#x20;process&#x20;abstractions." data-tags="elixir" data-date="2018-11">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">you might not need a genserver</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">4 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2018-11</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--elixir">elixir</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Tasks are often a simpler and better fit than GenServers for one-off async work in Elixir, and understanding the difference helps avoid over-engineering with unnecessary process abstractions.</p>
+                                        <a href="/you-might-not-need-a-genserver" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="offset&#x20;and&#x20;cursor&#x20;pagination&#x20;explained" data-blurb="offset&#x20;pagination&#x20;is&#x20;simple&#x20;but&#x20;becomes&#x20;slow&#x20;and&#x20;inaccurate&#x20;at&#x20;scale,&#x20;while&#x20;cursor&#x20;pagination&#x20;is&#x20;more&#x20;performant&#x20;and&#x20;stable&#x20;for&#x20;large&#x20;or&#x20;frequently&#x20;changing&#x20;datasets." data-tags="database" data-date="2018-10">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">offset and cursor pagination explained</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">3 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2018-10</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--database">database</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Offset pagination is simple but becomes slow and inaccurate at scale, while cursor pagination is more performant and stable for large or frequently changing datasets.</p>
+                                        <a href="/offset-cursor-pagination" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="using&#x20;protocols&#x20;to&#x20;decouple&#x20;implementation&#x20;details" data-blurb="elixir&#x20;protocols&#x20;implement&#x20;polymorphism&#x20;by&#x20;defining&#x20;a&#x20;single&#x20;interface&#x20;that&#x20;multiple&#x20;data&#x20;types&#x20;can&#x20;implement&#x20;independently,&#x20;decoupling&#x20;calling&#x20;code&#x20;from&#x20;type-specific&#x20;implementation&#x20;details." data-tags="elixir" data-date="2018-09">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">using protocols to decouple implementation details</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">3 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2018-09</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--elixir">elixir</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Elixir protocols implement polymorphism by defining a single interface that multiple data types can implement independently, decoupling calling code from type-specific implementation details.</p>
+                                        <a href="/protocols" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="add&#x20;docker&#x20;to&#x20;elixir&#x2F;phoenix&#x20;projects&#x20;in&#x20;one&#x20;command" data-blurb="exdocker&#x20;is&#x20;an&#x20;elixir&#x20;cli&#x20;escript&#x20;tool&#x20;that&#x20;automates&#x20;the&#x20;generation&#x20;of&#x20;docker&#x20;configuration&#x20;files&#x20;for&#x20;elixir&#x20;projects,&#x20;eliminating&#x20;repetitive&#x20;copy-paste&#x20;setup&#x20;when&#x20;starting&#x20;new&#x20;applications." data-tags="elixir" data-date="2018-08">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">add docker to elixir/phoenix projects in one command</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">2 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2018-08</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--elixir">elixir</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>exdocker is an Elixir CLI escript tool that automates the generation of Docker configuration files for Elixir projects, eliminating repetitive copy-paste setup when starting new applications.</p>
+                                        <a href="/exdocker" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="working&#x20;with&#x20;tasks" data-blurb="elixir&#x20;tasks&#x20;abstract&#x20;over&#x20;processes&#x20;to&#x20;provide&#x20;a&#x20;clean&#x20;api&#x20;for&#x20;fire-and-forget&#x20;or&#x20;awaitable&#x20;async&#x20;work,&#x20;and&#x20;re-implementing&#x20;the&#x20;module&#x20;from&#x20;scratch&#x20;is&#x20;a&#x20;great&#x20;way&#x20;to&#x20;understand&#x20;how&#x20;they&#x20;work." data-tags="elixir" data-date="2018-07">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">working with tasks</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">3 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2018-07</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--elixir">elixir</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Elixir Tasks abstract over processes to provide a clean API for fire-and-forget or awaitable async work, and re-implementing the module from scratch is a great way to understand how they work.</p>
+                                        <a href="/working-with-tasks" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="understanding&#x20;concurrency&#x20;in&#x20;elixir" data-blurb="elixir&#x20;leverages&#x20;the&#x20;erlang&#x20;vm&#x20;to&#x20;spawn&#x20;thousands&#x20;of&#x20;lightweight&#x20;processes&#x20;concurrently,&#x20;isolating&#x20;failures&#x20;and&#x20;preventing&#x20;a&#x20;single&#x20;bug&#x20;from&#x20;blocking&#x20;or&#x20;crashing&#x20;the&#x20;entire&#x20;application." data-tags="elixir" data-date="2018-07">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">understanding concurrency in elixir</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">5 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2018-07</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--elixir">elixir</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Elixir leverages the Erlang VM to spawn thousands of lightweight processes concurrently, isolating failures and preventing a single bug from blocking or crashing the entire application.</p>
+                                        <a href="/understanding-concurrency" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="composing&#x20;ecto&#x20;queries" data-blurb="ecto&#x20;lets&#x20;you&#x20;build&#x20;elixir&#x20;database&#x20;queries&#x20;as&#x20;composable,&#x20;chainable&#x20;expressions&#x20;using&#x20;the&#x20;pipe&#x20;operator,&#x20;keeping&#x20;queries&#x20;modular,&#x20;reusable,&#x20;and&#x20;easy&#x20;to&#x20;extend." data-tags="elixir&#x20;database" data-date="2018-07">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">composing ecto queries</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">4 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2018-07</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--elixir">elixir</span>
+                                                                            <span class="tag-chip tag-chip--database">database</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Ecto lets you build Elixir database queries as composable, chainable expressions using the pipe operator, keeping queries modular, reusable, and easy to extend.</p>
+                                        <a href="/composing-ecto-queries" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="streaming&#x20;large&#x20;datasets&#x20;in&#x20;elixir" data-blurb="elixir&#x20;streams&#x20;provide&#x20;lazy,&#x20;composable&#x20;evaluation&#x20;of&#x20;data&#x20;transformations&#x20;over&#x20;collections,&#x20;avoiding&#x20;loading&#x20;entire&#x20;datasets&#x20;into&#x20;memory&#x20;by&#x20;deferring&#x20;computation&#x20;until&#x20;enumeration." data-tags="elixir" data-date="2018-06">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">streaming large datasets in elixir</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">4 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2018-06</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--elixir">elixir</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Elixir Streams provide lazy, composable evaluation of data transformations over collections, avoiding loading entire datasets into memory by deferring computation until enumeration.</p>
+                                        <a href="/streaming-datasets" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="a&#x20;queue&#x20;is&#x20;just&#x20;a&#x20;q&#x20;with&#x20;4&#x20;silent&#x20;letters" data-blurb="implementing&#x20;a&#x20;fifo&#x20;queue&#x20;in&#x20;elixir&#x20;using&#x20;singly-linked&#x20;lists&#x20;requires&#x20;enqueue,&#x20;dequeue,&#x20;peek,&#x20;and&#x20;count&#x20;operations,&#x20;and&#x20;leverages&#x20;the&#x20;prepend-then-reverse&#x20;pattern&#x20;for&#x20;efficient&#x20;list&#x20;access." data-tags="elixir" data-date="2018-06">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">a queue is just a q with 4 silent letters</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">3 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2018-06</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--elixir">elixir</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Implementing a FIFO queue in Elixir using singly-linked lists requires enqueue, dequeue, peek, and count operations, and leverages the prepend-then-reverse pattern for efficient list access.</p>
+                                        <a href="/elixir-queues" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="composing&#x20;elixir&#x20;plugs&#x20;in&#x20;a&#x20;phoenix&#x20;application" data-blurb="elixir&#x20;plugs&#x20;are&#x20;simple&#x20;function&#x20;or&#x20;module&#x20;transformations&#x20;on&#x20;a&#x20;conn&#x20;struct&#x20;that&#x20;can&#x20;be&#x20;chained&#x20;together&#x20;in&#x20;a&#x20;pipeline,&#x20;making&#x20;web&#x20;request&#x20;handling&#x20;modular&#x20;and&#x20;easy&#x20;to&#x20;reason&#x20;about." data-tags="elixir" data-date="2018-03">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">composing elixir plugs in a phoenix application</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">3 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2018-03</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--elixir">elixir</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Elixir Plugs are simple function or module transformations on a Conn struct that can be chained together in a pipeline, making web request handling modular and easy to reason about.</p>
+                                        <a href="/composing-plugs" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="a&#x20;comparison&#x20;of&#x20;elixir&#x20;supervision&#x20;trees&#x20;and&#x20;react&#x20;component&#x20;trees" data-blurb="elixir&#x20;supervision&#x20;trees&#x20;isolate&#x20;process&#x20;failures&#x20;so&#x20;individual&#x20;processes&#x20;can&#x20;crash&#x20;and&#x20;restart&#x20;independently,&#x20;similar&#x20;to&#x20;how&#x20;react&#x20;component&#x20;error&#x20;boundaries&#x20;catch&#x20;errors&#x20;in&#x20;a&#x20;component&#x20;tree." data-tags="elixir" data-date="2018-02">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">a comparison of elixir supervision trees and react component trees</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">4 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2018-02</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--elixir">elixir</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Elixir supervision trees isolate process failures so individual processes can crash and restart independently, similar to how React component error boundaries catch errors in a component tree.</p>
+                                        <a href="/elixir-supervision-trees" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="surviving&#x20;technical&#x20;debt&#x20;in&#x20;the&#x20;real&#x20;world" data-blurb="technical&#x20;debt&#x20;is&#x20;unavoidable&#x20;but&#x20;manageable&#x20;-&#x20;always&#x20;write&#x20;tests&#x20;even&#x20;for&#x20;imperfect&#x20;code,&#x20;take&#x20;shortcuts&#x20;only&#x20;under&#x20;real&#x20;pressure,&#x20;and&#x20;continuously&#x20;refactor&#x20;before&#x20;the&#x20;debt&#x20;becomes&#x20;unworkable." data-tags="practices" data-date="2017-12">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">surviving technical debt in the real world</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">3 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2017-12</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--practices">practices</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Technical debt is unavoidable but manageable - always write tests even for imperfect code, take shortcuts only under real pressure, and continuously refactor before the debt becomes unworkable.</p>
+                                        <a href="/surviving-tech-debt" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="elixir&#x20;pattern&#x20;matching&#x20;in&#x20;a&#x20;nutshell" data-blurb="pattern&#x20;matching&#x20;in&#x20;elixir&#x20;replaces&#x20;complex&#x20;if-statement&#x20;chains&#x20;with&#x20;declarative&#x20;destructuring&#x20;and&#x20;multi-clause&#x20;functions,&#x20;making&#x20;code&#x20;control&#x20;flow&#x20;clearer&#x20;and&#x20;more&#x20;expressive." data-tags="elixir" data-date="2017-08">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">elixir pattern matching in a nutshell</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">2 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2017-08</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--elixir">elixir</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Pattern matching in Elixir replaces complex if-statement chains with declarative destructuring and multi-clause functions, making code control flow clearer and more expressive.</p>
+                                        <a href="/pattern-matching-elixir" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="first&#x20;impressions&#x20;of&#x20;elixir" data-blurb="a&#x20;javascript&#x20;developer&#x20;attracted&#x20;to&#x20;functional&#x20;programming&#x20;shares&#x20;their&#x20;first&#x20;impressions&#x20;of&#x20;elixir,&#x20;finding&#x20;its&#x20;pattern&#x20;matching,&#x20;immutability,&#x20;and&#x20;pipe&#x20;operator&#x20;a&#x20;natural&#x20;and&#x20;enjoyable&#x20;step&#x20;up&#x20;from&#x20;fp&#x20;in&#x20;js." data-tags="elixir" data-date="2017-01">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">first impressions of elixir</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">5 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2017-01</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--elixir">elixir</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>A JavaScript developer attracted to functional programming shares their first impressions of Elixir, finding its pattern matching, immutability, and pipe operator a natural and enjoyable step up from FP in JS.</p>
+                                        <a href="/first-impressions-elixir" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                                    <article class="post-card" data-post-card data-title="no&#x20;excuses,&#x20;write&#x20;unit&#x20;tests" data-blurb="unit&#x20;tests&#x20;verify&#x20;that&#x20;isolated&#x20;functions&#x20;return&#x20;expected&#x20;outputs&#x20;for&#x20;given&#x20;inputs,&#x20;and&#x20;teams&#x20;should&#x20;start&#x20;small&#x20;with&#x20;imperfect&#x20;coverage&#x20;rather&#x20;than&#x20;avoiding&#x20;tests&#x20;altogether&#x20;due&#x20;to&#x20;disagreement&#x20;or&#x20;time&#x20;pressure." data-tags="testing" data-date="2016-11">
+                                <button class="post-card__toggle" type="button" data-expand-toggle aria-expanded="false">
+                                    <span class="post-card__title">no excuses, write unit tests</span>
+                                    <span class="post-card__meta">
+                                                                                    <span class="post-card__reading">6 min</span>
+                                            <span class="post-card__sep" aria-hidden="true">·</span>
+                                                                                <span class="post-card__date">2016-11</span>
+                                    </span>
+                                </button>
+                                <div class="post-card__tags">
+                                                                            <span class="tag-chip tag-chip--testing">testing</span>
+                                                                    </div>
+                                <div class="post-card__excerpt" data-expandable>
+                                    <div class="post-card__excerpt-content">
+                                        <p>Unit tests verify that isolated functions return expected outputs for given inputs, and teams should start small with imperfect coverage rather than avoiding tests altogether due to disagreement or time pressure.</p>
+                                        <a href="/write-unit-tests" class="post-card__read-more">read full post →</a>
+                                    </div>
+                                </div>
+                            </article>
+                                            </div>
+                </section>
+            
+                    </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p class="site-footer__prompt">jackmarchant@blog:~$ exit</p>
+                <nav class="site-footer__links" aria-label="external links">
+                    <a href="/rss.xml">rss</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://github.com/jackmarchant" target="_blank" rel="noopener noreferrer">github</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://x.com/jackmarchant10" target="_blank" rel="noopener noreferrer" aria-label="x profile">x</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://www.linkedin.com/in/jack-marchant" target="_blank" rel="noopener noreferrer">linkedin</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:jack@jackmarchant.com">email</a>
+                </nav>
+                <p class="site-footer__meta">© <span data-current-year>2026</span> jack marchant</p>
+            </div>
+        </footer>
+
+        <script src="/prism.e59d2e5e.js"></script>
+        <script src="/index.2b15b332.js"></script>
+
+                    <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+            </body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>no excuses, write unit tests | jack marchant</title>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="/prism.30affb74.css" rel="stylesheet" type="text/css" />
+        <link href="/style.63f6c93a.css" rel="stylesheet" type="text/css" />
+                <meta name="description" content="Unit testing can sometimes be a tricky subject no matter what language you’re writing in. There’s a few reasons for this:" />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="No excuses, write unit tests" />
+        <meta property="og:description" content="Unit testing can sometimes be a tricky subject no matter what language you’re writing in. There’s a few reasons for this:" />
+        <meta property="og:url" content="https://www.jackmarchant.com/write-unit-tests" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="No excuses, write unit tests" />
+        <meta name="twitter:description" content="Unit testing can sometimes be a tricky subject no matter what language you’re writing in. There’s a few reasons for this:" />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="alternate" type="application/rss+xml" title="jack marchant" href="/rss.xml" />
+        <script>(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}}());</script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header__row">
+                    <p class="site-prompt">jackmarchant@blog:~$</p>
+                    <div class="site-header__actions">
+                        <button class="theme-toggle" type="button" data-theme-toggle aria-label="switch to light mode">
+                            <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        </button>
+                        <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                    </div>
+                </div>
+                <h1 class="site-title"><a href="/">jack marchant</a></h1>
+                <p class="site-tagline">principal engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">deputy</a> · writing about software</p>
+            </div>
+        </header>
+
+        <div class="subscribe-modal" data-subscribe-modal aria-hidden="true">
+            <div class="subscribe-modal__backdrop" data-subscribe-backdrop></div>
+            <div class="subscribe-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+                <div class="subscribe-modal__header">
+                    <h2 class="subscribe-modal__title" id="subscribe-modal-title">subscribe</h2>
+                    <button class="subscribe-modal__close" type="button" data-subscribe-close aria-label="close">×</button>
+                </div>
+                <p class="subscribe-modal__desc">get new posts delivered to your inbox</p>
+                <form class="subscribe-form" action="https://jackmarchant.us14.list-manage.com/subscribe?u=5a51a355f4187fddb0d0f4816&amp;id=b5ae7106ea" method="POST" target="_blank" rel="noopener noreferrer" novalidate>
+                    <div style="position:absolute;left:-5000px;" aria-hidden="true">
+                        <input type="text" name="b_5a51a355f4187fddb0d0f4816_b5ae7106ea" tabindex="-1" value="" />
+                    </div>
+                    <input type="email" name="EMAIL" id="mce-EMAIL" class="subscribe-form__input" placeholder="your@email.com" required />
+                    <button type="submit" class="subscribe-form__submit">subscribe →</button>
+                </form>
+            </div>
+        </div>
+        <main class="container">
+            
+                            <div class="reading-progress" data-reading-progress aria-hidden="true">
+                    <div class="reading-progress__bar" data-reading-progress-bar></div>
+                </div>
+                <article class="post" data-post>
+                    <h2 class="post__title">no excuses, write unit tests</h2>
+                    <p class="post__date">November 29, 2016</p>
+                                        <div class="post__tldr">
+                        <span class="post__tldr-label">tl;dr</span>
+                        <p class="post__tldr-text">Unit tests verify that isolated functions return expected outputs for given inputs, and teams should start small with imperfect coverage rather than avoiding tests altogether due to disagreement or time pressure.</p>
+                    </div>
+                                        <p>Unit testing can sometimes be a tricky subject no matter what language you’re writing in. There’s a few reasons for this:</p>
+<ul>
+<li>There’s fear unit testing will take time your team doesn’t have</li>
+<li>Your team can’t agree on an acceptable level of test coverage or get stuck bike-shedding*</li>
+<li>People are frustrated by breaking tests when changing code</li>
+</ul>
+<p>First let’s invest a bit of time understanding what I mean by unit testing. A unit can be any block of code that can be isolated and executed on its own. This can be a function or even a group of functions, although the latter makes it more difficult to test due to many moving parts.</p>
+<p>A function is easily testable, if it always produces the same output, that is, it returns the same thing from inside the function, when given the same inputs (parameters).</p>
+<p>It’s great for testing because we can make assumptions and set expectations based on those return values. The idea being, that when the test passes, the function still satisfies the requirements in the assertions, regardless of how it gets to that result.</p>
+<p><strong>An example of simple testing:</strong></p>
+<pre><code class="language-js">import { it } from 'mocha';
+import { expect } from 'chai';
+
+/**
+ * Add numbers together
+ *
+ * @param {int} numbers One or many numbers to add
+ */
+const add = (...numbers) =&gt; {
+  return numbers.reduce((acc, val) =&gt; {
+    return acc + val;
+  }, 0);
+};
+
+it('should add numbers', () =&gt; {
+  const expected = 15;
+  const actual = add(1, 2, 3, 4, 5);
+
+  expect(actual).to.equal(expected); // true
+});
+
+/**
+ * Subtract numbers from an initial number
+ *
+ * @param {int} initialNumber The number we start from when subtracting
+ * @param {int} numbers       One or many numbers to subtract
+ */
+const minus = (initialNumber, ...numbers) =&gt; {
+  return numbers.reduce((acc, val) =&gt; {
+    return acc - val;
+  }, initialNumber);
+};
+
+it('should minus numbers', () =&gt; {
+  const expected = 5;
+  const actual = minus(15, 5, 3, 2);
+
+  expect(actual).to.equal(expected); // true
+});</code></pre>
+<p>You can go as far with these tests as you like. If we wanted to we could add tests for what happens when the add and minus functions are passed values that are not numbers, does it need to deal with negative numbers?</p>
+<p>Adding tests for even the simplest functions can provide you with more information about:</p>
+<ul>
+<li>How hard the function is to use (number of parameters, understanding of output by function name)</li>
+<li>Potential risks for the function living in the wild and being used by other developers</li>
+<li>Whether the function is doing too much, either because you have to mock the world for it to even run, or if you are asserting too many things per function</li>
+</ul>
+<p>There’s so much to gain from writing tests, and so much to lose if you don’t.</p>
+<h2>You’ve got time for unit testing</h2>
+<p>Unit testing your code takes some extra time upfront, because of course, you need to write extra code – the tests.
+Then, weeks or months go by after you’ve written those tests and you make a change to a function that was tested, and the test breaks. Bugger. Now you’ve got to go in and fix the test.</p>
+<p>I’ve heard people complain that fixing broken tests is hard, time consuming and/or a waste of time. My response is where would you rather be fixing that bug? Would you rather it be in production while people are angry features are broken, or in a unit test, prolonging the time it takes to complete a task?</p>
+<p>If you change an API, things should break. If tests did not break, and that code went out to production, now everywhere else the code was used is now broken, you’ve got 99 problems but lucky you, testing ain’t one.
+I’ll tell you what, most teams don’t have time to fix bugs in production, yet time is always made for it. Everyone knows fixing bugs that occur in production is important, from managers to developers, but we’re always waiting until they’re in production to fix them.</p>
+<p>To me, it seems as if we could move the bug fixing earlier in the process and spend more time focussing in code clarity which promotes understanding of the code. Half of the time spent fixing a bug is figuring out how the hell it happened. If you had a unit test it would tell you as soon as you change something and run the test.</p>
+<p>Writing tests gets easier the more you do it. You will find that after a while you start writing code that’s easily testable because you were thinking about how you would test that code, while you were writing it! Imagine that!</p>
+<h2>Just write the damn test</h2>
+<p>Engineers are renowned for over-engineering. We think in abstractions and it’s normal to think too much about what should be a simple solution. The hardest part of that is just realising you might be going too far.</p>
+<p>Often, when new things pop up, we think of the best solution without addressing the core problems in an efficient manner.</p>
+<p>Deciding on team coding best practices is great. Including test coverage, what and how to test among other things is good. Preventing your team from trying things and learning from mistakes is bad.</p>
+<p>Don’t let it stand in your way of writing the damn test. A good rule of thumb for any new software is:</p>
+<blockquote>
+<p>First, make it work. Then make it right.</p>
+</blockquote>
+<p>This rule can be applied to unit testing in a number of ways, but the most useful I’ve found is to first write the code to make the thing work, preferably small functions and then write a test for it.</p>
+<p>Now that you’ve got a tested function, change the internal code of that function and see if the test still passes.
+<strong>Simply – Write. Test. Refactor.</strong></p>
+<h2>Dealing with broken tests</h2>
+<p>After you’ve been going writing tests for a while, you should start to notice more things you change will break existing tests. This is a good thing. Don’t underestimate the power of a broken test.</p>
+<p>Firstly, it forces the developer that broke the test to understand a bit more about how a piece of code will run in. As in what inputs and outputs are expected, depending on how well it was tested.</p>
+<p>Secondly, it forces any API changes to be well thought-out and potentially discussed as a team depending on the size of the change.</p>
+<p>Third, <strong>and most importantly</strong>, is that you found out in your terminal, as opposed to when a customer tried to do something.</p>
+<p>Just like anything, you can go too far with testing. And it depends on the application as to how deep you go into unit testing.</p>
+<p>In my experience, I see no reason good enough not to at least have some unit testing. Run the code in some expected scenarios and see what happens.</p>
+<p>It’s just like when you deploy your application and start clicking around on buttons, interacting with the app.</p>
+<p>You’re not going to just deploy your application and forget it even exists!</p>
+<p>Or would you? Start unit testing today. Start small and work your way up.</p>
+<p>*Bike-shedding refers to the time spent solving relatively unimportant issues when the larger problem should be solved before addressing minor details.</p>
+                </article>
+                                <nav class="post-nav" aria-label="post navigation">
+                                            <span class="post-nav__placeholder" aria-hidden="true"></span>
+                                        <a class="post-nav__home" href="/">all posts</a>
+                                            <a class="post-nav__link post-nav__link--next" href="/first-impressions-elixir">
+                            <span class="post-nav__label">newer →</span>
+                            <span class="post-nav__title">first impressions of elixir</span>
+                        </a>
+                                    </nav>
+                                    </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p class="site-footer__prompt">jackmarchant@blog:~$ exit</p>
+                <nav class="site-footer__links" aria-label="external links">
+                    <a href="/rss.xml">rss</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://github.com/jackmarchant" target="_blank" rel="noopener noreferrer">github</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://x.com/jackmarchant10" target="_blank" rel="noopener noreferrer" aria-label="x profile">x</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://www.linkedin.com/in/jack-marchant" target="_blank" rel="noopener noreferrer">linkedin</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:jack@jackmarchant.com">email</a>
+                </nav>
+                <p class="site-footer__meta">© <span data-current-year>2026</span> jack marchant</p>
+            </div>
+        </footer>
+
+        <script src="/prism.e59d2e5e.js"></script>
+        <script src="/index.2b15b332.js"></script>
+
+                    <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+            </body>
+</html>

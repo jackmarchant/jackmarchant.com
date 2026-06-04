@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>composing ecto queries | jack marchant</title>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="/prism.30affb74.css" rel="stylesheet" type="text/css" />
+        <link href="/style.63f6c93a.css" rel="stylesheet" type="text/css" />
+                <meta name="description" content="Ecto is an Elixir library, which allows you to define schemas that map to database tables. It&#039;s a super light weight ORM, (Object-Relational Mapper) that allows you to define structs to represent data. " />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Composing Ecto Queries" />
+        <meta property="og:description" content="Ecto is an Elixir library, which allows you to define schemas that map to database tables. It&#039;s a super light weight ORM, (Object-Relational Mapper) that allows you to define structs to represent data. " />
+        <meta property="og:url" content="https://www.jackmarchant.com/composing-ecto-queries" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Composing Ecto Queries" />
+        <meta name="twitter:description" content="Ecto is an Elixir library, which allows you to define schemas that map to database tables. It&#039;s a super light weight ORM, (Object-Relational Mapper) that allows you to define structs to represent data. " />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="alternate" type="application/rss+xml" title="jack marchant" href="/rss.xml" />
+        <script>(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}}());</script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header__row">
+                    <p class="site-prompt">jackmarchant@blog:~$</p>
+                    <div class="site-header__actions">
+                        <button class="theme-toggle" type="button" data-theme-toggle aria-label="switch to light mode">
+                            <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        </button>
+                        <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                    </div>
+                </div>
+                <h1 class="site-title"><a href="/">jack marchant</a></h1>
+                <p class="site-tagline">principal engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">deputy</a> · writing about software</p>
+            </div>
+        </header>
+
+        <div class="subscribe-modal" data-subscribe-modal aria-hidden="true">
+            <div class="subscribe-modal__backdrop" data-subscribe-backdrop></div>
+            <div class="subscribe-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+                <div class="subscribe-modal__header">
+                    <h2 class="subscribe-modal__title" id="subscribe-modal-title">subscribe</h2>
+                    <button class="subscribe-modal__close" type="button" data-subscribe-close aria-label="close">×</button>
+                </div>
+                <p class="subscribe-modal__desc">get new posts delivered to your inbox</p>
+                <form class="subscribe-form" action="https://jackmarchant.us14.list-manage.com/subscribe?u=5a51a355f4187fddb0d0f4816&amp;id=b5ae7106ea" method="POST" target="_blank" rel="noopener noreferrer" novalidate>
+                    <div style="position:absolute;left:-5000px;" aria-hidden="true">
+                        <input type="text" name="b_5a51a355f4187fddb0d0f4816_b5ae7106ea" tabindex="-1" value="" />
+                    </div>
+                    <input type="email" name="EMAIL" id="mce-EMAIL" class="subscribe-form__input" placeholder="your@email.com" required />
+                    <button type="submit" class="subscribe-form__submit">subscribe →</button>
+                </form>
+            </div>
+        </div>
+        <main class="container">
+            
+                            <div class="reading-progress" data-reading-progress aria-hidden="true">
+                    <div class="reading-progress__bar" data-reading-progress-bar></div>
+                </div>
+                <article class="post" data-post>
+                    <h2 class="post__title">composing ecto queries</h2>
+                    <p class="post__date">July 06, 2018</p>
+                                        <div class="post__tldr">
+                        <span class="post__tldr-label">tl;dr</span>
+                        <p class="post__tldr-text">Ecto lets you build Elixir database queries as composable, chainable expressions using the pipe operator, keeping queries modular, reusable, and easy to extend.</p>
+                    </div>
+                                        <p><a href="https://github.com/elixir-ecto/ecto">Ecto</a> is an Elixir library, which allows you to define schemas that map to database tables. It's a super light weight <a href="https://en.wikipedia.org/wiki/Object-relational_mapping">ORM</a>, (Object-Relational Mapper) that allows you to define structs to represent data. </p>
+<p>When I was first learning how to use Ecto and Elixir itself, I was amazed by the fact that you can compose queries in the same way you can compose functions. Given Elixir is a functional language in which pipelines play a big part, it's easy to see why it's such a nice way to express queries. </p>
+<p>To start composing Ecto queries, you can import the Ecto.Query module.
+This query will get all albums that have been released: </p>
+<pre><code class="language-elixir">query = where(MyApp.Album, released: true)</code></pre>
+<p>This will return an Ecto.Queryable type, which you could pass straight to a Repo (a module that handles connections to the database) using Repo.all(query), or you can add to it: </p>
+<pre><code class="language-elixir"># using our previously defined query
+released_with_length = where(query, [q], q.length &gt; 20)</code></pre>
+<p>We are able to create a whole new query based on the existing one above. If we now pass this to Repo.all we would get all released albums longer than 20 minutes.
+You may have noticed in the first query we started off using the Ecto.Schema we had defined, and in the second example we used the first query. That's because both of these structs implement the queryable protocol, essentially letting Ecto know we can use it to query for data. </p>
+<h2>Queries with joins</h2>
+<p>With great queries comes great responsibility, fortunately Ecto makes it easy to do joins without breaking a sweat.
+Let's say we also have a songs table, and each record has an album_id to relate it to an album.
+If we wanted to get a list of albums, where the songs in that album are longer than a certain number of seconds, we could do that with the following query:</p>
+<pre><code class="language-elixir">@doc """
+Find albums with songs longer than `length`
+Includes all songs in that album, with Repo.preload/3
+"""
+@spec find_albums_with_songs_longer_than(integer()) :: list(Album.t())
+def find_albums_with_songs_longer_than(length) do
+  Album
+  |&gt; compose_albums_with_song_length(length)
+  |&gt; distinct([a], a.id)
+  |&gt; find_all()
+  |&gt; Repo.preload([:songs])
+end
+
+defp compose_albums_with_song_length(queryable, length) do
+  queryable
+  |&gt; join(:inner, [album], song in Song, album.id == song.album_id)
+  |&gt; where([_, s], s.length &gt; ^length)
+end</code></pre>
+<p>There's a few things going on here, but the main part is using a function to join on the songs table and scope the query for albums to return only the ones with songs where they are longer than a certain integer.
+This pattern is useful for abstracting lower levels of a query into smaller parts, so you can join them up in a function that has a bit more context. Typically, you might have done this before with functions, but each function call would itself have gone to the database and you'd use an enumerable to filter results.</p>
+<p>This type of composition is made possible through Ecto query bindings. These are the references to schemas that have been added to a query, in a list ordered in the same way in which they were added.
+The order matters in query bindings, which can make it difficult to do multiple joins across different functions in the same way we split our query out into functions before.</p>
+<h2>Sample application - try it out for yourself</h2>
+<p>I built a small application to show how this all works together in an application. I would encourage you to clone it and check it out. There's not a lot of resources out there to get started working in Elixir but this application might show you how to get something simple working, while also showing some deeper examples of how powerful composition is in Ecto and Elixir in general.</p>
+<p>It has tests as well, so that you can make changes to the queries and run <code>mix test</code>, to see if you broke anything.</p>
+<p>So here it is: <a href="https://github.com/jackmarchant/composing-ecto-queries">Composing Ecto Queries on Github</a></p>
+                </article>
+                                <nav class="post-nav" aria-label="post navigation">
+                                            <a class="post-nav__link post-nav__link--prev" href="/streaming-datasets">
+                            <span class="post-nav__label">← older</span>
+                            <span class="post-nav__title">streaming large datasets in elixir</span>
+                        </a>
+                                        <a class="post-nav__home" href="/">all posts</a>
+                                            <a class="post-nav__link post-nav__link--next" href="/understanding-concurrency">
+                            <span class="post-nav__label">newer →</span>
+                            <span class="post-nav__title">understanding concurrency in elixir</span>
+                        </a>
+                                    </nav>
+                                    </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p class="site-footer__prompt">jackmarchant@blog:~$ exit</p>
+                <nav class="site-footer__links" aria-label="external links">
+                    <a href="/rss.xml">rss</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://github.com/jackmarchant" target="_blank" rel="noopener noreferrer">github</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://x.com/jackmarchant10" target="_blank" rel="noopener noreferrer" aria-label="x profile">x</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://www.linkedin.com/in/jack-marchant" target="_blank" rel="noopener noreferrer">linkedin</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:jack@jackmarchant.com">email</a>
+                </nav>
+                <p class="site-footer__meta">© <span data-current-year>2026</span> jack marchant</p>
+            </div>
+        </footer>
+
+        <script src="/prism.e59d2e5e.js"></script>
+        <script src="/index.2b15b332.js"></script>
+
+                    <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+            </body>
+</html>

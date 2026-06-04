@@ -1,0 +1,373 @@
+(function () {
+    var expandedCard = null;
+
+    function getExpandable(card) {
+        return card.querySelector('[data-expandable]');
+    }
+
+    function getToggle(card) {
+        return card.querySelector('[data-expand-toggle]');
+    }
+
+    function collapseCard(card) {
+        var expandable = getExpandable(card);
+        var toggle = getToggle(card);
+        if (!expandable || !toggle) {
+            return;
+        }
+
+        card.classList.remove('is-expanded');
+        toggle.setAttribute('aria-expanded', 'false');
+        expandable.style.maxHeight = '0px';
+    }
+
+    function expandCard(card) {
+        var expandable = getExpandable(card);
+        var toggle = getToggle(card);
+        if (!expandable || !toggle) {
+            return;
+        }
+
+        card.classList.add('is-expanded');
+        toggle.setAttribute('aria-expanded', 'true');
+        expandable.style.maxHeight = expandable.scrollHeight + 'px';
+    }
+
+    function toggleCard(card) {
+        if (expandedCard === card) {
+            collapseCard(card);
+            expandedCard = null;
+            return;
+        }
+
+        if (expandedCard) {
+            collapseCard(expandedCard);
+        }
+
+        expandCard(card);
+        expandedCard = card;
+    }
+
+    function setupExpanding() {
+        var cards = document.querySelectorAll('[data-post-card]');
+        cards.forEach(function (card) {
+            var toggle = getToggle(card);
+            if (!toggle) {
+                return;
+            }
+
+            toggle.addEventListener('click', function () {
+                toggleCard(card);
+            });
+        });
+    }
+
+    function setupPostDirectory(directory) {
+        var filterBar = directory.querySelector('[data-tag-filter-bar]');
+        var count = directory.querySelector('[data-results-count]');
+        var empty = directory.querySelector('[data-post-empty]');
+        var search = directory.querySelector('[data-post-search]');
+        var sortToggle = directory.querySelector('[data-sort-toggle]');
+        var list = directory.querySelector('[data-post-list]');
+        var featured = directory.querySelector('[data-featured-card]');
+        var cards = Array.from(directory.querySelectorAll('[data-post-card]'));
+
+        if (cards.length === 0) {
+            return;
+        }
+
+        var activeTag = 'all';
+        var query = '';
+        var sortMode = 'newest';
+        var originalOrder = cards.slice();
+        var oldestFirstOrder = cards.slice().reverse();
+
+        function applyFilter() {
+            var visibleCount = 0;
+
+            cards.forEach(function (card) {
+                var tags = (card.getAttribute('data-tags') || '').split(' ').filter(Boolean);
+                var title = card.getAttribute('data-title') || '';
+                var blurb = card.getAttribute('data-blurb') || '';
+
+                var tagMatch = activeTag === 'all' || tags.indexOf(activeTag) !== -1;
+                var queryMatch = !query || title.indexOf(query) !== -1 || blurb.indexOf(query) !== -1;
+                var matches = tagMatch && queryMatch;
+
+                card.hidden = !matches;
+                if (matches) {
+                    visibleCount += 1;
+                } else if (expandedCard === card) {
+                    collapseCard(card);
+                    expandedCard = null;
+                }
+            });
+
+            if (count) {
+                count.textContent = visibleCount;
+            }
+            if (empty) {
+                empty.hidden = visibleCount !== 0;
+            }
+            if (featured) {
+                var hideFeatured = activeTag !== 'all' || query !== '' || sortMode !== 'newest';
+                featured.classList.toggle('is-hidden', hideFeatured);
+            }
+        }
+
+        function applySort() {
+            if (!list) {
+                return;
+            }
+            var order = sortMode === 'oldest' ? oldestFirstOrder : originalOrder;
+            order.forEach(function (card) {
+                list.appendChild(card);
+            });
+        }
+
+        if (filterBar) {
+            filterBar.addEventListener('click', function (e) {
+                var btn = e.target.closest('[data-tag-filter]');
+                if (!btn) {
+                    return;
+                }
+
+                activeTag = btn.getAttribute('data-tag-filter');
+
+                filterBar.querySelectorAll('[data-tag-filter]').forEach(function (b) {
+                    b.classList.toggle('is-active', b === btn);
+                });
+
+                applyFilter();
+            });
+        }
+
+        if (search) {
+            search.addEventListener('input', function () {
+                query = (search.value || '').trim().toLowerCase();
+                applyFilter();
+            });
+        }
+
+        if (sortToggle) {
+            sortToggle.addEventListener('click', function (e) {
+                var btn = e.target.closest('[data-sort]');
+                if (!btn) {
+                    return;
+                }
+
+                sortMode = btn.getAttribute('data-sort');
+
+                sortToggle.querySelectorAll('[data-sort]').forEach(function (b) {
+                    b.classList.toggle('is-active', b === btn);
+                });
+
+                applySort();
+                applyFilter();
+            });
+        }
+    }
+
+    function refreshExpandedCardHeight() {
+        if (!expandedCard) {
+            return;
+        }
+
+        var expandable = getExpandable(expandedCard);
+        if (!expandable) {
+            return;
+        }
+
+        expandable.style.maxHeight = expandable.scrollHeight + 'px';
+    }
+
+    function setupSubscribeModal() {
+        var btn = document.querySelector('[data-subscribe-btn]');
+        var modal = document.querySelector('[data-subscribe-modal]');
+        var backdrop = document.querySelector('[data-subscribe-backdrop]');
+        var close = document.querySelector('[data-subscribe-close]');
+
+        if (!btn || !modal) {
+            return;
+        }
+
+        function openModal() {
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+            var input = modal.querySelector('.subscribe-form__input');
+            if (input) {
+                input.focus();
+            }
+        }
+
+        function closeModal() {
+            modal.classList.remove('is-open');
+            modal.setAttribute('aria-hidden', 'true');
+            btn.focus();
+        }
+
+        btn.addEventListener('click', openModal);
+
+        if (close) {
+            close.addEventListener('click', closeModal);
+        }
+
+        if (backdrop) {
+            backdrop.addEventListener('click', closeModal);
+        }
+
+        return closeModal;
+    }
+
+    function setupReadingProgress() {
+        var bar = document.querySelector('[data-reading-progress-bar]');
+        var post = document.querySelector('[data-post]');
+
+        if (!bar || !post) {
+            return;
+        }
+
+        function updateProgress() {
+            var scrollTop = window.scrollY || document.documentElement.scrollTop;
+            var postTop = post.offsetTop;
+            var postBottom = postTop + post.offsetHeight;
+            var viewportHeight = window.innerHeight;
+            var start = postTop;
+            var end = postBottom - viewportHeight;
+            var progress = end > start ? Math.min(100, Math.max(0, ((scrollTop - start) / (end - start)) * 100)) : 0;
+            bar.style.width = progress + '%';
+        }
+
+        window.addEventListener('scroll', updateProgress, { passive: true });
+        updateProgress();
+    }
+
+    function setupThemeToggle() {
+        var btn = document.querySelector('[data-theme-toggle]');
+        if (!btn) {
+            return;
+        }
+
+        function getStoredTheme() {
+            try {
+                return localStorage.getItem('theme') || 'dark';
+            } catch (e) {
+                return 'dark';
+            }
+        }
+
+        function storeTheme(theme) {
+            try {
+                localStorage.setItem('theme', theme);
+            } catch (e) {}
+        }
+
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            if (theme === 'dark') {
+                btn.setAttribute('aria-label', 'switch to light mode');
+            } else {
+                btn.setAttribute('aria-label', 'switch to dark mode');
+            }
+        }
+
+        applyTheme(getStoredTheme());
+
+        btn.addEventListener('click', function () {
+            var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            storeTheme(next);
+            applyTheme(next);
+        });
+    }
+
+    function setupCurrentYear() {
+        var el = document.querySelector('[data-current-year]');
+        if (el) {
+            el.textContent = String(new Date().getFullYear());
+        }
+    }
+
+    function setupCodeBlocks() {
+        var pres = document.querySelectorAll('.post pre[class*="language-"]');
+        pres.forEach(function (pre) {
+            if (pre.parentElement && pre.parentElement.classList.contains('code-block')) {
+                return;
+            }
+
+            var match = pre.className.match(/language-([\w-]+)/);
+            var lang = match ? match[1] : 'code';
+
+            var wrapper = document.createElement('div');
+            wrapper.className = 'code-block';
+
+            var header = document.createElement('div');
+            header.className = 'code-block__header';
+
+            var langEl = document.createElement('span');
+            langEl.className = 'code-block__lang';
+            langEl.textContent = lang;
+
+            var btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'code-block__copy';
+            btn.setAttribute('aria-label', 'copy code');
+            btn.textContent = 'copy';
+
+            header.appendChild(langEl);
+            header.appendChild(btn);
+
+            pre.parentNode.insertBefore(wrapper, pre);
+            wrapper.appendChild(header);
+            wrapper.appendChild(pre);
+
+            btn.addEventListener('click', function () {
+                var text = pre.textContent || '';
+                var done = function () {
+                    btn.textContent = 'copied';
+                    setTimeout(function () { btn.textContent = 'copy'; }, 1500);
+                };
+
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(text).then(done, function () {
+                        btn.textContent = 'failed';
+                        setTimeout(function () { btn.textContent = 'copy'; }, 1500);
+                    });
+                } else {
+                    var ta = document.createElement('textarea');
+                    ta.value = text;
+                    ta.setAttribute('readonly', '');
+                    ta.style.position = 'absolute';
+                    ta.style.left = '-9999px';
+                    document.body.appendChild(ta);
+                    ta.select();
+                    try { document.execCommand('copy'); done(); } catch (e) {}
+                    document.body.removeChild(ta);
+                }
+            });
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        setupExpanding();
+        setupThemeToggle();
+        setupReadingProgress();
+        setupCurrentYear();
+        setupCodeBlocks();
+        var closeModal = setupSubscribeModal();
+
+        if (closeModal) {
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            });
+        }
+
+        var directories = document.querySelectorAll('[data-post-directory]');
+        directories.forEach(function (directory) {
+            setupPostDirectory(directory);
+        });
+
+        window.addEventListener('resize', refreshExpandedCardHeight);
+    });
+})();

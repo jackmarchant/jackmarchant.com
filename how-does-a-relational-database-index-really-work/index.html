@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>how does a relational database index really work? | jack marchant</title>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="/prism.30affb74.css" rel="stylesheet" type="text/css" />
+        <link href="/style.63f6c93a.css" rel="stylesheet" type="text/css" />
+                <meta name="description" content="A common question in software engineering interviews is how can you speed up a slow query? In this post I want to explain one answer to this question, which is: to add an index to the table the query is performed on." />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="How does a relational database index really work?" />
+        <meta property="og:description" content="A common question in software engineering interviews is how can you speed up a slow query? In this post I want to explain one answer to this question, which is: to add an index to the table the query is performed on." />
+        <meta property="og:url" content="https://www.jackmarchant.com/how-does-a-relational-database-index-really-work" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="How does a relational database index really work?" />
+        <meta name="twitter:description" content="A common question in software engineering interviews is how can you speed up a slow query? In this post I want to explain one answer to this question, which is: to add an index to the table the query is performed on." />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="alternate" type="application/rss+xml" title="jack marchant" href="/rss.xml" />
+        <script>(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}}());</script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header__row">
+                    <p class="site-prompt">jackmarchant@blog:~$</p>
+                    <div class="site-header__actions">
+                        <button class="theme-toggle" type="button" data-theme-toggle aria-label="switch to light mode">
+                            <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        </button>
+                        <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                    </div>
+                </div>
+                <h1 class="site-title"><a href="/">jack marchant</a></h1>
+                <p class="site-tagline">principal engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">deputy</a> · writing about software</p>
+            </div>
+        </header>
+
+        <div class="subscribe-modal" data-subscribe-modal aria-hidden="true">
+            <div class="subscribe-modal__backdrop" data-subscribe-backdrop></div>
+            <div class="subscribe-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+                <div class="subscribe-modal__header">
+                    <h2 class="subscribe-modal__title" id="subscribe-modal-title">subscribe</h2>
+                    <button class="subscribe-modal__close" type="button" data-subscribe-close aria-label="close">×</button>
+                </div>
+                <p class="subscribe-modal__desc">get new posts delivered to your inbox</p>
+                <form class="subscribe-form" action="https://jackmarchant.us14.list-manage.com/subscribe?u=5a51a355f4187fddb0d0f4816&amp;id=b5ae7106ea" method="POST" target="_blank" rel="noopener noreferrer" novalidate>
+                    <div style="position:absolute;left:-5000px;" aria-hidden="true">
+                        <input type="text" name="b_5a51a355f4187fddb0d0f4816_b5ae7106ea" tabindex="-1" value="" />
+                    </div>
+                    <input type="email" name="EMAIL" id="mce-EMAIL" class="subscribe-form__input" placeholder="your@email.com" required />
+                    <button type="submit" class="subscribe-form__submit">subscribe →</button>
+                </form>
+            </div>
+        </div>
+        <main class="container">
+            
+                            <div class="reading-progress" data-reading-progress aria-hidden="true">
+                    <div class="reading-progress__bar" data-reading-progress-bar></div>
+                </div>
+                <article class="post" data-post>
+                    <h2 class="post__title">how does a relational database index really work?</h2>
+                    <p class="post__date">February 29, 2024</p>
+                                        <div class="post__tldr">
+                        <span class="post__tldr-label">tl;dr</span>
+                        <p class="post__tldr-text">A database index is a key-value reverse-lookup structure that lets the query engine skip full table scans, dramatically speeding up queries at the cost of additional storage and write overhead.</p>
+                    </div>
+                                        <p>A common question in software engineering interviews is <em>how can you speed up a slow query?</em> In this post I want to explain one answer to this question, which is: to add an index to the table the query is performed on.</p>
+<h2>What is an index in a relational database?</h2>
+<p>An index in a relational database is a key-value mapping for one or many columns where the key is the data in the column and the value is the primary ID of the row that contains the data.
+A primary index also exists in every database table so querying by ID is always fast. A custom index is a reverse-lookup to that primary index.</p>
+<h2>How does an index speed up database queries?</h2>
+<p>An index tells the database which rows contain specific values, without having to scan each row individually.</p>
+<p>A common way to understand it is the index of a phone book.
+If I was trying to find someone with the last name &quot;Martin&quot; in a phone book, I would skip to the back pages to the index, find names starting with M and start looking from the referenced page number.</p>
+<p>A database does the same lookup with an index.</p>
+<p>Let's take a look at a more concrete example. Suppose we create a new table:</p>
+<pre><code class="language-sql">CREATE TABLE `users` (
+  `id`          bigint          NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `name`        varchar(255)    NOT NULL,
+  `status`      int             NOT NULL,
+  `joined_on`   datetime        NOT NULL
+);</code></pre>
+<p>A query to find the users where status is <code>1</code> would result in a full table scan.</p>
+<pre><code class="language-sql">explain select * from users where status = 1;
+&gt; ... | Extra
+        Using where</code></pre>
+<p>If we add an index to the status column because we know it's a common access pattern for our application:</p>
+<pre><code class="language-sql">ALTER TABLE users ADD INDEX status(status);</code></pre>
+<p>When we run the explain again, we can see it </p>
+<pre><code class="language-sql">explain select * from users where status = 1;
+&gt; ... | key     | .. | Extra
+        status  | .. | Using index</code></pre>
+<p>When the database performs the operations for this query it will use the index instead of scanning every row, which starts making a big difference when there are millions of rows to scan.</p>
+<h2>Handling complex queries with a composite index</h2>
+<p>Continuing with this example, let's assume we have another access pattern which is to find all the users with a specific status who joined after a certain date ordered from most to least recent.</p>
+<pre><code class="language-sql">explain select * from users where status = 1 and joined_on &gt;= '2024-02-24' order by joined_on desc;
+&gt; ... | key     | .. | Extra
+        status  | .. | Using where; Using filesort</code></pre>
+<p>Without an index on <code>joined_on</code> column the query could still benefit from the index we added on status. It may not be the best performance, however, with the addition of the <code>joined_on</code> filter and the sort, which would result in a filesort operation which could make overall performance worse.</p>
+<p>We could go ahead and create an index for <code>joined_on</code> but the database may still choose the <code>status</code> index and perform a filesort.</p>
+<p>What would have better performance is a composite index with both <code>status</code> and <code>joined_on</code>.</p>
+<pre><code class="language-sql">ALTER TABLE users ADD INDEX status_joined_on(status, joined_on);</code></pre>
+<p>After adding the index, this is what the explain looks like:</p>
+<pre><code class="language-sql">explain select * from users where status = 1 and joined_on &gt;= '2024-02-24' order by joined_on desc;
+&gt; ... | key                 | .. | Extra
+          status_joined_on  | .. | Using index condition; Backward index scan</code></pre>
+<p>An index can be stored in either ascending or descending order depending on the definition. We see <code>Backward index scan</code> because we need the reverse order (descending) to sort results for the query above.</p>
+<p>If we were to create the index where <code>joined_on</code> column is sorted in descending order  we would see the <code>Backward index scan</code> removed:</p>
+<pre><code class="language-sql">status_joined_on(status, joined_on DESC)</code></pre>
+<p>Now we can run the explain again:</p>
+<pre><code class="language-sql">explain select * from users where status = 1 and joined_on &gt;= '2024-02-24' order by joined_on desc;</code></pre>
+<p>This is an ideal index for this type of query.</p>
+<h2>Summary</h2>
+<p>We explored creating indexes on relational databases and evaluated performance at each step. What did we learn along the way?</p>
+<ul>
+<li>
+<p>An index in a relational database is a key-value mapping for one or many columns to tell the database which rows contain what values without having to scan each row.</p>
+</li>
+<li>
+<p>Indexes can speed up query performance at the cost of write performance, though the former typically outweighs the latter.</p>
+</li>
+<li>
+<p>For complex queries, it's possible to create a multi-column index. Ordering the columns is an important factor in its performance.</p>
+</li>
+<li>
+<p>A descending index can help with searches for most recent data.</p>
+</li>
+</ul>
+                </article>
+                                <nav class="post-nav" aria-label="post navigation">
+                                            <a class="post-nav__link post-nav__link--prev" href="/refactoring-for-performance">
+                            <span class="post-nav__label">← older</span>
+                            <span class="post-nav__title">refactoring for performance</span>
+                        </a>
+                                        <a class="post-nav__home" href="/">all posts</a>
+                                            <a class="post-nav__link post-nav__link--next" href="/beyond-autocomplete-a-practical-guide-to-ai-assisted-development">
+                            <span class="post-nav__label">newer →</span>
+                            <span class="post-nav__title">beyond autocomplete: a practical guide to ai-assisted development</span>
+                        </a>
+                                    </nav>
+                                    </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p class="site-footer__prompt">jackmarchant@blog:~$ exit</p>
+                <nav class="site-footer__links" aria-label="external links">
+                    <a href="/rss.xml">rss</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://github.com/jackmarchant" target="_blank" rel="noopener noreferrer">github</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://x.com/jackmarchant10" target="_blank" rel="noopener noreferrer" aria-label="x profile">x</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://www.linkedin.com/in/jack-marchant" target="_blank" rel="noopener noreferrer">linkedin</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:jack@jackmarchant.com">email</a>
+                </nav>
+                <p class="site-footer__meta">© <span data-current-year>2026</span> jack marchant</p>
+            </div>
+        </footer>
+
+        <script src="/prism.e59d2e5e.js"></script>
+        <script src="/index.2b15b332.js"></script>
+
+                    <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+            </body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html data-theme="dark">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <title>add docker to elixir/phoenix projects in one command | jack marchant</title>
+        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+        <link href="/prism.30affb74.css" rel="stylesheet" type="text/css" />
+        <link href="/style.63f6c93a.css" rel="stylesheet" type="text/css" />
+                <meta name="description" content="Recently, I&#039;ve been writing a tonne of Elixir code, some Phoenix websites and a few other small Elixir applications. One thing that was bugging me every time I would create a new project is that I would want to add Docker to it either straight away because I knew there would be a dependency on Redis or Postgres etc, or halfway through a project and it would really slow down the speed at which I could hack something together." />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="Add Docker to Elixir/Phoenix projects in one command" />
+        <meta property="og:description" content="Recently, I&#039;ve been writing a tonne of Elixir code, some Phoenix websites and a few other small Elixir applications. One thing that was bugging me every time I would create a new project is that I would want to add Docker to it either straight away because I knew there would be a dependency on Redis or Postgres etc, or halfway through a project and it would really slow down the speed at which I could hack something together." />
+        <meta property="og:url" content="https://www.jackmarchant.com/exdocker" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Add Docker to Elixir/Phoenix projects in one command" />
+        <meta name="twitter:description" content="Recently, I&#039;ve been writing a tonne of Elixir code, some Phoenix websites and a few other small Elixir applications. One thing that was bugging me every time I would create a new project is that I would want to add Docker to it either straight away because I knew there would be a dependency on Redis or Postgres etc, or halfway through a project and it would really slow down the speed at which I could hack something together." />
+                <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="alternate" type="application/rss+xml" title="jack marchant" href="/rss.xml" />
+        <script>(function(){try{var t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);}catch(e){}}());</script>
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <div class="site-header__row">
+                    <p class="site-prompt">jackmarchant@blog:~$</p>
+                    <div class="site-header__actions">
+                        <button class="theme-toggle" type="button" data-theme-toggle aria-label="switch to light mode">
+                            <svg class="theme-toggle__sun" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                            <svg class="theme-toggle__moon" xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                        </button>
+                        <button class="subscribe-btn" type="button" data-subscribe-btn>subscribe</button>
+                    </div>
+                </div>
+                <h1 class="site-title"><a href="/">jack marchant</a></h1>
+                <p class="site-tagline">principal engineer @ <a target="_blank" rel="noopener noreferrer" href="https://deputy.com">deputy</a> · writing about software</p>
+            </div>
+        </header>
+
+        <div class="subscribe-modal" data-subscribe-modal aria-hidden="true">
+            <div class="subscribe-modal__backdrop" data-subscribe-backdrop></div>
+            <div class="subscribe-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="subscribe-modal-title">
+                <div class="subscribe-modal__header">
+                    <h2 class="subscribe-modal__title" id="subscribe-modal-title">subscribe</h2>
+                    <button class="subscribe-modal__close" type="button" data-subscribe-close aria-label="close">×</button>
+                </div>
+                <p class="subscribe-modal__desc">get new posts delivered to your inbox</p>
+                <form class="subscribe-form" action="https://jackmarchant.us14.list-manage.com/subscribe?u=5a51a355f4187fddb0d0f4816&amp;id=b5ae7106ea" method="POST" target="_blank" rel="noopener noreferrer" novalidate>
+                    <div style="position:absolute;left:-5000px;" aria-hidden="true">
+                        <input type="text" name="b_5a51a355f4187fddb0d0f4816_b5ae7106ea" tabindex="-1" value="" />
+                    </div>
+                    <input type="email" name="EMAIL" id="mce-EMAIL" class="subscribe-form__input" placeholder="your@email.com" required />
+                    <button type="submit" class="subscribe-form__submit">subscribe →</button>
+                </form>
+            </div>
+        </div>
+        <main class="container">
+            
+                            <div class="reading-progress" data-reading-progress aria-hidden="true">
+                    <div class="reading-progress__bar" data-reading-progress-bar></div>
+                </div>
+                <article class="post" data-post>
+                    <h2 class="post__title">add docker to elixir/phoenix projects in one command</h2>
+                    <p class="post__date">August 23, 2018</p>
+                                        <div class="post__tldr">
+                        <span class="post__tldr-label">tl;dr</span>
+                        <p class="post__tldr-text">exdocker is an Elixir CLI escript tool that automates the generation of Docker configuration files for Elixir projects, eliminating repetitive copy-paste setup when starting new applications.</p>
+                    </div>
+                                        <p>Recently, I've been writing a tonne of Elixir code, some Phoenix websites and a few other small Elixir applications. One thing that was bugging me every time I would create a new project is that I would want to add Docker to it either straight away because I knew there would be a dependency on Redis or Postgres etc, or halfway through a project and it would really slow down the speed at which I could hack something together.</p>
+<p>One of the things that I love about Elixir is how quickly you can get started writing an application, whether it's a web app or it's got supervision trees coming out of its ears.
+In any case, I found myself going back to old projects where I had used Docker, copying over a few necessary files to get started, with the workflow that I was used to.</p>
+<h2>exdocker</h2>
+<p>So I decided to try to fix this problem in an Elixir CLI application (Escript). It really doesn't do much, it writes some files and does some string replacements to make setting up docker easy.
+I called it <a href="https://github.com/jackmarchant/ex_docker">exdocker</a> because I'm not as creative as I used to be.</p>
+<h3>Installation</h3>
+<p>Make sure <code>~/.mix/escripts</code> is in your machine's <code>$PATH</code>. You can do this by adding <code>export PATH=~/.mix/escripts:$PATH</code> to your <code>.bashrc</code> or similar file.</p>
+<ol>
+<li><code>mix escript.install hex ex_docker</code></li>
+<li><code>source ~/.bashrc</code> - load the escript and <code>$PATH</code> update</li>
+</ol>
+<h3>Usage</h3>
+<ul>
+<li>Create a new Elixir project
+<code>mix phx.new my_project</code>
+<code>exdocker my_project</code></li>
+<li>Add to an existing Elixir project
+<code>exdocker my_project</code> or <code>exdocker .</code> to run it in your current directory.</li>
+</ul>
+<p>Three files get created in the root of your project:</p>
+<ul>
+<li>docker-compose.yml - configuration of your docker containers</li>
+<li>Dockerfile - Specify what needs to be installed for Elixir/Phoenix to run</li>
+<li>Makefile - Convenient targets for docker-compose commands</li>
+</ul>
+<p>You can then run make init shell from the root to build and run Docker containers, and when this command finishes, you'll be inside a shell session with Elixir and Mix installed so you can continue development as usual.</p>
+<p>Any other time you need to use it, it will be available to execute with <code>exdocker</code>.</p>
+<p>Be sure to let me know if you found this useful!</p>
+                </article>
+                                <nav class="post-nav" aria-label="post navigation">
+                                            <a class="post-nav__link post-nav__link--prev" href="/working-with-tasks">
+                            <span class="post-nav__label">← older</span>
+                            <span class="post-nav__title">working with tasks</span>
+                        </a>
+                                        <a class="post-nav__home" href="/">all posts</a>
+                                            <a class="post-nav__link post-nav__link--next" href="/protocols">
+                            <span class="post-nav__label">newer →</span>
+                            <span class="post-nav__title">using protocols to decouple implementation details</span>
+                        </a>
+                                    </nav>
+                                    </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p class="site-footer__prompt">jackmarchant@blog:~$ exit</p>
+                <nav class="site-footer__links" aria-label="external links">
+                    <a href="/rss.xml">rss</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://github.com/jackmarchant" target="_blank" rel="noopener noreferrer">github</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://x.com/jackmarchant10" target="_blank" rel="noopener noreferrer" aria-label="x profile">x</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="https://www.linkedin.com/in/jack-marchant" target="_blank" rel="noopener noreferrer">linkedin</a>
+                    <span aria-hidden="true">·</span>
+                    <a href="mailto:jack@jackmarchant.com">email</a>
+                </nav>
+                <p class="site-footer__meta">© <span data-current-year>2026</span> jack marchant</p>
+            </div>
+        </footer>
+
+        <script src="/prism.e59d2e5e.js"></script>
+        <script src="/index.2b15b332.js"></script>
+
+                    <!-- Google tag (gtag.js) -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=G-8T5L82C44Y"></script>
+            <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-8T5L82C44Y');
+            </script>
+            </body>
+</html>
